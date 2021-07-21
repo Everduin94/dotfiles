@@ -1,0 +1,11 @@
+[core]
+	editor = vim
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	brb = checkout -b
+[user]
+	email = everduin@cisco.com
+	name = Erik Verduin

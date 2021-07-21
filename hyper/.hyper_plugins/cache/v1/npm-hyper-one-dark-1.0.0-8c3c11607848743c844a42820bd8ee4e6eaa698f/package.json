@@ -1,0 +1,14 @@
+{
+  "name": "hyper-one-dark",
+  "version": "1.0.0",
+  "description": "Hyper.app theme based on Atom One Dark theme",
+  "main": "index.js",
+  "repository": "https://github.com/yuriihabrusiev/hyper-one-dark",
+  "keywords": [
+    "hyper",
+    "colors",
+    "atom"
+  ],
+  "author": "Yurii Habrusiev",
+  "license": "MIT"
+}

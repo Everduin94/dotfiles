@@ -1,0 +1,88 @@
+{
+  "manifest": {
+    "name": "dql",
+    "version": "0.2.2",
+    "description": "A GraphQL-inspired markup for querying databases",
+    "main": "bin/dql.js",
+    "author": {
+      "name": "Tyler Nickerson"
+    },
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Nickersoft/dql"
+    },
+    "files": [
+      "bin",
+      "*.md",
+      "*.png"
+    ],
+    "bugs": {
+      "url": "https://github.com/Nickersoft/dql/issues"
+    },
+    "homepage": "https://github.com/Nickersoft/dql",
+    "scripts": {
+      "precommit": "npm run build && git add bin/ src/_parser.js && lint-staged",
+      "build-rollup": "rollup -c rollup.config.js",
+      "build-parser": "node cfg/build",
+      "build": "npm run build-parser && npm run build-rollup",
+      "test": "nyc ava",
+      "flow": "flow"
+    },
+    "dependencies": {
+      "squel": "^5.12.0"
+    },
+    "devDependencies": {
+      "ava": "^0.23.0",
+      "babel-core": "^6.26.0",
+      "babel-plugin-external-helpers": "^6.22.0",
+      "babel-plugin-transform-runtime": "^6.23.0",
+      "babel-preset-env": "^1.6.1",
+      "babel-preset-flow": "^6.23.0",
+      "babel-preset-stage-2": "^6.24.1",
+      "babel-register": "^6.26.0",
+      "coveralls": "^3.0.0",
+      "faucet": "^0.0.1",
+      "flow-bin": "^0.57.3",
+      "flow-typed": "^2.2.0",
+      "husky": "^0.14.3",
+      "jison": "^0.4.18",
+      "js-yaml": "^3.10.0",
+      "lint-staged": "^4.3.0",
+      "nyc": "^11.2.1",
+      "prettier": "^1.7.4",
+      "rollup": "^0.50.0",
+      "rollup-plugin-babel": "^3.0.2",
+      "rollup-plugin-commonjs": "^8.2.4",
+      "rollup-plugin-node-resolve": "^3.0.0",
+      "rollup-plugin-uglify": "^2.0.1",
+      "tap-nyan": "^1.1.0",
+      "uglify-es": "^3.1.5"
+    },
+    "lint-staged": {
+      "*.{js,json,css}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ava": {
+      "require": "babel-register"
+    },
+    "_registry": "npm",
+    "_loc": "/Users/everduin/.hyper_plugins/cache/v1/npm-dql-0.2.2-a0ed123c307f01ca4b56af8b63d649553ecd6b18/package.json",
+    "readmeFilename": "README.md",
+    "readme": "<div align=\"center\">\n    <img src=\"https://github.com/Nickersoft/dql/raw/master/logo.png\" width=\"400\" /><br/><br/>\n\n[![Travis](https://img.shields.io/travis/Nickersoft/dql.svg)](https://travis-ci.org/Nickersoft/dql)\n[![Maintainability](https://api.codeclimate.com/v1/badges/78ac0fa85c83fea5213a/maintainability)](https://codeclimate.com/github/Nickersoft/dql/maintainability)\n[![Code Climate](https://img.shields.io/codeclimate/coverage/github/Nickersoft/dql.svg)]()\n[![Github file size](https://img.shields.io/github/size/Nickersoft/dql/bin/dql.js.svg)](https://github.com/Nickersoft/dql)\n\n[![Greenkeeper badge](https://img.shields.io/badge/Greenkeeper-enabled-brightgreen.svg)](https://greenkeeper.io/)\n[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Nickersoft/dql/blob/master/LICENSE.md)\n[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)\n\n</div>\n\nContents\n--------\n\n- [Introduction](#introduction)\n    - [What is DatQL?](#what-is-datql)\n    - [Installing](#installing)\n    - [Motivation](#so-whats-the-point)\n    - [Legitimacy](#idk-sounds-like-a-load-of-bull-do-people-even-use-this)\n- [The Markup](#the-markup)\n    - [Queries & Mutations](#queries--mutations)\n    - [Selecting](#select)\n    - [Joining](#join)\n    - [Inserting & Updating](#insert--update)\n    - [Deleting](#delete)\n- [API](#api)\n- [Caveats](#caveats)\n- [Support Table](#support-table)\n    \nIntroduction\n------------\n\n### What is DatQL?\nDatQL (a working title short for Data Query Language and pronounced *dat-quill*) is a \n[GraphQL](http://graphql.org/)-inspired markup language that compiles to vanilla SQL. While this library is still highly \nexperimental, DatQL supports basic SQL operations such as querying, inserting, updating, and even nested join statements.\nSo instead of writing this:\n\n```sql\nSELECT\n  user_id\nFROM text_messages\n  INNER JOIN (SELECT\n                users.id AS user_id\n              FROM users) ON (users.id = text_messages.user_id)) AS users\nWHERE (conversation_id = 5)\n```\n\nYou can write this:\n\n```\nquery getUserTextMessages($conversation_id) {\n    text_messages(conversation_id = $conversation_id) {\n        ...on users(id = text_messages.user_id) {\n            id[user_id]\n        }\n    }\n}\n```\n\n### Installing\nDatQL has the super-slick `dql` package name thanks to [@maxogden](https://github.com/maxogden) and can be installed via\nNPM or Yarn:\n\n```bash\n$ npm install dql@beta --save-dev\n$ yarn add dql@beta --dev\n```\n\nCurrently, DatQL is only accessible as a CommonJS module that can be used in Node 8+ (maybe earlier, but that's the Babel \npreset it uses, *sooo*..). It is also in beta (so a `beta` tag is required), and must be v0.2.0+, otherwise you'll get \nthe old library, which can be found [here](https://github.com/maxogden/dql).\n\nIt is also important to note that [@maxogden](https://github.com/maxogden) happens to (coincidentally) be the a prominent \ncontributor of the [Dat Project](https://github.com/datproject), a \"distributed data community\" that is in no way \nrelated to this project other than just have \"dat\" in the title. \n\n### “So... what's the point?”\nRight now you're probably thinking *“Big whoop man. Who the hell cares? SQL ain't that difficult.”* Well, let's talk \ndatabase abstraction for a minute. Say you don't want to get bogged down in the specifics of a database language, seeing\nyou might switch over to a different database in the future. After all, *all query languages are slightly different*. \nWhat are your current options?\n\n1. Use object-relational mapping (ORM), such as [Laravel](https://laravel.com/) or [Ruby on Rails](http://rubyonrails.org/),\n or even something like [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/orm/) or [Sequelize](http://docs.sequelizejs.com/).\n2. Use a query-building library such as [Squel](https://hiddentao.com/squel/), which this library actually uses.\n\nThe choices are slim. The biggest issue with ORMs is the fact they usually work best on empty databases, \nwhere all data is inserted and managed by a locally-defined schema consisting of models and controllers. Query builders\nare great, but can hard to swap out later on down the line, and the available API is usually attached to a particular \nlanguage. For example, I used [Squel](https://hiddentao.com/squel/) for all my Node.js database communication, but used\n [Quill](http://getquill.io/) for all my Scala database communication. And in case you're wondering, no, the libraries \n are nothing like each other, despite doing virtually the same thing.\n \nSo that's where DatQL comes in. DatQL is an abstraction *over* the abstractions, so to speak. The DatQL markup is parsed\nusing a publicly-available context-free grammar and can be adapted to virtually any language. While query builders can \nbe replaced depending on which language the DatQL library supports, the markup remains unchanged, creating an extensible, \nopen way to write SQL. Plus, DatQL at a glance is much easier to understand than SQL, especially for those who are not SQL\nexperts.\n\n### “Idk... sounds like a load of bull. Do people even use this?”\nYes, as a matter of fact, DQL is slowly replacing all query building operations in the \n[@GoLinguistic](https://github.com/GoLinguistic) codebase (closed source, sorry). DQL was developed out of Linguistic do\nto the need for an abstract, unified way for communicating with the platform's Postgres database. As a result, DQL will \ncontinue to improve and grow to meet the needs of the Linguistic platform.  \n\nThe Markup\n----------\n### Queries & Mutations\nDatQL is fairly straightforward to understand. Like GraphQL, .dql files contain a collection of *documents*, which can \nbe one of two types: a mutation (insertion/update) or a query. Each document definition contains a name, as well as any \ndeclared variable parameters it uses. For example:\n\n```\nquery getBookmarksForUser($user_id) \n```\n\nYou can also call neighboring mutations or queries as well (where appropriate), such as:\n\n```\nusers(id = getUserIDFromPage(102)) {\n    id\n}\n```\n\n### SELECT\nInside the query block, all top-level blocks are tables from which to SELECT from. Currently, only one table block \nper query is supported; however, in the future multiple may be supported. Tables also accept a list of WHICH statements\nthat filter the results returned. So let's start out by selecting from our `users` table, filtering by entries whose ID \nmatches the user ID provided to the query:\n\n```\nquery getBookmarksForUser($user_id) {\n    users(id = $user_id) {\n        id\n    }\n}\n```\n\nLike GraphQL, you can specify which fields to return inside each table block. You can alias these fields by specifying\nan alias in square brackets ([]) next to the field name.\n\n### JOIN\nJOINs take on a form similar to those of fragments in GraphQL. While their fundamental philosophies differ, the syntax \nis the same. JOIN blocks begin with `...on ` and must specify a table name and `ON` clause in parentheticals. Like \ntables, JOIN blocks accept field names, and it is ***strongly advised that you alias all JOIN fields to avoid conflicts***.\nSo, let's wrap up our statement by joining the `users` table with the `bookmarks` table:\n\n```\nquery getBookmarksForUser($user_id) {\n    users(id = $user_id) {\n        id\n        \n        ...on bookmarks(user_id = users.id) {\n            name[bookmark_name]\n        }\n    }\n}\n```\n\n### INSERT & UPDATE\nINSERT and UPDATE statements are both grouped under mutation documents. Whether the resultant query uses INSERT or UPDATE\nis dependent on whether a selector is specified for the table. If one is present, the existing row is updated. If one is\nnot provided, a new row is inserted. For example, to update a user's name:\n\n```\nmutation getBookmarksForUser($user_id, $user_name) {\n    users(id = $user_id) {\n        name: $user_name\n    }\n}\n```\n\n### DELETE\nDELETE statements can only be run on mutations and consist of a single table entry, prefixed with a minus sign (-). \nDeletes *must* contain a selector clause and *cannot* contain any children:\n```\nmutation deleteUser($name) {\n    - users(name = $name)\n}\n```\n\nAPI\n---\nSimilar to Apollo's [graphql-tag](https://github.com/apollographql/graphql-tag), DatQL uses an ES2015 template literal \ntag which is supported by most recent versions of Node. Currently, DatQL supports three SQL flavors: MySQL (mysql), PostgresQL (postgres), \nand Microsoft SQL (mssql). The `dql` tag processes documents into a tree, returning a function that accepts variables, as well \nas the name of the query or mutation to execute. By default, DatQL will always execute the last defined document in a \nfile. So for our above query:\n\n```javascript\nconst dql = require('dql').postgres;\n\nconst getBookmarksForUser = dql`\n    query getBookmarksForUser($user_id) {\n        users(id = $user_id) {\n            id\n            \n            ...on bookmarks(user_id = users.id) {\n                name[bookmark_name]\n            }\n        }\n    }\n`;\n\n/**\n * Outputs { \n *  text: 'SELECT id, bookmarks.name AS bookmark_name FROM users INNER JOIN (SELECT bookmarks.name, bookmarks.user_id FROM bookmarks) AS bookmarks ON (bookmarks.user_id = users.id) WHERE (id = $1)',\n *  values: [ 1002 ] \n * } \n */\nconst sql = getBookmarksForUser({\n    variables: {\n        user_id: 1002   \n    }\n});\n\n// Outputs SELECT id, bookmarks.name AS bookmark_name FROM users INNER JOIN (SELECT bookmarks.name, bookmarks.user_id FROM bookmarks) AS bookmarks ON (bookmarks.user_id = users.id) WHERE (id = 1002)\nconst sql_str = getBookmarksForUser({\n    variables: {\n        user_id: 1002   \n    }\n});\n```\n\nBy default, DatQL outputs an object containing both the text of the query and any variables associated with it. This \nallows your database engine to sanitize any variables to prevent SQL-injection attacks. To override this behavior, \nsimply pass `true` as the last parameter of the function. If your string contains multiple documents, you can\npass in the name of the entry-point document as the first argument of the function like so:\n\n```javascript\ngetBookmarksForUser('getBookmarksForUser', {\n    variables: {\n        user_id: 1002   \n    }\n}, true);\n```\n\nTo order your query by a specific field, simply pass in the `orderBy` configuration option. By default, all fields are \nin ascending order. To switch to descending, set the `descending` property to `true`:\n\n\n```javascript\ngetBookmarksForUser('getBookmarksForUser', {\n    variables: {\n        user_id: 1002   \n    },\n    orderBy: 'id',\n    descending: true\n}, true);\n```\n\nLastly, you can also pass in a `groupBy` option to group aggregated results based on certain fields.\n\nCaveats\n-------\nAs stated, this library is highly experimental. A couple things to note:\n\n1. The library assumes any fields on the left-side of an operator in any `WHICH`/`ON` statement is a field belonging to\nthe table in question. As a result, they should not be prefixed by the table name. So for example, the following is correct,\nassuming the `users` table has `name` field:\n\n    ```\n    ...on users(name = 'Tyler')\n    ```\n\n    The following ***will not*** work:\n    \n    ```\n    ...on users('Tyler' = users.name)\n    ```\n\n2. DatQL is capable of detecting built-in functions, method calls, and variables in `WHICH`/`ON` statements. \nAny text that does not match one of these is susceptible to being recognized as a field name. As a result, try to keep\nyour selectors simple and keep fields to the left of any operator.\n\n3. While this library is designed to be an abstraction over SQL, certain database-specific functions such as `Now()` have\nnot yet been abstracted and will need to be changed manually if you switch databases. Ideally, in the future DatQL will \ninclude its own built-in functions which will automatically be converted between databases.\n\nSupport Table\n-------------\n<table>\n    <tr>\n        <td rowspan=\"11\">Selecting (63% completed)</td>\n        <td>Single Table</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Multiple tables</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n        <td>Sub-queries as tables</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n       <td>Fields & Aliases</td>\n       <td>✔</td>\n    </tr>  \n    <tr>\n       <td>Joins</td>\n       <td>✔</td>\n    </tr>  \n    <tr>\n       <td>Filtering</td>\n       <td>✔</td>\n    </tr>  \n    <tr>\n        <td>Sorting</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Grouping</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Having</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n        <td>Limits & Offsets</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Unions</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n        <td rowspan=\"6\">Inserting & Updating (66% completed)</td>\n        <td>Fields</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Batch operations</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n        <td>Filtering</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Sorting</td>\n        <td>✔</td>\n    </tr>  \n    <tr>\n        <td>Limits</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Functions as values</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n        <td rowspan=\"4\">Deleting (75% completed)</td>\n        <td>Joins</td>\n        <td>✘</td>\n    </tr>\n    <tr>\n        <td>Filtering</td>\n        <td>✔</td>\n    </tr>\n    <tr>\n        <td>Sorting</td>\n        <td>✔</td>\n    </tr>  \n    <tr>\n        <td>Limits</td>\n        <td>✔</td>\n    </tr>\n    \n</table>\n",
+    "licenseText": "# The MIT License (MIT)\n\nCopyright (c) 2017 Tyler Nickerson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "artifacts": [],
+  "remote": {
+    "resolved": "https://registry.yarnpkg.com/dql/-/dql-0.2.2.tgz#a0ed123c307f01ca4b56af8b63d649553ecd6b18",
+    "type": "tarball",
+    "reference": "https://registry.yarnpkg.com/dql/-/dql-0.2.2.tgz",
+    "hash": "a0ed123c307f01ca4b56af8b63d649553ecd6b18",
+    "registry": "npm",
+    "packageName": "dql"
+  },
+  "registry": "npm",
+  "hash": "a0ed123c307f01ca4b56af8b63d649553ecd6b18"
+}

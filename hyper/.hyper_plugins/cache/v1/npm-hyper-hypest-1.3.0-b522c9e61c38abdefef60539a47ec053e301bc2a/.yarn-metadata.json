@@ -1,0 +1,49 @@
+{
+  "manifest": {
+    "name": "hyper-hypest",
+    "version": "1.3.0",
+    "description": "A beautiful & minimal macOS theme for Hyper",
+    "author": {
+      "name": "Hector Simpson",
+      "url": "https://hector.me"
+    },
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/dizzyup/hyper-hypest"
+    },
+    "bugs": {
+      "url": "https://github.com/dizzyup/hyper-hypest/issues"
+    },
+    "files": [
+      "index.js"
+    ],
+    "keywords": [
+      "hyper",
+      "hyper-theme",
+      "hyperterm",
+      "theme",
+      "ui",
+      "terminal",
+      "vibrancy",
+      "zeit",
+      "dizzyup"
+    ],
+    "_registry": "npm",
+    "_loc": "/Users/everduin/.hyper_plugins/cache/v1/npm-hyper-hypest-1.3.0-b522c9e61c38abdefef60539a47ec053e301bc2a/package.json",
+    "readmeFilename": "README.md",
+    "readme": "<img src=\"assets/icon.png?raw=true\" alt=\"Hypest Icon\" width=\"148\" height=\"148\" />\n\n# Hypest for Hyper\nA beautiful and minimal macOS theme for Hyper — with vibrancy, light and dark\nmodes, and theming for several popular Hyper plugins.\n\n<img src=\"assets/preview.jpg?raw=true\" alt=\"Hypest Screenshot\" width=\"600\" />\n\n## Installation\nIf you are switching from another Hyper theme you may need to relaunch the app\nfor Hypest to fully theme the window.\n\n### From Hyper\n`hyper i hyper-hypest`\n\n### Manually\n1. Open `~/.hyper.js` in your text editor (`cmd` + `,` in Hyper)\n2. Add `hyper-hypest` to the `plugins` array\n\n## Configuration\nThere are a few options that can be passed as optional configuration to modify\nthe theme. To pass the options you can add a `hypest` object to the `config` in\n`~/.hyper.js`.\n\n**Note:** you may need to restart Hyper when setting or switching between the\nvalues for the `darkmode`, `vibrancy` and `hideControls` properties.\n\n### Dark Mode\nSet `darkmode` to `true` to use the dark version of the theme.\n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Default is false\n        darkmode: true\n    }\n    ...\n}\n```\n<img src=\"assets/preview-dark.jpg?raw=true\" alt=\"Hypest Screenshot\" width=\"600\" />\n\n### Vibrancy\nSet `vibrancy` to `false` to disable the window vibrancy effect in either theme. \n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Default is true\n        vibrancy: false,\n    }\n    ...\n}\n```\n<img src=\"assets/preview-no-vibrancy.jpg?raw=true\" alt=\"Hypest Screenshot\" width=\"600\" />\n\n### Vibrancy level\nTo have the window appear more transparent when vibrancy is enabled, set `vibrancyLevel` to a value between `0` and `0.5`. To have the window appear more opaque, increase `vibrancyLevel` to a value between `0.7` and `1.0`. \n\nFor both light and dark versions, the default vibrancy level is `0.6`.\n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Default value is 0.6\n        vibrancyLevel: 0.6\n    }\n    ...\n}\n```\n\n### Borders\nSet `borders` to `true` if you prefer your tabs with some more contrast.\n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Default is false\n        borders: true\n    }\n    ...\n}\n```\n<img src=\"assets/preview-with-borders.jpg?raw=true\" alt=\"Hypest Screenshot\" width=\"600\" />\n\n### Remove window controls\nSet `hideControls` to `true` to remove the window controls and just show tabs.\n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Default is false\n        hideControls: true\n    }\n    ...\n}\n```\n<img src=\"assets/preview-no-controls.jpg?raw=true\" alt=\"Hypest Screenshot\" width=\"600\" />\n\n### Accent color\nPass a supported named color with `accentColor` to use it for the cursor color,\nselection color and the search styling (if using the `hyper-search` plugin).\nIt's also used for activity in `hyper-tabs-enhanced` and `hyper-statusline`.\n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Default is 'blue'\n        // Use one of 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan' or 'white'\n        accentColor: 'cyan'\n    }\n    ...\n}\n```\n\n### Custom theme colors\nHypest has it's own set of colors defined by the theme but you can override them\nby adding a `colors` object and setting all or some of the supported color\nproperties. These custom colors will also be inherited by `accentColor`.\n```js\n\nconfig: {\n    ...\n    hypest: {\n        // Supported  colors are 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan' and 'white'\n        // Custom colors must be specified as 6 character hexadecimals\n        colors: {\n          blue: '#0067FF'\n        }\n    }\n    ...\n}\n```\n\n## Plugin support\nHypest includes custom theming to support a few of the most popular Hyper\nplugins, including:\n\n- hyper-search\n- hyper-statusline\n- hyper-tab-icons\n- hyper-highlight-active-pane\n- hyper-tabs-enhanced\n\n<img src=\"assets/preview-with-plugins.jpg?raw=true\" alt=\"Hypest Screenshot\" width=\"600\" />\n\n##  Known issues\n\n#### Issues with selection colors when vibrancy is enabled\nThere is a known issue in the Xterm.js engine where selection colors appear to\nrender as opaque blocks with invisible text if the `background` has transparency.\nThere is a [known issue](https://github.com/zeit/hyper/issues/819) on the Hyper\nrepository and an [open issue](https://github.com/xtermjs/xterm.js/issues/1898)\non the Xterm.js repo but unfortunately no fixes for the issue as it stands.\n\nIf you're just looking to solve **pasted** text selection for zsh shells there\nis a workaround for that at least, left in a comment on\n[the Hyper issue](https://github.com/zeit/hyper/issues/819#issuecomment-383229725).\nRun the following command to disable the background color of pasted content to\nmake pasted text visible:\n\n```\necho 'unset zle_bracketed_paste' >> ~/.zshrc\n```\n\nThe only way to entirely work around the issue for now is to use the non-vibrant\ntheme in Hypest by setting\n[vibrancy to false](https://github.com/dizzyup/hyper-hypest#vibrancy) in your\nHypest configuration.\n",
+    "licenseText": "MIT License\n\nCopyright (c) 2019 Hector Simpson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+  },
+  "artifacts": [],
+  "remote": {
+    "resolved": "https://registry.yarnpkg.com/hyper-hypest/-/hyper-hypest-1.3.0.tgz#b522c9e61c38abdefef60539a47ec053e301bc2a",
+    "type": "tarball",
+    "reference": "https://registry.yarnpkg.com/hyper-hypest/-/hyper-hypest-1.3.0.tgz",
+    "hash": "b522c9e61c38abdefef60539a47ec053e301bc2a",
+    "registry": "npm",
+    "packageName": "hyper-hypest"
+  },
+  "registry": "npm",
+  "hash": "b522c9e61c38abdefef60539a47ec053e301bc2a"
+}

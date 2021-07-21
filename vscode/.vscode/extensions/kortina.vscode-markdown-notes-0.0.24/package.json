@@ -1,0 +1,248 @@
+{
+	"name": "vscode-markdown-notes",
+	"displayName": "Markdown Notes",
+	"description": "Navigate notes with [[wiki-links]], backlinks, #tags and @bibtex-citations (like Bear, Roam, etc). Automatically create notes from new inline [[wiki-links]]. Use Peek Definition to preview linked notes.",
+	"version": "0.0.24",
+	"publisher": "kortina",
+	"repository": {
+		"url": "https://github.com/kortina/vscode-markdown-notes.git",
+		"type": "git"
+	},
+	"engines": {
+		"vscode": "^1.41.1"
+	},
+	"keywords": [
+		"markdown",
+		"notebook",
+		"notes",
+		"notetaking",
+		"tagging",
+		"backlinks",
+		"wiki links"
+	],
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"markdown.markdownItPlugins": true,
+		"languages": [
+			{
+				"id": "markdown-notes",
+				"aliases": [],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "markdown-notes",
+				"scopeName": "text.markdown.notes",
+				"path": "./syntaxes/notes.tmLanguage.json",
+				"injectTo": [
+					"text.html.markdown",
+					"text.html.markdown.jsx"
+				]
+			}
+		],
+		"commands": [
+			{
+				"command": "vscodeMarkdownNotes.newNote",
+				"title": "Markdown Notes: New Note"
+			},
+			{
+				"command": "vscodeMarkdownNotes.newNoteFromSelection",
+				"title": "Markdown Notes: New Note From Selection"
+			},
+			{
+				"command": "vscodeMarkdownNotes.notesForWikiLink",
+				"title": "Given some wiki-link text (from between double-brackets) such as \"my-note\" or \"my-note.md\" return a Note[] (typically of length 1) where the note filename is a match for the wiki-link text."
+			}
+		],
+		"configuration": {
+			"title": "Markdown Notes Configuration",
+			"properties": {
+				"vscodeMarkdownNotes.noteCompletionConvention": {
+					"type": "string",
+					"enum": [
+						"rawFilename",
+						"noExtension",
+						"toSpaces"
+					],
+					"default": "rawFilename",
+					"description": "When offering completion options for `wiki-note.md`, get `rawFilename` OR `noExtension` (`wiki-link`) or `toSpaces` (`wiki link`). Default is rawFilename. NB: when using workspaceFilenameConvention, only rawFilename is returned."
+				},
+				"vscodeMarkdownNotes.workspaceFilenameConvention": {
+					"type": "string",
+					"enum": [
+						"uniqueFilenames",
+						"relativePaths"
+					],
+					"default": "uniqueFilenames",
+					"description": "By default, expect 'uniqueFilenames' for every `.md` file in workspace and treat `file.md` as link to file in any subdirectory. If you expect collisions in filenames for notes (eg, `note1/note.md` `note2/note.md`) use 'relativePaths' to render links between files."
+				},
+				"vscodeMarkdownNotes.slugifyCharacter": {
+					"type": "string",
+					"enum": [
+						"-",
+						"_",
+						"NONE"
+					],
+					"default": "-",
+					"description": "When creating new notes from a 'Title Case Note Name', slugify non-word characters with '-' (default) or '_', or don't slugify non-word characters by setting to 'NONE.'"
+				},
+				"vscodeMarkdownNotes.slugifyMethod": {
+					"type": "string",
+					"enum": [
+						"classic",
+						"github-slugger"
+					],
+					"default": "classic",
+					"description": "Method converting 'Title Case Note Names' to 'slug-file-names.' Defaults to 'classic.' See unit tests in vscode-markdown-notes GitHub project for more details."
+				},
+				"vscodeMarkdownNotes.defaultFileExtension": {
+					"type": "string",
+					"default": "md",
+					"description": "When creating new notes from a 'Title Case Note Name', append this extension to the filename. Defaults to 'md'"
+				},
+				"vscodeMarkdownNotes.createNoteOnGoToDefinitionWhenMissing": {
+					"type": "boolean",
+					"default": true,
+					"description": "By default, when invoking `editor.action.revealDefinition` on `[[note.md]]` if `note.md` does not exist in workspace, create it. NB: Works only when `vscodeMarkdownNotes.workspaceFilenameConvention` = 'uniqueFilenames'."
+				},
+				"vscodeMarkdownNotes.newNoteDirectory": {
+					"type": "string",
+					"default": "SAME_AS_ACTIVE_NOTE",
+					"description": "Directory for creating new notes. Defaults to 'SAME_AS_ACTIVE_NOTE'; you can also use 'WORKSPACE_ROOT'; or a 'subdirectory/path' in the Workspace Root."
+				},
+				"vscodeMarkdownNotes.newNoteTemplate": {
+					"type": "string",
+					"default": "# ${noteName}\n\n",
+					"description": "Template for auto-created note files. Available tokens: ${noteName}, ${timestamp}. Timestamp is inserted in ISO format, i.e. 2020-07-09T05:29:00.541Z."
+				},
+				"vscodeMarkdownNotes.newNoteFromSelectionReplacementTemplate": {
+					"type": "string",
+					"default": "[[${wikiLink}]]",
+					"description": "After the selection is 'cut' from the active document, replacement text is 'inserted' into its place. Available tokens: ${wikiLink}, ${noteName}. The default insertion is a wiki-link to the new note containing the selected text."
+				},
+				"vscodeMarkdownNotes.lowercaseNewNoteFilenames": {
+					"type": "boolean",
+					"default": true,
+					"description": "When true, new note file names will be converted to lowercase. Otherwise, the case will be preserved. Eg: my-new-note.md vs. My-New-Note.md"
+				},
+				"vscodeMarkdownNotes.compileSuggestionDetails": {
+					"type": "boolean",
+					"default": false,
+					"description": "Set `true` to compile the markdown content when showing suggestion documentation for a CompletionItem. Defaults `false`."
+				},
+				"vscodeMarkdownNotes.allowPipedWikiLinks": {
+					"type": "boolean",
+					"default": false,
+					"description": "States whether or not to use piped wiki-links. When set to false, this will ignore any '|' character and slugify it as normal."
+				},
+				"vscodeMarkdownNotes.pipedWikiLinksSyntax": {
+					"type": "string",
+					"enum": [
+						"desc|file",
+						"file|desc"
+					],
+					"default": "file|desc",
+					"description": "Describes what piped wiki-link syntax to use: either [[file|description]], or [[description|file]]."
+				},
+				"vscodeMarkdownNotes.pipedWikiLinksSeparator": {
+					"type": "string",
+					"default": "\\|",
+					"pattern": "[^\\[\\]]+",
+					"patternErrorMessage": "Warning: This separator will unfortunately not work - It would break the wiki-link syntax.",
+					"markdownDescription": "States what separator should be used - **Note: Special regex characters should be escaped! Example: '|' should be '\\\\|'**"
+				},
+				"vscodeMarkdownNotes.triggerSuggestOnReplacement": {
+					"type": "boolean",
+					"default": true,
+					"description": "Trigger suggest on both insertion AND replacement of new character inside a wiki-link. Defaults true. Set false to only trigger suggest on insertion. See PR #69 for details."
+				},
+				"vscodeMarkdownNotes.previewShowFileExtension": {
+					"type": "boolean",
+					"default": false,
+					"description": "Specifies whether or not to show the linked file's extension in the preview."
+				},
+				"vscodeMarkdownNotes.previewLabelStyling": {
+					"type": "string",
+					"default": "[[label]]",
+					"enum": [
+						"[[label]]",
+						"[label]",
+						"label"
+					],
+					"description": "Changes how the link to a file should be shown, either with or without brackets."
+				},
+				"vscodeMarkdownNotes.bibtexFilePath": {
+					"type": "string",
+					"default": "",
+					"description": "Absolute or current workspace relative path to a BibTeX file that will provide autocompletion for @bibtex-citations."
+				}
+			}
+		},
+		"views": {
+			"explorer": [
+				{
+					"id": "vscodeMarkdownNotesBacklinks",
+					"name": "Backlinks"
+				}
+			]
+		}
+	},
+	"icon": "images/vscode-markdown-notes.png",
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"scripts": {
+		"compile": "tsc -p ./",
+		"jest": "jest",
+		"lint": "eslint -c .eslintrc.js --ext .ts src",
+		"pretest": "npm run compile",
+		"test": "jest",
+		"vpackage": "./node_modules/.bin/vsce package",
+		"vpublish": "./node_modules/.bin/vsce publish",
+		"vscode:prepublish": "npm run compile",
+		"watch": "tsc -watch -p ./"
+	},
+	"dependencies": {
+		"@thomaskoppelaar/markdown-it-wikilinks": "^1.3.0",
+		"github-slugger": "^1.3.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.10.1",
+		"@babel/preset-env": "^7.10.1",
+		"@babel/preset-typescript": "^7.10.1",
+		"@types/github-slugger": "^1.3.0",
+		"@types/glob": "^7.1.1",
+		"@types/jest": "^25.2.3",
+		"@types/jest-cli": "^24.3.0",
+		"@types/node": "^11.9.0",
+		"@types/vscode": "^1.32.0",
+		"@typescript-eslint/eslint-plugin": "^2.28.0",
+		"@typescript-eslint/parser": "^2.28.0",
+		"babel-jest": "^26.6.3",
+		"babylon": "^6.18.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.4",
+		"jest": "^26.6.3",
+		"jest-cli": "^26.6.3",
+		"remark": "^12.0.0",
+		"remark-wiki-link": "^0.0.4",
+		"source-map-support": "^0.5.12",
+		"ts-jest": "^26.4.4",
+		"typescript": "^3.8.3",
+		"unified": "^9.0.0",
+		"unist-util-find": "^1.0.1",
+		"unist-util-visit": "^2.0.2",
+		"vsce": "^1.81.0",
+		"vscode-test": "^1.3.0"
+	},
+	"__metadata": {
+		"id": "dde258e9-793b-4377-a4fe-9d54cbd28ea2",
+		"publisherId": "65665850-6981-4a65-a378-200d5d37c87d",
+		"publisherDisplayName": "kortina",
+		"installedTimestamp": 1626379934027
+	}
+}

@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "name": "hyper-one-dark",
+    "version": "1.0.0",
+    "description": "Hyper.app theme based on Atom One Dark theme",
+    "main": "index.js",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yuriihabrusiev/hyper-one-dark"
+    },
+    "keywords": [
+      "hyper",
+      "colors",
+      "atom"
+    ],
+    "author": {
+      "name": "Yurii Habrusiev"
+    },
+    "license": "MIT",
+    "_registry": "npm",
+    "_loc": "/Users/everduin/.hyper_plugins/cache/v1/npm-hyper-one-dark-1.0.0-8c3c11607848743c844a42820bd8ee4e6eaa698f/package.json",
+    "readmeFilename": "README.md",
+    "readme": "# One Dark for Hyper.app\n\n[Hyper.app](https://hyper.is) theme based on [the Atom One Dark theme](https://github.com/atom/one-dark-syntax). Forked from @mdo's [hyperterm-atom-dark](https://github.com/mdo/hyperterm-atom-dark) and modified by @yuriihabrusiev.\n\n![Screenshot at start](https://cloud.githubusercontent.com/assets/98681/16899205/f644411e-4baf-11e6-851a-930070779867.png)\n![Screenshot with tabs](https://cloud.githubusercontent.com/assets/98681/16899206/f644c080-4baf-11e6-890d-fd5c628c7991.png)\n\n### Install\n\n1. Open HyperTerm's preferences with `Cmd+,` (or manually at `~/.hyper.js`) with your editor.\n2. Update your list of plugins to include `hyper-one-dark`, like so:\n```js\nplugins: [\n  'hyper-one-dark'\n],\n```\n3. Fully reload HyperTerm (`Cmd+Shift+R`), and tada!\n\n### License\n\nMIT\n"
+  },
+  "artifacts": [],
+  "remote": {
+    "resolved": "https://registry.yarnpkg.com/hyper-one-dark/-/hyper-one-dark-1.0.0.tgz#8c3c11607848743c844a42820bd8ee4e6eaa698f",
+    "type": "tarball",
+    "reference": "https://registry.yarnpkg.com/hyper-one-dark/-/hyper-one-dark-1.0.0.tgz",
+    "hash": "8c3c11607848743c844a42820bd8ee4e6eaa698f",
+    "registry": "npm",
+    "packageName": "hyper-one-dark"
+  },
+  "registry": "npm",
+  "hash": "8c3c11607848743c844a42820bd8ee4e6eaa698f"
+}

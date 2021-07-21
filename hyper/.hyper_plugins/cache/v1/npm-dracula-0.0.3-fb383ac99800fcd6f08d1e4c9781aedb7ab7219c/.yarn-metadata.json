@@ -1,0 +1,44 @@
+{
+  "manifest": {
+    "name": "dracula",
+    "version": "0.0.3",
+    "main": "index.js",
+    "author": {
+      "name": "Tyler Nickerson"
+    },
+    "license": "MIT",
+    "scripts": {
+      "precommit": "lint-staged"
+    },
+    "dependencies": {
+      "dql": "^0.2.1"
+    },
+    "devDependencies": {
+      "husky": "^0.14.3",
+      "lint-staged": "^5.0.0",
+      "prettier": "^1.8.2"
+    },
+    "lint-staged": {
+      "*.{js,json,css}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "_registry": "npm",
+    "_loc": "/Users/everduin/.hyper_plugins/cache/v1/npm-dracula-0.0.3-fb383ac99800fcd6f08d1e4c9781aedb7ab7219c/package.json",
+    "readmeFilename": "README.md",
+    "readme": "# Dracula\n*“I vant to drink your data”*\n\nDracula (inspired by *DatQL-a* or *dat-quill-a*) is a small JavaScript module for running\n[DatQL](https://github.com/Nickersoft/dql) queries directly against your\ndatabase, as opposed to simply returning the generated SQL. You can install it\nvia NPM or Yarn:\n\n```bash\n$ npm install dracula --save-dev\n$ yarn add dracula --dev\n```\n\nBe sure to install v0.0.3 or up, or else you'll get the original library registered\nunder the \"dracula\" package name (a now defunct package by [Bozhidar Dryanovski](https://github.com/bdryanovski)).\n\nThe API is incredibly simple to use, and is designed only for recent versions of Node. For\nexample, to hook DatQL into Postgres using Dracula:\n\n```javascript\nimport { types, Pool } from \"pg\";\nimport dracula from \"dracula\";\nimport dql from \"dql\";\n\nconst pool = new Pool /* pg config object */();\n\n// Define a query\nconst query = dql`\nquery getUser($id) {\n    users(id = $id) {\n        name\n        email\n    }\n}\n`;\n\n// Create a hook to connect DQL to your database\n// Queries are always passed to the callback in their parameterized object form\nconst db = dracula(\n  query =>\n    new Promise(async (fulfill, reject) => {\n      pool.query(params.text, params.values, (err, res) => {\n        if (err) reject(err);\n        else fulfill(res);\n      });\n    })\n);\n\nconst getUser = db(\n  query,\n  // The 2nd param is only included to demonstrate that you can cherry-pick which query you want to run\n  // You can omit it if you only have one query or want only the last defined query to be selected\n  \"getUser\"\n);\n\n// You can now pass a config object to getUser() to retrieve a user by its ID\ngetUser({\n  variables: {\n    id: 1\n  }\n}).then(result => {\n  console.log(result);\n});\n```\n\nYou can omit some of the above code by doing merging the `db` variable with the\n`dracula` include directly:\n\n```javascript\nconst dracula = require(\"dracula\")(\n  query =>\n    new Promise(async (fulfill, reject) => {\n      pool.query(params.text, params.values, (err, res) => {\n        if (err) reject(err);\n        else fulfill(res);\n      });\n    })\n);\n```\n\nPlease note that the API is still relatively new and may change in the future.\n",
+    "description": "*“I vant to drink your data”*"
+  },
+  "artifacts": [],
+  "remote": {
+    "resolved": "https://registry.yarnpkg.com/dracula/-/dracula-0.0.3.tgz#fb383ac99800fcd6f08d1e4c9781aedb7ab7219c",
+    "type": "tarball",
+    "reference": "https://registry.yarnpkg.com/dracula/-/dracula-0.0.3.tgz",
+    "hash": "fb383ac99800fcd6f08d1e4c9781aedb7ab7219c",
+    "registry": "npm",
+    "packageName": "dracula"
+  },
+  "registry": "npm",
+  "hash": "fb383ac99800fcd6f08d1e4c9781aedb7ab7219c"
+}

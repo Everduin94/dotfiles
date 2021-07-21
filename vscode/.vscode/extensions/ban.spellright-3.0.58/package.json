@@ -1,0 +1,275 @@
+{
+	"name": "spellright",
+	"displayName": "Spell Right",
+	"description": "Multilingual, Offline and Lightweight Spellchecker",
+	"version": "3.0.58",
+	"publisher": "ban",
+	"engines": {
+		"vscode": "^1.46.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"spell",
+		"checker",
+		"spellchecker",
+		"multi-language",
+		"offline"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./src/extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Spell Right configuration",
+			"properties": {
+				"spellright.language": {
+					"type": "array",
+					"default": [],
+					"scope": "resource",
+					"description": "Default language set (dictionary/region) used for spelling."
+				},
+				"spellright.documentTypes": {
+					"type": "array",
+					"default": [
+						"markdown",
+						"latex",
+						"plaintext"
+					],
+					"scope": "resource",
+					"description": "Document types for which spelling will be turned ON by default."
+				},
+				"spellright.configurationUpdate": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "Enable/disable automatic update of configuration from GUI operations."
+				},
+				"spellright.configurationScope": {
+					"type": "string",
+					"enum": [
+						"user",
+						"workspace"
+					],
+					"default": "workspace",
+					"scope": "resource",
+					"description": "Scope for automatic configuration update."
+				},
+				"spellright.groupDictionaries": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "Enable/disable grouping of dictionaries by language."
+				},
+				"spellright.recheckOnSave": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "Enable/disable spelling of entire document on save."
+				},
+				"spellright.statusBarIndicator": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "Enable/disable language & status indicator switch in status bar."
+				},
+				"spellright.suggestionsInHints": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "Enable/disable including suggested corrections in hints."
+				},
+				"spellright.addToSystemDictionary": {
+					"type": "boolean",
+					"default": false,
+					"scope": "resource",
+					"description": "Enable/disable adding words to system custom spelling dictionary instead of user dictionary."
+				},
+				"spellright.ignoreRegExps": {
+					"type": "array",
+					"default": [],
+					"scope": "resource",
+					"description": "Regular expressions to eliminate from spelling."
+				},
+				"spellright.ignoreRegExpsByClass": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "Regular expressions to eliminate from spelling per document type."
+				},
+				"spellright.ignoreFiles": {
+					"type": "array",
+					"default": [
+						"**/.gitignore",
+						"**/.spellignore"
+					],
+					"scope": "resource",
+					"description": "List of file patterns ignored during spelling."
+				},
+				"spellright.notificationClass": {
+					"type": "string",
+					"enum": [
+						"error",
+						"warning",
+						"information",
+						"hint"
+					],
+					"default": "error",
+					"scope": "resource",
+					"description": "Assign class of diagnostic messages produced by SpellRight."
+				},
+				"spellright.notificationClassByParser": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "Assign class of diagnostic messages produced by SpellRight per parser."
+				},
+				"spellright.spellContext": {
+					"type": "string",
+					"default": "body comments strings",
+					"scope": "resource",
+					"description": "Decide which syntactic parts of documents are spelled by default."
+				},
+				"spellright.spellContextByClass": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "Decide which syntactic parts of documents are spelled per document type."
+				},
+				"spellright.languageContext": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "Decide which language is used to spell syntactic parts of documents."
+				},
+				"spellright.languageContextByClass": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "Decide which language is used to spell syntactic parts of documents per document type."
+				},
+				"spellright.parserByClass": {
+					"type": "object",
+					"default": {},
+					"scope": "resource",
+					"description": "Decide which parser and its configuration to use per document type."
+				},
+				"spellright.latexSpellParameters": {
+					"type": "array",
+					"default": [
+						"author",
+						"title",
+						"subtitle",
+						"date",
+						"chapter",
+						"section\\*?",
+						"subsection\\*?",
+						"subsubsection\\*?",
+						"part",
+						"paragraph",
+						"subparagraph",
+						"text(rm|sf|tt|md|bf|up|it|sl|sc|normal)",
+						"underline",
+						"emph",
+						"item",
+						"footnote(text)?",
+						"caption(of)?",
+						"multicolumn",
+						"href",
+						"hyperref",
+						"institute",
+						"frametitle",
+						"framesubtitle",
+						"begin\\{frame\\}"
+					],
+					"scope": "resource",
+					"description": "List of LaTeX commands that will have the parameter list spell checked."
+				},
+				"spellright.useDocumentSymbolsInCode": {
+					"type": "boolean",
+					"default": true,
+					"scope": "resource",
+					"description": "Enable/disable using document symbols when spelling using code parser (source code documents)."
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "spellright.configurationUpdate",
+				"title": "SpellRight: Configuration Update"
+			},
+			{
+				"command": "spellright.selectDictionary",
+				"title": "SpellRight: Select Dictionary (Language)"
+			},
+			{
+				"command": "spellright.setCurrentTypeOFF",
+				"title": "SpellRight: Turn OFF for Current Document Type"
+			},
+			{
+				"command": "spellright.openWorkspaceDictionary",
+				"title": "SpellRight: Open Workspace Dictionary File"
+			},
+			{
+				"command": "spellright.openUserDictionary",
+				"title": "SpellRight: Open User Dictionary File"
+			},
+			{
+				"command": "spellright.addFromSelectionToWorkspaceDictionary",
+				"title": "SpellRight: Add Selection to Workspace Dictionary"
+			},
+			{
+				"command": "spellright.addFromSelectionToUserDictionary",
+				"title": "SpellRight: Add Selection to User Dictionary"
+			}
+		],
+		"keybindings": []
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.32",
+		"@types/node": "^6.0.40",
+		"electron": "^1.4.13",
+		"electron-rebuild": "^1.5.7",
+		"eslint": "^5.15.3",
+		"mocha": "^6.0.2",
+		"vscode": "^1.1.35"
+	},
+	"dependencies": {
+		"any-promise": "^1.3.0",
+		"fs": "0.0.1-security",
+		"glob": "^7.1.1",
+		"growl": "^1.10.5",
+		"ignore": "^3.3.3",
+		"jsonminify": "^0.4.1",
+		"mkdirp": "^0.5.1",
+		"nan": "^2.12.1",
+		"node-gyp": "^3.8.0",
+		"opn": "^5.1.0",
+		"os-locale": "^2.0.0",
+		"path": "^0.12.7",
+		"xregexp": "^3.2.0"
+	},
+	"icon": "icon.png",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"homepage": "https://github.com/bartosz-antosik/vscode-spellright",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bartosz-antosik/vscode-spellright.git"
+	},
+	"bugs": {
+		"url": "https://github.com/bartosz-antosik/vscode-spellright/issues"
+	},
+	"__metadata": {
+		"id": "7d236dd4-6af6-48f4-9464-6bf82ad36aaa",
+		"publisherId": "058d2b2f-dac6-41b2-8c3e-462966d45cd6",
+		"publisherDisplayName": "Bartosz Antosik",
+		"installedTimestamp": 1626379971484
+	}
+}

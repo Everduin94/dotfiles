@@ -1,0 +1,182 @@
+# Development notes
+
+spellright:
+
+    [ ] Language server conversion
+        [ ] Spelling functionality to server
+        [ ] indicator/controller -> extension
+
+    [ ] LaTeX math from `equation environment` `\begin|\end{equation*}`, `\begin|\end{align*}`
+    [+] XML en-US --> @done(18-11-24 18:24)
+    [ ] Repeated languages (TODO's case, "English, French, English")
+    [+] _filter & _parse performance improvement in differential spelling!
+        [+] Lines loop as outside as possible
+        [+] `_filter` should be split in `_filter_global` & `_filter_line`
+        [+] Line RegExes should be evaluated "per line" not per entire document
+            [+] in `latex` parser
+            [+] in `markdown` parser
+            [+] in `plaintext` parser
+            [+] in `code` parser
+            [+] in `xml` parser
+        [ ] Combined expression from `latexSpellParameters`
+    [+] `parseForCommands` should not interpret/spell
+    [+] "en, pl" in statusbar indicator
+
+    [+] Remove `spellCheckAll`
+
+    [+] Changes to `markdown` parser
+    [+] Changes to `plaintext` parser
+    [+] Changes to `code` parser
+    [+] Changes to `xml` parser
+
+    [+] Rename:
+        [+] checkAndMark, markCallback -> checkAndMarkCallback
+        [+] interpretCommand -> commandCallback
+        [+] contextCallback -> contextCallback
+
+    [+] Settings change does not null diagnostics for invisible windows e.g. when languages are added
+    [+] Eng. Does not spell with dot! (<- multi language spelling backfire)
+    [+] No reaction to commands when adding second language e.g.:  on adding "en" does not refresh in: spellcheck- language "fr" "en" - same language as default added - no refresh, but there should be!
+
+    [+] GUI with checkmarks
+    [+] Suggestions in popup menu should be provided for all languages spelled
+    [+] Cache multiple languages on spelling API level
+    [+] Iterate over language sets on all levels: spellright.language, spellright.languageContext, spellright.languageContextByClass
+
+    [ ] Shift+Click should 'replace all' (currently not possible to capture Ctrl state)
+
+    [ ] Ctrl+. menu screenshot (people ask "How to correct?")
+
+    [+] Multipane screenshots (easier to maintain)
+    [-] Absolute paths to ignore (ignoreFiles and .spellignore) NOTE: Somehow they work for me but they do not for (#172)
+    [+] LaTeX angle braces ('<>') in commands (beamer presentation)
+
+        /\\(\w+)\*?[\s]*([\s]*(\{(?:\{[^\}]*\}|[^\{\}])*\})|[\s]*(\[(?:\[[^\]]*\]|[^\[\]])*\])|[\s]*(\<(?:\<[^>]]*\>|[^\<\>])*\>))*/g
+
+        \begin{frame}<1>[label=myframe]{The list}
+            \begin{itemize}[<+->]
+                \item Car
+                \item Airplane
+                \item Watermelon
+            \end{itemize}
+        \end{frame}
+
+    [+] Refreshing only when necessary
+
+    onDidOpenTextDocument - spell entire document
+    onDidSaveTextDocument - spell (or not) entire document
+
+    onDidChangeTextDocument - diff spelling
+
+    onDidChangeVisibleTextEditors - update indicators
+    onDidChangeActiveTextEditor - update indicators
+
+    Language Switch - spell visible, invalidata invisible
+
+    [+] Maybe add dictionaries URL (check whether they are UTF-8)
+    [+] Additiona punctuatuion characters
+    [+] In-Document Commands quoted/unquoted
+    [+] Rename token, extoken, charmap etc. to more consistent names with word, source, map etc.
+    [+] checkAndMark: context -> token.context
+    [-] Screenshots of examples in README should have:
+        [-] Comments/strings spelled in different languages (obsolete with multilanguage version)
+        [-] Latex example with switching language using LATEX magic commands and/or In-Document commands (also seems obsolete with multilanguage version)
+    [ ] Include embedded HTML (typeScriptReact etc...)
+
+        https://regex101.com/r/pE1mT5/15
+        https://regex101.com/r/pE1mT5/16
+
+    [+] Diacritics in LaTeX
+    [+] Multiline command in LaTeX
+
+        /\\\w+\*?(\[[\s\S]*?\])*((\{|\()[\s\S]*?(\}|\)))*(\[[\s\S]*?\])*/g
+
+        \setmainfont[
+        BoldFont={Segoe UI Semibold},
+        ItalicFont={Segoe UI Italic},
+        BoldItalicFont={Segoe UI Bold}
+        ]{Segoe UI Semibold}
+
+    [ ] Add parsers' parameters to `spellright.parserByClass`
+    [ ] Markdown indented code blocks vs. bulleted lists (#105)
+
+        /^\s*(\*|\+|-|\d+\.)\s*/gm
+        _indent = 
+
+    [ ] Spell attributes in XML documents
+    [ ] Detect language from file name (split to parts, see if anything matches language code) - taken from speller for Visual Studio related to resource files (e.g. something.en.xml)
+    [ ] Extra functionality: Go to first occurrence, Go to next/previous occurrence, List of suggestions to replace all occurrences, add all issues to dictionary
+
+    [-] JSON with Comments gets parser automatically - why? (Because they are supported from inside of spellright)
+    [-] Add editor/title icon for quick switching ON/OFF for current file
+
+    [+] #125  Spelling documents' syntactic elements e.g. comments and strings in different languages
+    [+] #121 not handling some LaTeX commands
+    [+] Commands spanning on multiple lines in LaTeX removed from spelling correctly
+    [+] Switching language for an unsaved document choses workspace language (?)
+    [+] Markdown indented code blocks vs. bulleted lists (#105)
+
+    [+] Priority for status bar item
+    [+] Configure parsers for unknown document types.
+
+    [+] Strings in Makefile
+    [+] Parameters inside {} in LaTeX
+    [+] Configuration <-> Settings agree
+    [+] Closing document (z.b. PDF) leaves diagnostics
+    [+] Switching language in large document leaves parts checked in previous language
+    [+] All vars to consts in spellright.js
+    [+] Multi-root workspace
+    [+] On setting OFF delete diagnostics
+    [+] Color of the OFF symbol should be red for .spellignore ignored files too!
+    [+] test.log in .spellignore disabled folder /test/ is WHITE off instead of RED.
+    [+] Support multi root workspaces!
+    [+] Support % [!TEX directives](https://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding), especially spellcheck, e.g.: * !TEX spellcheck = en
+
+    q-a-section:
+
+        [+] What if I want to add a document type (language) that is not spelled?
+        [+] Why there is a maximum of 251 spelling errors highlighted?
+
+    commands:
+
+        `
+        Command format:
+
+        spellcheck: [command] [parameters]
+        spellcheck-[command] [parameters]
+
+        Valid commands:
+
+        language [language|language-region]
+        on
+        off
+
+        Future commands:
+
+        stop
+        start
+        ignoreWords [list]
+        ignoreRegExps [list]
+        `
+
+    research:
+        ### Spell Checking Modules in JavaScript
+
+        https://github.com/GitbookIO/hunspell-spellchecker
+        https://github.com/cfinke/Typo.js/
+        https://github.com/wooorm/nspell
+
+        https://github.com/atom/node-spellchecker
+
+        http://hunspell.github.io/
+
+        ### Native modules
+
+        https://github.com/Microsoft/vscode/issues/658
+        https://github.com/electron/electron/blob/master/docs/tutorial/using-native-node-modules.md
+
+        https://github.com/mapbox/node-pre-gyp
+
+        online spell checker:
+
+        https://github.com/adrienjoly/vscode-spellchecker

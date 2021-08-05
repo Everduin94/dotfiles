@@ -17,4 +17,11 @@ function ev.sync-notes
 
     curl --request POST \
         --url 'https://api.trello.com/1/lists/60ff3f53e417325df584cf73/archiveAllCards?key=22c37678f9ab7cec6b6c1e9cf982fac8&token=14803be4874efa2bc22852f211fde90e3af27d58601d12fbdf5474993403e836'
+
+    # Sync dotfiles 
+    cd ~/dotfiles
+    git add .
+    git commit -m "Dotfiles Sync: Pushing to remote"
+    git push origin main
+    cd $dirPath
  end

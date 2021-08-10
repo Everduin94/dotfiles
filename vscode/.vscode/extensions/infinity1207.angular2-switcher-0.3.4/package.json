@@ -1,0 +1,127 @@
+{
+	"name": "angular2-switcher",
+	"publisher": "infinity1207",
+	"icon": "images/logo.png",
+	"displayName": "angular2-switcher",
+	"description": "Easily navigate to `typescript`|`template`|`style` in angular2 project.",
+	"version": "0.3.4",
+	"engines": {
+		"vscode": "^1.41.0"
+	},
+	"categories": [
+		"Keymaps"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/infinity1207/angular2-switcher"
+	},
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.switchTemplate",
+				"title": "Open corresponding template file"
+			},
+			{
+				"command": "extension.switchStyle",
+				"title": "Open corresponding style file"
+			},
+			{
+				"command": "extension.switchTs",
+				"title": "Open corresponding typescript file"
+			},
+			{
+				"command": "extension.switchSpec",
+				"title": "Open corresponding unit test file"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.switchTemplate",
+				"key": "alt+o",
+				"mac": "shift+alt+o"
+			},
+			{
+				"command": "extension.switchStyle",
+				"key": "alt+i",
+				"mac": "shift+alt+i"
+			},
+			{
+				"command": "extension.switchTs",
+				"key": "alt+u",
+				"mac": "shift+alt+u"
+			},
+			{
+				"command": "extension.switchSpec",
+				"key": "alt+p",
+				"mac": "shift+alt+p"
+			}
+		],
+		"configuration": [
+			{
+				"title": "Side by side",
+				"properties": {
+					"angular2-switcher.openSideBySide": {
+						"type": "boolean",
+						"default": false,
+						"description": "Open files side by side."
+					}
+				}
+			},
+			{
+				"title": "Style formats",
+				"properties": {
+					"angular2-switcher.styleFormats": {
+						"type": "array",
+						"default": [
+							".scss",
+							".sass",
+							".less",
+							".css"
+						],
+						"description": "The order of angular2-switcher find corresponding style file."
+					}
+				}
+			},
+			{
+				"title": "Template formats",
+				"properties": {
+					"angular2-switcher.templateFormats": {
+						"type": "array",
+						"default": [
+							".html"
+						],
+						"description": "The order of angular2-switcher find corresponding template file."
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.41.0",
+		"glob": "^7.1.5",
+		"mocha": "^6.2.2",
+		"typescript": "^3.6.4",
+		"tslint": "^5.20.0",
+		"vscode-test": "^1.2.2"
+	},
+	"__metadata": {
+		"id": "3a259045-e69a-48e3-a653-df434315df18",
+		"publisherId": "4f0abb45-bf7e-4549-9df7-c5fe70a8b00d",
+		"publisherDisplayName": "infinity1207",
+		"installedTimestamp": 1628184129219
+	}
+}

@@ -42,14 +42,24 @@ nnoremap H ^
 nnoremap L $
 nnoremap j k
 nnoremap k j
+nnoremap J {
+nnoremap K }
+xnoremap j k
+xnoremap k j
+xnoremap J {
+xnoremap K }
+onoremap J {
+onoremap K }
 onoremap j k
 onoremap k j
 onoremap H ^
 onoremap L $
 nnoremap <SPACE> <Nop>
-nnoremap <leader>c ciw
-nnoremap <leader>d diw
 nnoremap <leader>/ :noh<CR>
+nnoremap <leader>y yyp
+nnoremap <leader>j J
+nnoremap <leader>k K
+map <Space> <Leader>
 "nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
 "nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'
 "nnoremap j v:count j 

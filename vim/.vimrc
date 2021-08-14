@@ -59,6 +59,12 @@ nnoremap <leader>/ :noh<CR>
 nnoremap <leader>y yyp
 nnoremap <leader>j J
 nnoremap <leader>k K
+vnoremap K :m '>+1<CR>gv=gv
+vnoremap J :m '>-2<CR>gv=gv
+inoremap <C-k> <esc>:m .+1<CR>==
+inoremap <C-j> <esc>:m .-2<CR>==
+nnoremap <leader>j :m .-2<CR>==
+nnoremap <leader>k :m .+1<CR>==
 map <Space> <Leader>
 "nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
 "nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'

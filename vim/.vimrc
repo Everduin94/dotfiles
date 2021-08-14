@@ -37,35 +37,48 @@ set showmatch
 "nnoremap / /\v
 "vnoremap / /\va
 " Clear search - IDK how to use 07/15/2021
-map <leader><space> :let @/=''<cr>
 nnoremap H ^
 nnoremap L $
 nnoremap j k
 nnoremap k j
-nnoremap J {
-nnoremap K }
+nnoremap J {zz
+nnoremap K }zz
 xnoremap j k
 xnoremap k j
-xnoremap J {
-xnoremap K }
-onoremap J {
-onoremap K }
+xnoremap J {zz
+xnoremap K }zz
+onoremap J {zz
+onoremap K }zz
 onoremap j k
 onoremap k j
 onoremap H ^
 onoremap L $
+" Undo Break Points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+" Center when X
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
 nnoremap <SPACE> <Nop>
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>y yyp
 nnoremap <leader>j J
 nnoremap <leader>k K
-vnoremap K :m '>+1<CR>gv=gv
-vnoremap J :m '>-2<CR>gv=gv
-inoremap <C-k> <esc>:m .+1<CR>==
-inoremap <C-j> <esc>:m .-2<CR>==
-nnoremap <leader>j :m .-2<CR>==
-nnoremap <leader>k :m .+1<CR>==
+" VS Code Alt J / Alt K move line up and down 
+"
+" Useful for pure vim in future
+" vnoremap K :m '>+1<CR>gv=gv
+" vnoremap J :m '>-2<CR>gv=gv
+" inoremap <C-k> <esc>:m .+1<CR>==
+" inoremap <C-j> <esc>:m .-2<CR>==
+" nnoremap <leader>j :m .-2<CR>==
+" nnoremap <leader>k :m .+1<CR>==
 map <Space> <Leader>
+nnoremap yH mtv0y`t:delmarks t<CR>
+nnoremap yL yg_
 "nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
 "nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'
 "nnoremap j v:count j 
@@ -86,4 +99,4 @@ set ruler
 set background=dark
 
 " Pick a leader key
-" let mapleader = 
+" let mapleader = "\<Space>"

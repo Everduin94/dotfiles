@@ -61,7 +61,7 @@ inoremap ? ?<c-g>u
 " Center when X
 nnoremap n nzzzv
 nnoremap N Nzzzv
-nnoremap J mzJ`z
+"nnoremap J mzJ`z
 nnoremap <SPACE> <Nop>
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>y yyp
@@ -70,17 +70,17 @@ nnoremap <leader>k K
 " VS Code Alt J / Alt K move line up and down 
 "
 " Useful for pure vim in future
-" vnoremap K :m '>+1<CR>gv=gv
-" vnoremap J :m '>-2<CR>gv=gv
-" inoremap <C-k> <esc>:m .+1<CR>==
-" inoremap <C-j> <esc>:m .-2<CR>==
-" nnoremap <leader>j :m .-2<CR>==
-" nnoremap <leader>k :m .+1<CR>==
+"vnoremap K :m '>+1<CR>gv=gv
+"vnoremap J :m '>-2<CR>gv=gv
+nnoremap <M-j> <esc>:m .-2<CR>==
+nnoremap <M-k> <esc>:m .+1<CR>==
+"nnoremap <leader>j :m .-2<CR>==
+"nnoremap <leader>k :m .+1<CR>==
 map <Space> <Leader>
 nnoremap yH mtv0y`t:delmarks t<CR>
 nnoremap yL yg_
-"nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
-"nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gk'
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
 "nnoremap j v:count j 
 " Status Bar
 set laststatus=2

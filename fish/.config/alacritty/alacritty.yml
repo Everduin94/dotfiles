@@ -1,18 +1,24 @@
+#    ___    __    ___   __________  __________________  __
+#   /   |  / /   /   | / ____/ __ \/  _/_  __/_  __/\ \/ /
+#  / /| | / /   / /| |/ /   / /_/ // /  / /   / /    \  / 
+# / ___ |/ /___/ ___ / /___/ _, _// /  / /   / /     / /  
+#/_/  |_/_____/_/  |_\____/_/ |_/___/ /_/   /_/     /_/
+#
 colors:
   # Default colors
   primary:
-    #    background: "#2E3440" # Darkest Nord Color
+    # background: "#2E3440" # Darkest Nord Color
     # background: "#00214a" # Frost Nord But Darker
     background: "#02152e" # Darker -- Favorite so far
     # background: "#1e2127"
     # background: "#2E3440"
     foreground: "#D8DEE9"
 
-  # Normal colors
+  # Normal colors -- Only changed Green so far
   normal:
     black: "#3B4252"
     red: "#BF616A"
-    green: "#A3BE8C"
+    green: "#22da6e"
     yellow: "#EBCB8B"
     blue: "#81A1C1"
     magenta: "#B48EAD"
@@ -59,9 +65,9 @@ font:
 
 window:
   padding:
-    x: 2
-    y: 25
-  decorations: transparent
+    x: 4
+    y: 4
+  decorations: buttonless 
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

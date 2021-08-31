@@ -68,18 +68,21 @@ nnoremap N Nzzzv
 " nnoremap J mzJ`z
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>y yyp
-nnoremap <leader>j J
 nnoremap <leader>k K
-"vnoremap K :m '>+1<CR>gv=gv
-"vnoremap J :m '>-2<CR>gv=gv
-"nnoremap <C-k> <esc>:m .+1<CR>==
-"nnoremap <C-j> <esc>:m .-2<CR>==
+nnoremap <leader>j J
 
 
 " ∆ and ˚ are literally the results of OPTION-J and OPTION-K on my mac in
 " hyper -- May have to change for aca
-nnoremap ∆ :m .-2<CR>==
-nnoremap ˚ :m .+1<CR>==
+"nnoremap ∆ :m .-2<CR>==
+"nnoremap ˚ :m .+1<CR>==
+nnoremap ˚ <esc>:m .+1<CR>==
+nnoremap ∆ <esc>:m .-2<CR>==
+vnoremap ˚ :m '>+1<CR>gv=gv
+vnoremap ∆ :m '<-2<CR>gv=gv
 nnoremap yL yg_
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gk'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
+
+" Toggle relative line number
+nmap <C-L><C-L> :set invrelativenumber<CR>

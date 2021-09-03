@@ -15,6 +15,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'justinmk/vim-sneak'
     Plug 'unblevable/quick-scope'
     Plug 'liuchengxu/vim-which-key'
+    Plug 'metakirby5/codi.vim'
+    Plug 'ChristianChiarulli/far.vim'
 
     " Git Integration
     Plug 'mhinz/vim-signify'

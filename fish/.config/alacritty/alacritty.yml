@@ -41,16 +41,20 @@ background_opacity: 0.90
 
 font:
   normal:
-    family: "Menlo"
+    # family: "Menlo"
+    family: "Hack Nerd Font"
     style: Regular
   bold:
-    family: "Menlo"
+    # family: "Menlo"
+    family: "Hack Nerd Font"
     style: Bold
   italic:
-    family: "Menlo"
+    # family: "Menlo"
+    family: "Hack Nerd Font"
     style: Italic
   bold_italic:
-    family: "Menlo"
+    # family: "Menlo"
+    family: "Hack Nerd Font"
     style: Bold Italic
 
   # Point size

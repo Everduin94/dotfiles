@@ -3,7 +3,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " File Explorer
-    Plug 'scrooloose/NERDTree'
+    " Plug 'scrooloose/NERDTree'
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
     Plug 'vim-airline/vim-airline'
@@ -17,6 +17,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vim-which-key'
     Plug 'metakirby5/codi.vim'
     Plug 'ChristianChiarulli/far.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'tpope/vim-surround'
+
+    " Sets current working directory to .git root. Messes up monorepo
+    " Plug 'airblade/vim-rooter' 
 
     " Git Integration
     Plug 'mhinz/vim-signify'

@@ -20,6 +20,8 @@ source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/codi.vim
 source $HOME/.config/nvim/plug-config/far.vim
+source $HOME/.config/nvim/plug-config/fzf.vim
+
 
 " Lua Plugins
 lua require'plug-colorizer'

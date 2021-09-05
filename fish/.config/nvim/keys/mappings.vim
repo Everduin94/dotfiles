@@ -84,5 +84,25 @@ nnoremap yL yg_
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gk'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
 
+" Navigation, Sessions, FZF
+
+map <leader>pp :Files<CR>
+map <leader>po :GFiles<CR>
+map <leader>pb :Buffers<CR>
+" Find in CWD
+nnoremap <leader>pf :Rg<CR>
+" Find in Git Root
+nnoremap <leader>pg :Rgg<CR>
+" Find in buffer directory
+nnoremap <leader>ph :Rggg<CR>
+" Strict find (not fuzzy)
+nnoremap <leader>pF :RG<CR>
+nnoremap <leader>pG :RGG<CR>
+nnoremap <leader>pH :RGGG<CR>
+nnoremap <leader>pt :Tags<CR>
+nnoremap <leader>pm :Marks<CR>
+nnoremap <leader>ps :Startify<CR>
+
+
 " Toggle relative line number
 nmap <C-L><C-L> :set invrelativenumber<CR>

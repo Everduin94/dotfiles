@@ -20,6 +20,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-surround'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " Sets current working directory to .git root. Messes up monorepo
     " Plug 'airblade/vim-rooter' 

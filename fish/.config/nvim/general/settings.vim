@@ -42,5 +42,6 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 cmap w!! w !sudo tee %
 
 " My settings
+set ignorecase
 set relativenumber
 set termguicolors                       " Needed for colorizer to work

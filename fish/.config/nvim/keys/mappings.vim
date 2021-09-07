@@ -32,8 +32,8 @@ vnoremap > >gv
 
 " Better window navigation (NOT FLIPPED - May not need?)
 nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>k
+nnoremap <C-k> <C-w>j
 nnoremap <C-l> <C-w>l
 
 " What do this do?

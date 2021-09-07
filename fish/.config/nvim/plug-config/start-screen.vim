@@ -14,6 +14,7 @@ let g:startify_bookmarks = [
             \ { 'w': '~/Documents/dev/cx-cloud-ui-clone/cx-cloud-ui/apps/athena-playground'},
             \ { 'r': '~/Documents/dev/cx-cloud-ui/apps/cx-portal/src/main.ts'},
             \ { 't': '~/Documents/dev/erxk-article-playground/README.md'},
+            \ { 'u': '~/Documents/dev/notes/todo.md'},
             \ ]
 
 let g:startify_session_autoload = 1

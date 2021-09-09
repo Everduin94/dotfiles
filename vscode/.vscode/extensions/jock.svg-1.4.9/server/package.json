@@ -1,0 +1,26 @@
+{
+	"name": "svg-server",
+	"description": "svg vscode extensions lsp server",
+	"version": "1.0.0",
+	"author": "jock",
+	"license": "MIT",
+	"engines": {
+		"node": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lishu/vscode-svg2.git"
+	},
+	"dependencies": {
+		"vscode-languageserver": "^7.0.0",
+		"vscode-css-languageservice": "^5.1.0",
+		"vscode-html-languageservice": "^4.0.3"
+	},
+	"devDependencies": {
+		"jest": "26.4.2"
+	},
+	"scripts": {
+		"vscode:prepublish": "webpack --mode production",
+		"test": "jest"
+	}
+}

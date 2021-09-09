@@ -49,15 +49,23 @@ function! GetGitDir()
 endfunction
 
 " Get text in files with Rg -- Actually Fuzzy
-function! FuzzyRipgrep(query, fullscreen, dir)
+" Limit columns, avoids IDs/Hashes getting mixed in fuzzy search
+" I added langArgs to make specific file searches like CSS only or filter
+" garbage for the most common usecases
+function! FuzzyRipgrep(query, fullscreen, dir, langArgs)
   call fzf#vim#grep(
-  \   'rg --column --line-number --color=always --no-heading --ignore-case -Tjson '.shellescape(a:query), 1,
+  \   'rg --column --line-number --max-columns=150 --color=always --no-heading --ignore-case ' . a:langArgs.shellescape(a:query), 1,
   \   fzf#vim#with_preview({'options': ['--delimiter=:', '--nth=4..'], 'dir': a:dir}), a:fullscreen)
 endfunction
 
-command! -bang -nargs=* Rg call FuzzyRipgrep(<q-args>, <bang>0, getcwd())
-command! -bang -nargs=* Rgg call FuzzyRipgrep(<q-args>, <bang>0, GetGitDir())
-command! -bang -nargs=* Rggg call FuzzyRipgrep(<q-args>, <bang>0, expand('%:p:h'))
+command! -bang -nargs=* Rg call FuzzyRipgrep(<q-args>, <bang>0, getcwd(), ' -Tjson ' )
+command! -bang -nargs=* Rgg call FuzzyRipgrep(<q-args>, <bang>0, GetGitDir(), ' -Tjson ' )
+command! -bang -nargs=* Rggg call FuzzyRipgrep(<q-args>, <bang>0, expand('%:p:h'), ' -Tjson ' )
+command! -bang -nargs=* Rgcss call FuzzyRipgrep(<q-args>, <bang>0, getcwd(), " -tcss " )
+
+nnoremap <silent> <Leader>piw :Rg <C-R><C-W><CR>
+nnoremap <silent> <Leader>pig :Rgg <C-R><C-W><CR>
+nnoremap <silent> <Leader>pic :Rgcss <C-R><C-W><CR>
 
 " Ripgrep advanced -- Not fuzzy (exact search)
 function! RipgrepFzf(query, fullscreen, dir)

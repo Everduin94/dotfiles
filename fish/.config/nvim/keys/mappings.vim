@@ -37,8 +37,10 @@ nnoremap <C-k> <C-w>j
 nnoremap <C-l> <C-w>l
 
 " What do this do?
-nnoremap <Leader>o o<Esc>^Da
-nnoremap <Leader>O O<Esc>^Da
+" nnoremap <Leader>o o<Esc>^Da
+" nnoremap <Leader>O O<Esc>^Da
+
+
 
 " My Remaps
 nnoremap H ^

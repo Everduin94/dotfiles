@@ -8,7 +8,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler              			            " Show the cursor position all the time
-set cmdheight=2                         " More space for displaying messages
+set cmdheight=1                         " More space for displaying messages - Was 2, made 1
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
@@ -43,6 +43,7 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 cmap w!! w !sudo tee %
 
 " My settings
+set signcolumn="yes"                    " Always show sign column for signify
 set ignorecase
 set relativenumber
 set termguicolors                       " Needed for colorizer to work

@@ -20,12 +20,15 @@ source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/codi.vim
 source $HOME/.config/nvim/plug-config/far.vim
-source $HOME/.config/nvim/plug-config/fzf.vim
+source $HOME/.config/nvim/plug-config/fzf.vim 
 source $HOME/.config/nvim/plug-config/coc.vim
-
+source $HOME/.config/nvim/plug-config/switcher.vim
+source $HOME/.config/nvim/plug-config/treesitter.vim
 
 " Lua Plugins
 lua require'plug-colorizer'
+
+" TODO: Source TMUX?
 
 " Theme
 " source $HOME/.config/nvim/themes/doom-one.vim

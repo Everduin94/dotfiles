@@ -22,12 +22,19 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'tpope/vim-commentary'
+    Plug 'honza/vim-snippets'
+    Plug 'machakann/vim-highlightedyank'
+    " Plug 'christianchiarulli/nvcode-color-schemes.vim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-angular'
+    Plug 'edkolev/tmuxline.vim'
 
     " Sets current working directory to .git root. Messes up monorepo
     " Plug 'airblade/vim-rooter' 
 
     " Git Integration
     Plug 'mhinz/vim-signify'
+    " Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'junegunn/gv.vim'
@@ -35,6 +42,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Theme
     " Plug 'romgrk/doom-one.vim'
     " Plug 'joshdick/onedark.vim'
-    Plug 'arcticicestudio/nord-vim'
+    " Plug 'arcticicestudio/nord-vim' " Keep for airline
+    Plug 'shaunsingh/nord.nvim'
 
 call plug#end()

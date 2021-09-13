@@ -1,7 +1,7 @@
 #    ___    __    ___   __________  __________________  __
 #   /   |  / /   /   | / ____/ __ \/  _/_  __/_  __/\ \/ /
-#  / /| | / /   / /| |/ /   / /_/ // /  / /   / /    \  / 
-# / ___ |/ /___/ ___ / /___/ _, _// /  / /   / /     / /  
+#  / /| | / /   / /| |/ /   / /_/ // /  / /   / /    \  /
+# / ___ |/ /___/ ___ / /___/ _, _// /  / /   / /     / /
 #/_/  |_/_____/_/  |_\____/_/ |_/___/ /_/   /_/     /_/
 #
 colors:
@@ -38,7 +38,6 @@ colors:
 
 background_opacity: 0.90
 
-
 font:
   normal:
     # family: "Menlo"
@@ -69,9 +68,9 @@ font:
 
 window:
   padding:
-    x: 4
-    y: 4
-  decorations: buttonless 
+    x: 0
+    y: 0
+  decorations: buttonless
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

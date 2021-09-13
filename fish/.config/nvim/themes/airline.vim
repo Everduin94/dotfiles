@@ -10,11 +10,19 @@ let g:airline_powerline_fonts = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
+" Disable redundant test in middle
+let g:airline_section_c = ''
+
 " Switch to your current theme
-let g:airline_theme = 'nord'
+let g:airline_theme = 'base16_nord'
 
 " Always show tabs
 set showtabline=2
 
 " We don't need to see things like -- INSERT -- anymore
 set noshowmode
+
+" NOTE! I switched normal and replace in:
+" autoload/plugged/vim-airline-themes/autoload/airline/themes/base16_nord.vim
+" If this plugin is reloaded, I'll probably lose that change.
+

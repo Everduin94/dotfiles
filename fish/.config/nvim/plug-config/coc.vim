@@ -7,9 +7,11 @@ let g:coc_global_extensions = [
       \'coc-highlight',
       \'coc-prettier', 
       \'coc-json', 
-      \'coc-git',
       \'coc-emmet',
+      \'coc-snippets',
       \]
+
+" Removed coc-git
 
 nmap <leader>lf <Plug>(coc-fix-current)
 nmap <leader>lc <Plug>(coc-codeaction)
@@ -24,7 +26,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
+    call CocActionAsync('doHover') 
   else
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
@@ -38,7 +40,24 @@ nmap <leader>la  <Plug>(coc-codeaction-selected)
 
 
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-"
 nmap <silent> <leader>lj <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>lk <Plug>(coc-diagnostic-next)
 nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr>
+
+
+" Snippets -- TODO: Test these. Did not test defaults
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-k> for select text for visual placeholder of snippet.
+vmap <C-k> <Plug>(coc-snippets-select)
+
+" Use <C-k> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-k>'
+
+" Use <C-j> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-j>'
+
+" Use <C-k> for both expand and jump (make expand higher priority.)
+imap <C-k> <Plug>(coc-snippets-expand-jump)

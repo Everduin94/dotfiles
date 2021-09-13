@@ -12,7 +12,7 @@ let g:startify_bookmarks = [
             \ { 'i': '~/.config/nvim/init.vim' },
             \ { 'c': '~/.config' },
             \ { 'w': '~/Documents/dev/cx-cloud-ui-clone/cx-cloud-ui/apps/athena-playground'},
-            \ { 'r': '~/Documents/dev/cx-cloud-ui/apps/cx-portal/src/main.ts'},
+            \ { 'r': '~/Documents/dev/cx-cloud-ui/apps/cx-portal/'},
             \ { 't': '~/Documents/dev/erxk-article-playground/README.md'},
             \ { 'u': '~/Documents/dev/notes/todo.md'},
             \ ]

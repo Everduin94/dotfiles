@@ -10,7 +10,7 @@
     "json"
   ],
   "angular.experimental-ivy": false,
-  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"],
+  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
   "list.nextKeymap": "<C-k>",
   "list.previousKeymap": "<C-j>",
   "tree.key.selectNext": "<C-k>",

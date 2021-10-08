@@ -28,13 +28,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-angular'
     Plug 'edkolev/tmuxline.vim'
+    Plug 'Konfekt/vim-CtrlXA'
+    Plug 'mattn/emmet-vim'
+    Plug 'chamindra/marvim'
+    Plug 'voldikss/vim-floaterm'
+
 
     " Sets current working directory to .git root. Messes up monorepo
     " Plug 'airblade/vim-rooter' 
 
     " Git Integration
     Plug 'mhinz/vim-signify'
-    " Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'junegunn/gv.vim'

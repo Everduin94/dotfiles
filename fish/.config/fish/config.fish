@@ -11,3 +11,5 @@ set ws_cx_cloud_ui $HOME/Documents/dev/cx-cloud-ui/apps/cx-portal
 set ws_erxk_playground $HOME/Documents/dev/erxk-article-playground
 set ws_notes $HOME/Documents/dev/notes
 
+# Fix TMUX Issue?
+set -x SHELL /bin/bash

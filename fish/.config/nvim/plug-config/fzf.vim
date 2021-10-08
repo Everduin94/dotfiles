@@ -38,8 +38,7 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-"Get Files
-
+" Get Files
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
@@ -61,7 +60,11 @@ endfunction
 command! -bang -nargs=* Rg call FuzzyRipgrep(<q-args>, <bang>0, getcwd(), ' -Tjson ' )
 command! -bang -nargs=* Rgg call FuzzyRipgrep(<q-args>, <bang>0, GetGitDir(), ' -Tjson ' )
 command! -bang -nargs=* Rggg call FuzzyRipgrep(<q-args>, <bang>0, expand('%:p:h'), ' -Tjson ' )
-command! -bang -nargs=* Rgcss call FuzzyRipgrep(<q-args>, <bang>0, getcwd(), " -tcss " )
+command! -bang -nargs=* Rgcss call FuzzyRipgrep(<q-args>, <bang>0, expand('%:p:h'), " -tcss " )
+
+" Attempt: Search macro -- Update to ~ or HOME?
+command! -bang -nargs=* Rgmacros call FuzzyRipgrep(<q-args>, <bang>0, '~/dotfiles/fish/.config/nvim/macros', '' )
+
 
 nnoremap <silent> <Leader>piw :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>pig :Rgg <C-R><C-W><CR>

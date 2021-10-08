@@ -18,13 +18,17 @@ nnoremap <TAB> :bnext<CR>
 nnoremap <S-TAB> :bprevious<CR>
 
 " Alternate way to save
-nnoremap <C-s> :w<CR>
-" Alternate way to quit
-nnoremap <C-Q> :wq!<CR>
-" Use control-c instead of escape
-nnoremap <C-c> <Esc>
+nnoremap <C-s> :wa<CR>
+" Close buffer -- Hard quit
+nnoremap <C-q> :bd!<CR>
+" Close buffer -- Save
+map <leader>q :wa\|bd<CR>
+" Save all, Close all buffers but this one -- escape the | 
+nnoremap <C-D> mz\|:wa\|%bd\|e#\|bd#<cr>`z
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+map ß :w\|so %<CR>
 
 " Better tabbing
 vnoremap < <gv
@@ -45,6 +49,8 @@ nnoremap <C-l> <C-w>l
 " My Remaps
 nnoremap H ^
 nnoremap L $
+vnoremap H ^
+vnoremap L $
 nnoremap j k
 nnoremap k j
 nnoremap J {zz
@@ -73,7 +79,6 @@ nnoremap <leader>y yyp
 nnoremap <leader>k K
 nnoremap <leader>j J
 
-
 " ∆ and ˚ are literally the results of OPTION-J and OPTION-K on my mac in
 " hyper -- May have to change for aca
 "nnoremap ∆ :m .-2<CR>==
@@ -88,9 +93,16 @@ nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
 
 " Navigation, Sessions, FZF
 
+" Fugitive
+map <leader>gf :G<CR>
+map <leader>ga :diffget //2<CR>
+map <leader>gl :diffget //3<CR>
+map <leader>gs :G push -u<CR>
+" Find files
 map <leader>pp :Files<CR>
 map <leader>po :GFiles<CR>
 map <leader>pb :Buffers<CR>
+map <leader>pq :Rgmacros<CR>
 " Find in CWD
 nnoremap <leader>pf :Rg<CR>
 " Find in Git Root

@@ -8,6 +8,7 @@ highlight SignifySignChange guibg=NONE guifg=#EBCB8B cterm=NONE gui=NONE
 highlight Sneak guifg=#2E3440 guibg=#f1fa8c	 ctermfg=black ctermbg=cyan
 " highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
 highlight SneakScope guifg=#2E3440 guibg=#ECEFF4 
+hi FloatermBorder guibg=none guifg=#3EB489
 
 " This probably doesn't hurt to have but may not be needed.
 " always show the signcolumn

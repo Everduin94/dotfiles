@@ -1,4 +1,3 @@
-
 "    _____   _____________    ________  ___
 "   /  _/ | / /  _/_  __/ |  / /  _/  |/  /
 "   / //  |/ // /  / /  | | / // // /|_/ / 
@@ -24,6 +23,11 @@ source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/switcher.vim
 source $HOME/.config/nvim/plug-config/treesitter.vim
+source $HOME/.config/nvim/plug-config/emmet.vim
+source $HOME/.config/nvim/plug-config/marvim.vim
+source $HOME/.config/nvim/plug-config/floaterm.vim
+
+
 
 " Lua Plugins
 lua require'plug-colorizer'

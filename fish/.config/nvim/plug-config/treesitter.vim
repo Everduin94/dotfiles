@@ -5,7 +5,7 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = { "haskell" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust", "haskell"},  -- list of language that will be disabled
+    disable = { "c", "rust", "haskell", "typescript"},  -- list of language that will be disabled
   },
 }
 EOF

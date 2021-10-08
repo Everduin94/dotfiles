@@ -1,3 +1,51 @@
-snippet aabb
-	const ${1:TEST} = $1;
+snippet zselect
+	readonly ${1:xxxprop}$: Observable<${2:xxxtype}> = this.select((state) => state.${1:xxxprop});
 endsnippet
+
+snippet zstore
+
+import { ComponentStore } from '@ngrx/component-store';
+import { Injectable } from '@angular/core';
+
+export interface ${1:xxxprop}State {
+}
+
+@Injectable({
+providedIn: 'root',
+})
+export class ${1:xxxprop}Store extends ComponentStore<${1:xxxprop}State> {
+
+	readonly vm$ = this.select(
+		this.state$,
+		(state) => ({
+			state,
+		})
+	);
+
+	constructor() {
+		super();
+	}
+
+}
+
+endsnippet
+
+snippet zupdater
+	readonly set${1:xxxprop} = this.updater((state, ${1:xxxprop}: ${2:xxxtype}) => ({
+		...state,
+		${1:xxxprop}
+	}));
+endsnippet
+
+snippet zprop
+	${1:xxxprop}: ${2:xxxtype};	
+endsnippet
+
+snippet zvalue
+	${1:xxxprop}: ${2:xxxvalue},	
+endsnippet
+
+snippet zequals
+	${1:xxxprop} = ${2:xxxvalue};	
+endsnippet
+

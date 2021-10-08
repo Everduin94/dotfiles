@@ -1,0 +1,5 @@
+eslint.lintProject
+workspace.showOutput
+eslint.showOutputChannel
+eslint.manageLibraryExecution
+eslint.executeAutofix

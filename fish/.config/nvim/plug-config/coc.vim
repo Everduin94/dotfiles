@@ -7,7 +7,7 @@ let g:coc_global_extensions = [
       \'coc-highlight',
       \'coc-prettier', 
       \'coc-json', 
-      \'coc-emmet',
+      \'coc-eslint',
       \'coc-snippets',
       \]
 
@@ -49,6 +49,8 @@ nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr>
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
+" let g:UltiSnipsExpandTrigger="<c-l>" -- This doesn't work because all is
+" done via coc. Not ultisnips
 
 " Use <C-k> for select text for visual placeholder of snippet.
 vmap <C-k> <Plug>(coc-snippets-select)
@@ -60,4 +62,19 @@ let g:coc_snippet_next = '<c-k>'
 let g:coc_snippet_prev = '<c-j>'
 
 " Use <C-k> for both expand and jump (make expand higher priority.)
-imap <C-k> <Plug>(coc-snippets-expand-jump)
+imap ∫ <Plug>(coc-snippets-expand-jump)
+
+
+" Testing
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'

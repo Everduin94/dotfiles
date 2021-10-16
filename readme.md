@@ -27,6 +27,10 @@
 ### Scripts
 - Moved from fish to zsh. Need to convert.
 
+### Git
+- .gitconfig currently uses my work account.
+- Update to use my personal. And then update local configs to use work.
+
 ### TODO
 - Include alfred (brew cask if possible + vc preferences)
   - Is vc preferences necessary or are they cloud based?
@@ -37,3 +41,4 @@
   - Fix username
 - vc nerdfont config
 - install script (you could do this manually just by following instructions in "Programs")
+

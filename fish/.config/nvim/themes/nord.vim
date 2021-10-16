@@ -9,6 +9,15 @@ highlight Sneak guifg=#2E3440 guibg=#f1fa8c	 ctermfg=black ctermbg=cyan
 " highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
 highlight SneakScope guifg=#2E3440 guibg=#ECEFF4 
 hi FloatermBorder guibg=none guifg=#3EB489
+highlight CmpItemKind guifg=#3EB489 guibg=#02152e
+" highlight CmpItemMenu guibg=#02152e
+" highlight CmpItemAbbr guibg=#02152e
+" highlight CmpDocumentation guibg=#02152e
+" highlight CmpItemAbbrMatch guibg=#02152e
+" highlight CmpItemAbbrMatchFuzzy guibg=#02152e
+highlight Pmenu guibg=#02152e
+
+
 
 " This probably doesn't hurt to have but may not be needed.
 " always show the signcolumn

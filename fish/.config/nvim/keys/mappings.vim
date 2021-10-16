@@ -1,6 +1,7 @@
 " Better nav for omnicomplete (FLIPPED)
-inoremap <expr> <c-k> ("\<C-n>")
-inoremap <expr> <c-j> ("\<C-p>")
+" inoremap <expr> <c-k> ("\<C-n>")
+" inoremap <expr> <c-j> ("\<C-p>")
+
 
 " Use alt + hjkl to resize windows
 " nnoremap <M-j>    :resize -2<CR>

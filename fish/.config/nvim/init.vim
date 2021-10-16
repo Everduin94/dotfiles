@@ -1,4 +1,3 @@
-"    _____   _____________    ________  ___
 "   /  _/ | / /  _/_  __/ |  / /  _/  |/  /
 "   / //  |/ // /  / /  | | / // // /|_/ / 
 " _/ // /|  // /  / /  _| |/ // // /  / /  
@@ -20,21 +19,27 @@ source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/codi.vim
 source $HOME/.config/nvim/plug-config/far.vim
 source $HOME/.config/nvim/plug-config/fzf.vim 
-source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/switcher.vim
 source $HOME/.config/nvim/plug-config/treesitter.vim
 source $HOME/.config/nvim/plug-config/emmet.vim
 source $HOME/.config/nvim/plug-config/marvim.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
-
-
+source $HOME/.config/nvim/plug-config/lsp-config.vim
+source $HOME/.config/nvim/plug-config/prettier.vim
+" source $HOME/.config/nvim/plug-config/coq-plug.vim
 
 " Lua Plugins
-lua require'plug-colorizer'
+luafile $HOME/.config/nvim/lua/compe-config.lua
+luafile $HOME/.config/nvim/lua/plug-colorizer.lua
+luafile $HOME/.config/nvim/lua/lsp/typescript-ls.lua
+luafile $HOME/.config/nvim/lua/lsp/angular-ls.lua
+luafile $HOME/.config/nvim/lua/lsp/html-ls.lua
+luafile $HOME/.config/nvim/lua/lsp/lua-ls.lua
+luafile $HOME/.config/nvim/lua/lsp/efm-ls.lua
 
-" TODO: Source TMUX?
+
+" Auto Commands
+autocmd BufWritePost /Users/everduin/dotfiles/fish/.config/tmux/tmux.conf execute ':!tmux source-file %' 
 
 " Theme
-" source $HOME/.config/nvim/themes/doom-one.vim
-" source $HOME/.config/nvim/themes/onedark.vim
 source $HOME/.config/nvim/themes/nord.vim

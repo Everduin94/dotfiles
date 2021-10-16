@@ -94,4 +94,4 @@ key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
   - { key: C, mods: Control|Shift, action: Copy }
   - { key: Key0, mods: Control, action: ResetFontSize }
-  - { key: N, mods: Control, action: SpawnNewInstance }
+# - { key: N, mods: Control, action: SpawnNewInstance }

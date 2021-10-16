@@ -4,7 +4,7 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 " let g:airline#extensions#tabline#right_sep = ''
 " let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 " Hides 'buffers' in top right
 let g:airline#extensions#tabline#show_tab_type = 0
 
@@ -13,8 +13,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 
-" Disable redundant test in middle
-let g:airline_section_c = ''
+" Disable redundant text in middle
+" let g:airline_section_c = ''
 
 " Switch to your current theme
 let g:airline_theme = 'base16_nord'

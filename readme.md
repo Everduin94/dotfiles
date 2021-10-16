@@ -1,25 +1,39 @@
-### Potential Issues
-Vim plugs did not push content to remote (July, 2021) (Unresolved)
-- Will PluggedInstall fix?
-  - If not, create submodules
+# Dotfiles
 
-The first time I tried to make a submodule, index already exists exception
-- *Note*: vim sneak for example, still works on my work machine.
+*Managed with GNU Stow*
+- `stow */` to symlink all folders into `.config` and `$HOME`
 
-### Future Improvements
-Need installation script 
-- mv all existing/conflicting dotfiles to temp
-- create symlinks for every dotfile
-- install brew if mac
-  - install brew tools 
-  - install fish if mac
+### Stack
+- Alacritty
+- Neovim
+- Tmux
+- Zsh
 
-### Goal
-**Version control all of my dotfiles**
+**Additional Features**
+- Ranger
+- Fzf
+- Git
+- No OMZ
+- NerdFonts Enabled
 
-#### STATUS: COMPLETE
+### Programs
+`xargs brew install < programs/.brew.list`
+`xargs brew install --cask < programs/.brew-cask.list`
+`programs/.npm.list` -- No installation setup (yet).`
+`:PlugInstall` -- nvim utilizing Vim-Plug
+  - Some themes I hard-editted. May need to adjust
+  based on comments in files like nord.vim
 
-### Goal
-**Run installation Script on another machine**
+### Scripts
+- Moved from fish to zsh. Need to convert.
 
-#### STATUS: LOW PRIORITY
+### TODO
+- Include alfred (brew cask if possible + vc preferences)
+  - Is vc preferences necessary or are they cloud based?
+- Install bottom (or a similar program)
+- Adjustments to zsh config (copied from MachFiles)
+  - Remove unix specific commands
+  - Update j/k
+  - Fix username
+- vc nerdfont config
+- install script (you could do this manually just by following instructions in "Programs")

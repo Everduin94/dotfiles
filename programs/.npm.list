@@ -1,0 +1,15 @@
+/usr/local/lib
+├── @angular/cli@12.1.2
+├── @angular/language-server@12.2.1
+├── @datorama/akita-cli@6.1.1
+├── eslint@7.32.0
+├── eslint_d@11.0.0
+├── jest@27.0.6
+├── neovim@4.10.0
+├── npm@6.14.13
+├── nx@12.5.8
+├── prettier@2.4.1
+├── typescript@4.4.3
+├── typescript-language-server@0.6.3
+└── vscode-langservers-extracted@3.0.0
+

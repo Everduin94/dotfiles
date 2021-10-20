@@ -50,5 +50,3 @@ require'lspconfig'.sumneko_lua.setup {
         }
     }
 }
-
-print('setting up lua!!!')

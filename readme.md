@@ -23,6 +23,7 @@
 `:PlugInstall` -- nvim utilizing Vim-Plug
   - Some themes I hard-editted. May need to adjust
   based on comments in files like nord.vim
+`Prefix+I` -- Install tmux plugins
 
 ### Scripts
 - Moved from fish to zsh. Need to convert.

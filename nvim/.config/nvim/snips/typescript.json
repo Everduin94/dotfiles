@@ -1,0 +1,11 @@
+{
+  "Set Timeout": {
+		"prefix": "settimeout",
+		"body": [
+			"setTimeout(() => {",
+			"\t$0",
+			"}, ${1:timeout});"
+		],
+		"description": "Set Timeout Function"
+	}
+}

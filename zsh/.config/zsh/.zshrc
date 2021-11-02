@@ -12,6 +12,9 @@ zle_highlight=('paste:none')
 # beeping is annoying
 unsetopt BEEP
 
+# Must be before bindkey calls
+# Turns off vim-mode and enables emacs mode (default): https://unix.stackexchange.com/questions/197839/why-does-exporting-vim-as-editor-in-zsh-disable-keyboard-shortcuts
+bindkey -e 
 
 # completions
 autoload -Uz compinit
@@ -34,7 +37,7 @@ source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
 zsh_add_file "zsh-exports"
-zsh_add_file "zsh-vim-mode"
+# zsh_add_file "zsh-vim-mode"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-prompt"
 
@@ -56,8 +59,15 @@ bindkey -s '^z' 'zi^M'
 bindkey '^[[P' delete-char
 bindkey "^p" up-line-or-beginning-search # Up
 bindkey "^n" down-line-or-beginning-search # Down
-bindkey "^k" up-line-or-beginning-search # Up
-bindkey "^j" down-line-or-beginning-search # Down
+
+# Important: Removed \ec binding from fzf shell keybinds
+zle     -N    fzf-cd-widget
+bindkey 'ç' fzf-cd-widget # Option+ç
+
+# Flipped
+bindkey "^j" up-line-or-beginning-search # Up
+bindkey "^k" down-line-or-beginning-search # Down
+bindkey "^L" end-of-line
 bindkey -r "^u"
 bindkey -r "^d"
 
@@ -73,12 +83,9 @@ bindkey -r "^d"
 compinit
 
 # Edit line in vim with ctrl-e:
-autoload edit-command-line; zle -N edit-command-line
+# TODO: EV Commented out to test
+# autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
-
-# TODO Remove these
-setxkbmap -option caps:escape
-xset r rate 210 40
 
 # Speedy keys
 # xset r rate 210 40
@@ -86,7 +93,8 @@ xset r rate 210 40
 # Environment variables set everywhere
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="brave"
+export BROWSER="chrome"
+
 
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct

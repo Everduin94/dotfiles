@@ -16,8 +16,6 @@ let g:airline_left_sep = ''
 " Disable redundant text in middle
 " let g:airline_section_c = ''
 
-" Switch to your current theme
-let g:airline_theme = 'base16_nord'
 
 " Always show tabs
 set showtabline=2

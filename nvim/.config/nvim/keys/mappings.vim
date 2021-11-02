@@ -6,8 +6,8 @@
 " Use alt + hjkl to resize windows
 " nnoremap <M-j>    :resize -2<CR>
 " nnoremap <M-k>    :resize +2<CR>
-nnoremap <M-h>    :vertical resize -2<CR>
-nnoremap <M-l>    :vertical resize +2<CR>
+" nnoremap <M-h>    :vertical resize -2<CR>
+" nnoremap <M-l>    :vertical resize +2<CR>
 
 " Easy CAPS
 inoremap <c-u> <ESC>viwUi
@@ -20,13 +20,13 @@ nnoremap <S-TAB> :bprevious<CR>
 
 " Alternate way to save
 nnoremap <C-s> :wa<CR>
-" Close buffer -- Hard quit
-nnoremap <C-q> :bd!<CR>
+" Close buffer -- Hard quit -- OPTION+q
+nnoremap œ :bd!<CR>
 " Close buffer -- Save
-map <leader>q :wa\|bd<CR>
+map <leader>q :w\|bd<CR>
 " Save all, Close all buffers but this one -- escape the | 
 nnoremap <C-D> mz\|:wa\|%bd\|e#\|bd#<cr>`z
-" <TAB>: completion.
+" <TAB>: completion. -- TODO: Should this be here?
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 map ß :w\|so %<CR>
@@ -34,6 +34,8 @@ map ß :w\|so %<CR>
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
+nnoremap < <<
+nnoremap > >>
 
 " Better window navigation (NOT FLIPPED - May not need?)
 nnoremap <C-h> <C-w>h
@@ -44,7 +46,6 @@ nnoremap <C-l> <C-w>l
 " What do this do?
 " nnoremap <Leader>o o<Esc>^Da
 " nnoremap <Leader>O O<Esc>^Da
-
 
 
 " My Remaps
@@ -76,7 +77,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 " nnoremap J mzJ`z
 nnoremap <leader>/ :noh<CR>
-nnoremap <leader>y yyp
 nnoremap <leader>k K
 nnoremap <leader>j J
 
@@ -92,13 +92,25 @@ nnoremap yL yg_
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gk'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
 
+" Terminal
+" Normal Mode
+" « = OPTION+\
+tnoremap « <C-\><C-N>
+
 " Navigation, Sessions, FZF
 
 " Fugitive
 map <leader>gf :G<CR>
-map <leader>ga :diffget //2<CR>
-map <leader>gl :diffget //3<CR>
-map <leader>gs :G push -u<CR>
+map <leader>g1 :diffget //2<CR>
+map <leader>g2 :diffget //3<CR>
+
+" Fugitive: Commit=cc Checkout=coo
+map <leader>gcc :Git commit
+map <leader>gco :Git checkout
+map <leader>gcs :Git push -u
+map <leader>gcp :Git pull -r
+" map <leader>gs :G push -u<CR>
+
 " Find files
 map <leader>pp :Files<CR>
 map <leader>po :GFiles<CR>
@@ -118,6 +130,13 @@ nnoremap <leader>pt :Tags<CR>
 nnoremap <leader>pm :Marks<CR>
 nnoremap <leader>ps :Startify<CR>
 
+" Quick Fix List -- Center on moving and when closing list
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cl :cclose<CR>zz
+" OPTION+z: Previous Option+x next
+nnoremap Ω :cp<CR>zz
+nnoremap ≈ :cn<CR>zz
+
 
 " Toggle relative line number
-nmap <C-L><C-L> :set invrelativenumber<CR>
+" nmap <C-L><C-L> :set invrelativenumber<CR>

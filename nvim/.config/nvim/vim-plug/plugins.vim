@@ -36,13 +36,21 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " LSP
     Plug 'neovim/nvim-lspconfig'
     Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-    Plug 'rafamadriz/friendly-snippets'
+    " Snippets + LSP
     Plug 'hrsh7th/nvim-cmp'
+    Plug 'rafamadriz/friendly-snippets'
+    " Plug 'hrsh7th/vim-vsnip'
+    " Plug 'hrsh7th/vim-vsnip-integ'
     Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'L3MON4D3/LuaSnip'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'onsails/lspkind-nvim'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'
+    
+    " Harpoon
+    Plug 'nvim-lua/plenary.nvim' 
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'ThePrimeagen/harpoon'
 
     " COQ
     
@@ -72,5 +80,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'joshdick/onedark.vim'
     " Plug 'arcticicestudio/nord-vim' " Keep for airline
     Plug 'shaunsingh/nord.nvim'
+    Plug 'tyrannicaltoucan/vim-deep-space'
 
 call plug#end()

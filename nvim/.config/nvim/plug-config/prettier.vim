@@ -4,4 +4,5 @@
 let g:prettier#autoformat_config_present = 1
 let g:prettier#autoformat_require_pragma = 0
 let g:prettier#config#config_precedence = 'prefer-file'
+nmap <Leader>pz <Plug>(Prettier)
 

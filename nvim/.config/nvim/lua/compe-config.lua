@@ -19,6 +19,13 @@ vim.o.completeopt = 'menuone,noselect'
 local luasnip = require 'luasnip'
 local lspKind = require 'lspkind'
 -- require("luasnip/loaders/from_vscode").load { paths = '~/.config/nvim/autoload/plugged/friendly-snippets' }
+require("luasnip/loaders/from_vscode").load { paths = '~/.config/nvim/snips' }
+
+-- IDK What this is but I'm using for vsnip call
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 
 -- -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -28,6 +35,7 @@ cmp.setup {
   },
   snippet = {
     expand = function(args)
+      -- vim.fn["vsnip#anonymous"](args.body)
       require('luasnip').lsp_expand(args.body)
     end,
   },
@@ -36,7 +44,7 @@ cmp.setup {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-a>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<C-l>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -45,6 +53,8 @@ cmp.setup {
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      -- elseif vim.fn.call("vsnip#available", {1}) == 1 then
+      --   return t "<Plug>(vsnip-expand-or-jump)"
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       else
@@ -54,6 +64,8 @@ cmp.setup {
     ['<S-Tab>'] = function(fallback)
       if luasnip.jumpable(-1) then
         luasnip.jump(-1)
+      -- if vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+      --   return t "<Plug>(vsnip-jump-prev)"
       elseif cmp.visible() then
         cmp.select_prev_item()
       else
@@ -62,8 +74,9 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = 'luasnip' },
     { name = 'nvim_lsp',
     max_item_count = 100},
-    { name = 'luasnip' },
+    -- { name = 'vsnip' },
   },
 }

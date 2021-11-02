@@ -4,7 +4,7 @@
 "/___/_/ |_/___/ /_/  (_)___/___/_/  /_/   
 "
 
-" Vim Plugins
+" Vim Plugins 
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/keys/mappings.vim
@@ -26,7 +26,7 @@ source $HOME/.config/nvim/plug-config/marvim.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/prettier.vim
-" source $HOME/.config/nvim/plug-config/coq-plug.vim
+source $HOME/.config/nvim/plug-config/harpoon.vim
 
 " Lua Plugins
 luafile $HOME/.config/nvim/lua/compe-config.lua
@@ -37,9 +37,11 @@ luafile $HOME/.config/nvim/lua/lsp/html-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/lua-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/efm-ls.lua
 
+" TODO: Move all to one file
+luafile $HOME/.config/nvim/lua/harpoon-setup.lua
 
 " Auto Commands
-autocmd BufWritePost /Users/everduin/dotfiles/fish/.config/tmux/tmux.conf execute ':!tmux source-file %' 
+autocmd BufWritePost /Users/everduin/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 
 
 " Theme
 source $HOME/.config/nvim/themes/nord.vim

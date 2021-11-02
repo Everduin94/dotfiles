@@ -23,54 +23,84 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-" THESE MAPPINGS ARE NOT ACCURATE - UPDATE WHEN POSSIBLE
-
 " Single mappings
-let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'comment' ]
-let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-let g:which_key_map['f'] = [ ':Files'                     , 'search fils' ]
-let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
-let g:which_key_map['r'] = [ ':Ranger'                    , 'ranger' ]
-let g:which_key_map['S'] = [ ':Startify'                  , 'start screen' ]
-let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
-let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
+let g:which_key_map['r'] = [ ':Ranger' , 'ranger' ]
+" Number Binds
+let g:which_key_map['0'] = 'Harpoon Add'
+let g:which_key_map['1'] = 'Harpoon 1'
+let g:which_key_map['2'] = 'Harpoon 2'
+let g:which_key_map['3'] = 'Harpoon 3'
+let g:which_key_map['4'] = 'Harpoon 4'
+let g:which_key_map['e'] = 'Harpoon Menu'
+let g:which_key_map['j'] = 'Join line'
+let g:which_key_map['q'] = 'Save->close'
+let g:which_key_map['k'] = 'Man page'
+
+" Angular Switcher
+let g:which_key_map.o = {
+    \ 'name' : '+Switcher' ,
+    \ 'o' : 'HTML',
+    \ 'i' : 'CSS',
+    \ 'u' : 'TS',
+    \ 'y' : 'Spec',
+    \ }
+
+let g:which_key_map.t = {
+    \ 'name' : '+Flo' ,
+    \ ';' : 'Shell',
+    \ 'r' : 'Codi',
+    \ '1' : 'Terminal-1',
+    \ '2' : 'Terminal-2',
+    \ 'c' : 'Cmd Menu',
+    \ }
+
+
+let g:which_key_map.g = {
+    \ 'name' : '+Git' ,
+    \ 'k' : 'Next Hunk' ,
+    \ 'j' : 'Prev Hunk' ,
+    \ 'f' : 'Fugitive' ,
+    \ '1' : 'Take Left' ,
+    \ '2' : 'Take Right' ,
+    \ 'b' : [':Git blame', 'Blame'],
+    \ 'l' : [':Git log', 'Log'],
+    \ 'v' : [':Gvdiffsplit', 'Diff Split'],
+    \ 'w' : [':Git difftool', 'Diff Tool'],
+    \ 'e' : [':Git mergetool', 'Merge Tool'],
+    \ }
+
+let g:which_key_map.g.c = {
+    \ 'name' : '+Workflow' ,
+    \ }
+
+let g:which_key_map.R = {
+    \ 'name' : '+Macros' ,
+    \ }
+
+let g:which_key_map.p = {
+    \ 'name' : '+Search' ,
+    \ }
 
 " f is for FAR
 let g:which_key_map.f = {
-      \ 'name' : '+find & replace' ,
-      \ 'b' : [':Farr --source=vimgrep'    , 'buffer'],
-      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
-      \ }
+    \ 'name' : '+Far' ,
+    \ 'b' : [':Farr --source=vimgrep'    , 'buffer'],
+    \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+    \ }
 
-"" s is for search
-let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
-      \ 'a' : [':Ag'           , 'text Ag'],
-      \ 'b' : [':BLines'       , 'current buffer'],
-      \ 'B' : [':Buffers'      , 'open buffers'],
-      \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : [':Files'        , 'files'],
-      \ 'g' : [':GFiles'       , 'git files'],
-      \ 'G' : [':GFiles?'      , 'modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'lines'] ,
-      \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Helptags'     , 'help tags'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
-      \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 't' : [':Rg'           , 'text Rg'],
-      \ 'T' : [':BTags'        , 'buffer tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
-      \ }
+" Vim Splits
+let g:which_key_map.v = {
+    \ 'name' : '+Splits' ,
+    \ 'k' : [':15sp'    , 'Down'],
+    \ 'l' : [':65vsp'     , 'Right'],
+    \ 'c' : [':close'     , 'Close'],
+    \ ']' : [':vertical resize +5'     , '+->'],
+    \ '[' : [':vertical resize -5'     , '<-+'],
+    \ '=' : [':resize +5'     , 'vvv'],
+    \ '-' : [':resize -5'     , '^^^'],
+    \ '\' : ['<C-W>='     , 'Balance'],
+    \ '|' : ['<C-W>|'     , 'Hide'],
+    \ }
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")

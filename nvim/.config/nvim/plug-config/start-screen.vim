@@ -9,12 +9,13 @@ let g:startify_lists = [
           \ ]
 
 let g:startify_bookmarks = [
-            \ { 'i': '~/.config/nvim/init.vim' },
-            \ { 'c': '~/.config' },
-            \ { 'w': '~/Documents/dev/cx-cloud-ui-clone/cx-cloud-ui/apps/athena-playground'},
-            \ { 'r': '~/Documents/dev/cx-cloud-ui/apps/cx-portal/'},
-            \ { 't': '~/Documents/dev/erxk-article-playground/README.md'},
-            \ { 'u': '~/Documents/dev/notes/todo.md'},
+            \ { 'i': '$WS_CONFIG/nvim/.config/nvim/init.vim' },
+            \ { 'd': '$WS_CONFIG' },
+            \ { 'z': '$WS_ZSHRC' },
+            \ { 'r': '$WS_CX_CLOUD'},
+            \ { 't': '$WS_PLAYGROUND'},
+            \ { 'f': '$WS_FULL_METAL'},
+            \ { 'u': '$WS_NOTES'},
             \ ]
 
 let g:startify_session_autoload = 1

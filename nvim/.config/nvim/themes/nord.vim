@@ -1,3 +1,9 @@
+" Deep Space Test
+" colorscheme deep-space
+" let g:airline_theme = 'deep-space'
+
+
+let g:airline_theme = 'base16_nord'
 colorscheme nord
 hi Normal guibg=NONE ctermbg=NONE           " Transparent background
 highlight clear SignColumn

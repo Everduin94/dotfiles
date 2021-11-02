@@ -13,8 +13,9 @@ let g:signify_sign_show_text = 1
 " Jump though hunks (I Flipped these)
 nmap <leader>gk <plug>(signify-next-hunk)
 nmap <leader>gj <plug>(signify-prev-hunk)
-nmap <leader>gK 9999<leader>gJ
-nmap <leader>gJ 9999<leader>gk
+" I don't undestand what these do
+" nmap <leader>gK 9999<leader>gJ
+" nmap <leader>gJ 9999<leader>gk
 
 " If you like colors instead
 " highlight SignifySignAdd                  ctermbg=green                guibg=#00ff00

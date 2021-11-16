@@ -17,13 +17,13 @@
 - NerdFonts Enabled
 
 ### Programs
-`xargs brew install < programs/.brew.list`
-`xargs brew install --cask < programs/.brew-cask.list`
-`programs/.npm.list` -- No installation setup (yet).
-`:PlugInstall` -- nvim utilizing Vim-Plug
+ - `xargs brew install < programs/.brew.list`
+ - `xargs brew install --cask < programs/.brew-cask.list`
+ - `programs/.npm.list` -- No installation setup (yet).
+ - `:PlugInstall` -- nvim utilizing Vim-Plug
   - Some themes I hard-editted. May need to adjust
   based on comments in files like nord.vim
-`Prefix+I` -- Install tmux plugins
+ - `Prefix+I` -- Install tmux plugins
 
 ### Scripts
 - Moved from fish to zsh. Need to convert.

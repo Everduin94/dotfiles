@@ -19,7 +19,7 @@
 ### Programs
 `xargs brew install < programs/.brew.list`
 `xargs brew install --cask < programs/.brew-cask.list`
-`programs/.npm.list` -- No installation setup (yet).`
+`programs/.npm.list` -- No installation setup (yet).
 `:PlugInstall` -- nvim utilizing Vim-Plug
   - Some themes I hard-editted. May need to adjust
   based on comments in files like nord.vim
@@ -28,18 +28,9 @@
 ### Scripts
 - Moved from fish to zsh. Need to convert.
 
-### Git
-- .gitconfig currently uses my work account.
-- Update to use my personal. And then update local configs to use work.
-
 ### TODO
-- Include alfred (brew cask if possible + vc preferences)
-  - Is vc preferences necessary or are they cloud based?
+- Include alfred (brew cask if possible)
 - Install bottom (or a similar program)
-- Adjustments to zsh config (copied from MachFiles)
-  - Remove unix specific commands
-  - Update j/k
-  - Fix username
-- vc nerdfont config
+- vc nerdfont config / move nerd fonts to dotfiles
 - install script (you could do this manually just by following instructions in "Programs")
 

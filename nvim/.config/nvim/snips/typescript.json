@@ -7,5 +7,55 @@
 			"}, ${1:timeout});"
 		],
 		"description": "Set Timeout Function"
+	},
+  "Effect with Side-Effect": {
+		"prefix": "effects",
+		"body": [
+"${1}$ = createEffect(",
+    "    () =>",
+    "      this.actions$.pipe(",
+    "        ofType(${2}),",
+    "        tap(() => ${3}),",
+    "        switchMap((actionValue) => [",
+    "          toaster(actionValue),",
+    "        ])",
+    "      ),",
+    "    { dispatch: true }",
+    "  );"
+		],
+		"description": "Effect with a switchmap"
+	},
+  "Effect": {
+		"prefix": "effect",
+		"body": [
+"${1}$ = createEffect(() =>",
+    "    this.actions$.pipe(",
+    "      ofType(${2}),",
+    "      tap(() => ${3})",
+    "    )",
+    "  );"
+		],
+		"description": "Effect"
+	},
+  "Enum Redux": {
+		"prefix": "enumRedux",
+		"body": [
+      "${1} = '[${1}] ${2}'"
+		],
+		"description": "Enum Redux Entry"
+	},
+  "Input definition": { 
+		"prefix": "inputS",
+		"body": [
+      "@Input() ${1} = ${0}"
+		],
+		"description": "Input Definition"
+	},
+  "Output definition": { 
+		"prefix": "outputS",
+		"body": [
+      "@Output() ${1} = new EventEmitter<any>();"
+		],
+		"description": "Output Definition"
 	}
 }

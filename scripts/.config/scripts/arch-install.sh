@@ -41,13 +41,13 @@ aur=(
 )
 
 systemUpdate() {
-  sudo pacman -Syu git
+  sudo pacman -Syu git --noconfirm
 }
 
 pacmanNoVerify() {
   local deps=("$@")
   for i in ${deps[@]}; do
-    sudo pacman -S $i --no-verify
+    sudo pacman -S $i --noconfirm
   done
 }
 
@@ -61,7 +61,7 @@ installYay() {
 yayNoVerify() {
   local deps=("$@")
   for i in ${deps[@]}; do
-    yay -Syu $i --no-verify
+    yay -Syu $i --noconfirm
   done
 }
 

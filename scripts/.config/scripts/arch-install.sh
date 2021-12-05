@@ -1,7 +1,7 @@
 #!/bin/bash
 
 core=(
-'xorg-server'
+'xorg'
 'xorg-xinit'
 'firefox'
 'nautilus'
@@ -65,6 +65,10 @@ yayNoVerify() {
   done
 }
 
+enableLightDm() {
+  systemctl enable lightdm
+}
+
 
 systemUpdate
 pacmanNoVerify "${core[@]}"
@@ -73,5 +77,6 @@ pacmanNoVerify "${wm[@]}"
 pacmanNoVerify "${amdGaming[@]}"
 pacmanNoVerify "${editor[@]}"
 installYay "${aur[@]}"
+enableLightDm
 
 

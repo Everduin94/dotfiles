@@ -54,6 +54,10 @@ let g:which_key_map.t = {
     \ 'c' : 'Cmd Menu',
     \ }
 
+let g:which_key_map.a = {
+      \ 'name' : '+Snippets',
+      \ '6' : ['ieffect <CR>:lua require("luasnip").expand()', 'Effect'],
+      \ }
 
 let g:which_key_map.g = {
     \ 'name' : '+Git' ,

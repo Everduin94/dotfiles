@@ -1,0 +1,34 @@
+{
+  "Output binding": { 
+		"prefix": "outputS",
+		"body": [
+      "(${1})=\"${2}\""
+		],
+		"description": "Output Binding"
+	},
+  "Input binding": { 
+		"prefix": "inputS",
+		"body": [
+      "[${1}]=\"${2}\""
+		],
+		"description": "Input Binding"
+	},
+  "Ng Container If": { 
+		"prefix": "ngCoIf",
+		"body": [
+"<ng-container *ngIf=\"${1}$ | async as ${1}\">",
+    "\t$0",
+    "</ng-container>"
+		],
+		"description": "Ng Container with If"
+	},
+  "Ng Container For": { 
+		"prefix": "ngCoFor",
+		"body": [
+ "<ng-container *ngFor=\"let ${1} of ${1}s\">",
+    "\t$0",
+    "</ng-container>"
+		],
+		"description": "Ng Container with For"
+	},
+}

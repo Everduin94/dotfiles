@@ -8,7 +8,6 @@
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/keys/mappings.vim
-source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/plug-config/rnvimr.vim
 source $HOME/.config/nvim/plug-config/rainbow.vim
 source $HOME/.config/nvim/plug-config/start-screen.vim
@@ -17,7 +16,6 @@ source $HOME/.config/nvim/plug-config/sneak.vim
 source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/codi.vim
-source $HOME/.config/nvim/plug-config/far.vim
 source $HOME/.config/nvim/plug-config/fzf.vim 
 source $HOME/.config/nvim/plug-config/switcher.vim
 source $HOME/.config/nvim/plug-config/treesitter.vim
@@ -31,12 +29,15 @@ source $HOME/.config/nvim/plug-config/harpoon.vim
 " Lua Plugins
 luafile $HOME/.config/nvim/lua/compe-config.lua
 luafile $HOME/.config/nvim/lua/plug-colorizer.lua
+luafile $HOME/.config/nvim/lua/lualine-config.lua
+luafile $HOME/.config/nvim/lua/bufferline-config.lua
 luafile $HOME/.config/nvim/lua/lsp/typescript-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/angular-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/html-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/lua-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/efm-ls.lua
 
+" TODO: investigate timeouts in settings
 " TODO: Move all to one file
 luafile $HOME/.config/nvim/lua/harpoon-setup.lua
 
@@ -44,4 +45,14 @@ luafile $HOME/.config/nvim/lua/harpoon-setup.lua
 autocmd BufWritePost /Users/everduin/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 
 
 " Theme
-source $HOME/.config/nvim/themes/nord.vim
+" source $HOME/.config/nvim/themes/nord.vim
+let g:tokyonight_colors = {
+      \ 'green': '#6ace95',
+\ }
+let g:tokyonight_transparent = 1
+colorscheme tokyonight 
+" TODO: these aren't working until I reload
+highlight CursorLine guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
+highlight SignifySignAdd guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
+highlight SignifySignDelete guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
+highlight SignifySignChange guibg=NONE ctermbg=NONE cterm=NONE gui=NONE

@@ -3,7 +3,7 @@
 " let g:airline_theme = 'deep-space'
 
 
-let g:airline_theme = 'base16_nord'
+" let g:airline_theme = 'base16_nord'
 colorscheme nord
 hi Normal guibg=NONE ctermbg=NONE           " Transparent background
 highlight clear SignColumn
@@ -24,12 +24,6 @@ highlight CmpItemKind guifg=#3EB489 guibg=#02152e
 highlight Pmenu guibg=#02152e
 
 
-
-" This probably doesn't hurt to have but may not be needed.
-" always show the signcolumn
-autocmd BufRead,BufNewFile * setlocal signcolumn=yes
-" remove the color from the signColumn
-autocmd BufRead,BufNewFile * highlight clear SignColumn
 
 " I changed these from #A3BE8C to #3EB489
 " autoload/plugged/nord.nvim/lua/nord/colors.lua

@@ -64,11 +64,18 @@ font:
     x: 0
     y: 0
 
+# MacOS
+# window:
+#   padding:
+#     x: 0
+#     y: 0
+#   decorations: buttonless
+
 window:
   padding:
     x: 0
     y: 0
-  decorations: buttonless
+  decorations: none
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

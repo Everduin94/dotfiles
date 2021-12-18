@@ -60,15 +60,15 @@ Git worktree
 ### TMUX
 
 - Explanation of session management (TODO)
-- See notes/tmux.md: ~/Documents/dev/notes/creative-work/tmux.md
-- Switch windows - should match nvim (TODO)
+  * See notes/tmux.md: ~/Documents/dev/notes/creative-work/tmux.md
+  - Switch windows - should match nvim (TODO)
 - Create pane - nvim or tmux can handle. Choose 1 or make same keybind (TODO)
 
 ### NVIM
 
 - Save all -> Close all buffers except this one - C-d
 - Save all - C-s
-- Save & close buffer - <leader>+q
+  - Save & close buffer - <leader>+q
 - Hard close buffer - C-q
 - Move up/down splits - C-j / C-k
 - Move left/right splits - C-h / C-l

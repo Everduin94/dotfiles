@@ -4,55 +4,53 @@
 # / ___ |/ /___/ ___ / /___/ _, _// /  / /   / /     / /
 #/_/  |_/_____/_/  |_\____/_/ |_/___/ /_/   /_/     /_/
 #
+      
+# TokyoNight STORM (Dark Bg, New Green) Alacritty Colors
 colors:
   # Default colors
   primary:
-    # background: "#2E3440" # Darkest Nord Color
-    # background: "#00214a" # Frost Nord But Darker
-    background: "#02152e" # Darker -- Favorite so far
-    # background: "#1e2127"
-    # background: "#2E3440"
-    foreground: "#D8DEE9"
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
 
-  # Normal colors -- Only changed Green so far
+  # Normal colors
   normal:
-    black: "#3B4252"
-    red: "#BF616A"
-    green: "#22da6e"
-    yellow: "#EBCB8B"
-    blue: "#81A1C1"
-    magenta: "#B48EAD"
-    cyan: "#88C0D0"
-    white: "#abb2bf"
+    black:   '0x1D202F'
+    red:     '0xf7768e'
+    green:   '0x6ace95'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
 
   # Bright colors
   bright:
-    black: "#5c6370"
-    red: "#e06c75"
-    green: "#98c379"
-    yellow: "#d19a66"
-    blue: "#61afef"
-    magenta: "#c678dd"
-    cyan: "#56b6c2"
-    white: "#ECEFF4"
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x6ace95'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
 
 background_opacity: 0.90
 
 font:
   normal:
-    # family: "Menlo"
     family: "Hack Nerd Font"
     style: Regular
   bold:
-    # family: "Menlo"
     family: "Hack Nerd Font"
     style: Bold
   italic:
-    # family: "Menlo"
     family: "Hack Nerd Font"
     style: Italic
   bold_italic:
-    # family: "Menlo"
     family: "Hack Nerd Font"
     style: Bold Italic
 

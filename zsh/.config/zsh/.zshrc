@@ -59,14 +59,20 @@ bindkey -s '^z' 'zi^M'
 bindkey '^[[P' delete-char
 bindkey "^p" up-line-or-beginning-search # Up
 bindkey "^n" down-line-or-beginning-search # Down
+# bindkey "^j" up-line-or-history # Up
+# bindkey "^k" down-line-or-history # Down
+bindkey "^j": previous-history
+bindkey "^k": next-history
+bindkey -M menuselect '^j' up-line-or-beginning-search
+bindkey -M menuselect '^k' down-line-or-beginning-search
 
 # Important: Removed \ec binding from fzf shell keybinds
 zle     -N    fzf-cd-widget
 bindkey 'ç' fzf-cd-widget # Option+ç
 
-# Flipped
-bindkey "^j" up-line-or-beginning-search # Up
-bindkey "^k" down-line-or-beginning-search # Down
+# Flipped -- TODO: Dec 14th, disable these in favor of bind above as a test.
+# bindkey "^j" up-line-or-beginning-search # Up
+# bindkey "^k" down-line-or-beginning-search # Down
 bindkey "^L" end-of-line
 bindkey -r "^u"
 bindkey -r "^d"
@@ -80,6 +86,7 @@ bindkey -r "^d"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
 # export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+export FZF_DEFAULT_OPTS='--bind=ctrl-j:up,ctrl-k:down'
 compinit
 
 # Edit line in vim with ctrl-e:

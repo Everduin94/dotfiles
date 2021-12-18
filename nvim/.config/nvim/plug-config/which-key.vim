@@ -85,13 +85,6 @@ let g:which_key_map.p = {
     \ 'name' : '+Search' ,
     \ }
 
-" f is for FAR
-let g:which_key_map.f = {
-    \ 'name' : '+Far' ,
-    \ 'b' : [':Farr --source=vimgrep'    , 'buffer'],
-    \ 'p' : [':Farr --source=rgnvim'     , 'project'],
-    \ }
-
 " Vim Splits
 let g:which_key_map.v = {
     \ 'name' : '+Splits' ,

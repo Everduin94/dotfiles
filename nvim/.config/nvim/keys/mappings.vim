@@ -1,116 +1,94 @@
-" Better nav for omnicomplete (FLIPPED)
-" inoremap <expr> <c-k> ("\<C-n>")
-" inoremap <expr> <c-j> ("\<C-p>")
-
-
-" Use alt + hjkl to resize windows
-" nnoremap <M-j>    :resize -2<CR>
-" nnoremap <M-k>    :resize +2<CR>
-" nnoremap <M-h>    :vertical resize -2<CR>
-" nnoremap <M-l>    :vertical resize +2<CR>
-
-" Easy CAPS
-inoremap <c-u> <ESC>viwUi
-nnoremap <c-u> viwU<Esc>
-
-" TAB in general mode will move to text buffer
+" - Buffers | Splits -
 nnoremap <TAB> :bnext<CR>
-" SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 
-" Alternate way to save
 nnoremap <C-s> :wa<CR>
 " Close buffer -- Hard quit -- OPTION+q
 nnoremap œ :bd!<CR>
 " Close buffer -- Save
 map <leader>q :w\|bd<CR>
-" Save all, Close all buffers but this one -- escape the | 
-nnoremap <C-D> mz\|:wa\|%bd\|e#\|bd#<cr>`z
+  
+" Save all, Close all buffers but this one -- escape the | -- I wanted to keep
+" this just so i have the syntax. But ctrl d is a bad bind (overwrites)
+" nnoremap <C-D> mz\|:wa\|%bd\|e#\|bd#<cr>`z
+
 " <TAB>: completion. -- TODO: Should this be here?
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-map ß :w\|so %<CR>
-
-" Better tabbing
+" Better tabbing - Enforce this mapping over plugins
 vnoremap < <gv
 vnoremap > >gv
 nnoremap < <<
 nnoremap > >>
 
-" Better window navigation (NOT FLIPPED - May not need?)
+" Better window navigation 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>k
 nnoremap <C-k> <C-w>j
 nnoremap <C-l> <C-w>l
 
-" What do this do?
-" nnoremap <Leader>o o<Esc>^Da
-" nnoremap <Leader>O O<Esc>^Da
 
+nnoremap gj gk
+nnoremap gk gj
 
-" My Remaps
+" - Base -
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L $
-nnoremap j k
-nnoremap k j
+nnoremap j <Up>
+nnoremap k <Down>
 nnoremap J {zz
 nnoremap K }zz
-xnoremap j k
-xnoremap k j
+xnoremap j <Up>
+xnoremap k <Down>
 xnoremap J {zz
 xnoremap K }zz
 onoremap J {zz
 onoremap K }zz
-onoremap j k
-onoremap k j
+onoremap j <Up>
+onoremap k <Down>
 onoremap H ^
 onoremap L $
+
 " Undo Break Points
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
+
 " Center when X
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
 " nnoremap J mzJ`z
 nnoremap <leader>/ :noh<CR>
 nnoremap <leader>k K
 nnoremap <leader>j J
 
-" ∆ and ˚ are literally the results of OPTION-J and OPTION-K on my mac in
-" hyper -- May have to change for aca
-"nnoremap ∆ :m .-2<CR>==
-"nnoremap ˚ :m .+1<CR>==
+" ∆ and ˚ are the results of OPTION-J and OPTION-K on  mac 
 nnoremap ˚ <esc>:m .+1<CR>==
 nnoremap ∆ <esc>:m .-2<CR>==
 vnoremap ˚ :m '>+1<CR>gv=gv
 vnoremap ∆ :m '<-2<CR>gv=gv
 nnoremap yL yg_
-nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gk'
-nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
+" TODO: Bring these back
 
-" Terminal
-" Normal Mode
+" - Terminal | Normal Mode -
 " « = OPTION+\
 tnoremap « <C-\><C-N>
 
-" Navigation, Sessions, FZF
-
-" Fugitive
+" - Fugitive -
 map <leader>gf :G<CR>
 map <leader>g1 :diffget //2<CR>
 map <leader>g2 :diffget //3<CR>
-
-" Fugitive: Commit=cc Checkout=coo
 map <leader>gcc :Git commit
 map <leader>gco :Git checkout
 map <leader>gcs :Git push -u
 map <leader>gcp :Git pull -r
-" map <leader>gs :G push -u<CR>
+" Commit=cc Checkout=coo
 
+" - Navigation - 
 " Find files
 map <leader>pp :Files<CR>
 map <leader>po :GFiles<CR>
@@ -130,24 +108,13 @@ nnoremap <leader>pt :Tags<CR>
 nnoremap <leader>pm :Marks<CR>
 nnoremap <leader>ps :Startify<CR>
 
-" Quick Fix List -- Center on moving and when closing list
+" - Quick Fix List - 
+" Center on moving and when closing list
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cl :cclose<CR>zz
-" OPTION+z: Previous Option+x next
+
+" OPTION+Z: Previous | Option+X Next
 nnoremap Ω :cp<CR>zz
 nnoremap ≈ :cn<CR>zz
 
 
-" Toggle relative line number
-" nmap <C-L><C-L> :set invrelativenumber<CR>
-"
-"
-
-
-nnoremap <leader>a6 ieffect <esc>:lua require("luasnip").expand()<CR>
-nnoremap <leader>a7 ieffects <esc>:lua require("luasnip").expand()<CR>
-nnoremap <leader>ae ienumRedux <esc>:lua require("luasnip").expand()<CR>
-nnoremap <leader>ai iinputS <esc>:lua require("luasnip").expand()<CR>
-nnoremap <leader>ao ioutputS <esc>:lua require("luasnip").expand()<CR>
-nnoremap <leader>af ingCoIf <esc>:lua require("luasnip").expand()<CR>
-nnoremap <leader>ar ingCoFor <esc>:lua require("luasnip").expand()<CR>

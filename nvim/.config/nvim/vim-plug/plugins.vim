@@ -51,6 +51,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-rhubarb'
     Plug 'junegunn/gv.vim'
 
+    " Markdown Integration
+    Plug 'vimwiki/vimwiki'
+    Plug 'ferrine/md-img-paste.vim'
+
     " Theme
     Plug 'shaunsingh/nord.nvim'
     Plug 'folke/tokyonight.nvim', { 'branch': 'main' }

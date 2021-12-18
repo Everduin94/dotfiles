@@ -150,5 +150,7 @@ require("bufferline").setup{
                 guibg = '#1D202F',
                 gui = "bold,italic"
             }
-  }
-}
+   }
+ }
+
+

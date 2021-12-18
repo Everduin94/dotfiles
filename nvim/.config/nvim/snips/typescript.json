@@ -57,5 +57,12 @@
       "@Output() ${1} = new EventEmitter<any>();"
 		],
 		"description": "Output Definition"
+	},
+  "Tap Log": { 
+		"prefix": "tapLog",
+		"body": [
+      "tap((v) => console.log('${1:value}:', {$2}))"
+		],
+		"description": "Output Definition"
 	}
 }

@@ -15,7 +15,7 @@ map <leader>q :w\|bd<CR>
 " <TAB>: completion. -- TODO: Should this be here?
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" Better tabbing
+" Better tabbing - Enforce this mapping over plugins
 vnoremap < <gv
 vnoremap > >gv
 nnoremap < <<
@@ -27,23 +27,27 @@ nnoremap <C-j> <C-w>k
 nnoremap <C-k> <C-w>j
 nnoremap <C-l> <C-w>l
 
+
+nnoremap gj gk
+nnoremap gk gj
+
 " - Base -
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L $
-nnoremap j k
-nnoremap k j
+nnoremap j <Up>
+nnoremap k <Down>
 nnoremap J {zz
 nnoremap K }zz
-xnoremap j k
-xnoremap k j
+xnoremap j <Up>
+xnoremap k <Down>
 xnoremap J {zz
 xnoremap K }zz
 onoremap J {zz
 onoremap K }zz
-onoremap j k
-onoremap k j
+onoremap j <Up>
+onoremap k <Down>
 onoremap H ^
 onoremap L $
 
@@ -68,8 +72,7 @@ nnoremap ∆ <esc>:m .-2<CR>==
 vnoremap ˚ :m '>+1<CR>gv=gv
 vnoremap ∆ :m '<-2<CR>gv=gv
 nnoremap yL yg_
-nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gk'
-nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gj'
+" TODO: Bring these back
 
 " - Terminal | Normal Mode -
 " « = OPTION+\

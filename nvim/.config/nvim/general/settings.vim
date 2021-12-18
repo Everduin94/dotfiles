@@ -23,20 +23,18 @@ set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=0                        " Always display the status line
 set number                              " Line numbers
-set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
-set nobackup                            " This is recommended by coc TODO no coc
-set nowritebackup                       " This is recommended by coc TODO no coc
 set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms TODO: Is this why my cmp fails in big tsserver?
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
-set signcolumn=number                   " This is a fix for something wrong with COC TODO: Don't use coc, can i delete
-set signcolumn="yes"                    " Always show sign column for signify
+set signcolumn=yes                    " Always show sign column for signify
 set ignorecase                          " Ignore case for search
 set relativenumber                      "  3 2 1 39 1 2 3
 set termguicolors                       " Needed for colorizer to work
 set noshowmode                          " Hide INSERT 
+set nocompatible
+filetype plugin on
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC

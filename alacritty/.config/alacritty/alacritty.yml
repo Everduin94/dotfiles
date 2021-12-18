@@ -27,7 +27,7 @@ colors:
   bright:
     black:   '0x414868'
     red:     '0xf7768e'
-    green:   '0x9ece6a'
+    green:   '0x6ace95'
     yellow:  '0xe0af68'
     blue:    '0x7aa2f7'
     magenta: '0xbb9af7'
@@ -37,33 +37,6 @@ colors:
   indexed_colors:
     - { index: 16, color: '0xff9e64' }
     - { index: 17, color: '0xdb4b4b' }
-
-# Default
-# colors:
-#   primary:
-    # background: '0x24283b'
-#     background: "#02152e" # Darker -- Favorite so far
-#     foreground: "#D8DEE9"
-
-#   normal:
-#     black: "#3B4252"
-#     red: "#BF616A"
-#     green: "#22da6e"
-#     yellow: "#EBCB8B"
-#     blue: "#81A1C1"
-#     magenta: "#B48EAD"
-#     cyan: "#88C0D0"
-#     white: "#abb2bf"
-
-#   bright:
-#     black: "#5c6370"
-#     red: "#e06c75"
-#     green: "#98c379"
-#     yellow: "#d19a66"
-#     blue: "#61afef"
-#     magenta: "#c678dd"
-#     cyan: "#56b6c2"
-#     white: "#ECEFF4"
 
 background_opacity: 0.90
 

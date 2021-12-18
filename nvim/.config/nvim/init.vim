@@ -22,9 +22,10 @@ source $HOME/.config/nvim/plug-config/treesitter.vim
 source $HOME/.config/nvim/plug-config/emmet.vim
 source $HOME/.config/nvim/plug-config/marvim.vim
 source $HOME/.config/nvim/plug-config/floaterm.vim
-source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/prettier.vim
 source $HOME/.config/nvim/plug-config/harpoon.vim
+source $HOME/.config/nvim/plug-config/lsp-config.vim
+source $HOME/.config/nvim/plug-config/vim-wiki.vim
 
 " Lua Plugins
 luafile $HOME/.config/nvim/lua/compe-config.lua
@@ -36,23 +37,13 @@ luafile $HOME/.config/nvim/lua/lsp/angular-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/html-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/lua-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/efm-ls.lua
-
-" TODO: investigate timeouts in settings
-" TODO: Move all to one file
 luafile $HOME/.config/nvim/lua/harpoon-setup.lua
 
-" Auto Commands
-autocmd BufWritePost /Users/everduin/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 
-
 " Theme
-" source $HOME/.config/nvim/themes/nord.vim
-let g:tokyonight_colors = {
-      \ 'green': '#6ace95',
-\ }
-let g:tokyonight_transparent = 1
-colorscheme tokyonight 
-" TODO: these aren't working until I reload
-highlight CursorLine guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
-highlight SignifySignAdd guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
-highlight SignifySignDelete guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
-highlight SignifySignChange guibg=NONE ctermbg=NONE cterm=NONE gui=NONE
+source $HOME/.config/nvim/themes/tokyo-night.vim
+source $HOME/.config/nvim/themes/transparent-theme-util.vim
+
+" Autocmd
+autocmd BufWritePost /Users/everduin/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 
+autocmd FileType man nnoremap <buffer> j gk
+autocmd FileType man nnoremap <buffer> k gj

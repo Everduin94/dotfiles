@@ -53,6 +53,19 @@ font:
   bold_italic:
     family: "Hack Nerd Font"
     style: Bold Italic
+# font:
+#   normal:
+#     family: Hack Nerd Font
+#     style: Regular
+#   bold:
+#     family: Hack Nerd Font
+#     style: Bold
+#   italic:
+#     family: Hack Nerd Font
+#     style: Italic
+#   bold_italic:
+#     family: Hack Nerd Font
+#     style: Bold Italic
 
   # Point size
   size: 18.0

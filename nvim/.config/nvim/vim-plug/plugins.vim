@@ -19,7 +19,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'machakann/vim-highlightedyank'
     Plug 'mattn/emmet-vim'
-    Plug 'chamindra/marvim'
+    " Plug 'chamindra/marvim'
     Plug 'voldikss/vim-floaterm'
     
     " LSP

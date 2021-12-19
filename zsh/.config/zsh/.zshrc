@@ -95,7 +95,7 @@ compinit
 # bindkey '^e' edit-command-line
 
 # Speedy keys
-# xset r rate 210 40
+setxkbmap -option caps:escape
 
 # Environment variables set everywhere
 export EDITOR="nvim"

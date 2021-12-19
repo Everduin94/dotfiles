@@ -3,3 +3,4 @@ let g:tokyonight_colors = {
       \ 'green': '#6ace95',
 \ }
 colorscheme tokyonight 
+set bg=dark

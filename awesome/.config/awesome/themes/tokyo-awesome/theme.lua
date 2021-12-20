@@ -14,19 +14,49 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local tokyoNight = {
+    background= '#1a1b26',
+    foreground= '#c0caf5',
+    normal = {
+      black =   '#1D202F',
+      red =     '#f7768e',
+      green =   '#6ace95',
+      yellow =  '#e0af68',
+      blue =    '#7aa2f7',
+      magenta = '#bb9af7',
+      cyan =    '#7dcfff',
+      white =   '#a9b1d6',
+    },
+    bright = {
+      black =   '#414868',
+      red =     '#f7768e',
+      green =   '#6ace95',
+      yellow =  '#ff9e64',
+      blue =    '#2ac3de',
+      magenta = '#bb9af7',
+      cyan =    '#73daca',
+      white =   '#ffffff',
+    }
+}
+
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/tokyo-awesome"
 theme.wallpaper                                 = theme.dir .. "/wall.jpg"
-theme.font                                      = "Terminus 9"
-theme.fg_normal                                 = "#FEFEFE"
-theme.fg_focus                                  = "#32D6FF"
-theme.fg_urgent                                 = "#C83F11"
-theme.bg_normal                                 = "#222222"
-theme.bg_focus                                  = "#1E2320"
-theme.bg_urgent                                 = "#3F3F3F"
-theme.taglist_fg_focus                          = "#00CCFF"
-theme.tasklist_bg_focus                         = "#222222"
-theme.tasklist_fg_focus                         = "#00CCFF"
+theme.font                                      = "Hack Nerd Font"
+theme.fg_normal                                 = tokyoNight.foreground
+theme.fg_focus                                  = tokyoNight.normal.blue
+theme.fg_urgent                                 = tokyoNight.normal.red
+theme.bg_normal                                 = tokyoNight.background
+theme.bg_focus                                  = tokyoNight.normal.black
+theme.bg_urgent                                 = tokyoNight.bright.black
+theme.taglist_fg_focus                          = tokyoNight.bright.white
+theme.taglist_bg_focus                          = tokyoNight.normal.blue
+theme.taglist_fg_occupied                          = tokyoNight.foreground
+theme.taglist_fg_empty                          = tokyoNight.normal.white
+theme.taglist_bg_occupied                          = tokyoNight.normal.black
+theme.taglist_bg_empty                          = tokyoNight.normal.black
+theme.tasklist_bg_focus                         = tokyoNight.background
+theme.tasklist_fg_focus                         = tokyoNight.normal.blue
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#3F3F3F"
 theme.border_focus                              = "#6F6F6F"
@@ -308,6 +338,14 @@ local function pl(widget, bgcolor, padding)
     return wibox.container.background(wibox.container.margin(widget, dpi(16), dpi(16)), bgcolor, theme.powerline_rl)
 end
 
+
+local clock = awful.widget.watch(
+    "date +'%a %b %d %I:%M'", 60,
+    function(widget, stdout)
+        widget:set_markup(" " .. markup.font(theme.font, stdout))
+    end
+)
+
 function theme.at_screen_connect(s)
     -- Quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
@@ -340,7 +378,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(16), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(16), bg = theme.bg_normal, fg = tokyoNight.bright.white })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -355,21 +393,24 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            wibox.container.margin(scissors, dpi(4), dpi(8)),
-            --[[ using shapes
-            pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(task, "#343434"),
+
+            -- Hide native icons (should be able to do this with cli or hotkeys anyway (flameshot,wifi,sound))
+            -- wibox.widget.systray(),
+            -- wibox.container.margin(scissors, dpi(4), dpi(8)),
+            -- using shapes
+            -- pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
+            -- pl(task, "#343434"),
             --pl(wibox.widget { mailicon, mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, "#777E76"),
-            pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, "#4B696D"),
-            pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, "#4B3B51"),
+            pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.magenta),
+            pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.green),
+            pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal },tokyoNight.normal.magenta),
             --pl(wibox.widget { fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal }, "#CB755B"),
-            pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, "#8DAA9A"),
-            pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, "#C0C0A2"),
-            pl(binclock.widget, "#777E76"),
-            --]]
+            pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.green),
+            pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.magenta),
+            pl(clock, tokyoNight.normal.green),
+            --[[
             -- using separators
+
             arrow(theme.bg_normal, "#343434"),
             wibox.container.background(wibox.container.margin(wibox.widget { mailicon, theme.mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(7)), "#343434"),
             arrow("#343434", theme.bg_normal),
@@ -391,6 +432,7 @@ function theme.at_screen_connect(s)
             arrow("#C0C0A2", "#777E76"),
             wibox.container.background(wibox.container.margin(binclock.widget, dpi(4), dpi(8)), "#777E76"),
             arrow("#777E76", "alpha"),
+
             --]]
             s.mylayoutbox,
         },

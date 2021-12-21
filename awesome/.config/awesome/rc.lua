@@ -300,18 +300,18 @@ globalkeys = mytable.join(
               {description = "view  previous nonempty", group = "tag"}),
 
     -- Default client focus
-    awful.key({ altkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ altkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
+    -- awful.key({ altkey,           }, "k",
+    --     function ()
+    --         awful.client.focus.byidx( 1)
+    --     end,
+    --     {description = "focus next by index", group = "client"}
+    -- ),
+    -- awful.key({ altkey,           }, "j",
+    --     function ()
+    --         awful.client.focus.byidx(-1)
+    --     end,
+    --     {description = "focus previous by index", group = "client"}
+    -- ),
 
     -- By-direction client focus
     awful.key({ modkey }, "j",
@@ -518,6 +518,9 @@ globalkeys = mytable.join(
         end,
         {description = "mpc on/off", group = "widgets"}),
 
+    -- TODO: If you copy with cmd + c. It works in vim. 
+    --    If you try to paste with cmd + v, it kills the clipboard.
+    --    Ctrl + v works with Ctrl + c, but ctrl + v with cmd + c kills the clipboard too.
     -- Copy primary to clipboard (terminals to gtk)
     awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
               {description = "copy terminal to gtk", group = "hotkeys"}),
@@ -551,7 +554,7 @@ globalkeys = mytable.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey }, "r", function () os.execute('rofi -show run') end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",

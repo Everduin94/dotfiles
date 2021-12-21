@@ -21,6 +21,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/emmet-vim'
     " Plug 'chamindra/marvim'
     Plug 'voldikss/vim-floaterm'
+    Plug 'folke/trouble.nvim'
     
     " LSP
     Plug 'neovim/nvim-lspconfig'

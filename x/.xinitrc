@@ -24,7 +24,7 @@ xset s off
 xset -dpms
 xset s noblank
 
-# Ouh
+# Must haves
 xset r rate 210 40
 setxkbmap -option caps:escape
 xrandr --auto --output HDMI-1 --left-of DP-1
@@ -74,5 +74,5 @@ fi
 
 nitrogen --restore &
 pasystray &
-# picom &
+picom --config ~/.config/picom/picom.conf &
 exec awesome

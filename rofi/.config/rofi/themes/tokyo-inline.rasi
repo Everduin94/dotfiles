@@ -1,0 +1,49 @@
+/**
+ * Tokyo Inline Rofi Theme
+ * - Inspired by Tokyo Night and Dmenu
+ * User: Erik
+ * Copyright: Dave Davenport
+ */
+
+* {
+    background-color:     #1a1b26;
+    border-color:         White;
+    text-color:           #c0caf5;
+    font:                 "hack 11";
+}
+prompt {
+    background-color:     #1a1b26;
+    text-color:           #7aa2f7;
+    padding: 2px;
+}
+window {
+    anchor:     north west;
+    location:   north west;
+    width:      50%;
+    children:   [ horibox ];
+}
+horibox {
+    orientation: horizontal;
+    children:   [ prompt, entry, listview ];
+}
+listview {
+    layout:     horizontal;
+    spacing:    5px;
+    lines:      100;
+}
+entry {
+    expand:     false;
+    width:      10em;
+    padding: 2px;
+}
+element {
+    padding: 2px;
+}
+element selected {
+    background-color: #414868;
+}
+
+element-text, element-icon {
+  background-color: inherit;
+  text-color: #6ace95;
+}

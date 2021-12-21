@@ -26,6 +26,8 @@ source $HOME/.config/nvim/plug-config/prettier.vim
 source $HOME/.config/nvim/plug-config/harpoon.vim
 source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/vim-wiki.vim
+source $HOME/.config/nvim/plug-config/opposite-day.vim
+
 
 " Lua Plugins
 luafile $HOME/.config/nvim/lua/compe-config.lua
@@ -38,6 +40,7 @@ luafile $HOME/.config/nvim/lua/lsp/html-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/lua-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/efm-ls.lua
 luafile $HOME/.config/nvim/lua/harpoon-setup.lua
+luafile $HOME/.config/nvim/lua/trouble-config.lua
 
 " Theme
 source $HOME/.config/nvim/themes/tokyo-night.vim
@@ -45,5 +48,3 @@ source $HOME/.config/nvim/themes/transparent-theme-util.vim
 
 " Autocmd
 autocmd BufWritePost /Users/everduin/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 
-autocmd FileType man nnoremap <buffer> j gk
-autocmd FileType man nnoremap <buffer> k gj

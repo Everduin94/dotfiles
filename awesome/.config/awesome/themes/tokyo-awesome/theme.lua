@@ -58,8 +58,8 @@ theme.taglist_bg_empty                          = tokyoNight.normal.black
 theme.tasklist_bg_focus                         = tokyoNight.background
 theme.tasklist_fg_focus                         = tokyoNight.normal.blue
 theme.border_width                              = dpi(2)
-theme.border_normal                             = "#3F3F3F"
-theme.border_focus                              = "#6F6F6F"
+theme.border_normal                             = tokyoNight.normal.black
+theme.border_focus                              = tokyoNight.normal.blue
 theme.border_marked                             = "#CC9393"
 theme.titlebar_bg_focus                         = "#3F3F3F"
 theme.titlebar_bg_normal                        = "#3F3F3F"
@@ -108,7 +108,7 @@ theme.widget_task                               = theme.dir .. "/icons/task.png"
 theme.widget_scissors                           = theme.dir .. "/icons/scissors.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 0
+theme.useless_gap                               = 3
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -377,8 +377,8 @@ function theme.at_screen_connect(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(16), bg = theme.bg_normal, fg = tokyoNight.bright.white })
+    -- Create the wibox (EV: This is a bar, why do they call it a wibox? -- Added border hack to simulate padding)
+    s.mywibox = awful.wibar({ border_width = 4, border_color = tokyoNight.background, position = "top", screen = s, height = dpi(18), ontop = true, bg = theme.bg_normal, fg = tokyoNight.bright.white })
 
     -- Add widgets to the wibox
     s.mywibox:setup {

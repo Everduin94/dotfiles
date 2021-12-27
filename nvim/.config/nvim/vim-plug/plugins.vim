@@ -22,6 +22,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'chamindra/marvim'
     Plug 'voldikss/vim-floaterm'
     Plug 'folke/trouble.nvim'
+    Plug 'Everduin94/nvim-quick-switcher'
     
     " LSP
     Plug 'neovim/nvim-lspconfig'
@@ -33,6 +34,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
     Plug 'onsails/lspkind-nvim'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'L3MON4D3/LuaSnip'

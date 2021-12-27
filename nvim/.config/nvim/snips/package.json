@@ -16,6 +16,10 @@
         "path": "./global.json"
       },
       {
+        "language": "md",
+        "path": "./markdown.json"
+      },
+      {
         "language": "typescript",
         "path": "./typescript.json"
       },

@@ -28,7 +28,6 @@ source $HOME/.config/nvim/plug-config/lsp-config.vim
 source $HOME/.config/nvim/plug-config/vim-wiki.vim
 source $HOME/.config/nvim/plug-config/opposite-day.vim
 
-
 " Lua Plugins
 luafile $HOME/.config/nvim/lua/compe-config.lua
 luafile $HOME/.config/nvim/lua/plug-colorizer.lua
@@ -41,6 +40,9 @@ luafile $HOME/.config/nvim/lua/lsp/lua-ls.lua
 luafile $HOME/.config/nvim/lua/lsp/efm-ls.lua
 luafile $HOME/.config/nvim/lua/harpoon-setup.lua
 luafile $HOME/.config/nvim/lua/trouble-config.lua
+luafile $HOME/.config/nvim/lua/switcher-config.lua
+luafile $HOME/.config/nvim/lua/luasnip-config.lua
+luafile $HOME/.config/nvim/lua/telescope-config.lua
 
 " Theme
 source $HOME/.config/nvim/themes/tokyo-night.vim

@@ -272,9 +272,9 @@ globalkeys = mytable.join(
     -- Destroy all notifications
     awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
+
     -- Take a screenshot
-    -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end,
+    awful.key({ altkey }, "p", function() os.execute("flameshot gui -p ~/images/triage") end,
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
@@ -313,16 +313,16 @@ globalkeys = mytable.join(
     --     {description = "focus previous by index", group = "client"}
     -- ),
 
-    -- By-direction client focus
+    -- By-direction client focus (Opposite Day)
     awful.key({ modkey }, "j",
         function()
-            awful.client.focus.global_bydirection("down")
+            awful.client.focus.global_bydirection("up")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus down", group = "client"}),
     awful.key({ modkey }, "k",
         function()
-            awful.client.focus.global_bydirection("up")
+            awful.client.focus.global_bydirection("down")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus up", group = "client"}),

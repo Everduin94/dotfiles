@@ -8,9 +8,6 @@ map <leader>q :w\|bd<CR>
 " this just so i have the syntax. But ctrl d is a bad bind (overwrites)
 " nnoremap <C-D> mz\|:wa\|%bd\|e#\|bd#<cr>`z
 
-" <TAB>: completion. -- TODO: Should this be here?
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
 " Better tabbing 
 vnoremap < <gv
 vnoremap > >gv
@@ -61,22 +58,22 @@ map <leader>gcp :Git pull -r
 
 " - Navigation - 
 " Find files
-map <leader>pp :Files<CR>
-map <leader>po :GFiles<CR>
-map <leader>pb :Buffers<CR>
-map <leader>pq :Rgmacros<CR>
+" map <leader>pp :Files<CR>
+" map <leader>po :GFiles<CR>
+" map <leader>pb :Buffers<CR>
+" map <leader>pq :Rgmacros<CR>
 " Find in CWD
-nnoremap <leader>pf :Rg<CR>
+" nnoremap <leader>pf :Rg<CR>
 " Find in Git Root
-nnoremap <leader>pg :Rgg<CR>
+" nnoremap <leader>pg :Rgg<CR>
 " Find in buffer directory
-nnoremap <leader>ph :Rggg<CR>
+" nnoremap <leader>ph :Rggg<CR>
 " Strict find (not fuzzy)
-nnoremap <leader>pF :RG<CR>
-nnoremap <leader>pG :RGG<CR>
-nnoremap <leader>pH :RGGG<CR>
-nnoremap <leader>pt :Tags<CR>
-nnoremap <leader>pm :Marks<CR>
+" nnoremap <leader>pF :RG<CR>
+" nnoremap <leader>pG :RGG<CR>
+" nnoremap <leader>pH :RGGG<CR>
+" nnoremap <leader>pt :Tags<CR>
+" nnoremap <leader>pm :Marks<CR>
 nnoremap <leader>ps :Startify<CR>
 
 " - Quick Fix List - 

@@ -17,7 +17,6 @@ source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/codi.vim
 source $HOME/.config/nvim/plug-config/fzf.vim 
-source $HOME/.config/nvim/plug-config/switcher.vim
 source $HOME/.config/nvim/plug-config/treesitter.vim
 source $HOME/.config/nvim/plug-config/emmet.vim
 source $HOME/.config/nvim/plug-config/marvim.vim
@@ -29,6 +28,7 @@ source $HOME/.config/nvim/plug-config/vim-wiki.vim
 source $HOME/.config/nvim/plug-config/opposite-day.vim
 
 " Lua Plugins
+luafile $HOME/.config/nvim/lua/keymaps-config.lua
 luafile $HOME/.config/nvim/lua/compe-config.lua
 luafile $HOME/.config/nvim/lua/plug-colorizer.lua
 luafile $HOME/.config/nvim/lua/lualine-config.lua
@@ -43,6 +43,8 @@ luafile $HOME/.config/nvim/lua/trouble-config.lua
 luafile $HOME/.config/nvim/lua/switcher-config.lua
 luafile $HOME/.config/nvim/lua/luasnip-config.lua
 luafile $HOME/.config/nvim/lua/telescope-config.lua
+luafile $HOME/.config/nvim/lua/nvim-dap-config.lua
+luafile $HOME/.config/nvim/lua/autopairs-config.lua
 
 " Theme
 source $HOME/.config/nvim/themes/tokyo-night.vim

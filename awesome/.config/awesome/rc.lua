@@ -436,8 +436,8 @@ globalkeys = mytable.join(
     -- Widgets popups
     awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
-    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
-              {description = "show filesystem", group = "widgets"}),
+    -- awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
+    --           {description = "show filesystem", group = "widgets"}),
     awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
               {description = "show weather", group = "widgets"}),
 
@@ -522,11 +522,14 @@ globalkeys = mytable.join(
     --    If you try to paste with cmd + v, it kills the clipboard.
     --    Ctrl + v works with Ctrl + c, but ctrl + v with cmd + c kills the clipboard too.
     -- Copy primary to clipboard (terminals to gtk)
-    awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
-              {description = "copy terminal to gtk", group = "hotkeys"}),
+    --
+    -- awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
+    --           {description = "copy terminal to gtk", group = "hotkeys"}),
+    --
     -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
-              {description = "copy gtk to terminal", group = "hotkeys"}),
+    --
+    -- awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
+    --           {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
     awful.key({ modkey }, "q", function () awful.spawn(browser) end,
@@ -556,6 +559,9 @@ globalkeys = mytable.join(
     -- Prompt
     awful.key({ modkey }, "r", function () os.execute('rofi -show run') end,
               {description = "run prompt", group = "launcher"}),
+
+    awful.key({ modkey }, "e", function () os.execute('rofi -show emoji -modi emoji') end,
+              {description = "run emoji", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()

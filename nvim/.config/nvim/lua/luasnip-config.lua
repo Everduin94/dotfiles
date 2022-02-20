@@ -10,10 +10,10 @@ local d = ls.dynamic_node
 local r = ls.restore_node
 local events = require("luasnip.util.events")
 
-
-
 ls.snippets = {
   all = {
     s("trigger", t("Wow! Text!"))
   }
 }
+
+

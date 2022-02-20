@@ -17,9 +17,6 @@ export class MyTest {
     }, 200);
 
     
-
-    
-    
   }
 
   

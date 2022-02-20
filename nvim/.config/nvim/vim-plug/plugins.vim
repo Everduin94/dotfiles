@@ -1,8 +1,9 @@
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Base
-    Plug 'jiangmiao/auto-pairs'
+    " Plug 'jiangmiao/auto-pairs'
     Plug 'nvim-lualine/lualine.nvim'
+    Plug 'windwp/nvim-autopairs'
     Plug 'akinsho/bufferline.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
@@ -22,7 +23,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'chamindra/marvim'
     Plug 'voldikss/vim-floaterm'
     Plug 'folke/trouble.nvim'
-    Plug 'Everduin94/nvim-quick-switcher'
+    " Plug 'Everduin94/nvim-quick-switcher'
+
+    " Debugger
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'Pocco81/DAPInstall.nvim'
+    Plug 'theHamsta/nvim-dap-virtual-text'
+    Plug 'nvim-telescope/telescope-dap.nvim'
+    Plug 'rcarriga/nvim-dap-ui'
+    Plug 'David-Kunz/jester'
     
     " LSP
     Plug 'neovim/nvim-lspconfig'

@@ -1,5 +1,17 @@
 #!/bin/sh
-# HISTFILE="$XDG_DATA_HOME"/zsh/history
+
+# Projects
+export DEV_FOLDER=$HOME/dev
+export WS_FULL_METAL=$DEV_FOLDER/monobased/apps/full-metal-template
+export WS_CX_CLOUD=$DEV_FOLDER/cx-cloud-ui-worktree/main/apps/cx-portal
+export WS_NOTES=$DEV_FOLDER/notes
+export WS_TASKS=$DEV_FOLDER/task-manager
+export WS_SWITCHER=$DEV_FOLDER/nvim-quick-switcher
+export WS_PLAYGROUND=$DEV_FOLDER/erxk-article-playground
+export WS_ZSH=$HOME/.config/zsh/
+export WS_AWESOME=$HOME/.config/awesome
+
+# Misc
 HISTSIZE=1000000
 SAVEHIST=1000000
 export PATH="$HOME/.local/bin":$PATH
@@ -11,34 +23,3 @@ export GOPATH=$HOME/.local/share/go
 export PATH=$HOME/.fnm:$PATH
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
-# eval "$(fnm env)"
-# eval "$(zoxide init zsh)"
-# eval "`pip completion --zsh`"
-
-
-# My Variables
-export DEV_FOLDER=Documents/dev
-export WS_FULL_METAL=$HOME/$DEV_FOLDER/monobased/apps/full-metal-template
-export WS_CX_CLOUD=$HOME/$DEV_FOLDER/cx-cloud-ui-worktree/main/apps/cx-portal
-export WS_NOTES=$HOME/$DEV_FOLDER/notes
-export WS_PLAYGROUND=$HOME/$DEV_FOLDER/erxk-article-playground
-export WS_CONFIG=$HOME/dotfiles
-export WS_ZSHRC=$WS_CONFIG/zsh/.config/zsh/.zshrc
-
-
-# TODO: Removed
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$("$HOME/.miniconda/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "$HOME/.miniconda/etc/profile.d/conda.sh" ]; then
-#         . "$HOME/.miniconda/etc/profile.d/conda.sh"
-#     else
-#         export PATH="$HOME/.miniconda/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-

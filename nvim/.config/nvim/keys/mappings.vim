@@ -92,7 +92,27 @@ if "Linux" == g:os
   nnoremap <A-j> <esc>:m .-2<CR>==
   vnoremap <A-k> :m '>+1<CR>gv=gv
   vnoremap <A-j> :m '<-2<CR>gv=gv
-  nnoremap <A-\> <C-\><C-N>
+  tnoremap <A-\> <C-\><C-N>
+  " EMMET
+  " Option+h balance outward
+  nmap <A-h> <C-y>d
+  imap <A-h> <C-y>d
+  vmap <A-h> <C-y>d
+  " Option+l balance inward
+  nmap <A-l> <C-y>D
+  imap <A-l> <C-y>D
+  vmap <A-l> <C-y>D
+  " Option+, ´ expand -- Testing new binds (g)
+  nmap <A-,> <C-y>,
+  imap <A-,> <C-y>,
+  nmap <A-g> <C-y>,
+  imap <A-g> <C-y>,
+  " Option+o ø go to next edit
+  nmap <A-o> <C-y>n
+  imap <A-o> <C-y>n
+  " Option+O Ø go to previous edit
+  nmap <A-s-o> <C-y>N
+  imap <A-s-o> <C-y>N
 else
   " Darwin
   nnoremap œ :bd!<CR>
@@ -104,5 +124,24 @@ else
   vnoremap ∆ :m '<-2<CR>gv=gv
   " - Terminal | Normal Mode - 
   tnoremap « <C-\><C-N>
+
+  " EMMET
+  " Option+h balance outward
+  nmap ˙ <C-y>d
+  imap ˙ <C-y>d
+  vmap ˙ <C-y>d
+  " Option+l balance inward
+  nmap ¬ <C-y>D
+  imap ¬ <C-y>D
+  vmap ¬ <C-y>D
+  " Option+, ´ expand TODO: Add alt+g
+  nmap ≤ <C-y>,
+  imap ≤ <C-y>,
+  " Option+o ø go to next edit
+  nmap ø <C-y>n
+  imap ø <C-y>n
+  " Option+O Ø go to previous edit
+  nmap Ø <C-y>N
+  imap Ø <C-y>N
 endif
 

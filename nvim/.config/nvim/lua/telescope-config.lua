@@ -1,19 +1,41 @@
 local actions = require("telescope.actions")
 require('telescope').setup{
   defaults = {
-    -- Default configuration for telescope goes here:
-    -- config_key = value,
-    path_display = {'shorten'},
+    prompt_prefix = " ",
+    selection_caret = " ",
+    path_display = {'smart'},
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+
+        ["<C-j>"] = actions.move_selection_previous,
+        ["<C-k>"] = actions.move_selection_next,
+
+        ["<C-c>"] = actions.close,
+
+        ["<Down>"] = actions.move_selection_next,
+        ["<Up>"] = actions.move_selection_previous,
+
+        ["<CR>"] = actions.select_default,
+        ["<C-x>"] = actions.select_horizontal,
+        ["<C-v>"] = actions.select_vertical,
+        ["<C-t>"] = actions.select_tab,
+
+        ["<C-u>"] = actions.preview_scrolling_up,
+        ["<C-d>"] = actions.preview_scrolling_down,
+
+        ["<PageUp>"] = actions.results_scrolling_up,
+        ["<PageDown>"] = actions.results_scrolling_down,
+
+        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+        ["<C-l>"] = actions.complete_tag,
+        ["<C-_>"] = actions.which_key,
       },
-      -- i = {
-        -- map actions.which_key to <C-h> (default: <C-/>)
-        -- actions.which_key shows the mappings for your picker,
-        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        -- ["<C-h>"] = "which_key"
-      -- }
     }
   },
   pickers = {
@@ -36,16 +58,4 @@ require('telescope').setup{
 
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('dap')
-
-local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-keymap("n", "<leader>pp", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
-keymap("n", "<leader>ph", "<cmd>lua require('telescope.builtin').highlights()<cr>", opts)
-keymap("n", "<leader>pf", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
-keymap("n", "<leader>pb", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts)
-keymap("n", "<leader>p*", "<cmd>lua require('telescope.builtin').grep_string()<cr>", opts)
-keymap("n", "<leader>po", "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.systemlist('git rev-parse --show-toplevel')[1] })<cr>", opts)
-keymap("n", "<leader>pg", "<cmd>lua require('telescope.builtin').live_grep{ cwd = vim.fn.systemlist('git rev-parse --show-toplevel')[1] }<cr>", opts)
-
-
 

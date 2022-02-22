@@ -12,8 +12,17 @@ local events = require("luasnip.util.events")
 
 ls.snippets = {
   all = {
-    s("trigger", t("Wow! Text!"))
+    s("trigger", {
+      f(function(args, snip)
+        local value = snip.env.TM_FILENAME_BASE
+        local result = ""
+        local separator = "# ";
+        for word in value:gmatch("%w+") do
+          result = result .. separator .. word:gsub("^%l", string.upper)
+          separator = " "
+        end
+        return result
+      end, {})
+    })
   }
 }
-
-

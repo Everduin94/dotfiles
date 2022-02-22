@@ -13,6 +13,8 @@ alias tmux="TERM=xterm-256color tmux -2"
 export L="lua ~/.config/lua-scripts/lua-runner.lua"
 alias l="$L"
 alias lpush="$L push"
+  # Hot Reload Lua -- Pass File Name & Args
+alias hrl="find . -name '*.lua' | entr lua " 
 
 case "$(uname -s)" in
 

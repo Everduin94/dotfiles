@@ -6,7 +6,12 @@ local git = require("git-util")
 
 
 local params = {...}
-print(params[1])
 
+local table = {
+  test = "one"
+}
 
-print(package.path)
+table["<leader>ff"] = { something = "else"}
+
+print(table["<leader>ff"].something)
+

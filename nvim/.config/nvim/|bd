@@ -4,10 +4,9 @@ if not status_ok then
   return
 end
 
--- SETUP
+-- Setup
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 local wopts = { mode = "n", noremap = true, silent = true, buffer = nil }
 
 NORMAL_MAPS = {}
@@ -31,21 +30,22 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+
+keymap("n", "<TAB>", ":bnext<CR>", opts)
+keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
+keymap("n", "<C-s>", ":wa<CR>", opts)
+
 -- Tabbing
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
-keymap("n", "<", "<<", opts)
-keymap("n", ">", ">>", opts)
+keymap("n", ">", ">gv", opts)
+keymap("n", ">", ">gv", opts)
 
 -- Navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>k", opts)
 keymap("n", "<C-k>", "<C-w>j", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 keymap("n", "H", "^", opts)
 keymap("v", "H", "^", opts)
@@ -53,10 +53,6 @@ keymap("o", "H", "^", opts)
 keymap("n", "L", "$", opts)
 keymap("v", "L", "$", opts)
 keymap("o", "L", "$", opts)
-
-keymap("n", "<TAB>", ":bnext<CR>", opts)
-keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
-keymap("n", "<C-s>", ":wa<CR>", opts)
 
 -- Undo break points
 keymap("i", ",", ",<c-g>u", opts)
@@ -102,20 +98,17 @@ luaMap('4', 'harpoon.ui', 'nav_file(4)')
 luaMap('e', 'harpoon.ui', 'toggle_quick_menu()')
 
 -- Buffers
--- leaderMap('q', 'w\\|bd', "") -- TODO: Test
+leaderMap('q', 'w\\|bd', "Close w/o save") -- TODO: Test
 leaderMap('/', 'noh', "Clear Highlights")
 keymap("n", "<leader>k", "K", opts)
 keymap('n', '<leader>j', "J", opts)
 
 -- Terminal
-category('t', '+Terminal')
   -- Harpoon
 luaMap('tc', 'harpoon.cmd-ui', 'toggle_quick_menu()')
-luaMap('t1', 'harpoon.term', 'gotoTerminal(1)')
-luaMap('t2', 'harpoon.term', 'gotoTerminal(2)')
-luaMap('t3', 'harpoon.term', 'gotoTerminal(3)')
-  -- ToggleTerm
-leaderMap('tn', 'lua _NODE_TOGGLE()', "Node")
+luaMap('t1', 'harpoon.term', 'goToTerminal(1)')
+luaMap('t2', 'harpoon.term', 'goToTerminal(2)')
+luaMap('t3', 'harpoon.term', 'goToTerminal(3)')
 
 -- Search
 category('p', '+Telescope')
@@ -138,7 +131,7 @@ luaMap('pts', 'telescope.builtin', 'git_status()')
 luaMap('ptb', 'telescope.builtin', 'git_branches()')
 luaMap('ptc', 'telescope.builtin', 'git_commits()')
   -- Dashboard
-leaderMap('ps', 'Alpha', 'Dashboard')
+leaderMap('ps', 'Startify', 'Dashboard')
 
 -- Quickfix
 category('c', '+QuickFix')
@@ -158,45 +151,3 @@ leaderMap('v-', 'vertical resize -5', '⬆️')
 -- leaderMap('|', '<C-W>|', 'Hide')
 
 which_key.register(NORMAL_MAPS, wopts)
-
--- MAC & LINUX (Alt Keybinds)
-local function macOrLinux(os, mode, linux_bind, mac_bind, fn, opt)
-  if os == "Linux" then
-    keymap(mode, linux_bind, fn, opt)
-  else
-    keymap(mode, mac_bind, fn, opt)
-  end
-end
-
-local os = vim.loop.os_uname().sysname
--- General
-  -- Quickfix List
-macOrLinux(os, "n", "<A-q>", "œ",  ":bd!<CR>", opts)
-macOrLinux(os, "n", "<A-z>", "Ω", ":cp<CR>zz", opts)
-macOrLinux(os, "n", "<A-x>", "≈", ":cn<CR>zz", opts)
-macOrLinux(os, "n", "<A-k>", "˚", "<esc>:m .+1<CR>==", opts)
-macOrLinux(os, "n", "<A-j>", "∆", "<esc>:m .-2<CR>==", opts)
-macOrLinux(os, "v", "<A-k>", "˚", ":m '>+1<CR>gv=gv", opts)
-macOrLinux(os, "v", "<A-j>", "∆", ":m '<-2<CR>gv=gv", opts)
-macOrLinux(os, "t", "<A-\\>", "«", "<C-\\><C-N>", term_opts)
--- Emmet: TODO Original emmet binds were not noremap, is this okay?
-  -- Balance outward
-macOrLinux(os, "n", "<A-h>", "˙", "<C-y>d", opts)
-macOrLinux(os, "i", "<A-h>", "˙", "<C-y>d", opts)
-macOrLinux(os, "v", "<A-h>", "˙", "<C-y>d", opts)
-  -- Balance inward
-macOrLinux(os, "n", "<A-l>", "¬", "<C-y>D", opts)
-macOrLinux(os, "i", "<A-l>", "¬", "<C-y>D", opts)
-macOrLinux(os, "v", "<A-l>", "¬", "<C-y>D", opts)
-  -- Expand: TODO: Add g on mac
-macOrLinux(os, "n", "<A-,>", "≤", "<C-y>,", opts)
-macOrLinux(os, "i", "<A-,>", "≤", "<C-y>,", opts)
-macOrLinux(os, "n", "<A-g>", "≤", "<C-y>,", opts)
-macOrLinux(os, "i", "<A-g>", "≤", "<C-y>,", opts)
-  -- Next Edit
-macOrLinux(os, "n", "<A-o>", "ø", "<C-y>n", opts)
-macOrLinux(os, "i", "<A-o>", "ø", "<C-y>n", opts)
-  -- Previous Edit
-macOrLinux(os, "n", "<A-s-o>", "Ø", "<C-y>N", opts)
-macOrLinux(os, "i", "<A-s-o>", "Ø", "<C-y>N", opts)
-

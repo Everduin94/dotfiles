@@ -11,7 +11,6 @@ source $HOME/.config/nvim/keys/mappings.vim
 source $HOME/.config/nvim/plug-config/rnvimr.vim
 source $HOME/.config/nvim/plug-config/rainbow.vim
 source $HOME/.config/nvim/plug-config/start-screen.vim
-source $HOME/.config/nvim/plug-config/signify.vim
 source $HOME/.config/nvim/plug-config/sneak.vim
 source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
@@ -45,10 +44,10 @@ luafile $HOME/.config/nvim/lua/luasnip-config.lua
 luafile $HOME/.config/nvim/lua/telescope-config.lua
 luafile $HOME/.config/nvim/lua/nvim-dap-config.lua
 luafile $HOME/.config/nvim/lua/autopairs-config.lua
+luafile $HOME/.config/nvim/lua/gitsigns-config.lua
 
 " Theme
 source $HOME/.config/nvim/themes/tokyo-night.vim
-source $HOME/.config/nvim/themes/transparent-theme-util.vim
 
 " Autocmd
 autocmd BufWritePost /Users/everduin/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 

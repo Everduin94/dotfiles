@@ -3,8 +3,16 @@
 # For when keys break
 alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
 
+# NVIM
+alias n="nvim"
+
 # TMUX
 alias tmux="TERM=xterm-256color tmux -2"
+
+# Lua Scripts
+export L="lua ~/.config/lua-scripts/lua-runner.lua"
+alias l="$L"
+alias lpush="$L push"
 
 case "$(uname -s)" in
 

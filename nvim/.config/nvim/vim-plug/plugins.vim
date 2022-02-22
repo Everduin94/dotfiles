@@ -58,10 +58,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     
     " Git Integration
-    Plug 'mhinz/vim-signify'
+    " Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'junegunn/gv.vim'
+    Plug 'lewis6991/gitsigns.nvim'
 
     " Markdown Integration
     Plug 'vimwiki/vimwiki'

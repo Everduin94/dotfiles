@@ -12,3 +12,8 @@ end
 
 
 leaderMap('du', 'lua require("dapui").toggle()')
+leaderMap('gk', 'lua require("gitsigns").next_hunk()')
+leaderMap('gj', 'lua require("gitsigns").prev_hunk()')
+leaderMap('gu', 'lua require("gitsigns").reset_hunk()')
+leaderMap('gp', 'lua require("gitsigns").preview_hunk()')
+

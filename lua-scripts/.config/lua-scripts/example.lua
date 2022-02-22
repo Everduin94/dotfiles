@@ -1,15 +1,12 @@
--- Test
-local util = require("util")
-util.printMsg("hello there")
+local git = require("git-util")
 
-local command = "git rev-parse --abbrev-ref HEAD"
-local handle = io.popen(command);
-local result = handle:read("*a"); -- *a reads whole file
-handle:close();
+-- git.commit(git.buildCommitMessage("feat", "Athena", "Changes to Map", "Added multiple somethings to the map wow!"))
+
+-- print(git.push('-f'))
 
 
 local params = {...}
 print(params[1])
 
 
-print(result);
+print(package.path)

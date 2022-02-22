@@ -10,6 +10,7 @@ export WS_SWITCHER=$DEV_FOLDER/nvim-quick-switcher
 export WS_PLAYGROUND=$DEV_FOLDER/erxk-article-playground
 export WS_ZSH=$HOME/.config/zsh/
 export WS_AWESOME=$HOME/.config/awesome
+export WS_SCRIPTS=$HOME/.config/lua-scripts
 
 # Misc
 HISTSIZE=1000000

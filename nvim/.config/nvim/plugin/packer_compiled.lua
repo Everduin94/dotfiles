@@ -189,6 +189,11 @@ _G.packer_plugins = {
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/kyazdani42/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -229,11 +234,6 @@ _G.packer_plugins = {
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/quick-scope",
     url = "https://github.com/unblevable/quick-scope"
   },
-  rnvimr = {
-    loaded = true,
-    path = "/home/erik/.local/share/nvim/site/pack/packer/start/rnvimr",
-    url = "https://github.com/kevinhwang91/rnvimr"
-  },
   ["telescope-dap.nvim"] = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim",
@@ -263,6 +263,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-highlightedyank"] = {
     loaded = true,

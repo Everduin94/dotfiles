@@ -47,7 +47,6 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "akinsho/bufferline.nvim"
   use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
   use "kyazdani42/nvim-web-devicons"
   use "folke/which-key.nvim"
   use "norcalli/nvim-colorizer.lua"
@@ -78,6 +77,8 @@ return packer.startup(function(use)
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  -- File Tree
+  use "kyazdani42/nvim-tree.lua"
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -87,6 +88,7 @@ return packer.startup(function(use)
   use "JoosepAlviste/nvim-ts-context-commentstring"
   -- Git
   use "lewis6991/gitsigns.nvim"
+  use "tpope/vim-fugitive"
   -- Debugger
   use "mfussenegger/nvim-dap"
   use "Pocco81/DAPInstall.nvim"
@@ -99,19 +101,16 @@ return packer.startup(function(use)
   -- Dashboard
   use {'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }}
   -- use "junegunn/rainbow_parentheses.vim"
+
   -- Replacing
-  use "kevinhwang91/rnvimr" -- luatree
-  -- use "mhinz/vim-startify"  -- alpha
   use "prettier/vim-prettier" -- null ls
-  
+
   -- Interested in or may use in future
   -- use "numToStr/Comment.nvim" -- Easily comment stuff
-  -- use "kyazdani42/nvim-tree.lua"
   -- use "moll/vim-bbye"
   -- use "ahmedkhalf/project.nvim"
   -- use "lewis6991/impatient.nvim"
   -- use "lukas-reineke/indent-blankline.nvim"
-  -- use "goolord/alpha-nvim"
   -- use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   -- use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters

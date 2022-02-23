@@ -21,8 +21,17 @@ local function luaMap(key, module, fn, desc)
   NORMAL_MAPS["<leader>" .. key] = { "<cmd>lua require('".. module .. "')." .. fn ..  "<cr>", desc }
 end
 
-local function category(key, name)
+local function leaderCategory(key, name)
   NORMAL_MAPS["<leader>" .. key] = { name }
+end
+
+local function category(key, name)
+  NORMAL_MAPS[key] = { name }
+end
+
+local function lspMap(key, fn, desc)
+  desc = desc or fn;
+  NORMAL_MAPS[key] = { "<cmd>" .. fn .. "<cr>", desc }
 end
 
 -- MAPPINGS
@@ -38,6 +47,7 @@ keymap("n", "<", "<<", opts)
 keymap("n", ">", ">>", opts)
 
 -- Navigation
+  -- Panes
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>k", opts)
 keymap("n", "<C-k>", "<C-w>j", opts)
@@ -47,6 +57,7 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+  -- End of Line
 keymap("n", "H", "^", opts)
 keymap("v", "H", "^", opts)
 keymap("o", "H", "^", opts)
@@ -54,9 +65,26 @@ keymap("n", "L", "$", opts)
 keymap("v", "L", "$", opts)
 keymap("o", "L", "$", opts)
 
+  -- Buffers
 keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 keymap("n", "<C-s>", ":wa<CR>", opts)
+
+  -- Opposite day
+keymap("n", "j", "<Up>", opts)
+keymap("n", "k", "<Down>", opts)
+keymap("n", "J", "{zz", opts)
+keymap("n", "K", "}zz", opts)
+keymap("x", "j", "<Up>", opts)
+keymap("x", "k", "<Down>", opts)
+keymap("x", "J", "{zz", opts)
+keymap("x", "K", "}zz", opts)
+keymap("o", "J", "{zz", opts)
+keymap("o", "K", "}zz", opts)
+keymap("o", "j", "<Up>", opts)
+keymap("o", "k", "<Down>", opts)
+keymap("n", "gj", "gk", opts)
+keymap("n", "gk", "gj", opts)
 
 -- Undo break points
 keymap("i", ",", ",<c-g>u", opts)
@@ -72,13 +100,18 @@ keymap("n", "N", "Nzzzv", opts)
 keymap("n", "yL", "yg_", opts)
 
 -- LEADER
--- Debug
-category('d', '+Debugger')
+-- Debug (DAP)
+leaderCategory('d', '+Debugger')
+  -- Debugger
+luaMap('dd', 'dap', 'continue()')
+luaMap('db', 'dap', 'toggle_breakpoint()')
+luaMap('dr', 'dap', 'repl.open()')
+luaMap('dl', 'dap', 'set_breakpoint(nil, nil, vim.fn.input("Log point message: "))')
   -- UI
 luaMap('du', 'dapui', 'toggle()')
 
 -- Git
-category('g', '+Git')
+leaderCategory('g', '+Git')
   -- Git Signs
 luaMap('gk', 'gitsigns', 'next_hunk()')
 luaMap('gj', 'gitsigns', 'prev_hunk()')
@@ -101,14 +134,15 @@ luaMap('3', 'harpoon.ui', 'nav_file(3)')
 luaMap('4', 'harpoon.ui', 'nav_file(4)')
 luaMap('e', 'harpoon.ui', 'toggle_quick_menu()')
 
--- Buffers
--- leaderMap('q', 'w\\|bd', "") -- TODO: Test
+-- Misc
+-- leaderMap('q', 'w\\|bd', "") -- I think the problem is \ was meant to dereference |
 leaderMap('/', 'noh', "Clear Highlights")
+leaderMap('tj', 'e temp.js | Codi', "Codi Javascript")
 keymap("n", "<leader>k", "K", opts)
 keymap('n', '<leader>j', "J", opts)
 
 -- Terminal
-category('t', '+Terminal')
+leaderCategory('t', '+Terminal')
   -- Harpoon
 luaMap('tc', 'harpoon.cmd-ui', 'toggle_quick_menu()')
 luaMap('t1', 'harpoon.term', 'gotoTerminal(1)')
@@ -118,7 +152,7 @@ luaMap('t3', 'harpoon.term', 'gotoTerminal(3)')
 leaderMap('tn', 'lua _NODE_TOGGLE()', "Node")
 
 -- Search
-category('p', '+Telescope')
+leaderCategory('p', '+Telescope')
   -- Telescope
 luaMap('pp', 'telescope.builtin', 'find_files()')
 luaMap('pf', 'telescope.builtin', 'live_grep()')
@@ -133,20 +167,22 @@ luaMap('ph', 'telescope.builtin', 'highlights()')
 luaMap('pm', 'telescope.builtin', 'man_pages()')
 luaMap('p?', 'telescope.builtin', 'help_tags()')
   -- Telescope:Git
-category('pt', '+Git Telescope')
+leaderCategory('pt', '+Git Telescope')
 luaMap('pts', 'telescope.builtin', 'git_status()')
 luaMap('ptb', 'telescope.builtin', 'git_branches()')
 luaMap('ptc', 'telescope.builtin', 'git_commits()')
   -- Dashboard
 leaderMap('ps', 'Alpha', 'Dashboard')
+  -- Nvim Tree
+leaderMap("'", 'NvimTreeToggle', 'Explorer')
 
 -- Quickfix
-category('c', '+QuickFix')
+leaderCategory('c', '+QuickFix')
 leaderMap('co', 'copen', 'Open')
 leaderMap('cl', 'cclose', 'Close')
 
 -- Splits
-category('v', '+Splits')
+leaderCategory('v', '+Splits')
 leaderMap('vk', '15sp', 'Split Down')
 leaderMap('vl', '65vsp', 'Split Right')
 leaderMap('vc', 'close', 'Close Split')
@@ -156,6 +192,26 @@ leaderMap('v=', 'vertical resize -5', '⬇️')
 leaderMap('v-', 'vertical resize -5', '⬆️')
 -- leaderMap('\\', '<C-W>=', 'Balance')
 -- leaderMap('|', '<C-W>|', 'Hide')
+
+-- LSP
+lspMap("gd", "lua vim.lsp.buf.definition()", "Definition")
+lspMap("gD", "lua vim.lsp.buf.declaration()", "Declaration")
+lspMap("gr", "lua vim.lsp.buf.references()", "References")
+lspMap("gi", "lua vim.lsp.buf.implementation()", "Implementation")
+category("gl", "+LSP Actions")
+lspMap("gli", "lua vim.lsp.buf.hover()", "Hover")
+lspMap("gls", "lua vim.lsp.buf.signature_help()", "Signature Popup")
+lspMap("glr", "lua vim.lsp.buf.rename()", "Rename")
+lspMap("glc", "lua vim.lsp.buf.code_action()", "Code Action")
+lspMap("<C-p>", "lua vim.lsp.diagnostic.goto_next()", "Go to Next")
+lspMap("<C-n>", "lua vim.lsp.diagnostic.goto_prev()", "Go to Previous")
+
+-- Vim Wiki
+leaderMap("wo", "VimwikiGoBackLink", "Go back")
+leaderMap("wp", "VimwikiFollowLink", "Folow link")
+leaderMap("wl", "VimwikiNextLink", "Next Link")
+leaderMap("wh", "VimwikiPrevLink", "Prev Link")
+leaderMap("wm", "VimwikiTable", "Create Table")
 
 which_key.register(NORMAL_MAPS, wopts)
 
@@ -199,4 +255,8 @@ macOrLinux(os, "i", "<A-o>", "ø", "<C-y>n", opts)
   -- Previous Edit
 macOrLinux(os, "n", "<A-s-o>", "Ø", "<C-y>N", opts)
 macOrLinux(os, "i", "<A-s-o>", "Ø", "<C-y>N", opts)
+-- Dap: TODO: Configure for mac
+macOrLinux(os, "n", "<A-e>", "<A-e>", "<cmd>lua require'dap'.step_over()<CR>", opts)
+macOrLinux(os, "n", "<A-r>", "<A-e>", "<cmd>lua require'dap'.step_into()<CR>", opts)
+macOrLinux(os, "n", "<A-t>", "<A-e>", "<cmd>lua require'dap'.step_out()<CR>", opts)
 

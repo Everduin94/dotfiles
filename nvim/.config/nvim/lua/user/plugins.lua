@@ -89,6 +89,15 @@ return packer.startup(function(use)
   -- Git
   use "lewis6991/gitsigns.nvim"
   use "tpope/vim-fugitive"
+    -- Github
+  use {
+    'pwntester/octo.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope.nvim',
+        'kyazdani42/nvim-web-devicons',
+      },
+  }
   -- Debugger
   use "mfussenegger/nvim-dap"
   use "Pocco81/DAPInstall.nvim"

@@ -3,7 +3,7 @@
 # Projects
 export DEV_FOLDER=$HOME/dev
 export WS_FULL_METAL=$DEV_FOLDER/monobased/apps/full-metal-template
-export WS_CX_CLOUD=$DEV_FOLDER/cx-cloud-ui-worktree/main/apps/cx-portal
+export WS_CX_CLOUD=$DEV_FOLDER/cx-cloud-ui/apps/cx-portal
 export WS_NOTES=$DEV_FOLDER/notes
 export WS_TASKS=$DEV_FOLDER/task-manager
 export WS_SWITCHER=$DEV_FOLDER/nvim-quick-switcher
@@ -11,6 +11,8 @@ export WS_PLAYGROUND=$DEV_FOLDER/erxk-article-playground
 export WS_ZSH=$HOME/.config/zsh/
 export WS_AWESOME=$HOME/.config/awesome
 export WS_SCRIPTS=$HOME/.config/lua-scripts
+export WS_NVIM=$HOME/.config/nvim
+export WS_DOTFILES=$HOME/dotfiles
 export WS_SNIPPETS_FILE=$HOME/.config/nvim/lua/luasnip-config.lua
 
 # Misc

@@ -15,8 +15,9 @@ function M.getTicketTag()
 end
 
 function M.buildCommitMessage(ctype, scope, title, description, relation)
-  relation = relation or "Closes"
-  local ticket = M:getTicketTag()
+  relation = relation or ""
+  local isCx = fu.isCxCloud();
+  local ticket = isCx and M:getTicketTag() or ''
   local fMessage = ctype .. "(" .. scope .. "): " .. title .. "\n\n" .. description .. "\n\n" .. relation .. ": " .. ticket
   return su.trim(fMessage);
 end
@@ -27,7 +28,8 @@ end
 
 function M.commitTemp(msg)
   msg = msg or "Saving work"
-  local ticket = M:getTicketTag()
+  local isCx = fu.isCxCloud();
+  local ticket = isCx and M:getTicketTag() or ''
   local tempMsg = ticket .. " Temp Commit (Rebase): "
   return os.execute('git commit -m "' .. tempMsg .. msg .. '" --no-verify')
 end
@@ -41,6 +43,21 @@ end
 function M.cxCheckout(numberAndName, ctype)
   ctype = ctype or "feat"
   return os.execute('git checkout -b everduin94/' .. ctype .. '/CCFC-' .. numberAndName)
+end
+
+function M.init()
+  local auth = os.getenv("WS_CX_CLOUD") .. '/utils/scripts/auth.sh'
+  io.write('📦 Changes will be stashed... \n')
+  os.execute('git stash')
+  io.write('🌱 Checking out main... \n')
+  os.execute('git checkout main')
+  io.write('📩 Pulling latest changes... \n')
+  os.execute('git pull -r origin main')
+  io.write('🕵  Authenticating (Duo)... \n')
+  os.execute('source ' .. auth)
+  io.write('🧪 Installing dependencies... \n')
+  os.execute('npm ci')
+  io.write('✅ Complete! \n')
 end
 
 return M

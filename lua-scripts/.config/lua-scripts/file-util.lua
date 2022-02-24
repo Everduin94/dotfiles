@@ -15,6 +15,18 @@ function M.readLines(command)
   return result;
 end
 
+function M.getcwd()
+ local pipe = assert(io.popen('pwd'))
+ local path = assert(pipe:read('*l'))
+ pipe:close()
+ return path
+end
+
+function M.isCxCloud()
+  local pwd = M.getcwd()
+  return string.find(pwd, 'cx%-cloud%-ui')
+end
+
 function M.escape(...)
  local command = type(...) == 'table' and ... or { ... }
  for i, s in ipairs(command) do

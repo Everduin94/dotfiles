@@ -14,6 +14,8 @@ local function run(...)
     return git.commitTemp(args[2])
   elseif program == 'cxcheckout' then
     return git.cxCheckout(args[2], args[3])
+  elseif program == 'init' then
+    return git.init()
   end
 end
 

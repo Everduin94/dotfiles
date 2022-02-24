@@ -16,6 +16,10 @@ alias lpush="$L push"
   # Hot Reload Lua -- Pass File Name & Args
 alias hrl="find . -name '*.lua' | entr lua " 
 
+# Bash Scripts
+alias p='dirs=`envsubst < ~/projects` && dir=`echo "$dirs" | fzf` && cd "$dir"'
+alias pn='p && n'
+
 case "$(uname -s)" in
 
 Darwin)

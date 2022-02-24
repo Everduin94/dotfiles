@@ -95,7 +95,7 @@ compinit
 # bindkey '^e' edit-command-line
 
 # Speedy keys
-# xset r rate 210 40
+setxkbmap -option caps:escape
 
 # Environment variables set everywhere
 export EDITOR="nvim"
@@ -112,3 +112,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # setxkbmap -option caps:swapescape
 
 
+
+# fnm
+export PATH=/home/erik/.local/bin:$PATH
+eval "`fnm env`"

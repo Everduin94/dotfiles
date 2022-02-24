@@ -38,8 +38,6 @@ colors:
     - { index: 16, color: '0xff9e64' }
     - { index: 17, color: '0xdb4b4b' }
 
-background_opacity: 0.90
-
 font:
   normal:
     family: "Hack Nerd Font"
@@ -53,9 +51,22 @@ font:
   bold_italic:
     family: "Hack Nerd Font"
     style: Bold Italic
+# font:
+#   normal:
+#     family: Hack Nerd Font
+#     style: Regular
+#   bold:
+#     family: Hack Nerd Font
+#     style: Bold
+#   italic:
+#     family: Hack Nerd Font
+#     style: Italic
+#   bold_italic:
+#     family: Hack Nerd Font
+#     style: Bold Italic
 
   # Point size
-  size: 18.0
+  size: 14.0
 
   offset:
     x: 0
@@ -70,12 +81,14 @@ font:
 #     x: 0
 #     y: 0
 #   decorations: buttonless
+#   opacity: .9
 
 window:
   padding:
     x: 0
     y: 0
   decorations: none
+  opacity: .9
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -96,7 +109,10 @@ selection:
 live_config_reload: true
 
 key_bindings:
-  - { key: V, mods: Control|Shift, action: Paste }
-  - { key: C, mods: Control|Shift, action: Copy }
-  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: V, mods: Super, action: Paste }
+  - { key: C, mods: Super, action: Copy }
+  - { key: F1, action: IncreaseFontSize }
+  - { key: F2, action: DecreaseFontSize }
+  - { key: F3, action: ResetFontSize }
 # - { key: N, mods: Control, action: SpawnNewInstance }
+

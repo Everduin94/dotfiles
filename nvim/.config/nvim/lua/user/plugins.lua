@@ -55,10 +55,13 @@ return packer.startup(function(use)
   use "unblevable/quick-scope"
   use "metakirby5/codi.vim"
   use "tpope/vim-surround"
-  use "tpope/vim-commentary"
+  use "numToStr/Comment.nvim" -- Easily comment stuff
+  use "lewis6991/impatient.nvim" -- load lua modules faster 
+  -- use "tpope/vim-commentary"
   use "machakann/vim-highlightedyank"
   use "mattn/emmet-vim"
   use "ThePrimeagen/harpoon"
+  use "lukas-reineke/indent-blankline.nvim"
   -- CMP
   use "hrsh7th/nvim-cmp"  -- completion
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -70,6 +73,7 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "onsails/lspkind-nvim"
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
     -- Snippets
   use "L3MON4D3/LuaSnip"
   -- Colorschemes
@@ -109,23 +113,13 @@ return packer.startup(function(use)
   use "ferrine/md-img-paste.vim"
   -- Dashboard
   use {'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }}
-  -- use "junegunn/rainbow_parentheses.vim"
 
-  -- Replacing
-  use "prettier/vim-prettier" -- null ls
 
   -- Interested in or may use in future
-  -- use "numToStr/Comment.nvim" -- Easily comment stuff
-  -- use "moll/vim-bbye"
-  -- use "ahmedkhalf/project.nvim"
-  -- use "lewis6991/impatient.nvim"
-  -- use "lukas-reineke/indent-blankline.nvim"
-  -- use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-  -- use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-
-
-
+    -- use "moll/vim-bbye"
+    -- use "ahmedkhalf/project.nvim"
+    -- use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+    -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

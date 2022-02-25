@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   ["DAPInstall.nvim"] = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
@@ -134,6 +139,16 @@ _G.packer_plugins = {
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
@@ -148,6 +163,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/md-img-paste.vim",
     url = "https://github.com/ferrine/md-img-paste.vim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -264,11 +284,6 @@ _G.packer_plugins = {
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
   },
-  ["vim-commentary"] = {
-    loaded = true,
-    path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-commentary",
-    url = "https://github.com/tpope/vim-commentary"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -278,11 +293,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-highlightedyank",
     url = "https://github.com/machakann/vim-highlightedyank"
-  },
-  ["vim-prettier"] = {
-    loaded = true,
-    path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-prettier",
-    url = "https://github.com/prettier/vim-prettier"
   },
   ["vim-sneak"] = {
     loaded = true,

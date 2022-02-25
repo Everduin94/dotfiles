@@ -3,7 +3,7 @@
 		"prefix": "settimeout",
 		"body": [
 			"setTimeout(() => {",
-			"\t$0",
+			"\t$2",
 			"}, ${1:timeout});"
 		],
 		"description": "Set Timeout Function"

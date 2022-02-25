@@ -51,22 +51,9 @@ font:
   bold_italic:
     family: "Hack Nerd Font"
     style: Bold Italic
-# font:
-#   normal:
-#     family: Hack Nerd Font
-#     style: Regular
-#   bold:
-#     family: Hack Nerd Font
-#     style: Bold
-#   italic:
-#     family: Hack Nerd Font
-#     style: Italic
-#   bold_italic:
-#     family: Hack Nerd Font
-#     style: Bold Italic
 
   # Point size
-  size: 14.0
+  size: 17.0
 
   offset:
     x: 0
@@ -76,19 +63,19 @@ font:
     y: 0
 
 # MacOS
-# window:
-#   padding:
-#     x: 0
-#     y: 0
-#   decorations: buttonless
-#   opacity: .9
-
 window:
   padding:
     x: 0
     y: 0
-  decorations: none
+  decorations: buttonless
   opacity: .9
+
+# window:
+#  padding:
+#    x: 0
+#    y: 0
+#  decorations: none
+#  opacity: .9
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

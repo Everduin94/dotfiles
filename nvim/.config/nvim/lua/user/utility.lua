@@ -22,20 +22,15 @@ vim.cmd [[
                      \ 'javascript.jsx': 'javascript',
                      \ }
 
-  " Prettier -- Replace me
-    " Allow prettier to run on autosave with form or perttier tags
-    " This is the magical combination to actaully use a .prettierrc file
-    " ! This did not work without "config_present"
-  let g:prettier#autoformat_config_present = 1
-  let g:prettier#autoformat_require_pragma = 0
-  let g:prettier#config#config_precedence = 'prefer-file'
-
   " Vim Wiki
   let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'},
         \ {'path': '~/Documents/dev/notes/', 'syntax': 'markdown', 'ext': '.md'},
         \ {'path': '~/Documents/dev/task-manager/', 'syntax': 'markdown', 'ext': '.md'}
         \ ]
 
+  " Set v-split border width
+  set fillchars+=vert:\▎	
+        
   " Auto Commands
     " Wiki
   autocmd FileType markdown nmap <buffer><silent> <leader>mp :call mdip#MarkdownClipboardImage()<CR>
@@ -44,4 +39,23 @@ vim.cmd [[
   autocmd FileType man nnoremap <buffer> k gj
     " Tmux
   autocmd BufWritePost ~/dotfiles/tmux/.config/tmux/tmux.conf execute ':!tmux source-file %' 
+    " General
+  augroup _general_settings
+    autocmd!
+    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
+    autocmd BufWinEnter * :set formatoptions-=cro
+    autocmd FileType qf set nobuflisted
+  augroup end
+
+  augroup _highlights
+    autocmd!
+    autocmd ColorScheme * highlight TelescopeNormal cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    \ | highlight TelescopePrompt cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    \ | highlight TelescopeBorder cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#7aa2f7
+    \ | highlight NvimTreeNormal cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    \ | highlight NvimTreeVertSplit cterm=NONE gui=NONE guibg=#7aa2f7 guifg=#a9b1d6
+    \ | highlight NormalFloat cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    \ | highlight VertSplit cterm=reverse gui=NONE guifg=#7aa2f7
+    \ | highlight FloatBorder cterm=NONE gui=NONE guibg=NONE guifg=#7aa2f7
+  augroup end
 ]]

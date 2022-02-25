@@ -51,7 +51,7 @@ zsh_add_plugin "hlissner/zsh-autopair"
 
 # Key-bindings
 bindkey -s '^o' 'ranger^M'
-bindkey -s '^f' 'zi^M'
+# bindkey -s '^f' 'zi^M'
 bindkey -s '^s' 'ncdu^M'
 # bindkey -s '^n' 'nvim $(fzf)^M'
 # bindkey -s '^v' 'nvim\n'
@@ -73,7 +73,7 @@ bindkey 'ç' fzf-cd-widget # Option+ç
 # Flipped -- TODO: Dec 14th, disable these in favor of bind above as a test.
 # bindkey "^j" up-line-or-beginning-search # Up
 # bindkey "^k" down-line-or-beginning-search # Down
-bindkey "^L" end-of-line
+bindkey "^f" end-of-line
 bindkey -r "^u"
 bindkey -r "^d"
 

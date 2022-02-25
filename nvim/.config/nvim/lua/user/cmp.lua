@@ -33,8 +33,9 @@ cmp.setup {
       select = true,
     },
     ['<Tab>'] = function(fallback)
-      if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+      -- Priority is jump, otherwise, next item
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
       elseif cmp.visible() then
         cmp.select_next_item()
       else

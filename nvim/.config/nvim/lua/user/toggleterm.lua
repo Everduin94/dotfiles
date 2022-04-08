@@ -46,4 +46,48 @@ function _NODE_TOGGLE()
 end
 
 
+local jest = Terminal:new({ cmd = "jest", hidden = true })
 
+function _JEST_TOGGLE()
+	jest:toggle()
+end
+
+local gitPush = Terminal:new({ cmd = "l push", hidden = true })
+
+function _GIT_PUSH_TOGGLE()
+	gitPush:toggle()
+end
+
+local cwd = Terminal:new({ hidden = false, count=1 })
+function _CWD_TOGGLE()
+    local path = vim.api.nvim_buf_get_name(0):match("^(.+)/.+$")
+    cwd:toggle()
+    -- Learning
+      -- change_dir, doesn't work because cwd.dir ~= dir
+      -- Why? Because dir is always the vim cwd. So if you go to init.lua, it thinks the paths match.
+      -- i.e. it doesn't look at where the terminal really is, just where it was defined
+    if cwd:is_open() then
+      -- To clear
+        -- cwd:send({'cd ' .. path, 'clear' }, false)
+      cwd:send('cd ' .. path, false)
+    end
+end
+
+-- TODO (03/26/2022 - 07:24pm): Make lua scripts available in nvim
+local function getcwd()
+ local pipe = assert(io.popen('pwd'))
+ local path = assert(pipe:read('*l'))
+ pipe:close()
+ return path
+end
+
+local function isCxCloud()
+  local pwd = getcwd()
+  return string.find(pwd, 'cx%-cloud%-ui')
+end
+
+local project = isCxCloud() and 'cx-portal' or ''
+local ng_serve = Terminal:new({ cmd = "ng serve", hidden = true })
+function _NG_SERVE_TOGGLE()
+	ng_serve:toggle()
+end

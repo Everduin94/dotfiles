@@ -12,13 +12,41 @@ alias tmux="TERM=xterm-256color tmux -2"
 # Lua Scripts
 export L="lua ~/.config/lua-scripts/lua-runner.lua"
 alias l="$L"
-alias lpush="$L push"
+
   # Hot Reload Lua -- Pass File Name & Args
 alias hrl="find . -name '*.lua' | entr lua " 
 
 # Bash Scripts
-alias p='dirs=`envsubst < ~/projects` && dir=`echo "$dirs" | fzf` && cd "$dir"'
-alias pn='p && n'
+# alias p='dirs=`envsubst < ~/projects` && dir=`echo "$dirs" | fzf` && cd "$dir"'
+alias p='lua_cd od'
+alias pn='lua_nvim od'
+alias pt='lua_tmux od'
+
+# TODO: Investigate $@ vs "$@" for N number of args
+lua_cd () { cd $(l $1 $2) }
+lua_nvim () { cd $(l $1 $2) && n }
+
+# Learning
+  # You probably don't need these as much as you think
+  # exports will take effect inside of a child process.
+  # e.g. if you use npm ci in that process, it has access to:
+    # all of the parent shell variables
+    # all of the current shell variables
+  # So if you run `npm ci`, as long as you export auth in that current shell you're good
+lua_export() { export $(l $1) }
+lua_source() { source $(l $1) }
+
+# Learning
+  # This actually isn't necessary.
+  # cd, source, export, etc... these are the commands you need to run in the current shell. tmux is fine.
+  # tmux has a "send" command. What if we just did literally everything with tmux?
+  # Would this have a sideffect of giving us ability to keybind all of our stuff?
+  # DONE: Tmux everything does not work. A tmux.send command doesn't block the current thread like other commands do.
+lua_tmux () { 
+  dirs=$(l $1 $2)
+  folder=$(l 'folder-name' $dirs)
+  tmux new-window -c "$dirs" -n "$folder"
+}
 
 case "$(uname -s)" in
 

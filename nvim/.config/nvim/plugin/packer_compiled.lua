@@ -224,16 +224,6 @@ _G.packer_plugins = {
     path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-treesitter-angular"] = {
-    loaded = true,
-    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/nvim-treesitter-angular",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter-angular"
-  },
-  ["nvim-ts-context-commentstring"] = {
-    loaded = true,
-    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
-    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
-  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -273,6 +263,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

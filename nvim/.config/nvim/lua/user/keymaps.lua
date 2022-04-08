@@ -149,8 +149,12 @@ luaMap('tc', 'harpoon.cmd-ui', 'toggle_quick_menu()')
 luaMap('t1', 'harpoon.term', 'gotoTerminal(1)')
 luaMap('t2', 'harpoon.term', 'gotoTerminal(2)')
 luaMap('t3', 'harpoon.term', 'gotoTerminal(3)')
+
   -- ToggleTerm
 leaderMap('tn', 'lua _NODE_TOGGLE()', "Node")
+leaderMap('tc', 'lua _NG_SERVE_TOGGLE()', "ng serve")
+leaderMap('tj', 'lua _JEST_TOGGLE()', "Jest")
+leaderMap('t6', 'lua _CWD_TOGGLE()', "CWD")
 
 -- Search
 leaderCategory('p', '+Telescope')

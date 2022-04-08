@@ -1,17 +1,28 @@
 local git = require("git-util")
+local fu = require("file-util")
+local tu = require("tmux-util")
+local term   = require 'term'
+local posix = require 'posix.stdlib'
+local colors = term.colors -- or require 'term.colors'
 
--- git.commit(git.buildCommitMessage("feat", "Athena", "Changes to Map", "Added multiple somethings to the map wow!"))
+-- find . -name '*.lua' | entr lua 
 
--- print(git.push('-f'))
+-- POC Switcher find
+local result = fu.readAll('find . -maxdepth 2 -name "*.md"')
+
+local tableResults = {}
+for s in result:gmatch("[^\r\n]+") do
+    table.insert(tableResults, s)
+end
+
+-- POC Tmux Exports
+local env = os.getenv('WS_SCRIPTS')
+-- os.execute('tmux send "source ' .. env .. '/aws-auth.sh"')
 
 
-local params = {...}
 
-local table = {
-  test = "one"
-}
+-- local results = tu.send('source ' .. env .. '/aws-auth.sh')
+print(posix.setenv('CODEARTIFACT_AUTH_TOKEN', fu.readAll('echo 123')))
 
-table["<leader>ff"] = { something = "else"}
 
-print(table["<leader>ff"].something)
-
+print(posix.getenv('CODEARTIFACT_AUTH_TOKEN'))

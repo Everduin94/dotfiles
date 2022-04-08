@@ -1,6 +1,8 @@
 local fu = require("file-util")
 local su = require("string-util")
-M = {}
+local tu = require("tmux-util")
+local posix = require("posix.stdlib")
+local M = {}
 
 function M.getBranchName()
   local command = "git rev-parse --abbrev-ref HEAD"
@@ -40,21 +42,27 @@ function M.push(flags)
   return os.execute('git push origin ' .. branchName .. ' ' .. flags)
 end
 
-function M.cxCheckout(numberAndName, ctype)
+function M.checkout(numberAndName, ctype)
   ctype = ctype or "feat"
   return os.execute('git checkout -b everduin94/' .. ctype .. '/CCFC-' .. numberAndName)
 end
 
 function M.init()
   local auth = os.getenv("WS_CX_CLOUD") .. '/utils/scripts/auth.sh'
+  local env = os.getenv('WS_SCRIPTS')
+  local awsAuthCmd = 'source ' .. env .. '/aws-auth.sh'
+  io.write('🕵  Authenticating (Duo)... \n')
+  os.execute('source ' .. auth)
+  io.write('🎭 Updating AWS Auth Token \n')
+  local result = fu.readAll(awsAuthCmd)
+  posix.setenv('CODEARTIFACT_AUTH_TOKEN', result)
+  io.write(posix.getenv('CODEARTIFACT_AUTH_TOKEN'))
   io.write('📦 Changes will be stashed... \n')
   os.execute('git stash')
   io.write('🌱 Checking out main... \n')
   os.execute('git checkout main')
   io.write('📩 Pulling latest changes... \n')
   os.execute('git pull -r origin main')
-  io.write('🕵  Authenticating (Duo)... \n')
-  os.execute('source ' .. auth)
   io.write('🧪 Installing dependencies... \n')
   os.execute('npm ci')
   io.write('✅ Complete! \n')

@@ -274,7 +274,7 @@ globalkeys = mytable.join(
               {description = "destroy all notifications", group = "hotkeys"}),
 
     -- Take a screenshot
-    awful.key({ altkey }, "p", function() os.execute("flameshot gui -p ~/images/triage") end,
+    awful.key({ altkey }, "p", function() os.execute("flameshot gui") end,
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
@@ -340,8 +340,8 @@ globalkeys = mytable.join(
         {description = "focus right", group = "client"}),
 
     -- Menu
-    awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    -- awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
+    --           {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -416,9 +416,9 @@ globalkeys = mytable.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    awful.key({ modkey,           }, "r", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, "r", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n", function ()
@@ -532,7 +532,7 @@ globalkeys = mytable.join(
     --           {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
+    awful.key({ modkey }, "i", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
 
     -- Default
@@ -557,10 +557,10 @@ globalkeys = mytable.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () os.execute('rofi -show run') end,
+    awful.key({ modkey }, "space", function () os.execute('rofi -show run') end,
               {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey }, "e", function () os.execute('rofi -show emoji -modi emoji') end,
+    awful.key({ modkey }, "e", function () os.execute('rofi -show emoji -modi emoji -theme center') end,
               {description = "run emoji", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -585,9 +585,9 @@ clientkeys = mytable.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
+    awful.key({ modkey, }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Control" }, "r",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),

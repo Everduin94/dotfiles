@@ -62,13 +62,10 @@ font:
     x: 0
     y: 0
 
-# MacOS
 window:
   padding:
     x: 0
     y: 0
-  decorations: buttonless
-  opacity: 1
 
 # window:
 #  padding:
@@ -76,6 +73,9 @@ window:
 #    y: 0
 #  decorations: none
 #  opacity: .9
+  decorations: none
+  opacity: 1.0
+
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

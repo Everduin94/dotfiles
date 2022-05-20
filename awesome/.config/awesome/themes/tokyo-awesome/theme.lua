@@ -108,7 +108,7 @@ theme.widget_task                               = theme.dir .. "/icons/task.png"
 theme.widget_scissors                           = theme.dir .. "/icons/scissors.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 3
+theme.useless_gap                               = 20
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -401,13 +401,13 @@ function theme.at_screen_connect(s)
             -- pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
             -- pl(task, "#343434"),
             --pl(wibox.widget { mailicon, mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.magenta),
-            pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.green),
-            pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal },tokyoNight.normal.magenta),
+            pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.red),
+            pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.cyan),
+            pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal },tokyoNight.normal.red),
             --pl(wibox.widget { fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal }, "#CB755B"),
-            pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.green),
-            pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.magenta),
-            pl(clock, tokyoNight.normal.green),
+            pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.cyan),
+            pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, tokyoNight.normal.red),
+            pl(clock, tokyoNight.normal.cyan),
             --[[
             -- using separators
 

@@ -17,7 +17,6 @@ local options = {
  expandtab=true,                          -- Converts tabs to spaces
  smartindent=true,                        -- Makes indenting smart
  autoindent=true,                         -- Good auto indent
- laststatus=0,                            -- Always display the status line
  number=true,                             -- Line numbers
  background="dark",                       -- Tell vim what the background color looks like
  showtabline=2,                           -- Always show tabs
@@ -33,6 +32,7 @@ local options = {
  scrolloff = 8,                           -- NEW
  sidescrolloff = 8,                       -- NEW
  completeopt = { "menuone", "noselect" },
+ laststatus = 3,
 }
 
 for k, v in pairs(options) do

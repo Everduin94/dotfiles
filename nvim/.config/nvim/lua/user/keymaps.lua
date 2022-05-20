@@ -57,6 +57,7 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+leaderMap("oa", "e#", "Alternate")
 
   -- End of Line
 keymap("n", "H", "^", opts)
@@ -70,6 +71,7 @@ keymap("o", "L", "$", opts)
 keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 keymap("n", "<C-s>", ":wa<CR>", opts)
+
 
   -- Opposite day
 keymap("n", "j", "<Up>", opts)
@@ -133,7 +135,7 @@ luaMap('1', 'harpoon.ui', 'nav_file(1)')
 luaMap('2', 'harpoon.ui', 'nav_file(2)')
 luaMap('3', 'harpoon.ui', 'nav_file(3)')
 luaMap('4', 'harpoon.ui', 'nav_file(4)')
-luaMap('e', 'harpoon.ui', 'toggle_quick_menu()')
+luaMap('q', 'harpoon.ui', 'toggle_quick_menu()')
 
 -- Misc
 -- leaderMap('q', 'w\\|bd', "") -- I think the problem is \ was meant to dereference |
@@ -159,14 +161,20 @@ leaderMap('t6', 'lua _CWD_TOGGLE()', "CWD")
 -- Search
 leaderCategory('p', '+Telescope')
   -- Telescope
-luaMap('pp', 'telescope.builtin', 'find_files()')
-luaMap('pf', 'telescope.builtin', 'live_grep()')
+   -- E means "exclude", must have fd installed.
+local grepFilter = '!*{.spec.ts,.yaml,.json,fixture*}'
+local fileFilter = '{ "fd", "--type", "f", "--glob", "-E", "{*.spec.ts,*.yaml,*.json,*fixture*}" }'
+luaMap('pp', 'telescope.builtin', 'find_files({ find_command = ' .. fileFilter ..  ' })')
+luaMap('pf', 'telescope.builtin', 'live_grep({glob_pattern = "' .. grepFilter .. '"})')
 luaMap('pb', 'telescope.builtin', 'buffers()')
 luaMap('p*', 'telescope.builtin', 'grep_string()')
 luaMap('po', 'telescope.builtin', 'find_files({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] })', 'Find Files(Git Root)')
 luaMap('pg', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }', 'Grep(Git Root)' )
 luaMap('pn', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes" }',  'Grep(Notes)')
 luaMap('pc', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes/creative-work/cheatsheets" }', 'Grep(Cheatsheets)')
+luaMap('pl', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , glob_pattern = "' .. grepFilter .. '" }', 'Grep(Nx Libs)' )
+luaMap('pl', 'telescope.builtin', 'find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , find_command = "' .. fileFilter .. '" }', 'Grep(Nx Libs)' )
+
   -- Telescope:Help
 luaMap('ph', 'telescope.builtin', 'highlights()')
 luaMap('pm', 'telescope.builtin', 'man_pages()')
@@ -208,8 +216,8 @@ lspMap("gli", "lua vim.lsp.buf.hover()", "Hover")
 lspMap("gls", "lua vim.lsp.buf.signature_help()", "Signature Popup")
 lspMap("glr", "lua vim.lsp.buf.rename()", "Rename")
 lspMap("glc", "lua vim.lsp.buf.code_action()", "Code Action")
-lspMap("<C-p>", "lua vim.lsp.diagnostic.goto_next()", "Go to Next")
-lspMap("<C-n>", "lua vim.lsp.diagnostic.goto_prev()", "Go to Previous")
+lspMap("<C-p>", "lua vim.diagnostic.goto_next()", "Go to Next")
+lspMap("<C-n>", "lua vim.diagnostic.goto_prev()", "Go to Previous")
 
 -- Vim Wiki
 leaderMap("wo", "VimwikiGoBackLink", "Go back")
@@ -217,6 +225,7 @@ leaderMap("wp", "VimwikiFollowLink", "Folow link")
 leaderMap("wl", "VimwikiNextLink", "Next Link")
 leaderMap("wh", "VimwikiPrevLink", "Prev Link")
 leaderMap("wm", "VimwikiTable", "Create Table")
+leaderMap("wq", ":%bd", "Quit All")
 
 which_key.register(NORMAL_MAPS, wopts)
 
@@ -240,26 +249,26 @@ macOrLinux(os, "n", "<A-j>", "∆", "<esc>:m .-2<CR>==", opts)
 macOrLinux(os, "v", "<A-k>", "˚", ":m '>+1<CR>gv=gv", opts)
 macOrLinux(os, "v", "<A-j>", "∆", ":m '<-2<CR>gv=gv", opts)
 macOrLinux(os, "t", "<A-\\>", "«", "<C-\\><C-N>", term_opts)
--- Emmet: TODO Original emmet binds were not noremap, is this okay?
+
+keymap("n", "<Leader>wnn", "<Plug>VimwikiNextLink", {})
+keymap("n", "<Leader>wnN", "<Plug>VimwikiPrevLink", {})
+
+-- Emmet
+-- TODO: You can't use nore for things like <C-y>
   -- Balance outward
-macOrLinux(os, "n", "<A-h>", "˙", "<C-y>d", opts)
-macOrLinux(os, "i", "<A-h>", "˙", "<C-y>d", opts)
-macOrLinux(os, "v", "<A-h>", "˙", "<C-y>d", opts)
+macOrLinux(os, "n", "<A-h>", "˙", "<C-y>d", {})
+macOrLinux(os, "i", "<A-h>", "˙", "<C-y>d", {})
+macOrLinux(os, "v", "<A-h>", "˙", "<C-y>d", {})
   -- Balance inward
-macOrLinux(os, "n", "<A-l>", "¬", "<C-y>D", opts)
-macOrLinux(os, "i", "<A-l>", "¬", "<C-y>D", opts)
-macOrLinux(os, "v", "<A-l>", "¬", "<C-y>D", opts)
-  -- Expand: TODO: Add g on mac
-macOrLinux(os, "n", "<A-,>", "≤", "<C-y>,", opts)
-macOrLinux(os, "i", "<A-,>", "≤", "<C-y>,", opts)
-macOrLinux(os, "n", "<A-g>", "≤", "<C-y>,", opts)
-macOrLinux(os, "i", "<A-g>", "≤", "<C-y>,", opts)
+macOrLinux(os, "n", "<A-l>", "¬", "<C-y>D", {})
+macOrLinux(os, "i", "<A-l>", "¬", "<C-y>D", {})
+macOrLinux(os, "v", "<A-l>", "¬", "<C-y>D", {})
   -- Next Edit
-macOrLinux(os, "n", "<A-o>", "ø", "<C-y>n", opts)
-macOrLinux(os, "i", "<A-o>", "ø", "<C-y>n", opts)
+macOrLinux(os, "n", "<A-o>", "ø", "<C-y>n", {})
+macOrLinux(os, "i", "<A-o>", "ø", "<C-y>n", {})
   -- Previous Edit
-macOrLinux(os, "n", "<A-s-o>", "Ø", "<C-y>N", opts)
-macOrLinux(os, "i", "<A-s-o>", "Ø", "<C-y>N", opts)
+macOrLinux(os, "n", "<A-s-o>", "Ø", "<C-y>N", {})
+macOrLinux(os, "i", "<A-s-o>", "Ø", "<C-y>N", {})
 -- Dap: TODO: Configure for mac
 macOrLinux(os, "n", "<A-e>", "<A-e>", "<cmd>lua require'dap'.step_over()<CR>", opts)
 macOrLinux(os, "n", "<A-r>", "<A-e>", "<cmd>lua require'dap'.step_into()<CR>", opts)

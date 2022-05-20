@@ -3,6 +3,7 @@ package.path = package.path .. ';' .. home .. '/.config/lua-scripts/?.lua'
 
 local git = require("git-util")
 local fu = require("file-util")
+local tu = require("tmux-util")
 local fGenerator = require("file-generator")
 
 local function run(...)
@@ -22,6 +23,16 @@ local function run(...)
     return git.init()
   elseif program == 'folder-name' then
     return fu.getFolderName(args[2])
+  elseif program == 'work' then
+    return tu.init('CISCO-DEV')
+  elseif program == 'home' then
+    return tu.init('HOME-DEV')
+  elseif program == 'attach' then
+    if args[2] == 'work'  then
+      tu.attach('CISCO-DEV')
+    elseif args[2] == 'home' then
+      tu.attach('HOME-DEV')
+    end 
   elseif program == 'od' then
     return fu.open_dir(args[2])
   elseif program == 'n-major' then

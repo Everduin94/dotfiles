@@ -45,6 +45,10 @@ function timeStamp(args, snip, user_args1)
           return '(' .. os.date("%x") .. ' - ' .. os.date("%I") .. ':' .. os.date("%M") .. string.lower(os.date("%p")) .. '):'
 end
 
+function today(args, snip, user_args1)
+          return os.date("%x")
+end
+
 ls.add_snippets("all", {
     s("filename", { f(getFileName) }),
     -- File path completion, deletes line up to next `/` IDK how to fix
@@ -57,9 +61,8 @@ ls.add_snippets("all", {
       t({"", "Back: [["}), i(1, "path"), t({"]]"}),
       t({"", "-----------", ""}), i(0)
     }),
-    s("timestamp", {
-      f(timeStamp)
-    }),
+    s("timestamp", { f(timeStamp) }),
+    s("today", { f(today) }),
     s("sprintday", {
       f(getFileName),
       t({"", ""}),

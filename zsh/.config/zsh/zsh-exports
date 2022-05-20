@@ -4,6 +4,7 @@
 export DEV_FOLDER=$HOME/dev
 export WS_FULL_METAL=$DEV_FOLDER/monobased/apps/full-metal-template
 export WS_CX_CLOUD=$DEV_FOLDER/cx-cloud-ui
+export WS_CHOICE_PLUS=$DEV_FOLDER/cx-cloud-ui/libs/shared/choice-plus
 export WS_NOTES=$DEV_FOLDER/notes
 export WS_TASKS=$DEV_FOLDER/task-manager
 export WS_SWITCHER=$DEV_FOLDER/nvim-quick-switcher

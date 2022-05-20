@@ -47,7 +47,7 @@ function M.checkout(numberAndName, ctype)
   return os.execute('git checkout -b everduin94/' .. ctype .. '/CCFC-' .. numberAndName)
 end
 
-function M.init()
+function M.init(update_in_place)
   local auth = os.getenv("WS_CX_CLOUD") .. '/utils/scripts/auth.sh'
   local env = os.getenv('WS_SCRIPTS')
   local awsAuthCmd = 'source ' .. env .. '/aws-auth.sh'
@@ -57,12 +57,14 @@ function M.init()
   local result = fu.readAll(awsAuthCmd)
   posix.setenv('CODEARTIFACT_AUTH_TOKEN', result)
   io.write(posix.getenv('CODEARTIFACT_AUTH_TOKEN'))
-  io.write('📦 Changes will be stashed... \n')
-  os.execute('git stash')
-  io.write('🌱 Checking out main... \n')
-  os.execute('git checkout main')
-  io.write('📩 Pulling latest changes... \n')
-  os.execute('git pull -r origin main')
+  -- if update_in_place then
+    io.write('📦 Changes will be stashed... \n')
+    os.execute('git stash')
+    io.write('🌱 Checking out main... \n')
+    os.execute('git checkout main')
+    io.write('📩 Pulling latest changes... \n')
+    os.execute('git pull -r origin main')
+  -- end
   io.write('🧪 Installing dependencies... \n')
   os.execute('npm ci')
   io.write('✅ Complete! \n')

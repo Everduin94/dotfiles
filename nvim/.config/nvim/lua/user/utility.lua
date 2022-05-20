@@ -29,7 +29,8 @@ vim.cmd [[
         \ ]
 
   " Set v-split border width
-  set fillchars+=vert:\▎	
+  " ▎ ━
+  set fillchars+=vert:\│	
         
   " Auto Commands
     " Wiki

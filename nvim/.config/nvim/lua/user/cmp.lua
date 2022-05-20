@@ -6,7 +6,6 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 vim.o.completeopt = 'menuone,noselect'
 
 
-
 -- luasnip setup
 local luasnip = require 'luasnip'
 local lspKind = require 'lspkind'
@@ -26,7 +25,11 @@ cmp.setup {
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = function()
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
+      end
+    end,
     ['<C-a>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<C-f>'] = cmp.mapping.confirm {
@@ -35,19 +38,19 @@ cmp.setup {
     },
     ['<Tab>'] = function(fallback)
       -- jump, else, next item
-      if luasnip.jumpable(1) then
-        luasnip.jump(1)
-      elseif cmp.visible() then
+      if cmp.visible() then
         cmp.select_next_item()
+      elseif luasnip.jumpable(1) then
+        luasnip.jump(1)
       else
         fallback()
       end
     end,
     ['<S-Tab>'] = function(fallback)
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      elseif cmp.visible() then
+      if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end

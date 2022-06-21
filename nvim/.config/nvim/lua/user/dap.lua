@@ -1,8 +1,3 @@
-local dap_install = require("dap-install")
-dap_install.config("chrome", {})
-dap_install.config("jsnode", {})
-dap_install.config("lua", {})
-
 local dap = require("dap");
 dap.configurations.typescript = {
     {

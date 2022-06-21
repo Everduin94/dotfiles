@@ -1,6 +1,15 @@
 local fu = require("file-util")
 local su = require("string-util")
+local cu = require("css-util")
 local M = {}
+
+
+function M.cssPropsToCustom(fileName)
+  return cu.updateCssProps(fileName)
+end
+
+
+
 
 local NOTES_MODULE_FILES = {
   '.index.md',

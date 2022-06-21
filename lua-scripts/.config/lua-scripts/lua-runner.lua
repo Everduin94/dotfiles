@@ -20,7 +20,7 @@ local function run(...)
   elseif program == 'checkout' then
     return git.checkout(args[2], args[3])
   elseif program == 'init' then
-    return git.init()
+    return git.init(args[2])
   elseif program == 'folder-name' then
     return fu.getFolderName(args[2])
   elseif program == 'work' then
@@ -32,7 +32,7 @@ local function run(...)
       tu.attach('CISCO-DEV')
     elseif args[2] == 'home' then
       tu.attach('HOME-DEV')
-    end 
+    end
   elseif program == 'od' then
     return fu.open_dir(args[2])
   elseif program == 'n-major' then
@@ -47,6 +47,8 @@ local function run(...)
     return fGenerator.sprint_day()
   elseif program == 'n-tmrw' then
     return fGenerator.sprint_tmrw()
+  elseif program == 'css-props' then
+    return fGenerator.cssPropsToCustom(args[2])
   end
 end
 

@@ -124,6 +124,11 @@ _G.packer_plugins = {
     path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/codi.vim",
     url = "https://github.com/metakirby5/codi.vim"
   },
+  ["dap-buddy.nvim"] = {
+    loaded = true,
+    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/dap-buddy.nvim",
+    url = "https://github.com/Pocco81/dap-buddy.nvim"
+  },
   ["emmet-vim"] = {
     loaded = true,
     path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/emmet-vim",

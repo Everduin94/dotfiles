@@ -16,6 +16,9 @@ alias l="$L"
   # Hot Reload Lua -- Pass File Name & Args
 alias hrl="find . -name '*.lua' | entr lua " 
 
+# mov to gif (Uses gifsicle as Dep, is not what I use on Arch) 
+alias video_to_gif='function video_to_gif(){ ffmpeg -i $1 output.gif && gifsicle -O3 output.gif -o output.gif && say "Video is ready!"};video_to_gif'
+
 # Bash Scripts
 # alias p='dirs=`envsubst < ~/projects` && dir=`echo "$dirs" | fzf` && cd "$dir"'
 alias p='lua_cd od'

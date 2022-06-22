@@ -1,0 +1,17 @@
+.wow {
+  color: var(--core-color-blue-200);
+  background: var(--core-color-blue-300);
+
+  .another-one {
+    color: var(--core-color-blue-600);
+    background-color: var(--core-color-gray-100);
+    border: 1px solid var(--core-color-gray-900);
+    margin: var(--core-spacing-5xl) var(--core-spacing-2xl);
+    margin-bottom: var(--core-spacing-lg);
+    padding: var(--core-spacing-lg);
+    font: var(--core-font-size-14);
+    font-size: var(--core-font-size-16);
+    border-radius: var(--core-radius-700);
+    border-radius: var(--core-radius-200);
+  }
+}

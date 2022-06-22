@@ -52,10 +52,11 @@ function _JEST_TOGGLE()
 	jest:toggle()
 end
 
-local gitPush = Terminal:new({ cmd = "l push", hidden = true })
+local gitSync = Terminal:new({ hidden = false, count=1 })
 
-function _GIT_PUSH_TOGGLE()
-	gitPush:toggle()
+function _GIT_SYNC_TOGGLE()
+  gitSync:toggle()
+  gitSync:send('l sync', false)
 end
 
 local cwd = Terminal:new({ hidden = false, count=1 })

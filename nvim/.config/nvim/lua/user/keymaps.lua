@@ -156,6 +156,7 @@ luaMap('t3', 'harpoon.term', 'gotoTerminal(3)')
 leaderMap('tn', 'lua _NODE_TOGGLE()', "Node")
 leaderMap('tc', 'lua _NG_SERVE_TOGGLE()', "ng serve")
 leaderMap('tj', 'lua _JEST_TOGGLE()', "Jest")
+leaderMap('ts', 'lua _GIT_SYNC_TOGGLE()', "Git Sync")
 leaderMap('t6', 'lua _CWD_TOGGLE()', "CWD")
 
 -- Search
@@ -173,7 +174,7 @@ luaMap('pg', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-p
 luaMap('pn', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes" }',  'Grep(Notes)')
 luaMap('pc', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes/creative-work/cheatsheets" }', 'Grep(Cheatsheets)')
 luaMap('pl', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , glob_pattern = "' .. grepFilter .. '" }', 'Grep(Nx Libs)' )
-luaMap('pl', 'telescope.builtin', 'find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , find_command = "' .. fileFilter .. '" }', 'Grep(Nx Libs)' )
+-- luaMap('pL', 'telescope.builtin', 'find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , find_command = ' .. fileFilter .. ' }', 'Find File(Nx Libs)' )
 
   -- Telescope:Help
 luaMap('ph', 'telescope.builtin', 'highlights()')

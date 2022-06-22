@@ -19,6 +19,8 @@ local function run(...)
     return git.getTicketTag()
   elseif program == 'checkout' then
     return git.checkout(args[2], args[3])
+  elseif program == 'sync' then
+    return git.sync()
   elseif program == 'init' then
     return git.init(args[2])
   elseif program == 'folder-name' then

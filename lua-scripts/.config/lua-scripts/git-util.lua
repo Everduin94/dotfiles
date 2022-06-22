@@ -24,6 +24,18 @@ function M.buildCommitMessage(ctype, scope, title, description, relation)
   return su.trim(fMessage);
 end
 
+function M.sync()
+  local user = os.execute('id -un')
+  local machine = 'HOME'
+  if user == 'everduin' then
+    machine = 'WORK'
+  end
+
+   os.execute('git add .')
+   os.execute('git commit -m "' .. "Syncing from ".. machine .. ": " .. os.date("%x") .. '"')
+   M.push()
+end
+
 function M.commit(msg)
   return os.execute('git commit -m "' .. msg .. '"')
 end

@@ -1,0 +1,29 @@
+  "Effect with Side-Effect": {
+		"prefix": "effects",
+		"body": [
+"${1}$ = createEffect(",
+    "    () =>",
+    "      this.actions$.pipe(",
+    "        ofType(${2}),",
+    "        tap(() => ${3}),",
+    "        switchMap((actionValue) => [",
+    "          toaster(actionValue),",
+    "        ])",
+    "      ),",
+    "    { dispatch: true }",
+    "  );"
+		],
+		"description": "Effect with a switchmap"
+	},
+  "Effect": {
+		"prefix": "effect",
+		"body": [
+"${1}$ = createEffect(() =>",
+    "    this.actions$.pipe(",
+    "      ofType(${2}),",
+    "      tap(() => ${3})",
+    "    )",
+    "  );"
+		],
+		"description": "Effect"
+	},

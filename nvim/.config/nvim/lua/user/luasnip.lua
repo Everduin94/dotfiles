@@ -148,8 +148,34 @@ ls.add_snippets("lua", {
   })
 
 ls.add_snippets("typescript", {
-    s("todo", { t("// TODO "), f(timeStamp), t(" "), i(0) })
+    s("todo", { t("// TODO "), f(timeStamp), t(" "), i(0) }),
+    s("effectFn", {
+      i(1), t("Effect = createEffectFn(("), i(2), t(": Observable<"), i(3), t(">"), t({") => { "}),
+      t({"return "}), f(function(args, snip, user_arg_1, user_arg_2) return args[1][1] end, {2}), t({".pipe("}), i(0),
+      t({")"}),
+      t("});")
+    }),
+    s("effect", {
+      i(1), t("$ = createEffect(actions => actions.pipe( ofType("), f(function(args, snip, user_arg_1, user_arg_2) return args[1][1] end, {1}), t("),")
+      , i(0), t("));")
+    }),
+    s("action", {
+      t("export const "), i(1), t(" = "), i(2), t(".create('"), i(3), t("')")
+    }),
+    s("actionInit", {
+      t("export const "), i(1), t("Actions = "), t("actionsFactory('"), f(function(args, snip, user_arg_1, user_arg_2) return args[1][1] end, {1}), t("')")
+    })
   })
+
+function effectFn()
+  s("effectFn", {
+    t("export const "), i(1), 
+    t("Effect = createEffectFn(("), i(2), t(": Observable<"), i(3), t(">"), t(") => { ", ""),
+    t("return "), f(function(args, snip, user_arg_1, user_arg_2) return args[1][1] end, {2}), t(".pipe(", ""),
+    t(");", ""),
+    t("});")
+  })
+end
 
 ls.add_snippets("html", {
     s("todo", { t("<!-- TODO "), f(timeStamp), t(" "), i(0), t(" -->") }),

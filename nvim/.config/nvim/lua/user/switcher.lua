@@ -13,6 +13,10 @@ keymap("n", "<leader>oo", "<cmd>:lua require('nvim-quick-switcher').find('.compo
 keymap("n", "<leader>op", "<cmd>:lua require('nvim-quick-switcher').find('.module.ts')<CR>", opts)
 keymap("n", "<leader>ol", "<cmd>:lua require('nvim-quick-switcher').find('*util.*', { prefix = 'short' })<CR>", opts)
 
+
+keymap("n", "<leader>oc", "<cmd>:lua require('nvim-quick-switcher').find('(.+page|.+component).ts', { regex = true })<CR>", opts)
+keymap("n", "<leader>ov", "<cmd>:lua require('nvim-quick-switcher').find('(.+page|.+component).html', { regex = true })<CR>", opts)
+
 -- Legacy
 -- keymap("n", "<leader>ou", "<cmd>:lua require('nvim-quick-switcher').switch('component.ts')<CR>", opts)
 -- keymap("n", "<leader>oo", "<cmd>:lua require('nvim-quick-switcher').switch('component.html')<CR>", opts)

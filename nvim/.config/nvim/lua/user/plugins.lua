@@ -57,7 +57,7 @@ return packer.startup(function(use)
   use "tpope/vim-surround"
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "lewis6991/impatient.nvim" -- load lua modules faster 
-  use {"Everduin94/nvim-quick-switcher", branch = 'stage' }
+  use {"Everduin94/nvim-quick-switcher"}
   -- use "tpope/vim-commentary"
   use "machakann/vim-highlightedyank"
   use "mattn/emmet-vim"

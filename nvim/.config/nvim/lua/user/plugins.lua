@@ -110,7 +110,6 @@ return packer.startup(function(use)
   use "theHamsta/nvim-dap-virtual-text"
   use "nvim-telescope/telescope-dap.nvim"
   use "rcarriga/nvim-dap-ui"
-  use "Pocco81/dap-buddy.nvim"
   -- Wiki
   use "vimwiki/vimwiki"
   use "ferrine/md-img-paste.vim"

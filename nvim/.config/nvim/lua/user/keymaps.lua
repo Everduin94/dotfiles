@@ -109,7 +109,7 @@ leaderCategory('d', '+Debugger')
 luaMap('dd', 'dap', 'continue()')
 luaMap('db', 'dap', 'toggle_breakpoint()')
 luaMap('dr', 'dap', 'repl.open()')
-luaMap('dl', 'dap', 'set_breakpoint(nil, nil, vim.fn.input("Log point message: "))')
+luaMap('dl', 'dap', 'set_breakpoint(nil, nil, vim.fn.input("Log-ev: "))')
   -- UI
 luaMap('du', 'dapui', 'toggle()')
 
@@ -140,7 +140,7 @@ luaMap('q', 'harpoon.ui', 'toggle_quick_menu()')
 -- Misc
 -- leaderMap('q', 'w\\|bd', "") -- I think the problem is \ was meant to dereference |
 leaderMap('/', 'noh', "Clear Highlights")
-leaderMap('tj', 'e temp.js | Codi', "Codi Javascript")
+leaderMap('ttj', 'e temp.js | Codi', "Codi Javascript")
 keymap("n", "<leader>k", "K", opts)
 keymap('n', '<leader>j', "J", opts)
 
@@ -158,6 +158,9 @@ leaderMap('tc', 'lua _NG_SERVE_TOGGLE()', "ng serve")
 leaderMap('tj', 'lua _JEST_TOGGLE()', "Jest")
 leaderMap('ts', 'lua _GIT_SYNC_TOGGLE()', "Git Sync")
 leaderMap('t6', 'lua _CWD_TOGGLE()', "CWD")
+
+-- Codi
+leaderMap('toc', 'Codi!!', "Toggle Codi")
 
 -- Search
 leaderCategory('p', '+Telescope')
@@ -202,8 +205,8 @@ leaderMap('vl', '65vsp', 'Split Right')
 leaderMap('vc', 'close', 'Close Split')
 leaderMap('v]', 'vertical resize +5', '⬅️')
 leaderMap('v[', 'vertical resize -5', '➡️')
-leaderMap('v=', 'vertical resize -5', '⬇️')
-leaderMap('v-', 'vertical resize -5', '⬆️')
+leaderMap('v=', 'resize -2', '⬇️')
+leaderMap('v-', 'resize +2', '⬆️')
 -- leaderMap('\\', '<C-W>=', 'Balance')
 -- leaderMap('|', '<C-W>|', 'Hide')
 

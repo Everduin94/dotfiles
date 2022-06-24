@@ -25,7 +25,8 @@ function M.buildCommitMessage(ctype, scope, title, description, relation)
 end
 
 function M.sync()
-  local user = os.execute('id -un')
+  local command = "id -un"
+  local user = fu.readAll(command);
   local machine = 'HOME'
   if user == 'everduin' then
     machine = 'WORK'

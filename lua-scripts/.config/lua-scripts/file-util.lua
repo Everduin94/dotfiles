@@ -105,5 +105,27 @@ function M.getFolderName(pathName)
 end
 
 
+function M.firebase_kill()
+  local getUser = "id -un"
+  local user = M.readAll(getUser);
+
+  local ports = {
+    "8080",
+    "4202",
+    "9099",
+  }
+
+  local sudo = user == 'erik' and 'sudo' or ''
+  for k, port in pairs(ports) do
+    local command = "lsof -ti :" .. port
+    local result = M.readAll(command);
+    if result then
+      os.execute(sudo .. ' kill -9 ' .. result)
+    end
+  end
+end
+
+
+
 return M
 

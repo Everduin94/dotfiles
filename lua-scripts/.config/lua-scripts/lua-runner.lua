@@ -23,6 +23,8 @@ local function run(...)
     return git.sync()
   elseif program == 'init' then
     return git.init(args[2])
+  elseif program == 'fb-kill' then
+    return fu.firebase_kill()
   elseif program == 'folder-name' then
     return fu.getFolderName(args[2])
   elseif program == 'work' then

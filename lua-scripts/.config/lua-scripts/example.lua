@@ -15,6 +15,7 @@ local colors = term.colors -- or require 'term.colors'
   local ports = {
     "8080",
     "4202",
+    "4400",
     "9099",
   }
 

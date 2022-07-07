@@ -61,15 +61,16 @@ function M.checkout(numberAndName, ctype)
 end
 
 function M.init(update_in_place)
-  local auth = os.getenv("WS_CX_CLOUD") .. '/utils/scripts/auth.sh'
-  local env = os.getenv('WS_SCRIPTS')
-  local awsAuthCmd = 'source ' .. env .. '/aws-auth.sh'
-  io.write('🕵  Authenticating (Duo)... \n')
-  os.execute('source ' .. auth)
-  io.write('🎭 Updating AWS Auth Token \n')
-  local result = fu.readAll(awsAuthCmd)
-  posix.setenv('CODEARTIFACT_AUTH_TOKEN', result)
-  io.write(posix.getenv('CODEARTIFACT_AUTH_TOKEN'))
+  -- As of June 30th, 2022 Auth is no longer needed
+  -- local auth = os.getenv("WS_CX_CLOUD") .. '/utils/scripts/auth.sh'
+  -- local env = os.getenv('WS_SCRIPTS')
+  -- local awsAuthCmd = 'source ' .. env .. '/aws-auth.sh'
+  -- io.write('🕵  Authenticating (Duo)... \n')
+  -- os.execute('source ' .. auth)
+  -- io.write('🎭 Updating AWS Auth Token \n')
+  -- local result = fu.readAll(awsAuthCmd)
+  -- posix.setenv('CODEARTIFACT_AUTH_TOKEN', result)
+  -- io.write(posix.getenv('CODEARTIFACT_AUTH_TOKEN'))
   if not update_in_place then
     io.write('📦 Changes will be stashed... \n')
     os.execute('git stash')

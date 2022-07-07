@@ -34,7 +34,12 @@ vim.cmd [[
         
   " Auto Commands
     " Wiki
-  autocmd FileType markdown nmap <buffer><silent> <leader>mp :call mdip#MarkdownClipboardImage()<CR>
+  augroup Markdown
+    autocmd!
+    autocmd FileType markdown set wrap
+    autocmd FileType markdown set linebreak
+    autocmd FileType markdown nmap <buffer><silent> <leader>mp :call mdip#MarkdownClipboardImage()<CR>
+  augroup END
     " Man
   autocmd FileType man nnoremap <buffer> j gk
   autocmd FileType man nnoremap <buffer> k gj

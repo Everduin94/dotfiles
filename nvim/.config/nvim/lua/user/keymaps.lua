@@ -193,6 +193,14 @@ leaderMap('ps', 'Alpha', 'Dashboard')
   -- Nvim Tree
 leaderMap("'", 'NvimTreeToggle', 'Explorer')
 
+-- TMUX
+leaderMap('m1', 'silent !tmux select-window -t 1', 'Switch Pane 1')
+leaderMap('m2', 'silent !tmux select-window -t 2', 'Switch Pane 2')
+leaderMap('m3', 'silent !tmux select-window -t 3', 'Switch Pane 3')
+leaderMap('m4', 'silent !tmux select-window -t 4', 'Switch Pane 4')
+leaderMap('m5', 'silent !tmux select-window -t 5', 'Switch Pane 5')
+leaderMap('m6', 'silent !tmux select-window -t 6', 'Switch Pane 6')
+
 -- Quickfix
 leaderCategory('c', '+QuickFix')
 leaderMap('co', 'copen', 'Open')
@@ -243,6 +251,7 @@ local function macOrLinux(os, mode, linux_bind, mac_bind, fn, opt)
 end
 
 local os = vim.loop.os_uname().sysname
+
 -- General
   -- Quickfix List
 macOrLinux(os, "n", "<A-q>", "œ",  ":bd!<CR>", opts)

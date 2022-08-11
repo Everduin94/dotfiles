@@ -105,6 +105,7 @@ The zsh config, taken from chris@machine, does completion and suggestions withou
 *Dotfiles should now be avilable in ~/.config*
 
 **Install All Apps**
+`brew tap homebrew/cask-fonts`
 `xargs brew install < .brew-starter.list`
 `xargs brew install --cask < .brew-cask-starter.list`
 

@@ -4,4 +4,7 @@
 /nvim/.config/nvim/autoload/**
 /nvim/.config/nvim/autoload/plugged
 /nvim/.config/nvim/autoload/plugged/**
-
+/nvim/.config/nvim/node_modules
+/nvim/.config/nvim/node_modules/**
+./nvim/.config/nvim/node_modules
+./nvim/.config/nvim/node_modules/**

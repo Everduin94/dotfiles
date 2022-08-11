@@ -1,24 +1,24 @@
 --
-vim.g.nvim_tree_icons = {
-  default = "",
-  symlink = "",
-  git = {
-    unstaged = "",
-    staged = "S",
-    unmerged = "",
-    renamed = "➜",
-    deleted = "",
-    untracked = "U",
-    ignored = "◌",
-  },
-  folder = {
-    default = "",
-    open = "",
-    empty = "",
-    empty_open = "",
-    symlink = "",
-  },
-}
+-- vim.g.nvim_tree_icons = {
+--   default = "",
+--   symlink = "",
+--   git = {
+--     unstaged = "",
+--     staged = "S",
+--     unmerged = "",
+--     renamed = "➜",
+--     deleted = "",
+--     untracked = "U",
+--     ignored = "◌",
+--   },
+--   folder = {
+--     default = "",
+--     open = "",
+--     empty = "",
+--     empty_open = "",
+--     symlink = "",
+--   },
+-- }
 
 -- vim.g.nvim_tree_highlight_opened_files = 2
 
@@ -48,12 +48,12 @@ nvim_tree.setup {
   update_cwd = false, -- true
   diagnostics = {
     enable = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    },
+    -- icons = {
+    --   hint = "",
+    --   info = "",
+    --   warning = "",
+    --   error = "",
+    -- },
   },
   update_focused_file = {
     enable = true,
@@ -78,7 +78,7 @@ nvim_tree.setup {
     height = 40,
     hide_root_folder = false,
     side = "right",
-    auto_resize = true,
+    adaptive_size = true,
     mappings = {
       custom_only = false,
       list = {

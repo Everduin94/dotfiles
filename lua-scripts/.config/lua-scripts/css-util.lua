@@ -1,7 +1,5 @@
-local fu = require("file-util")
 
 local M = {}
-
 
 function M.updateCssProps(fileName)
   local home = os.getenv('HOME')
@@ -18,7 +16,7 @@ function M.updateCssProps(fileName)
   -- In many cases, I use % as a dereference, just to be explicit.
   -- Sometimes I also expect I would need a * or + and I don't, adding it doesn't seem to break anything.
 
-  -- ipairs only works with index based props. Holy shit.
+  -- ipairs only works with index based props.
   local pattern =  "%s(--[%d|%a|-]+):%s([#|%d|%a|%)|%(|%-|%%]+)";
 
   local props = {}

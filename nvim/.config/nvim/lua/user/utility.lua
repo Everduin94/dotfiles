@@ -55,13 +55,13 @@ vim.cmd [[
 
   augroup _highlights
     autocmd!
-    autocmd ColorScheme * highlight TelescopeNormal cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
-    \ | highlight TelescopePrompt cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
-    \ | highlight TelescopeBorder cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#7aa2f7
-    \ | highlight NvimTreeNormal cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
-    \ | highlight NvimTreeVertSplit cterm=NONE gui=NONE guibg=#7aa2f7 guifg=#a9b1d6
-    \ | highlight NormalFloat cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
-    \ | highlight VertSplit cterm=reverse gui=NONE guifg=#7aa2f7
-    \ | highlight FloatBorder cterm=NONE gui=NONE guibg=NONE guifg=#7aa2f7
+    " autocmd ColorScheme * highlight TelescopeNormal cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    " \ | highlight TelescopePrompt cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    " \ | highlight TelescopeBorder cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#7aa2f7
+    " \ | highlight NvimTreeNormal cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    " \ | highlight NvimTreeVertSplit cterm=NONE gui=NONE guibg=#7aa2f7 guifg=#a9b1d6
+    " \ | highlight NormalFloat cterm=NONE ctermbg=76 ctermfg=16 gui=NONE guibg=NONE guifg=#a9b1d6
+    " \ | highlight VertSplit cterm=reverse gui=NONE guifg=#7aa2f7
+    " \ | highlight FloatBorder cterm=NONE gui=NONE guibg=NONE guifg=#7aa2f7
   augroup end
 ]]

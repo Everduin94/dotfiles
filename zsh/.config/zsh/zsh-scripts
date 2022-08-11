@@ -5,3 +5,15 @@ function zsh_add_file() {
     [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
 }
 
+function build_lua_lang() {
+  brew install ninja
+  cd ~
+  cd .config/nvim
+  git clone https://github.com/sumneko/lua-language-server
+  cd lua-language-server
+  git submodule update --init --recursive
+  cd 3rd/luamake
+  ninja -f compile/ninja/macos.ninja
+  cd ../..
+  ./3rd/luamake/luamake rebuild
+}

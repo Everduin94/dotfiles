@@ -73,8 +73,8 @@ window:
 #    y: 0
 #  decorations: none
 #  opacity: .9
-  decorations: none
-  opacity: 1.0
+  decorations: buttonless
+  opacity: 0.9
 
 
 scrolling:

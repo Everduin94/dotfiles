@@ -1,17 +1,20 @@
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
-keymap("n", "<leader>ot", "<cmd>:lua require('nvim-quick-switcher').find('.+test|.+spec', { regex = true, prefix='full' })<CR>", opts)
-keymap("n", "<leader>oe", "<cmd>:lua require('nvim-quick-switcher').find('*effects*')<CR>", opts)
-keymap("n", "<leader>oa", "<cmd>:lua require('nvim-quick-switcher').find('*actions*')<CR>", opts)
-keymap("n", "<leader>oq", "<cmd>:lua require('nvim-quick-switcher').find('*query*')<CR>", opts)
-keymap("n", "<leader>ow", "<cmd>:lua require('nvim-quick-switcher').find('*store*')<CR>", opts)
+keymap("n", "<leader>oe", "<cmd>:lua require('nvim-quick-switcher').find('*effects.ts')<CR>", opts)
+keymap("n", "<leader>oa", "<cmd>:lua require('nvim-quick-switcher').find('*actions.ts')<CR>", opts)
+keymap("n", "<leader>oq", "<cmd>:lua require('nvim-quick-switcher').find('.+query.ts|.+selectors.ts', { regex = true })<CR>", opts)
+keymap("n", "<leader>ow", "<cmd>:lua require('nvim-quick-switcher').find('*store.ts')<CR>", opts)
+keymap("n", "<leader>of", "<cmd>:lua require('nvim-quick-switcher').find('*facade.ts')<CR>", opts)
+keymap("n", "<leader>or", "<cmd>:lua require('nvim-quick-switcher').find('.+reducer.ts|.+repository.ts', { regex = true })<CR>", opts)
+keymap("n", "<leader>om", "<cmd>:lua require('nvim-quick-switcher').find('.+model.ts|.+models.ts|.+types.ts', { regex = true })<CR>", opts)
 keymap("n", "<leader>os", "<cmd>:lua require('nvim-quick-switcher').find('.service.ts')<CR>", opts)
 keymap("n", "<leader>oi", "<cmd>:lua require('nvim-quick-switcher').find('.+css|.+scss|.+sass', { regex = true, prefix='full' })<CR>", opts)
 keymap("n", "<leader>ou", "<cmd>:lua require('nvim-quick-switcher').find('.component.ts')<CR>", opts)
 keymap("n", "<leader>oo", "<cmd>:lua require('nvim-quick-switcher').find('.component.html')<CR>", opts)
 keymap("n", "<leader>op", "<cmd>:lua require('nvim-quick-switcher').find('.module.ts')<CR>", opts)
 keymap("n", "<leader>ol", "<cmd>:lua require('nvim-quick-switcher').find('*util.*', { prefix = 'short' })<CR>", opts)
+keymap("n", "<leader>ot", "<cmd>:lua require('nvim-quick-switcher').find('.+test|.+spec', { regex = true, prefix='full' })<CR>", opts)
 
 
 keymap("n", "<leader>oc", "<cmd>:lua require('nvim-quick-switcher').find('(.+page|.+component).ts', { regex = true })<CR>", opts)

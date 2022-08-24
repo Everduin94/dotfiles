@@ -113,6 +113,7 @@ function M.firebase_kill()
     "8080",
     "4202",
     "9099",
+    "5000",
   }
 
   local sudo = user == 'erik' and 'sudo' or ''

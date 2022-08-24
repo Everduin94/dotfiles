@@ -1,38 +1,37 @@
 
--- TODO: Using a variable feels bad, but running hello twice also feels bad :/
--- Is there a way to maintain state, say inside quick switcher, and handle this performantly?
--- Regardless, the idea works :)
-
-local tempState = 'None'
 
 local function hello() 
   local file_name = vim.fn.expand('%:t')
   local temp = file_name:match('%.([%-%w_]+)%.%w+$')
 
   if temp == nil then
-    tempState = 'None'
     return 'None'
   end
-  tempState = temp
-  
   return temp
 end
 
+local function test_mode() 
+  local result = hello();
+  local color = '#123456'
+  if result == 'store' then
+    color = '#BADA55'
+  end
+  
+  return { hello, color = { fg = '#111111', bg = color}}
+
+end 
 
 local function randomColor()
+  local result = hello();
   
   local color = '#123456'
-  if tempState == 'store' then
+  print(result)
+  if result == 'store' then
     color = '#BADA55'
   end
 
-  return { fg = '#111111', bg = color }
+  return color
 end
-
-local function test_mode() 
-  return { hello, color = randomColor }
-end 
-
 
 require'lualine'.setup {
   options = {
@@ -47,9 +46,8 @@ require'lualine'.setup {
     lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
     -- lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_x = {'filetype'},
     -- lualine_x = {{ hello, color = {fg = '#111111', bg = randomColor() }}},
-    -- lualine_x = {  {hello(tempState), color = randomColor } },
+    lualine_x = {  test_mode()  },
     -- lualine_y = {'progress'},
     lualine_y = {},
     lualine_z = {'location'}

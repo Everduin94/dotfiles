@@ -5,7 +5,6 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
-
 -- luasnip setup
 local luasnip = require 'luasnip'
 local lspKind = require 'lspkind'
@@ -22,9 +21,11 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+
+  -- TODO: ChoiceNodes break cmp and select_next_item starts to prematurely filter
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i' }),
     ['<C-d>'] = function()
       if luasnip.jumpable(1) then
         luasnip.jump(1)
@@ -37,7 +38,6 @@ cmp.setup {
       select = true,
     },
     ['<Tab>'] = function(fallback)
-      -- jump, else, next item
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.jumpable(1) then

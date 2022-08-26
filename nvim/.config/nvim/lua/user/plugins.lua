@@ -50,6 +50,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons"
   use "folke/which-key.nvim"
   use "norcalli/nvim-colorizer.lua"
+  -- Maybe replace with FTerm?
   use "akinsho/toggleterm.nvim"
   use "justinmk/vim-sneak"
   use "unblevable/quick-scope"
@@ -63,6 +64,9 @@ return packer.startup(function(use)
   use "mattn/emmet-vim"
   use "ThePrimeagen/harpoon"
   use "lukas-reineke/indent-blankline.nvim"
+  use "Pocco81/true-zen.nvim"
+  use "folke/twilight.nvim"
+
   -- CMP
   use "hrsh7th/nvim-cmp"  -- completion
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -75,7 +79,8 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "onsails/lspkind-nvim"
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-    -- Snippets
+  use "jose-elias-alvarez/typescript.nvim"
+  -- Snippets
   use "L3MON4D3/LuaSnip"
   -- Colorschemes
   use "folke/tokyonight.nvim"
@@ -83,6 +88,7 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
+  use "nvim-telescope/telescope-ui-select.nvim"
   -- File Tree
   use "kyazdani42/nvim-tree.lua"
   -- Treesitter

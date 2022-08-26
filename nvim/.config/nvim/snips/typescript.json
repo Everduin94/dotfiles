@@ -1,6 +1,6 @@
 {
   "Set Timeout": {
-		"prefix": "settimeout",
+		"prefix": "legacy-settimeout",
 		"body": [
 			"setTimeout(() => {",
 			"\t$2",
@@ -9,28 +9,28 @@
 		"description": "Set Timeout Function"
 	},
   "Enum Redux": {
-		"prefix": "enumRedux",
+		"prefix": "legacy-enumRedux",
 		"body": [
       "${1} = '[${1}] ${2}'"
 		],
 		"description": "Enum Redux Entry"
 	},
   "Input definition": { 
-		"prefix": "inputS",
+		"prefix": "legacy-inputS",
 		"body": [
       "@Input() ${1} = ${0}"
 		],
 		"description": "Input Definition"
 	},
   "Output definition": { 
-		"prefix": "outputS",
+		"prefix": "legacy-outputS",
 		"body": [
       "@Output() ${1} = new EventEmitter<any>();"
 		],
 		"description": "Output Definition"
 	},
   "Tap Log": { 
-		"prefix": "tapLog",
+		"prefix": "legacy-tapLog",
 		"body": [
       "tap((v) => console.log('${1:value}:', {$2}))"
 		],

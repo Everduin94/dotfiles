@@ -129,6 +129,11 @@ leaderMap('gv', 'Gvdiffsplit', 'Diff Split')
 leaderMap('gw', 'Git difftool', 'Diff Tool')
 leaderMap('ge', 'Git mergetool', 'Merge Tool')
 
+-- Zen
+leaderCategory('z', '+Zen')
+leaderMap('zm', 'TZAtaraxis', 'Zen Mode')
+leaderMap('zn', 'TZFocus', 'Zen Focus')
+
 -- Harpoon
 luaMap('0', 'harpoon.mark', 'add_file()')
 luaMap('1', 'harpoon.ui', 'nav_file(1)')
@@ -224,12 +229,17 @@ lspMap("gD", "lua vim.lsp.buf.declaration()", "Declaration")
 lspMap("gr", "lua vim.lsp.buf.references()", "References")
 lspMap("gi", "lua vim.lsp.buf.implementation()", "Implementation")
 category("gl", "+LSP Actions")
-lspMap("gli", "lua vim.lsp.buf.hover()", "Hover")
-lspMap("gls", "lua vim.lsp.buf.signature_help()", "Signature Popup")
+lspMap("gle", "lua vim.lsp.buf.hover()", "Hover")
+lspMap("glw", "lua vim.lsp.buf.signature_help()", "Signature Popup")
 lspMap("glr", "lua vim.lsp.buf.rename()", "Rename")
 lspMap("glc", "lua vim.lsp.buf.code_action()", "Code Action")
+leaderMap('is', "lua require('typescript').actions.addMissingImports({ sync = true }); require('typescript').actions.removeUnused(); vim.lsp.buf.formatting_sync(nil, 1000);", "Clean up - Format - Import")
 lspMap("<C-p>", "lua vim.diagnostic.goto_next()", "Go to Next")
 lspMap("<C-n>", "lua vim.diagnostic.goto_prev()", "Go to Previous")
+-- { sync = true } is required because if import and format happen at the same time it shits its pants
+vim.api.nvim_set_keymap("i", "<C-s>", "<cmd>lua require('typescript').actions.addMissingImports({ sync = true }); require('typescript').actions.removeUnused(); vim.lsp.buf.formatting_sync(nil, 1000); <CR>", opts)
+vim.api.nvim_set_keymap("i", "<C-w>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+vim.api.nvim_set_keymap("i", "<C-e>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 -- Vim Wiki
 leaderMap("wo", "VimwikiGoBackLink", "Go back")

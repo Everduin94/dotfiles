@@ -3,36 +3,38 @@
 -- Is there a way to maintain state, say inside quick switcher, and handle this performantly?
 -- Regardless, the idea works :)
 
-local tempState = 'None'
+-- lualine_x = {{ hello, color = randomColor }, 'filetype'},
+local tempState = ''
 
-local function hello() 
+local function hello()
   local file_name = vim.fn.expand('%:t')
   local temp = file_name:match('%.([%-%w_]+)%.%w+$')
-
   if temp == nil then
-    tempState = 'None'
-    return 'None'
+    tempState = ''
+    return ''
   end
-  tempState = temp
-  
-  return temp
+  tempState = string.upper(temp)
+  return tempState
 end
 
+-- Should be highlights for consistency or is there a way to pull from theme?
+local componentColors = {
+  STORE = '#73daca',
+  REPOSITORY = '#73daca',
+  QUERY = '#9ece6a',
+  SELECTORS = '#9ece6a',
+  EFFECTS = '#bb9af7',
+  ACTIONS = '#f7768e',
+  MODULE = '#f7768e',
+  REDUCER = '#7aa2f7',
+  COMPONENT = '#7dcfff',
+  SERVICE = '#e0af68',
+  SPEC = '#c0caf5',
+}
 
 local function randomColor()
-  
-  local color = '#123456'
-  if tempState == 'store' then
-    color = '#BADA55'
-  end
-
-  return { fg = '#111111', bg = color }
+  return { fg = '#111111', bg = tempState and componentColors[tempState] or '' }
 end
-
-local function test_mode() 
-  return { hello, color = randomColor }
-end 
-
 
 require'lualine'.setup {
   options = {

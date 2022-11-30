@@ -45,7 +45,7 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "akinsho/bufferline.nvim"
+  -- use "akinsho/bufferline.nvim"
   use "nvim-lualine/lualine.nvim"
   use "kyazdani42/nvim-web-devicons"
   use "folke/which-key.nvim"
@@ -58,7 +58,7 @@ return packer.startup(function(use)
   use "tpope/vim-surround"
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "lewis6991/impatient.nvim" -- load lua modules faster 
-  use {"Everduin94/nvim-quick-switcher"}
+  use {"Everduin94/nvim-quick-switcher", branch = "ignore_prefix"}
   -- use "tpope/vim-commentary"
   use "machakann/vim-highlightedyank"
   use "mattn/emmet-vim"
@@ -84,10 +84,11 @@ return packer.startup(function(use)
   use "L3MON4D3/LuaSnip"
   -- Colorschemes
   use "folke/tokyonight.nvim"
+  use { "catppuccin/nvim", as = "catppuccin" }
   -- Telescope
   use "nvim-telescope/telescope.nvim"
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  -- use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
   use "nvim-telescope/telescope-ui-select.nvim"
   -- File Tree
   use "kyazdani42/nvim-tree.lua"
@@ -96,6 +97,8 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+  use "nvim-treesitter/playground"
+
   -- use "nvim-treesitter/nvim-treesitter-angular"
   -- use "JoosepAlviste/nvim-ts-context-commentstring"
   -- Git

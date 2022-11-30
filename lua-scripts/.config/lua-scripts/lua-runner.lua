@@ -28,14 +28,14 @@ local function run(...)
   elseif program == 'folder-name' then
     return fu.getFolderName(args[2])
   elseif program == 'work' then
-    return tu.init('CISCO-DEV')
+    return tu.init('DEV')
   elseif program == 'home' then
-    return tu.init('HOME-DEV')
+    return tu.init('DEV')
   elseif program == 'attach' then
     if args[2] == 'work'  then
-      tu.attach('CISCO-DEV')
+      tu.attach('DEV')
     elseif args[2] == 'home' then
-      tu.attach('HOME-DEV')
+      tu.attach('DEV')
     end
   elseif program == 'od' then
     return fu.open_dir(args[2])

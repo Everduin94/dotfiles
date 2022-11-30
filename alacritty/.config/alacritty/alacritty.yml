@@ -5,38 +5,44 @@
 #/_/  |_/_____/_/  |_\____/_/ |_/___/ /_/   /_/     /_/
 #
       
+import:
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
+
 # TokyoNight STORM (Dark Bg, New Green) Alacritty Colors
-colors:
-  # Default colors
-  primary:
-    background: '0x1a1b26'
-    foreground: '0xc0caf5'
-
-  # Normal colors
-  normal:
-    black:   '0x1D202F'
-    red:     '0xf7768e'
-    green:   '0x6ace95'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xa9b1d6'
-
-  # Bright colors
-  bright:
-    black:   '0x414868'
-    red:     '0xf7768e'
-    green:   '0x6ace95'
-    yellow:  '0xe0af68'
-    blue:    '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan:    '0x7dcfff'
-    white:   '0xc0caf5'
-
-  indexed_colors:
-    - { index: 16, color: '0xff9e64' }
-    - { index: 17, color: '0xdb4b4b' }
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x1a1b26'
+#     foreground: '0xc0caf5'
+#
+#   # Normal colors
+#   normal:
+#     black:   '0x1D202F'
+#     red:     '0xf7768e'
+#     green:   '0x6ace95'
+#     yellow:  '0xe0af68'
+#     blue:    '0x7aa2f7'
+#     magenta: '0xbb9af7'
+#     cyan:    '0x7dcfff'
+#     white:   '0xa9b1d6'
+#
+#   # Bright colors
+#   bright:
+#     black:   '0x414868'
+#     red:     '0xf7768e'
+#     green:   '0x6ace95'
+#     yellow:  '0xe0af68'
+#     blue:    '0x7aa2f7'
+#     magenta: '0xbb9af7'
+#     cyan:    '0x7dcfff'
+#     white:   '0xc0caf5'
+#
+#   indexed_colors:
+#     - { index: 16, color: '0xff9e64' }
+#     - { index: 17, color: '0xdb4b4b' }
 
 mouse:
     hide_when_typing: true
@@ -77,7 +83,7 @@ window:
 #  decorations: none
 #  opacity: .9
   decorations: buttonless
-  opacity: 0.9
+  opacity: .9
 
 
 scrolling:

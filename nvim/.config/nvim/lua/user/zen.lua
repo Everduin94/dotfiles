@@ -1,4 +1,7 @@
 
+
+is_focus = ''
+
 local truezen = require('true-zen.config').set_options({
 
 	modes = { -- configurations per mode
@@ -62,9 +65,9 @@ local truezen = require('true-zen.config').set_options({
 		focus = {
 			callbacks = { -- run functions when opening/closing Focus mode
 				open_pre = nil,
-				open_pos = nil,
+				open_pos = function() is_focus = 'Focus' end,
 				close_pre = nil,
-				close_pos = nil
+				close_pos = function() is_focus = '' end
 			},
 		}
 	},

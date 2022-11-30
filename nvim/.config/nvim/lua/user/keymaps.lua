@@ -171,8 +171,8 @@ leaderMap('toc', 'Codi!!', "Toggle Codi")
 leaderCategory('p', '+Telescope')
   -- Telescope
    -- E means "exclude", must have fd installed.
-local grepFilter = '!*{.spec.ts,.yaml,.json,fixture*}'
-local fileFilter = '{ "fd", "--type", "f", "--glob", "-E", "{*.spec.ts,*.yaml,*.json,*fixture*}" }'
+local grepFilter = '!*{.spec.ts,.yaml,.xlf,bundle.js,.json,fixture*}'
+local fileFilter = '{ "fd", "--type", "f", "--glob", "-E", "{*.spec.ts,*.yaml,*.xlf,*bundle.js,*.json,*fixture*}" }'
 luaMap('pp', 'telescope.builtin', 'find_files({ find_command = ' .. fileFilter ..  ' })')
 luaMap('pf', 'telescope.builtin', 'live_grep({glob_pattern = "' .. grepFilter .. '"})')
 luaMap('pb', 'telescope.builtin', 'buffers()')

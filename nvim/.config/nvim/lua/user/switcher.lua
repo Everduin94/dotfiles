@@ -22,7 +22,7 @@ keymap("n", "<leader>op", "<cmd>:lua require('nvim-quick-switcher').find('.modul
 -- SvelteKit
 keymap("n", "<leader>oso", "<cmd>:lua require('nvim-quick-switcher').find('*page.svelte', { maxdepth = 1, ignore_prefix = true })<CR>", opts)
 keymap("n", "<leader>osi", "<cmd>:lua require('nvim-quick-switcher').find('*layout.svelte', { maxdepth = 1, ignore_prefix = true })<CR>", opts)
-keymap("n", "<leader>osu", "<cmd>:lua require('nvim-quick-switcher').find('.*page.server.ts|.*page.ts', { maxdepth = 1, regex = true, ignore_prefix = true })<CR>", opts)
+keymap("n", "<leader>osu", "<cmd>:lua require('nvim-quick-switcher').find('.*page.server(.+js|.+ts)|.*page(.+js|.+ts)', { maxdepth = 1, regex = true, ignore_prefix = true })<CR>", opts)
 
  -- Inline TS
 keymap("n", "<leader>osj", "<cmd>:lua require('nvim-quick-switcher').inline_ts_switch('svelte', '(script_element (end_tag) @capture)')<CR>", opts)

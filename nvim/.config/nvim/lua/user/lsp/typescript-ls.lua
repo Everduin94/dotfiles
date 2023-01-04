@@ -30,8 +30,7 @@ require("typescript").setup({
     capabilities = capabilities,
     on_attach = function(client)
       -- let prettier do the formatting
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
+      client.server_capabilities.documentFormattingProvider = false
     end
   }
 })

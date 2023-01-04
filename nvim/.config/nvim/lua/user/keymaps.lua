@@ -233,7 +233,7 @@ lspMap("gle", "lua vim.lsp.buf.hover()", "Hover")
 lspMap("glw", "lua vim.lsp.buf.signature_help()", "Signature Popup")
 lspMap("glr", "lua vim.lsp.buf.rename()", "Rename")
 lspMap("glc", "lua vim.lsp.buf.code_action()", "Code Action")
-leaderMap('is', "lua require('typescript').actions.addMissingImports({ sync = true }); require('typescript').actions.removeUnused(); vim.lsp.buf.formatting_sync(nil, 1000);", "Clean up - Format - Import")
+leaderMap('is', "lua require('typescript').actions.addMissingImports({ sync = true }); require('typescript').actions.removeUnused(); vim.lsp.buf.format();", "Clean up - Format - Import")
 lspMap("<C-p>", "lua vim.diagnostic.goto_next()", "Go to Next")
 lspMap("<C-n>", "lua vim.diagnostic.goto_prev()", "Go to Previous")
 -- { sync = true } is required because if import and format happen at the same time it shits its pants

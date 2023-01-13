@@ -25,9 +25,32 @@ alias p='lua_cd od'
 alias pn='lua_nvim od'
 alias pt='lua_tmux od'
 
+# DAC is part of the name of the speaker
+# You could do this as 1 command, but you can't say get 1 character, because then it breaks on double digits
+# i.e. redo this in lua
+alias dac='var=$(pactl list sinks short | grep -i DAC)'
+alias dacc='pactl set-default-sink ${var::1}'
+
+
 # TODO: Investigate $@ vs "$@" for N number of args
 lua_cd () { cd $(l $1 $2) }
 lua_nvim () { cd $(l $1 $2) && n }
+vid_gif () { ffmpeg -i $1 -vf "fps=16,scale=828:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 $2 }
+snail () {
+ sudo xkeysnail config.py --quiet &
+ export SNAIL_ID=$!
+ sleep 3 & 
+ wait $!
+ xset r rate 210 40
+ setxkbmap -option caps:escape
+}
+
+temp_test () {
+ sleep 1 & 
+ wait $!
+ xset r rate 210 40
+ setxkbmap -option caps:escape
+}
 
 # Learning
   # You probably don't need these as much as you think

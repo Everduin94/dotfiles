@@ -82,7 +82,7 @@ window:
 #    y: 0
 #  decorations: none
 #  opacity: .9
-  decorations: buttonless
+  decorations: None
   opacity: .9
 
 

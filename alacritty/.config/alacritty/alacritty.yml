@@ -45,8 +45,8 @@ import:
 #     - { index: 17, color: '0xdb4b4b' }
 
 mouse:
-    hide_when_typing: true
-    
+  hide_when_typing: true
+
 font:
   normal:
     family: "Hack Nerd Font"
@@ -76,15 +76,14 @@ window:
     x: 0
     y: 0
 
-# window:
-#  padding:
-#    x: 0
-#    y: 0
-#  decorations: none
-#  opacity: .9
+  # window:
+  #  padding:
+  #    x: 0
+  #    y: 0
+  #  decorations: none
+  #  opacity: .9
   decorations: None
   opacity: .9
-
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -111,4 +110,3 @@ key_bindings:
   - { key: F2, action: DecreaseFontSize }
   - { key: F3, action: ResetFontSize }
 # - { key: N, mods: Control, action: SpawnNewInstance }
-

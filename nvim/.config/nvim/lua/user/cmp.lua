@@ -13,8 +13,13 @@ require("luasnip/loaders/from_vscode").load { paths = '~/.config/nvim/snips' }
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered("rounded"),
+  },
   formatting = {
-    format = lspKind.cmp_format({with_text = true, maxwidth = 150})
+    format = lspKind.cmp_format({with_text = true, maxwidth = 150,
+  })
   },
   snippet = {
     expand = function(args)

@@ -6,6 +6,10 @@ vim.cmd [[
     " no smart s
   let g:sneak#s_next = 0
 
+  let g:dbs = {
+  \  'dev': 'postgresql://localhost:5432/mydb'
+  \ }
+
     " remap so I can use , and ; with f and t
   map gS <Plug>Sneak_,
   map gs <Plug>Sneak_;

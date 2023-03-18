@@ -66,6 +66,10 @@ return packer.startup(function(use)
   use "lukas-reineke/indent-blankline.nvim"
   use "Pocco81/true-zen.nvim"
   use "folke/twilight.nvim"
+  -- DATABASE
+  use "tpope/vim-dadbod"
+  use "kristijanhusak/vim-dadbod-ui"
+
 
   -- CMP
   use "hrsh7th/nvim-cmp"  -- completion
@@ -78,8 +82,13 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "onsails/lspkind-nvim"
+
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  -- "WhoIsSethDaniel/mason-tool-installer.nvim",
+  -- "jay-babu/mason-null-ls.nvim",
   use "jose-elias-alvarez/typescript.nvim"
+  use "williamboman/mason.nvim"
+
   -- Snippets
   use "L3MON4D3/LuaSnip"
   -- Colorschemes
@@ -91,13 +100,14 @@ return packer.startup(function(use)
   -- use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
   use "nvim-telescope/telescope-ui-select.nvim"
   -- File Tree
-  use "kyazdani42/nvim-tree.lua"
+  use {"kyazdani42/nvim-tree.lua", commit = "f3b7372"}
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
   use "nvim-treesitter/playground"
+  use "windwp/nvim-ts-autotag"
 
   -- use "nvim-treesitter/nvim-treesitter-angular"
   -- use "JoosepAlviste/nvim-ts-context-commentstring"

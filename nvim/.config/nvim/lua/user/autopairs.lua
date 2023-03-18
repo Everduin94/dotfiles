@@ -12,6 +12,7 @@ npairs.setup {
     java = false,
   },
   disable_filetype = { "TelescopePrompt" },
+  
 }
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"

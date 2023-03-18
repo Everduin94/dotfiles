@@ -6,7 +6,7 @@ local M = {}
   -- ex: if you write 4 tmux.send, it will print result of each one. Then run each one.
 function M.send(cmd, session, window)
   local loc = '"=' .. session .. ':=' .. window .. '"'
-  os.execute('tmux send-keys -t ' .. loc .. ' "' .. cmd .. '" Enter')
+  os.execute('tmux send-keys -t ' .. loc .. ' Escape ' .. ' "' .. cmd .. '" Enter')
 end
 
 function M.new_session(name, window_name)
@@ -22,6 +22,13 @@ end
 
 function M.attach(session)
   os.execute('TERM=xterm-256color tmux -2 attach -t "=' .. session .. '"')
+end
+
+function M.refresh(env)  
+  local sesh = env
+  local noteWindow = 'Notes'
+  M.send(':qa', sesh, noteWindow)
+  M.send('n', sesh, noteWindow)
 end
 
 function M.init(env)

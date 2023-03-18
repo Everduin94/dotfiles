@@ -39,6 +39,8 @@ local function run(...)
     end
   elseif program == 'od' then
     return fu.open_dir(args[2])
+  elseif program == 'refresh' then
+    return tu.refresh('DEV')
   elseif program == 'n-major' then
     return fGenerator.major_node(arg[2])
   elseif program == 'n-minor' then

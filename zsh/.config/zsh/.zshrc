@@ -95,7 +95,8 @@ compinit
 # bindkey '^e' edit-command-line
 
 # Speedy keys
-setxkbmap -option caps:escape
+# TODO: I'm pretty sur we do this with snail anyway
+# setxkbmap -option caps:escape
 
 # Environment variables set everywhere
 export EDITOR="nvim"
@@ -115,4 +116,12 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 # fnm
 export PATH=/home/erik/.local/bin:$PATH
-eval "`fnm env`"
+
+
+# TODO: I have no idea what this even does
+# eval "`fnm env`"
+
+# pnpm
+export PNPM_HOME="/Users/everduin/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

@@ -71,7 +71,13 @@ keymap("o", "L", "$", opts)
 keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 keymap("n", "<C-s>", ":wa<CR>", opts)
+keymap("n", "<C-x>", ":qa!<CR>", opts)
 
+  -- Close, but doesn't handle copy from outside
+-- keymap("v", "p", '"0p', opts)
+-- keymap("v", "P", '"0P', opts)
+-- keymap("n", "p", '"0p', opts)
+-- keymap("n", "P", '"0P', opts)
 
   -- Opposite day
 keymap("n", "j", "<Up>", opts)
@@ -156,13 +162,11 @@ luaMap('tc', 'harpoon.cmd-ui', 'toggle_quick_menu()')
 luaMap('t1', 'harpoon.term', 'gotoTerminal(1)')
 luaMap('t2', 'harpoon.term', 'gotoTerminal(2)')
 luaMap('t3', 'harpoon.term', 'gotoTerminal(3)')
-
-  -- ToggleTerm
-leaderMap('tn', 'lua _NODE_TOGGLE()', "Node")
-leaderMap('tc', 'lua _NG_SERVE_TOGGLE()', "ng serve")
-leaderMap('tj', 'lua _JEST_TOGGLE()', "Jest")
-leaderMap('ts', 'lua _GIT_SYNC_TOGGLE()', "Git Sync")
-leaderMap('t6', 'lua _CWD_TOGGLE()', "CWD")
+luaMap('t4', 'harpoon.term', 'gotoTerminal(4)')
+luaMap('t6', 'harpoon.term', 'sendCommand(1, "<C-c>npm run dev")')
+luaMap('t7', 'harpoon.term', 'sendCommand(1, "<C-c>npm run build")')
+luaMap('t8', 'harpoon.term', 'sendCommand(2, "<C-c>npm run test")')
+luaMap('t9', 'harpoon.term', 'sendCommand(3, "<C-c>l init")')
 
 -- Codi
 leaderMap('toc', 'Codi!!', "Toggle Codi")

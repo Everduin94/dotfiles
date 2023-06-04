@@ -22,6 +22,7 @@ alias video_to_gif='function video_to_gif(){ ffmpeg -i $1 output.gif && gifsicle
 # Bash Scripts
 # alias p='dirs=`envsubst < ~/projects` && dir=`echo "$dirs" | fzf` && cd "$dir"'
 alias p='lua_cd od'
+alias pv='l ov'
 alias pn='lua_nvim od'
 alias pt='lua_tmux od'
 

@@ -166,7 +166,7 @@ _G.packer_plugins = {
   },
   ["mason.nvim"] = {
     loaded = true,
-    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
   ["md-img-paste.vim"] = {
@@ -236,7 +236,7 @@ _G.packer_plugins = {
   },
   ["nvim-ts-autotag"] = {
     loaded = true,
-    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
   },
   ["nvim-web-devicons"] = {
@@ -321,12 +321,12 @@ _G.packer_plugins = {
   },
   ["vim-dadbod"] = {
     loaded = true,
-    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/vim-dadbod",
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-dadbod",
     url = "https://github.com/tpope/vim-dadbod"
   },
   ["vim-dadbod-ui"] = {
     loaded = true,
-    path = "/Users/everduin/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui",
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui",
     url = "https://github.com/kristijanhusak/vim-dadbod-ui"
   },
   ["vim-fugitive"] = {

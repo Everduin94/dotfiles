@@ -88,11 +88,37 @@ function M.open_dir(option)
   local t = f:read("*all")
   f:close()
 
+-- function M.escape(...)
+--  local command = type(...) == 'table' and ... or { ... }
+--  for i, s in ipairs(command) do
+--   s = (tostring(s) or ''):gsub('"', '\\"')
+--   if s:find '[^A-Za-z0-9_."/-]' then
+--    s = '"' .. s .. '"'
+--   elseif s == '' then
+--    s = '""'
+--   end
+--   command[i] = s
+--  end
+--  return table.concat(command, ' ')
+-- end
+
   local noArgs = option == nil or option:match("^%s*(.-)%s*$") == ''
   local query = noArgs and '' or ' --filter=' .. option:match("^%s*(.-)%s*$")
   local result = M.readAll('echo ' .. M.escape(t) .. ' | fzf' .. query)
   return result
 end
+
+
+function M.open_dir_vim()
+  local home = os.getenv('HOME')
+  local f = assert(io.open(home .. '/projects', "r"))
+  local t = f:read("*all")
+  f:close()
+  local result = M.readAll('echo ' .. M.escape(t) .. ' | fzf')
+  vim.cmd('cd ' .. result)
+  return result
+end
+
 
 -- Learning
   -- sub is inclusive. (1, -2), means grab from first character, to the second to last character.

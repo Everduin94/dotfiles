@@ -39,6 +39,8 @@ local function run(...)
     end
   elseif program == 'od' then
     return fu.open_dir(args[2])
+  elseif program == 'ov' then
+    return fu.open_dir_vim()
   elseif program == 'refresh' then
     return tu.refresh('DEV')
   elseif program == 'n-major' then

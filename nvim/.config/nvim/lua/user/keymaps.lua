@@ -34,6 +34,41 @@ local function lspMap(key, fn, desc)
   NORMAL_MAPS[key] = { "<cmd>" .. fn .. "<cr>", desc }
 end
 
+local function escape(...)
+ local command = type(...) == 'table' and ... or { ... }
+ for i, s in ipairs(command) do
+  s = (tostring(s) or ''):gsub('"', '\\"')
+  if s:find '[^A-Za-z0-9_."/-]' then
+  s = '"' .. s .. '"'
+  elseif s == '' then
+   s = '""'
+  end
+  command[i] = s
+ end
+ return table.concat(command, ' ')
+end
+
+function ev_selection()
+  local home = os.getenv('HOME')
+  local f = assert(io.open(home .. '/projects', "r"))
+  local l = f:lines()
+  local arr = {}
+  for line in l do
+     table.insert (arr, line);
+  end
+  f:close()
+  return vim.ui.select(
+    arr,
+    { prompt = 'Projects:', format_item = function(item) return os.getenv(item:sub(2)) end, },
+    function(choice) if choice then vim.cmd('cd ' .. os.getenv(choice:sub(2))) end end
+  )
+end
+
+
+leaderMap("pn", "lua " .. "ev_selection()", "CWD")
+
+
+
 -- MAPPINGS
 -- Leader
 keymap("", "<Space>", "<Nop>", opts)
@@ -151,7 +186,7 @@ luaMap('q', 'harpoon.ui', 'toggle_quick_menu()')
 -- Misc
 -- leaderMap('q', 'w\\|bd', "") -- I think the problem is \ was meant to dereference |
 leaderMap('/', 'noh', "Clear Highlights")
-leaderMap('ttj', 'e temp.js | Codi', "Codi Javascript")
+leaderMap('tj', 'e temp.js | Codi', "Codi Javascript")
 keymap("n", "<leader>k", "K", opts)
 keymap('n', '<leader>j', "J", opts)
 
@@ -183,7 +218,7 @@ luaMap('pb', 'telescope.builtin', 'buffers()')
 luaMap('p*', 'telescope.builtin', 'grep_string()')
 luaMap('po', 'telescope.builtin', 'find_files({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] })', 'Find Files(Git Root)')
 luaMap('pg', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }', 'Grep(Git Root)' )
-luaMap('pn', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes" }',  'Grep(Notes)')
+-- luaMap('pn', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes" }',  'Grep(Notes)')
 luaMap('pc', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes/creative-work/cheatsheets" }', 'Grep(Cheatsheets)')
 luaMap('pl', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , glob_pattern = "' .. grepFilter .. '" }', 'Grep(Nx Libs)' )
 -- luaMap('pL', 'telescope.builtin', 'find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , find_command = ' .. fileFilter .. ' }', 'Find File(Nx Libs)' )

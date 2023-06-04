@@ -18,6 +18,9 @@ export WS_ALACRITTY=$HOME/.config/alacritty
 export WS_DOTFILES=$HOME/dotfiles
 export WS_SNIPPETS_FILE=$HOME/.config/nvim/lua/luasnip-config.lua
 
+eval "$(fnm env)"
+
+
 # Misc
 HISTSIZE=1000000
 SAVEHIST=1000000

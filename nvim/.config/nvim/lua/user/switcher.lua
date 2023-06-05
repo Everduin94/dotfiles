@@ -35,3 +35,28 @@ keymap("n", "<leader>orw", "<cmd>:lua require('nvim-quick-switcher').find('*stor
 keymap("n", "<leader>orf", "<cmd>:lua require('nvim-quick-switcher').find('*facade.ts')<CR>", opts)
 keymap("n", "<leader>ors", "<cmd>:lua require('nvim-quick-switcher').find('.+query.ts|.+selectors.ts|.+selector.ts', { regex = true })<CR>", opts)
 keymap("n", "<leader>orr", "<cmd>:lua require('nvim-quick-switcher').find('.+reducer.ts|.+repository.ts', { regex = true })<CR>", opts)
+
+-- Test New Feature
+-- Call print(vim.inspect(p)) to see what I return
+
+local find_test_fn = [[function (p) local path = p.path; local file_name = p.prefix; local result = path:gsub('src', 'test') .. '/' .. file_name .. '*'; return result; end]]
+local find_src_fn = [[function (p) local path = p.path; local file_name = p.prefix; local result = path:gsub('test', 'src') .. '/' .. file_name .. '*'; return result; end]]
+keymap("n", "<leader>ojj", "<cmd>:lua require('nvim-quick-switcher').v2_find(" .. find_test_fn .. ")<CR>", opts)
+keymap("n", "<leader>ojk", "<cmd>:lua require('nvim-quick-switcher').v2_find(" .. find_src_fn .. ")<CR>", opts)
+
+
+-- These are just examples, the string function is hard to read.
+-- And if you pass in with new lines it will break 
+local ex_find_test_fn = function (p)
+  local path = p.path;
+  local file_name = p.prefix;
+  local result = path:gsub('src', 'test') .. '/' .. file_name .. '*';
+  return result;
+end
+
+local find_src_fn = function (p)
+  local path = p.path;
+  local file_name = p.prefix;
+  local result = path:gsub('test', 'src') .. '/' .. file_name .. '*';
+  return result;
+end

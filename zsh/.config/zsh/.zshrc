@@ -117,7 +117,6 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # fnm
 export PATH=/home/erik/.local/bin:$PATH
 
-
 # TODO: I have no idea what this even does
 # eval "`fnm env`"
 

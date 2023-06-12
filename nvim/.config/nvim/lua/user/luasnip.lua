@@ -180,6 +180,8 @@ ls.add_snippets("all", {
       t({"", "```", ""}),
       t({"", "```", ""}),
     }),
+    s("info", fmt('<details class="info" open>\n<summary>{X}</summary>\n\n{fin}\n\n</details>', {X = i(1), fin = i(0)})),
+    s("info-cornell", fmt('<details class="cornell" open>\n<summary>{X}</summary>\n\n| key | description |\n| --- | ---------- |\n|{fin}   |      |\n\n Summary\n\n```\n```\n\n</details>', {X = i(1), fin = i(0)})),
   }, { key = 'all'})
 
 ls.add_snippets("lua", {
@@ -256,6 +258,18 @@ ls.add_snippets("typescript", {
     s("actionInit", { t("export const "), i(1), t("Actions = "), t("actionsFactory('"), same(1), t("')") })
   }, { key = 'typescript' })
 
+ls.add_snippets("svelte", {
+  s("configurable_state", fmt('export let {X}: any;{fin}', {X = i(1), fin = i(0)})),
+  s("two_way_state", fmt('type {X} = {{}} \nconst {Y} = {fin}writable<{X}>();', {X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
+  s("derive_state", fmt('$: {X} = update_{X}({Y})\n function update_{X}({Y}) {{ \n\n{fin} }}   ', {X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
+  s("derive_class", fmt('$: {X} = class_{X}({Y})\n function class_{X}({Y}) {{ \n\n{fin} }}\n\n class={{`${X}`}}',{X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
+  s("destructure_data", fmt('export let data;\n\n $: ({{ {fin} }} = data);', {fin = i(0)})),
+  s("event_click", fmt('function event_{X} ({Y}) {{ \n\n {fin} }}\n\n on:click={{() => event_{X}({Y}) }}', {X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
+})
+
+
+-- 
+	
 
 ls.add_snippets("html", {
     s("glue-b", fmt('<glue-button [glue]="{statement}" {fin}></glue-button>', {statement = i(1), fin = i(0)})),

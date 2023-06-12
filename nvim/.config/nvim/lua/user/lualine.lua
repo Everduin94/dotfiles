@@ -1,5 +1,12 @@
 local mocha = require("catppuccin.palettes").get_palette "mocha"
 
+local cat = require'lualine.themes.catppuccin'
+cat.normal.c = { bg = '#181825', fg = mocha.text}
+cat.inactive.a = { bg = '#181825', fg = mocha.blue}
+cat.inactive.b = { bg = '#181825', fg = mocha.surface, gui ="bold" }
+cat.inactive.c = { bg = '#181825', fg = mocha.overlay0 }
+
+
 local file_to_color = {
   lualine = mocha.mauve,
   cmp = mocha.teal,
@@ -250,6 +257,7 @@ end
 sections = { lualine_a = { hello } }
 require'lualine'.setup {
   options = {
+    theme = cat,
     icons_enabled = true,
     component_separators = { left = '', right = ''},
      section_separators = { left = '', right = '' },

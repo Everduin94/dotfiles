@@ -4,7 +4,7 @@ require("catppuccin").setup({
         light = "latte",
         dark = "mocha",
     },
-    transparent_background = false,
+    transparent_background = true,
     term_colors = false,
     dim_inactive = {
         enabled = false,
@@ -16,8 +16,8 @@ require("catppuccin").setup({
     styles = {
         comments = { "italic" },
         conditionals = { "italic" },
-        loops = {},
-        functions = {},
+        loops = { "italic" },
+        functions = { "italic" },
         keywords = {},
         strings = {},
         variables = {},

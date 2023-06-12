@@ -9,8 +9,6 @@ function M.cssPropsToCustom(fileName)
 end
 
 
-
-
 local NOTES_MODULE_FILES = {
   '.index.md',
   '.maps.md',

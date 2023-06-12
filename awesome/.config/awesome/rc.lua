@@ -595,6 +595,9 @@ clientkeys = mytable.join(
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
+    -- "Pin" to top 
+    awful.key({ modkey,           }, "p",      function (c) c.sticky = not c.sticky end,
+              {description="Pin to top", group="awesome"}),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be

@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
+  ["bigfile.nvim"] = {
+    loaded = true,
+    path = "/home/erik/.local/share/nvim/site/pack/packer/start/bigfile.nvim",
+    url = "https://github.com/LunarVim/bigfile.nvim"
+  },
   catppuccin = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -218,11 +223,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/erik/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-quick-switcher"] = {
-    loaded = true,
-    path = "/home/erik/.local/share/nvim/site/pack/packer/start/nvim-quick-switcher",
-    url = "https://github.com/Everduin94/nvim-quick-switcher"
   },
   ["nvim-tree.lua"] = {
     loaded = true,

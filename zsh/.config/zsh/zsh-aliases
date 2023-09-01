@@ -33,6 +33,13 @@ alias pt='lua_tmux od'
 alias dac='var=$(pactl list sinks short | grep -i DAC)'
 alias dacc='pactl set-default-sink ${var::1}'
 
+# Misc
+sv () { 
+  dirs=$1
+  cd ~/dev && npm create svelte@latest "$dirs" && cd "$dirs" && npm install
+}
+ 
+
 
 # TODO: Investigate $@ vs "$@" for N number of args
 lua_cd () { cd $(l $1 $2) }

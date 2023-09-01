@@ -4,7 +4,7 @@
 # / ___ |/ /___/ ___ / /___/ _, _// /  / /   / /     / /
 #/_/  |_/_____/_/  |_\____/_/ |_/___/ /_/   /_/     /_/
 #
-      
+
 import:
   - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml

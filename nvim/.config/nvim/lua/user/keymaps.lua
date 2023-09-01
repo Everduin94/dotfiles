@@ -63,11 +63,32 @@ function ev_selection()
     function(choice) if choice then vim.cmd('cd ' .. os.getenv(choice:sub(2))) end end
   )
 end
+ 
+function go_to_alias(file_path)
+  local home = os.getenv('HOME')
+  local full_path = home .. '/' .. file_path
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  local path_file_name = file_path:match('.+/(.+)$') or file_path
+  local file_name = buf_name:match('.+/(.+)$')
+  if file_name == path_file_name then
+    vim.api.nvim_command('close')
+  else
+    vim.api.nvim_command('vsp ' .. full_path)
+  end
+end
 
-
+leaderMap("/a", "lua go_to_alias('.config/zsh/zsh-aliases')", "Zsh Alias")
+leaderMap("/e", "lua go_to_alias('.config/zsh/zsh-exports')", "Zsh Exports")
+leaderMap("/s", "lua go_to_alias('.config/nvim/lua/user/luasnip.lua')", "Snippets")
+leaderMap("/p", "lua go_to_alias('/projects')", "Projects")
 leaderMap("pn", "lua " .. "ev_selection()", "CWD")
 
-
+vim.keymap.set('n', '<C-/>', 
+    function()
+        local result = vim.treesitter.get_captures_at_cursor(0)
+        print(vim.inspect(result))
+    end,
+opts)
 
 -- MAPPINGS
 -- Leader
@@ -157,7 +178,7 @@ luaMap('du', 'dapui', 'toggle()')
 -- Git
 leaderCategory('g', '+Git')
   -- Git Signs
-luaMap('gk', 'gitsigns', 'next_hunk()')
+-- luaMap('gk', 'gitsigns', 'next_hunk()')
 luaMap('gj', 'gitsigns', 'prev_hunk()')
 luaMap('gu', 'gitsigns', 'reset_hunk()')
 luaMap('gp', 'gitsigns', 'preview_hunk()')
@@ -185,13 +206,13 @@ luaMap('q', 'harpoon.ui', 'toggle_quick_menu()')
 
 -- Misc
 -- leaderMap('q', 'w\\|bd', "") -- I think the problem is \ was meant to dereference |
-leaderMap('/', 'noh', "Clear Highlights")
-leaderMap('tj', 'e temp.js | Codi', "Codi Javascript")
 keymap("n", "<leader>k", "K", opts)
 keymap('n', '<leader>j', "J", opts)
 
 -- Terminal
 leaderCategory('t', '+Terminal')
+leaderMap('t/', 'noh', "Clear Highlights")
+leaderMap('tj', 'e temp.js | Codi', "Codi Javascript")
   -- Harpoon
 luaMap('tc', 'harpoon.cmd-ui', 'toggle_quick_menu()')
 luaMap('t1', 'harpoon.term', 'gotoTerminal(1)')

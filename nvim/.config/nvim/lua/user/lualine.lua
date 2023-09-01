@@ -70,9 +70,72 @@ local function is_repository(file) return includes(file, 'repository') end
 local function is_store(file) return includes(file, 'store') end
 
 
+local sub_mode = 'Buffer'
+
+-- Sub mode
+
+-- Git
+vim.keymap.set('n', '<leader>gk', 
+    function()
+      require('gitsigns').next_hunk()
+      vim.keymap.set('n', '<TAB>', '<cmd>lua require([[gitsigns]]).next_hunk() <CR>')
+      vim.keymap.set('n', '<S-TAB>', '<cmd>lua require([[gitsigns]]).prev_hunk() <CR>')
+      sub_mode = 'Git'
+    end,
+opts)
+
+-- Diagnostic
+vim.keymap.set('n', '<leader>gn', 
+    function()
+      vim.diagnostic.goto_next()
+      vim.keymap.set('n', "<TAB>", "<cmd>lua vim.diagnostic.goto_next() <CR>")
+      vim.keymap.set('n', "<S-TAB>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+      sub_mode = 'Diagnostic'
+    end,
+opts)
+
+-- Quick Fix
+vim.keymap.set('n', '<leader>gx', 
+    function()
+      vim.api.nvim_command('copen')
+      vim.keymap.set('n', '<TAB>', '<cmd>cn<CR>zz')
+      vim.keymap.set('n', '<S-TAB>', '<cmd>cp<CR>zz')
+      sub_mode = 'Quick Fix'
+    end,
+opts)
+
+-- Clear
+vim.keymap.set('n', '<leader>g/', 
+    function()
+      vim.keymap.set('n', '<TAB>', '<cmd>bnext<CR>')
+      vim.keymap.set('n', '<S-TAB>', '<cmd>bprevious<CR>')
+      sub_mode = 'Buffer'
+    end,
+opts)
+
+-- Spellcheck
+vim.keymap.set('n', '<leader>gs', 
+    function()
+      vim.api.nvim_feedkeys(']s', 'n', false)
+      vim.keymap.set('n', '<TAB>', ']s')
+      vim.keymap.set('n', '<S-TAB>', '[s')
+      sub_mode = 'Spellcheck'
+    end,
+opts)
+
+-- vim.keymap.set('n', '<leader>gk', 
+--     function()
+--       require('gitsigns').next_hunk()
+--       vim.keymap.set('n', '<TAB>', '<cmd>lua require([[gitsigns]]).next_hunk() <CR>')
+--       vim.keymap.set('n', '<S-TAB>', '<cmd>lua require([[gitsigns]]).prev_hunk() <CR>')
+--       sub_mode = 'Git'
+--     end,
+-- opts)
+
+
 -- Autocmd Test
 local SWITCHER_TAGS = {
-  title = '',
+  titl = '',
   color = mocha.red,
   has_entry = nil,
 }
@@ -89,7 +152,7 @@ local function write_file_name()
 
    if is_svelte_kit_route(all_file_parts) then
      SWITCHER_TAGS.title = reverse_find_svelte_page_title(all_file_parts)
-     SWITCHER_TAGS.color = mocha.peach
+     SWITCHER_TAGS.color = mocha.teal
   elseif is_styles(file_parts) then
      SWITCHER_TAGS.title = 'Styles'
      SWITCHER_TAGS.color = mocha.sky
@@ -178,11 +241,11 @@ local function randomColor()
 end
 
 local function getFileColor()
-  local fg_color = mocha.text
+  local fg_color = mocha.overlay1
   if is_focus == 'Focus' then
     fg_color = mocha.teal
   end
-  return { fg = fg_color }
+  return { fg = fg_color, bg = '#181825' }
 end
 
 
@@ -200,7 +263,7 @@ local colors = {
   red      =  mocha.red,
 }
 
-local function getModeColor()
+local function getModeColor(fg)
     -- auto change color according to neovims mode
     local mode_color = {
       n = colors.blue,
@@ -224,8 +287,20 @@ local function getModeColor()
       ['!'] = colors.red,
       t = colors.orange,
     }
-    return { fg = mode_color[vim.fn.mode()], bg='#181825', gui='italic,bold' }
+    if fg then
+      return { bg = mode_color[vim.fn.mode()], fg='#11111b', gui='bold' }
+    end
+
+    return { fg = mode_color[vim.fn.mode()], bg=mocha.surface0, gui='bold' }
   end
+
+local function get_sub_mode_color() 
+    local sub_mode_color = {
+      Git = colors.green,
+      Buffer = colors.blue
+    }
+    return { fg = sub_mode_color[sub_mode], bg='#11111b', gui='italic,bold' }
+end
 
 local conditions = {
   buffer_not_empty = function()
@@ -254,28 +329,49 @@ end
 -- {hello, color={ bg='#181825', fg=mocha.teal, gui='bold'}, cond = function() if is_focus == 'Focus' then return true end end }
 
 
+local function get_mode_icon()
+  if sub_mode == 'Buffer' then
+    return '󰀘'
+  end
+  if sub_mode == 'Quick Fix' then
+    return ''
+  end
+  if sub_mode == 'Git' then
+    return ''
+  end
+  if sub_mode == 'Diagnostic' then
+    return '󱩔'
+  end
+  if sub_mode == 'Spellcheck' then
+    return '󰓆'
+  end
+end
+
 sections = { lualine_a = { hello } }
 require'lualine'.setup {
   options = {
     theme = cat,
     icons_enabled = true,
     component_separators = { left = '', right = ''},
-     section_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {},
     always_divide_middle = false,
   },
   sections = {
-    lualine_a = {{'mode',  color = function() return getModeColor() end, padding = { left = 2, right = 2} }},
-    lualine_b =  {} ,
-    lualine_c = {'%=', {'filetype', icon_only = true, padding = {right = 0}, cond = conditions.buffer_not_empty}, {'filename', color = function() return getFileColor() end, cond = conditions.buffer_not_empty, symbols = {modified = '●'}}, {get_file_name, color= function() return get_color_name() end, cond = function() if SWITCHER_TAGS.has_entry == true then return true end end } },
+    -- padding = { left = 2, right = 2} 󰝴
+    lualine_a = {{'mode', fmt = function(str) return get_mode_icon() end,  color = function() return getModeColor('fg') end, padding = { right = 2, left = 1}  }, {'branch', fmt = function(str) local parts = vim.fn.split(str, '/', true); return parts[#parts] end, color = function() return getModeColor() end, padding = {left = 1, right = 1} }},
+    -- lualine_b =  {} ,
+    lualine_b = {{'filetype', icon_only = true, padding = {right = 0, left = 1}, cond = conditions.buffer_not_empty, color = {bg = '#181825'}}, {'filename', color = function() return getFileColor() end, cond = conditions.buffer_not_empty, symbols = {modified = '●'}}, {get_file_name, color= function() return get_color_name() end, cond = function() if SWITCHER_TAGS.has_entry == true then return true end end } },
+    lualine_c = {'%='},
     -- lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_x = {},
     -- lualine_x = {{ hello, color = {fg = '#111111', bg = randomColor() }}},
     -- lualine_x = {  {hello(tempState), color = randomColor } },
     -- lualine_y = {'progress'},
     lualine_y = {},
-    -- lualine_z = {'location'}
-    lualine_z = {{'branch', fmt = function(str) local parts = vim.fn.split(str, '/', true); return parts[#parts] end, color = { fg=colors.blue, bg = '#181825' }, padding = {left = 1, right = 2} }},
+    lualine_z = {  }
+-- {'custom', fmt = function(str) return sub_mode end, color = function() return get_sub_mode_color() end}
+    -- lualine_b = {{'branch', fmt = function(str) local parts = vim.fn.split(str, '/', true); return parts[#parts] end, color = function() return getModeColor() end, padding = {left = 1, right = 2} }},
   },
   inactive_sections = {
     lualine_a = {},

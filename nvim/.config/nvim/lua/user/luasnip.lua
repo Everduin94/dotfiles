@@ -152,6 +152,9 @@ local arrayFns = function(args)
 end
 
 
+-- intersection obs
+local temp = 'const the_animation = document.querySelectorAll(".animation");{fin} const observer = new IntersectionObserver( (entries) => {{ entries.forEach((entry) => {{ if (entry.isIntersecting) {{ entry.target.classList.add("scroll-animation"); observer.unobserve(entry.target) }}  }}); }}, {{ threshold: 0.12 }}); for (let i = 0; i < the_animation.length; i++) {{ const elements = the_animation[i]; observer.observe(elements); }}'
+
 ls.add_snippets("all", {
     s("filename", { f(getFileName) }),
     s("indexn", {
@@ -265,7 +268,11 @@ ls.add_snippets("svelte", {
   s("derive_class", fmt('$: {X} = class_{X}({Y})\n function class_{X}({Y}) {{ \n\n{fin} }}\n\n class={{`${X}`}}',{X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
   s("destructure_data", fmt('export let data;\n\n $: ({{ {fin} }} = data);', {fin = i(0)})),
   s("event_click", fmt('function event_{X} ({Y}) {{ \n\n {fin} }}\n\n on:click={{() => event_{X}({Y}) }}', {X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
+  s("starter", fmt('<script lang="ts">{fin}</script>\n\n<div class="grid">Hello {X}</div>\n\n<style></style>', {X = f(getFileName), fin = i(0)}, {repeat_duplicates = true})),
+  s("intersectionobs", fmt(temp, {fin = i(0)}, {repeat_duplicates = true})),
 })
+
+
 
 
 -- 

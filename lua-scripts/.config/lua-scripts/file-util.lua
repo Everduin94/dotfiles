@@ -69,6 +69,10 @@ function M.escape(...)
  return table.concat(command, ' ')
 end
 
+function M.create_svelte_project(dir)
+    os.execute('cd ~/dev && npm create svelte@latest ' .. dir .. ' && cd ' .. dir .. ' && npm install')
+end
+
 -- Relies on lua_cd
 function M.open_dir(option)
   -- Learning

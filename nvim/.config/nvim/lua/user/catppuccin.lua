@@ -27,9 +27,34 @@ require("catppuccin").setup({
         types = {},
         operators = {},
     },
-    color_overrides = {},
-    custom_highlights = {},
-    integrations = {
+    color_overrides = {
+       all = {
+          base = "#000000",
+					mantle = "#000000",
+					crust = "#000000",      
+    },
+  },
+    custom_highlights = function(colors)
+        return {
+            TabLineSel = { bg = colors.pink },
+            CmpBorder = { fg = colors.surface2 },
+            Number = { fg = colors.sapphire },
+            Constant = { fg = colors.sapphire },
+          Boolean = {fg = colors.sapphire},
+      ["@parameter"] = { fg = colors.teal },
+      ["@constant"] = { fg = colors.sapphire },
+      ["@constant.builtin"] = { fg = colors.sapphire },
+      ["@function.builtin"] = { fg = colors.sapphire },
+      ["@variable.builtin"] = { fg = colors.pink },
+      ["@method.call"] = { fg = colors.pink },
+      ["@number.css"] = { fg = colors.sapphire },
+      ["@text.strong"] = { fg = colors.pink },
+      ["@type.builtin"] = { fg = colors.teal },
+      ["Type"] = { fg = colors.teal },
+      
+        }
+    end,
+  integrations = {
         cmp = true,
         gitsigns = true,
         nvimtree = true,
@@ -42,3 +67,5 @@ require("catppuccin").setup({
 
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
+
+

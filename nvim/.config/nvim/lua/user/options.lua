@@ -33,7 +33,9 @@ local options = {
  sidescrolloff = 8,                       -- NEW
  completeopt = { "menuone", "noselect" },
  laststatus = 3,
-}
+ showcmd = false,
+ spell = false,
+} 
 
 for k, v in pairs(options) do
   vim.opt[k] = v

@@ -69,3 +69,8 @@ vim.cmd [[
     " \ | highlight FloatBorder cterm=NONE gui=NONE guibg=NONE guifg=#7aa2f7
   augroup end
 ]]
+
+vim.api.nvim_create_autocmd({"BufWrite"}, {
+  pattern = {"+page.server.ts", "+page.ts", "+layout.server.ts", "+layout.ts"},
+  command = "LspRestart svelte",
+})

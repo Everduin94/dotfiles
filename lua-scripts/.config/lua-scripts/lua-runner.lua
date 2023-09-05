@@ -41,6 +41,8 @@ local function run(...)
     return fu.open_dir(args[2])
   elseif program == 'ov' then
     return fu.open_dir_vim()
+  elseif program == 'svelte' then
+    return fu.create_svelte_project(args[2])
   elseif program == 'refresh' then
     return tu.refresh('DEV')
   elseif program == 'n-major' then

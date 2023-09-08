@@ -82,6 +82,7 @@ leaderMap("/e", "lua go_to_alias('.config/zsh/zsh-exports')", "Zsh Exports")
 leaderMap("/s", "lua go_to_alias('.config/nvim/lua/user/luasnip.lua')", "Snippets")
 leaderMap("/p", "lua go_to_alias('/projects')", "Projects")
 leaderMap("pn", "lua " .. "ev_selection()", "CWD")
+leaderMap("/c", "PickColor", "Pick Color")
 
 vim.keymap.set('n', '<C-/>', 
     function()
@@ -175,6 +176,9 @@ luaMap('dl', 'dap', 'set_breakpoint(nil, nil, vim.fn.input("Log-ev: "))')
   -- UI
 luaMap('du', 'dapui', 'toggle()')
 
+-- SQL | DADBOD | DB
+leaderMap('/d', 'DBUI', 'Dadbod')
+
 -- Git
 leaderCategory('g', '+Git')
   -- Git Signs
@@ -255,6 +259,7 @@ luaMap('ptb', 'telescope.builtin', 'git_branches()')
 luaMap('ptc', 'telescope.builtin', 'git_commits()')
   -- Dashboard
 leaderMap('ps', 'Alpha', 'Dashboard')
+leaderMap('pq', 'Telescope luasnip', 'LuaSnip (Q)')
   -- Nvim Tree
 leaderMap("'", 'NvimTreeToggle', 'Explorer')
 

@@ -1,4 +1,5 @@
 local ls = require"luasnip"
+local sql = require'user.snippets.sql'
 local s = ls.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
@@ -26,7 +27,7 @@ ls.config.set_config {
     },
     [types.insertNode] = {
       active = {
-        virt_text = { { "", "DiagnosticHint" } },
+        virt_text = { { "", "DiagnosticHint" } },
       },
     },
   },
@@ -111,6 +112,8 @@ function today(args, snip, user_args1)
 end
 
 
+
+
 local rxjsOperators = function(args)
     if next(args) == nil or vim.fn.trim(args[1][2]) ~= '' and args[1][2] ~= nil then
       return sn(nil,  {newline(""), c(1, {t(nil), 
@@ -157,6 +160,11 @@ local temp = 'const the_animation = document.querySelectorAll(".animation");{fin
 
 ls.add_snippets("all", {
     s("filename", { f(getFileName) }),
+    s("sql_table_schema", fmt(sql.sql_table .. '{fin}', { fin = i(0)}) ),
+    s("sql_query_join", fmt(sql.sql_query_join .. '{fin}', { fin = i(0)}) ),
+    s("sql_query_array_lateral", fmt(sql.sql_query_array_lateral .. '{fin}', { fin = i(0)}) ),
+    s("sql_query_array_agg", fmt(sql.sql_query_array_agg .. '{fin}', { fin = i(0)}) ),
+    s("sql_function", fmt(sql.sql_function .. '{fin}', { fin = i(0)}) ),
     s("indexn", {
       f(getFileName),
       t({"", ""}),
@@ -184,7 +192,7 @@ ls.add_snippets("all", {
       t({"", "```", ""}),
     }),
     s("info", fmt('<details class="info" open>\n<summary>{X}</summary>\n\n{fin}\n\n</details>', {X = i(1), fin = i(0)})),
-    s("info-cornell", fmt('<details class="cornell" open>\n<summary>{X}</summary>\n\n| key | description |\n| --- | ---------- |\n|{fin}   |      |\n\n Summary\n\n```\n```\n\n</details>', {X = i(1), fin = i(0)})),
+    s({trig="info-cornell", dscr="This is my description, does this work?"}, fmt('<details class="cornell" open>\n<summary>{X}</summary>\n\n| key | description |\n| --- | ---------- |\n|{fin}   |      |\n\n Summary\n\n```\n```\n\n</details>', {X = i(1), fin = i(0)})),
   }, { key = 'all'})
 
 ls.add_snippets("lua", {

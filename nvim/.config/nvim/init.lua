@@ -36,3 +36,5 @@ require "user.lsp.tailwindcss-ls"
 require "user.lsp.astro-ls"
 require "user.lsp.svelte-ls"
 require "user.zen"
+-- Needs configured: can we remove file name? Can we style colors? Can we remove / trim css class (tailwind makes unreadable)?
+-- require "user.breadcrumbs"

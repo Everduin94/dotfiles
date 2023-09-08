@@ -10,6 +10,9 @@ local luasnip = require 'luasnip'
 local lspKind = require 'lspkind'
 require("luasnip/loaders/from_vscode").load { paths = '~/.config/nvim/snips' }
 
+
+-- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim - Mentions setting formatter, what.
+-- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim/issues/4
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
@@ -17,6 +20,7 @@ cmp.setup {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered("rounded"),
   },
+  
   formatting = {
     format = lspKind.cmp_format({with_text = true, maxwidth = 150,
   })
@@ -66,6 +70,7 @@ cmp.setup {
     { name = 'nvim_lsp',
     max_item_count = 100},
     { name = 'buffer' },
-    { name = 'path' }
+    { name = 'path' },
+    { name = 'vim-dadbod-completion' }
   },
 }

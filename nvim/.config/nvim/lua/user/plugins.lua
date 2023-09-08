@@ -52,16 +52,21 @@ return packer.startup(function(use)
   use "folke/which-key.nvim"
   use "norcalli/nvim-colorizer.lua"
   -- Maybe replace with FTerm?
-  use "akinsho/toggleterm.nvim"
+  -- use "akinsho/toggleterm.nvim"
   use "justinmk/vim-sneak"
   use "unblevable/quick-scope"
   use "metakirby5/codi.vim"
   use "tpope/vim-surround"
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "lewis6991/impatient.nvim" -- load lua modules faster 
-  -- use {"Everduin94/nvim-quick-switcher"}
+  use {"Everduin94/nvim-quick-switcher"}
+  use "roobert/tailwindcss-colorizer-cmp.nvim"
+  use "ziontee113/color-picker.nvim"
+  use "LunarVim/breadcrumbs.nvim"
+  use "SmiteshP/nvim-navic"
+
   -- use "tpope/vim-commentary"
-  use "machakann/vim-highlightedyank"
+  -- use "machakann/vim-highlightedyank"
   use "mattn/emmet-vim"
   use "ThePrimeagen/harpoon"
   use "lukas-reineke/indent-blankline.nvim"
@@ -70,6 +75,7 @@ return packer.startup(function(use)
   -- DATABASE
   use "tpope/vim-dadbod"
   use "kristijanhusak/vim-dadbod-ui"
+  use "kristijanhusak/vim-dadbod-completion"
 
 
   -- CMP
@@ -79,6 +85,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
@@ -88,16 +95,17 @@ return packer.startup(function(use)
   -- "WhoIsSethDaniel/mason-tool-installer.nvim",
   -- "jay-babu/mason-null-ls.nvim",
   use "jose-elias-alvarez/typescript.nvim"
-  use "williamboman/mason.nvim"
+  -- use "williamboman/mason.nvim"
 
   -- Snippets
   use "L3MON4D3/LuaSnip"
   -- Colorschemes
-  use "folke/tokyonight.nvim"
+  -- use "folke/tokyonight.nvim"
   use { "catppuccin/nvim", as = "catppuccin" }
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  use "benfowler/telescope-luasnip.nvim"
   -- use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
   use "nvim-telescope/telescope-ui-select.nvim"
   -- File Tree
@@ -116,14 +124,14 @@ return packer.startup(function(use)
   use "lewis6991/gitsigns.nvim"
   use "tpope/vim-fugitive"
     -- Github
-  use {
-    'pwntester/octo.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
-        'kyazdani42/nvim-web-devicons',
-      },
-  }
+  -- use {
+  --   'pwntester/octo.nvim',
+  --     requires = {
+  --       'nvim-lua/plenary.nvim',
+  --       'nvim-telescope/telescope.nvim',
+  --       'kyazdani42/nvim-web-devicons',
+  --     },
+  -- }
   -- Debugger
   use "mfussenegger/nvim-dap"
   use "Pocco81/DAPInstall.nvim"

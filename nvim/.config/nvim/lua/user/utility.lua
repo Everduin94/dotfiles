@@ -74,3 +74,11 @@ vim.api.nvim_create_autocmd({"BufWrite"}, {
   pattern = {"+page.server.ts", "+page.ts", "+layout.server.ts", "+layout.ts"},
   command = "LspRestart svelte",
 })
+
+-- au TextYankPost * silent! lua vim.highlight.on_yank()
+
+vim.api.nvim_create_autocmd({"TextYankPost"}, {
+  pattern = {"*"},
+  command = "lua vim.highlight.on_yank({timeout = 2000}) ",
+  
+})

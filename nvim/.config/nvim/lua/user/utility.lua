@@ -1,26 +1,26 @@
 vim.cmd [[
   " Sneak
-  let g:sneak#label = 1
+  " let g:sneak#label = 1
     " case insensitive sneak
-  let g:sneak#use_ic_scs = 1
+  " let g:sneak#use_ic_scs = 1
     " no smart s
-  let g:sneak#s_next = 0
+  " let g:sneak#s_next = 0
 
   let g:dbs = {
   \  'dev': 'postgresql://localhost:5432/mydb'
   \ }
 
     " remap so I can use , and ; with f and t
-  map gS <Plug>Sneak_,
-  map gs <Plug>Sneak_;
-  let g:sneak#prompt = '🔭 '
-
+  " map gS <Plug>Sneak_,
+  " map gs <Plug>Sneak_;
+  " let g:sneak#prompt = '🔭 '
   " Quick Scope
-  let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-  let g:qs_max_chars=150
-
+  " let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+  " let g:qs_max_chars=150
   " Codi
   highlight CodiVirtualText guifg=#73daca
+  highlight FlashMatch guifg=#73daca
+  highlight FlashBackdrop guifg=#111111
   let g:codi#virtual_text_prefix = "❯ "
   let g:codi#aliases = {
                      \ 'javascript.jsx': 'javascript',
@@ -75,10 +75,18 @@ vim.api.nvim_create_autocmd({"BufWrite"}, {
   command = "LspRestart svelte",
 })
 
+vim.api.nvim_create_autocmd({"ColorScheme"}, {
+  command = "highlight IncSearch  guifg=#7aa2f7 guibg=#181825",
+})
+vim.api.nvim_create_autocmd({"ColorScheme"}, {
+  command = "highlight FlashLabel guifg=#f38ba8 guibg=#181825",
+})
+
+-- #22da6e
 -- au TextYankPost * silent! lua vim.highlight.on_yank()
 
 vim.api.nvim_create_autocmd({"TextYankPost"}, {
   pattern = {"*"},
-  command = "lua vim.highlight.on_yank({timeout = 2000}) ",
+  command = "lua vim.highlight.on_yank({higroup='IncSearch', timeout = 2000}) ",
   
 })

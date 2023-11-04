@@ -46,6 +46,9 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "LunarVim/bigfile.nvim"
+  use "folke/flash.nvim"
+  use "SUSTech-data/wildfire.nvim"
+
   -- use "akinsho/bufferline.nvim"
   use "nvim-lualine/lualine.nvim"
   use "kyazdani42/nvim-web-devicons"
@@ -53,17 +56,12 @@ return packer.startup(function(use)
   use "norcalli/nvim-colorizer.lua"
   -- Maybe replace with FTerm?
   -- use "akinsho/toggleterm.nvim"
-  use "justinmk/vim-sneak"
-  use "unblevable/quick-scope"
   use "metakirby5/codi.vim"
-  use "tpope/vim-surround"
+  use "kylechui/nvim-surround"
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "lewis6991/impatient.nvim" -- load lua modules faster 
   use {"Everduin94/nvim-quick-switcher"}
   use "roobert/tailwindcss-colorizer-cmp.nvim"
-  use "ziontee113/color-picker.nvim"
-  use "LunarVim/breadcrumbs.nvim"
-  use "SmiteshP/nvim-navic"
 
   -- use "tpope/vim-commentary"
   -- use "machakann/vim-highlightedyank"

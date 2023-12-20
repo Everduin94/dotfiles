@@ -75,6 +75,29 @@ vim.api.nvim_create_autocmd({"BufWrite"}, {
   command = "LspRestart svelte",
 })
 
+vim.g.firenvim_config = {
+    globalSettings = { alt = "all" },
+    localSettings = {
+        [".*"] = {
+            cmdline  = "neovim",
+            content  = "text",
+            priority = 0,
+            selector = "textarea",
+            takeover = "never"
+        }
+    }
+}
+
+vim.api.nvim_create_autocmd({'UIEnter'}, {
+    callback = function(event)
+        local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
+        if client ~= nil and client.name == "Firenvim" then
+            vim.o.guifont = "DankMono Nerd Font:h24"
+      
+        end
+    end
+})
+
 vim.api.nvim_create_autocmd({"ColorScheme"}, {
   command = "highlight IncSearch  guifg=#7aa2f7 guibg=#181825",
 })

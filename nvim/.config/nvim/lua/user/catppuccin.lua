@@ -4,6 +4,7 @@ require("catppuccin").setup({
         light = "latte",
         dark = "mocha",
     },
+    -- How can we dynamically turn this off?
     transparent_background = true,
     term_colors = false,
     dim_inactive = {
@@ -27,13 +28,6 @@ require("catppuccin").setup({
         types = {},
         operators = {},
     },
-    color_overrides = {
-       all = {
-          base = "#000000",
-					mantle = "#000000",
-					crust = "#000000",      
-    },
-  },
     custom_highlights = function(colors)
         return {
             TabLineSel = { bg = colors.pink },

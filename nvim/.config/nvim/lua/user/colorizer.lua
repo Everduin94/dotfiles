@@ -11,8 +11,6 @@ require'colorizer'.setup(
 	  css_fn   = true;         -- Enable all CSS *functions*: rgb_fn, hsl_fn
   })
 
-
-require("color-picker").setup()
 require("tailwindcss-colorizer-cmp").setup({
   color_square_width = 2,
 })

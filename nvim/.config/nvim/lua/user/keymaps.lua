@@ -257,6 +257,11 @@ leaderCategory('pt', '+Git Telescope')
 luaMap('pts', 'telescope.builtin', 'git_status()')
 luaMap('ptb', 'telescope.builtin', 'git_branches()')
 luaMap('ptc', 'telescope.builtin', 'git_commits()')
+leaderMap('ptt', 'Telescope git_worktree', 'Git Worktrees')
+  -- <Enter> - switches to that worktree
+  -- <c-d> - deletes that worktree
+  -- <c-f> - toggles forcing of the next deletion
+
   -- Dashboard
 leaderMap('ps', 'Alpha', 'Dashboard')
 leaderMap('pq', 'Telescope luasnip', 'LuaSnip (Q)')
@@ -312,7 +317,8 @@ leaderMap("wp", "VimwikiFollowLink", "Folow link")
 leaderMap("wl", "VimwikiNextLink", "Next Link")
 leaderMap("wh", "VimwikiPrevLink", "Prev Link")
 leaderMap("wm", "VimwikiTable", "Create Table")
-leaderMap("wq", ":%bd", "Quit All")
+-- leaderMap("wq", ":%bd", "Quit All")
+leaderMap("wq", ":wq", "Save & Quit")
 
 which_key.register(NORMAL_MAPS, wopts)
 

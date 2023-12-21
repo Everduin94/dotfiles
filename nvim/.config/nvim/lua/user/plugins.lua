@@ -48,6 +48,10 @@ return packer.startup(function(use)
   use "LunarVim/bigfile.nvim"
   use "folke/flash.nvim"
   use "SUSTech-data/wildfire.nvim"
+  use {
+      'glacambre/firenvim',
+      run = function() vim.fn['firenvim#install'](0) end 
+  }
 
   -- use "akinsho/bufferline.nvim"
   use "nvim-lualine/lualine.nvim"
@@ -121,6 +125,7 @@ return packer.startup(function(use)
   -- Git
   use "lewis6991/gitsigns.nvim"
   use "tpope/vim-fugitive"
+  use "ThePrimeagen/git-worktree.nvim"
     -- Github
   -- use {
   --   'pwntester/octo.nvim',

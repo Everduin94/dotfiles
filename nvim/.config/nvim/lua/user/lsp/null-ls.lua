@@ -15,6 +15,7 @@ local code_actions = null_ls.builtins.code_actions
 null_ls.setup({
 	sources = {
 		formatting.prettierd,
+    diagnostics.eslint
 	},
   on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then

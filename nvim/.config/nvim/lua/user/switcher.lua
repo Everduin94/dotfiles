@@ -24,20 +24,35 @@ vim.keymap.set("n", "<leader>ol", find('*util.*', { prefix = 'short' }), opts)
 -- Tests
 vim.keymap.set("n", "<leader>ot", find('.+test|.+spec', { regex = true, prefix='full' }), opts)
 
--- Angular
-vim.keymap.set("n", "<leader>oy", find('.service.ts'), opts)
-vim.keymap.set("n", "<leader>ou", find('.component.ts'), opts)
-vim.keymap.set("n", "<leader>oo", find('.component.html'), opts)
-vim.keymap.set("n", "<leader>op", find('.module.ts'), opts)
 
--- SvelteKit
-vim.keymap.set("n", "<leader>oso", find('*page.svelte', { maxdepth = 1, ignore_prefix = true }), opts)
-vim.keymap.set("n", "<leader>osi", find('*layout.svelte', { maxdepth = 1, ignore_prefix = true }), opts)
-vim.keymap.set("n", "<leader>osu", find('.*page.server(.+js|.+ts)|.*page(.+js|.+ts)', { maxdepth = 1, regex = true, ignore_prefix = true }), opts)
+vim.api.nvim_create_autocmd({'UIEnter'}, {
+    callback = function(event)
+      local is_angular = next(vim.fs.find({ "angular.json", "nx.json" }, { upward = true }))
+      local is_svelte = next(vim.fs.find({ "svelte.config.js", "svelte.config.ts" }, { upward = true }))
 
- -- Inline TS
-vim.keymap.set("n", "<leader>osj", inline_ts_switch('svelte', '(script_element (end_tag) @capture)'), opts)
-vim.keymap.set("n", "<leader>osk", inline_ts_switch('svelte', '(style_element (start_tag) @capture)'), opts)
+      -- Angular
+      if is_angular then
+        print('Angular')
+        vim.keymap.set("n", "<leader>oo", find('.component.html'), opts)
+        vim.keymap.set("n", "<leader>ou", find('.component.ts'), opts)
+        vim.keymap.set("n", "<leader>op", find('.module.ts'), opts)
+        vim.keymap.set("n", "<leader>oy", find('.service.ts'), opts)
+      end
+
+      -- SvelteKit
+      if is_svelte then
+        print('Svelte')
+        vim.keymap.set("n", "<leader>oo", find('*page.svelte', { maxdepth = 1, ignore_prefix = true }), opts)
+        vim.keymap.set("n", "<leader>ou", find('.*page.server(.+js|.+ts)|.*page(.+js|.+ts)', { maxdepth = 1, regex = true, ignore_prefix = true }), opts)
+        vim.keymap.set("n", "<leader>op", find('*layout.svelte', { maxdepth = 1, ignore_prefix = true }), opts)
+
+         -- Inline TS
+        vim.keymap.set("n", "<leader>oj", inline_ts_switch('svelte', '(script_element (end_tag) @capture)'), opts)
+        vim.keymap.set("n", "<leader>ok", inline_ts_switch('svelte', '(style_element (start_tag) @capture)'), opts)
+      end
+    end
+})
+
 
 -- Redux-like
 vim.keymap.set("n", "<leader>ore", find('*effects.ts'), opts)

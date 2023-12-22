@@ -4,8 +4,8 @@ local function find(file_regex, opts)
   return function() require('nvim-quick-switcher').find(file_regex, opts) end
 end
 
-local function inline_ts_switch(scheme, opts)
-  return function() require('nvim-quick-switcher').inline_ts_switch(scheme, opts) end
+local function inline_ts_switch(file_type, scheme)
+  return function() require('nvim-quick-switcher').inline_ts_switch(file_type, scheme) end
 end
 
 local function find_by_fn(fn, opts)

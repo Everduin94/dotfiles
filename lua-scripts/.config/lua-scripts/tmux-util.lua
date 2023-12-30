@@ -24,6 +24,8 @@ function M.attach(session)
   os.execute('TERM=xterm-256color tmux -2 attach -t "=' .. session .. '"')
 end
 
+
+--   
 function M.refresh(env)  
   local sesh = env
   local noteWindow = 'Notes'
@@ -33,14 +35,12 @@ end
 
 function M.init(env)
   local sesh = env
-  local noteWindow = 'Notes'
-  local projectWindow = 'Project'
-  local serverWindow = 'Servers'
-  M.new_session(sesh, 'Config')
+  local noteWindow = '-Notes'
+  local projectWindow = '󰀘-Dev'
+  local serverWindow = '󰒋-Server'
+  M.new_session(sesh, '-Config')
   M.new_window(sesh, noteWindow, os.getenv('WS_NOTES'))
-  M.send('n', sesh, noteWindow)
   M.new_window(sesh, projectWindow, os.getenv('WS_CX_CLOUD'))
-  M.send('n', sesh, projectWindow)
   M.new_window(sesh, serverWindow, os.getenv('WS_CX_CLOUD'))
 end
 

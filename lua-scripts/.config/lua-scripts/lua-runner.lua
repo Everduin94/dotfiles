@@ -30,12 +30,12 @@ local function run(...)
   elseif program == 'work' then
     return tu.init('DEV')
   elseif program == 'home' then
-    return tu.init('DEV')
+    return tu.init('Arch-Linux-x86_64')
   elseif program == 'attach' then
     if args[2] == 'work'  then
       tu.attach('DEV')
     elseif args[2] == 'home' then
-      tu.attach('DEV')
+      tu.attach('Arch-Linux-x86_64')
     end
   elseif program == 'od' then
     return fu.open_dir(args[2])

@@ -160,6 +160,7 @@ local temp = 'const the_animation = document.querySelectorAll(".animation");{fin
 
 ls.add_snippets("all", {
     s("filename", { f(getFileName) }),
+    s("time", fmt('const start = new Date().getTime();\nconsole.log("TIME {X}: ", new Date().getTime() - start){fin}', { X = i(1),  fin = i(0)}) ),
     s("sql_table_schema", fmt(sql.sql_table .. '{fin}', { fin = i(0)}) ),
     s("sql_query_join", fmt(sql.sql_query_join .. '{fin}', { fin = i(0)}) ),
     s("sql_query_array_lateral", fmt(sql.sql_query_array_lateral .. '{fin}', { fin = i(0)}) ),
@@ -270,6 +271,7 @@ ls.add_snippets("typescript", {
   }, { key = 'typescript' })
 
 ls.add_snippets("svelte", {
+  s("time", fmt('const start = new Date().getTime();\nconsole.log("TIME {X}: ", new Date().getTime() - start){fin}', { X = i(1),  fin = i(0)}) ),
   s("configurable_state", fmt('export let {X}: any;{fin}', {X = i(1), fin = i(0)})),
   s("two_way_state", fmt('type {X} = {{}} \nconst {Y} = {fin}writable<{X}>();', {X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),
   s("derive_state", fmt('$: {X} = update_{X}({Y})\n function update_{X}({Y}) {{ \n\n{fin} }}   ', {X = i(1), Y = i(2), fin = i(0)}, {repeat_duplicates = true})),

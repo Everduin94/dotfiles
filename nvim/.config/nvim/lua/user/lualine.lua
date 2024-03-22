@@ -1,10 +1,10 @@
 local mocha = require("catppuccin.palettes").get_palette "mocha"
 
 local cat = require'lualine.themes.catppuccin'
-cat.normal.c = { bg = '#181825', fg = mocha.text}
-cat.inactive.a = { bg = '#181825', fg = mocha.blue}
-cat.inactive.b = { bg = '#181825', fg = mocha.surface, gui ="bold" }
-cat.inactive.c = { bg = '#181825', fg = mocha.overlay0 }
+cat.normal.c = { bg = '#1e1e2e', fg = mocha.text}
+cat.inactive.a = { bg = '#1e1e2e', fg = mocha.blue}
+cat.inactive.b = { bg = '#1e1e2e', fg = mocha.surface, gui ="bold" }
+cat.inactive.c = { bg = '#1e1e2e', fg = mocha.overlay0 }
 
 
 local file_to_color = {
@@ -241,11 +241,11 @@ local function randomColor()
 end
 
 local function getFileColor()
-  local fg_color = mocha.overlay1
+  local fg_color = mocha.text
   if is_focus == 'Focus' then
     fg_color = mocha.teal
   end
-  return { fg = fg_color, bg = '#181825' }
+  return { fg = fg_color, bg = '#1e1e2e' }
 end
 
 
@@ -262,6 +262,30 @@ local colors = {
   blue     =  mocha.blue,
   red      =  mocha.red,
 }
+
+
+local global_mode_color = {
+      n = colors.blue,
+      i = colors.green,
+      v = colors.magenta,
+      [''] = colors.magenta,
+      V = colors.magenta,
+      c = colors.yellow,
+      no = colors.red,
+      s = colors.orange,
+      S = colors.orange,
+      [''] = colors.orange,
+      ic = colors.yellow,
+      R = colors.violet,
+      Rv = colors.violet,
+      cv = colors.red,
+      ce = colors.red,
+      r = colors.cyan,
+      rm = colors.cyan,
+      ['r?'] = colors.cyan,
+      ['!'] = colors.red,
+      t = colors.orange,
+    }
 
 local function getModeColor(fg)
     -- auto change color according to neovims mode
@@ -322,7 +346,7 @@ local function get_file_name()
 end
 
 local function get_color_name()
-  return  { fg = SWITCHER_TAGS.color, bg='#181825' }
+  return  { fg = SWITCHER_TAGS.color, bg='#1e1e2e' }
 end
 
 -- # Good example of an integration, but we decided to just color file name
@@ -337,7 +361,7 @@ local function get_mode_icon()
     return ''
   end
   if sub_mode == 'Git' then
-    return ''
+    return '󰊢'
   end
   if sub_mode == 'Diagnostic' then
     return '󱩔'
@@ -353,15 +377,28 @@ require'lualine'.setup {
     theme = cat,
     icons_enabled = true,
     component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = '' },
+    section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = false,
   },
   sections = {
     -- padding = { left = 2, right = 2} 󰝴
-    lualine_a = {{'mode', fmt = function(str) return get_mode_icon() end,  color = function() return getModeColor('fg') end, padding = { right = 2, left = 1}  }, {'branch', fmt = function(str) local parts = vim.fn.split(str, '/', true); return parts[#parts] end, color = function() return getModeColor() end, padding = {left = 1, right = 1} }},
+    lualine_a = {
+      {
+        'mode',
+        fmt = function(str) return get_mode_icon() end,
+        color = function() return getModeColor('fg') end,
+        separator = { left = '' },
+        padding = { right = 2, left = 0}  
+      },
+      {
+        'branch', 
+        fmt = function(str) local parts = vim.fn.split(str, '/', true); return parts[#parts] end, color = function() return getModeColor() end,
+        padding = {left = 1, right = 1} 
+      }
+    },
     -- lualine_b =  {} ,
-    lualine_b = {{'filetype', icon_only = true, padding = {right = 0, left = 1}, cond = conditions.buffer_not_empty, color = {bg = '#181825'}}, {'filename', color = function() return getFileColor() end, cond = conditions.buffer_not_empty, symbols = {modified = '●'}}, {get_file_name, color= function() return get_color_name() end, cond = function() if SWITCHER_TAGS.has_entry == true then return true end end } },
+    lualine_b = {{'filetype', icon_only = true, padding = {right = 0, left = 1}, cond = conditions.buffer_not_empty, color = {bg = '#1e1e2e'}}, {'filename', color = function() return getFileColor() end, cond = conditions.buffer_not_empty, symbols = {modified = '●'}}, {get_file_name, color= function() return get_color_name() end, cond = function() if SWITCHER_TAGS.has_entry == true then return true end end } },
     lualine_c = {'%='},
     -- lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_x = {},
@@ -369,7 +406,30 @@ require'lualine'.setup {
     -- lualine_x = {  {hello(tempState), color = randomColor } },
     -- lualine_y = {'progress'},
     lualine_y = {},
-    lualine_z = {  }
+    lualine_z = {
+      {
+       'tabs', 
+        separator = { right = '' },
+        use_mode_colors = true,
+        show_modified_status = false,
+        mode = 1,
+        tabs_color = {
+
+          -- Same values as the general color option can be used here.
+         -- active = { bg = global_mode_color and global_mode_color[vim.fn.mode()] or '#11111b', fg='#11111b' },
+         active = function() return getModeColor('fg') end,     -- Color for active tab.
+         inactive = { bg = '#1e1e2e', fg = '#CDD6f4'}, -- Color for inactive tab.
+        },
+        fmt = function(name, context)
+
+        if name and name == "[No Name]" or name and string.find(name, "%.") then
+            return context.tabnr
+        else
+            return name
+        end
+      end
+      }
+    },
 -- {'custom', fmt = function(str) return sub_mode end, color = function() return get_sub_mode_color() end}
     -- lualine_b = {{'branch', fmt = function(str) local parts = vim.fn.split(str, '/', true); return parts[#parts] end, color = function() return getModeColor() end, padding = {left = 1, right = 2} }},
   },

@@ -106,14 +106,28 @@ keymap("i", "<C-g>", "<Nop>", opts)
 
 -- Navigation
   -- Panes
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>k", opts)
-keymap("n", "<C-k>", "<C-w>j", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
+vim.keymap.set('n', '<A-k>', require('smart-splits').resize_down)
+vim.keymap.set('n', '<A-j>', require('smart-splits').resize_up)
+vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
+-- moving between splits
+vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+vim.keymap.set('n', '<C-\\>', require('smart-splits').move_cursor_previous)
+-- swapping buffers between windows
+vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
+vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_down)
+vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_up)
+vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
+
+
 leaderMap("od", "e#", "Alternate")
 
   -- End of Line
@@ -197,16 +211,40 @@ leaderMap('ge', 'Git mergetool', 'Merge Tool')
 
 -- Zen
 leaderCategory('z', '+Zen')
-leaderMap('zm', 'TZAtaraxis', 'Zen Mode')
-leaderMap('zn', 'TZFocus', 'Zen Focus')
+leaderMap('zm', 'ZenMode', 'Zen Mode')
 
 -- Harpoon
-luaMap('0', 'harpoon.mark', 'add_file()')
-luaMap('1', 'harpoon.ui', 'nav_file(1)')
-luaMap('2', 'harpoon.ui', 'nav_file(2)')
-luaMap('3', 'harpoon.ui', 'nav_file(3)')
-luaMap('4', 'harpoon.ui', 'nav_file(4)')
-luaMap('q', 'harpoon.ui', 'toggle_quick_menu()')
+local harpoon = require('harpoon')
+
+vim.keymap.set("n", "<leader>0", function() harpoon:list():append() end)
+vim.keymap.set("n", "<leader>q", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<leader>tq", function() harpoon.ui:toggle_quick_menu(harpoon:list("term")) end)
+
+vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1, {drop = true}) end)
+vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2, {drop = true}) end)
+vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3, {drop = true}) end)
+vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4, {drop = true}) end)
+
+vim.keymap.set("n", "<leader>t1", function() harpoon:list("term"):select(1) end)
+vim.keymap.set("n", "<leader>t2", function() harpoon:list("term"):select(2) end)
+vim.keymap.set("n", "<leader>t3", function() harpoon:list("term"):select(3) end)
+vim.keymap.set("n", "<leader>t4", function() harpoon:list("term"):select(4) end)
+
+-- Somtimes I'm an absolute fucking freight train of raw speed and performance. Amazing.
+-- This causes me to press escape and then p, o, etc... so fast that both keys go down, before escape goes up.
+-- If both keys go down, karabiner thinks I mean ctrl, when in reality I hit each key BAM-BAM
+vim.keymap.set("i", "<C-l>", "<esc>l")
+vim.keymap.set("i", "<C-p>", "<esc>p")
+vim.keymap.set("i", "<C-o>", "<esc>o")
+vim.keymap.set("i", "<C-k>", "<esc>k")
+vim.keymap.set("i", "<C-j>", "<esc>j")
+vim.keymap.set("i", "<C-h>", "<esc>h")
+
+
+-- ./init.lua
+-- gf drop
+-- vim.keymap.set("n", "<leader>t4", ":e <cfile><CR>")
+keymap("n", "gf", ":drop <cfile><CR>", opts)
 
 -- Misc
 -- leaderMap('q', 'w\\|bd', "") -- I think the problem is \ was meant to dereference |
@@ -217,16 +255,6 @@ keymap('n', '<leader>j', "J", opts)
 leaderCategory('t', '+Terminal')
 leaderMap('t/', 'noh', "Clear Highlights")
 leaderMap('tj', 'e temp.js | Codi', "Codi Javascript")
-  -- Harpoon
-luaMap('tc', 'harpoon.cmd-ui', 'toggle_quick_menu()')
-luaMap('t1', 'harpoon.term', 'gotoTerminal(1)')
-luaMap('t2', 'harpoon.term', 'gotoTerminal(2)')
-luaMap('t3', 'harpoon.term', 'gotoTerminal(3)')
-luaMap('t4', 'harpoon.term', 'gotoTerminal(4)')
-luaMap('t6', 'harpoon.term', 'sendCommand(1, "<C-c>npm run dev")')
-luaMap('t7', 'harpoon.term', 'sendCommand(1, "<C-c>npm run build")')
-luaMap('t8', 'harpoon.term', 'sendCommand(2, "<C-c>npm run test")')
-luaMap('t9', 'harpoon.term', 'sendCommand(3, "<C-c>l init")')
 
 -- Codi
 leaderMap('toc', 'Codi!!', "Toggle Codi")
@@ -246,6 +274,8 @@ luaMap('pg', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-p
 -- luaMap('pn', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes" }',  'Grep(Notes)')
 luaMap('pc', 'telescope.builtin', 'live_grep{ cwd = "~/dev/notes/creative-work/cheatsheets" }', 'Grep(Cheatsheets)')
 luaMap('pl', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , glob_pattern = "' .. grepFilter .. '" }', 'Grep(Nx Libs)' )
+luaMap('pxc', 'telescope.builtin', 'live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs/shared/cases" , glob_pattern = "' .. grepFilter .. '" }', 'Grep(Nx Libs)' )
+-- luaMap('pL', 'telescope.builtin', 'find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , find_command = ' .. fileFilter .. ' }', 'Find File(Nx Libs)' )
 -- luaMap('pL', 'telescope.builtin', 'find_files{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] .. "/libs" , find_command = ' .. fileFilter .. ' }', 'Find File(Nx Libs)' )
 
   -- Telescope:Help
@@ -266,15 +296,16 @@ leaderMap('ptt', 'Telescope git_worktree', 'Git Worktrees')
 leaderMap('ps', 'Alpha', 'Dashboard')
 leaderMap('pq', 'Telescope luasnip', 'LuaSnip (Q)')
   -- Nvim Tree
-leaderMap("'", 'NvimTreeToggle', 'Explorer')
+leaderMap("'", 'Neotree toggle=true', 'Explorer')
 
 -- TMUX
-leaderMap('m1', 'silent !tmux select-window -t 1', 'Switch Pane 1')
-leaderMap('m2', 'silent !tmux select-window -t 2', 'Switch Pane 2')
-leaderMap('m3', 'silent !tmux select-window -t 3', 'Switch Pane 3')
-leaderMap('m4', 'silent !tmux select-window -t 4', 'Switch Pane 4')
-leaderMap('m5', 'silent !tmux select-window -t 5', 'Switch Pane 5')
-leaderMap('m6', 'silent !tmux select-window -t 6', 'Switch Pane 6')
+-- NOTE Switch to wezterm
+-- leaderMap('m1', 'silent !tmux select-window -t 1', 'Switch Pane 1')
+-- leaderMap('m2', 'silent !tmux select-window -t 2', 'Switch Pane 2')
+-- leaderMap('m3', 'silent !tmux select-window -t 3', 'Switch Pane 3')
+-- leaderMap('m4', 'silent !tmux select-window -t 4', 'Switch Pane 4')
+-- leaderMap('m5', 'silent !tmux select-window -t 5', 'Switch Pane 5')
+-- leaderMap('m6', 'silent !tmux select-window -t 6', 'Switch Pane 6')
 
 -- Quickfix
 leaderCategory('c', '+QuickFix')
@@ -284,12 +315,13 @@ leaderMap('cl', 'cclose', 'Close')
 -- Splits
 leaderCategory('v', '+Splits')
 leaderMap('vk', '15sp', 'Split Down')
-leaderMap('vl', '65vsp', 'Split Right')
+leaderMap('vl', '75vsp', 'Split Right')
 leaderMap('vc', 'close', 'Close Split')
-leaderMap('v]', 'vertical resize +5', '⬅️')
-leaderMap('v[', 'vertical resize -5', '➡️')
-leaderMap('v=', 'resize -2', '⬇️')
-leaderMap('v-', 'resize +2', '⬆️')
+vim.keymap.set("n", "<leader>vb", function() require('bufdelete').bufdelete(0) end, { noremap = true, silent = true })
+-- leaderMap('v]', 'vertical resize +5', '⬅️')
+-- leaderMap('v[', 'vertical resize -5', '➡️')
+-- leaderMap('v=', 'resize -2', '⬇️')
+-- leaderMap('v-', 'resize +2', '⬆️')
 -- leaderMap('\\', '<C-W>=', 'Balance')
 -- leaderMap('|', '<C-W>|', 'Hide')
 

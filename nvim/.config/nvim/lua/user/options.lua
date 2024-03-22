@@ -31,6 +31,7 @@ local options = {
  termguicolors=true,                      -- Required for colorizer
  scrolloff = 8,                           -- NEW
  sidescrolloff = 8,                       -- NEW
+ -- equalalways = false,                     -- Prevent auto window resize
  completeopt = { "menuone", "noselect" },
  laststatus = 3,
  showcmd = false,

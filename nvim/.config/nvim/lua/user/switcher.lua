@@ -13,7 +13,7 @@ local function find_by_fn(fn, opts)
 end
 
 -- Styles
-vim.keymap.set("n", "<leader>oi", find('.+css|.+scss|.+sass', { regex = true, prefix='full' }), opts)
+vim.keymap.set("n", "<leader>oi", find('.+css|.+scss|.+sass', { regex = true, prefix='full', drop = true }), opts)
 
 -- Types
 vim.keymap.set("n", "<leader>orm", find('.+model.ts|.+models.ts|.+types.ts', { regex = true }), opts)

@@ -14,7 +14,10 @@ require "user.telescope"
 require "user.treesitter"
 require "user.autopairs"
 require "user.gitsigns"
+
+-- TODO: This file lags so badly it can't be edited?
 require "user.nvim-tree"
+
 -- require "user.bufferline"
 require "user.lualine"
 require "user.terminal"
@@ -38,6 +41,10 @@ require "user.lsp.emmet-ls"
 require "user.lsp.tailwindcss-ls"
 require "user.lsp.astro-ls"
 require "user.lsp.svelte-ls"
+require "user.diff"
+require "user.split"
+require "user.incline"
 require "user.zen"
+require "user.persistence"
 -- Needs configured: can we remove file name? Can we style colors? Can we remove / trim css class (tailwind makes unreadable)?
 -- require "user.breadcrumbs"

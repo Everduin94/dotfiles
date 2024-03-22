@@ -42,6 +42,8 @@ vim.cmd [[
     autocmd!
     autocmd FileType markdown set wrap
     autocmd FileType markdown set linebreak
+    autocmd FileType  markdown nnoremap <buffer> j gk
+    autocmd FileType  markdown nnoremap <buffer> k gj
     autocmd FileType markdown nmap <buffer><silent> <leader>mp :call mdip#MarkdownClipboardImage()<CR>
   augroup END
     " Man

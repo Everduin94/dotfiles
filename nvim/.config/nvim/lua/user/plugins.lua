@@ -52,6 +52,24 @@ return packer.startup(function(use)
       'glacambre/firenvim',
       run = function() vim.fn['firenvim#install'](0) end 
   }
+  use "Folke/zen-mode.nvim"
+  use "folke/twilight.nvim"
+  use({
+    "gbprod/cutlass.nvim",
+    config = function()
+      require("cutlass").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        cut_key = 'm'
+      })
+    end
+  })
+  use "sindrets/diffview.nvim"
+  use "b0o/incline.nvim"
+  use "folke/persistence.nvim"
+  use "mrjones2014/smart-splits.nvim"
+  use "famiu/bufdelete.nvim"
 
   -- use "akinsho/bufferline.nvim"
   use "nvim-lualine/lualine.nvim"
@@ -64,16 +82,14 @@ return packer.startup(function(use)
   use "kylechui/nvim-surround"
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "lewis6991/impatient.nvim" -- load lua modules faster 
-  use {"Everduin94/nvim-quick-switcher"}
+  use {"Everduin94/nvim-quick-switcher", branch = 'everduin94/feat/drop-buffer'}
   use "roobert/tailwindcss-colorizer-cmp.nvim"
 
   -- use "tpope/vim-commentary"
   -- use "machakann/vim-highlightedyank"
   use "mattn/emmet-vim"
-  use "ThePrimeagen/harpoon"
+  use {"ThePrimeagen/harpoon", branch = 'harpoon2'}
   use "lukas-reineke/indent-blankline.nvim"
-  use "Pocco81/true-zen.nvim"
-  use "folke/twilight.nvim"
   -- DATABASE
   use "tpope/vim-dadbod"
   use "kristijanhusak/vim-dadbod-ui"
@@ -110,8 +126,13 @@ return packer.startup(function(use)
   use "benfowler/telescope-luasnip.nvim"
   -- use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
   use "nvim-telescope/telescope-ui-select.nvim"
+
   -- File Tree
-  use {"kyazdani42/nvim-tree.lua", commit = "f3b7372"}
+  -- NOTE: 🔥
+  -- use {"kyazdani42/nvim-tree.lua", commit = "f3b7372"}
+  use "nvim-neo-tree/neo-tree.nvim"
+  use "MunifTanjim/nui.nvim" -- dep
+
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -136,11 +157,16 @@ return packer.startup(function(use)
   --     },
   -- }
   -- Debugger
+
+  -- TODO: Requires nio?
   use "mfussenegger/nvim-dap"
   use "Pocco81/DAPInstall.nvim"
   use "theHamsta/nvim-dap-virtual-text"
   use "nvim-telescope/telescope-dap.nvim"
   use "rcarriga/nvim-dap-ui"
+
+  -- NOTE: IDK what this is, but its needed for DAP now lol
+  use "nvim-neotest/nvim-nio"
   -- Wiki
   use "vimwiki/vimwiki"
   use "ferrine/md-img-paste.vim"

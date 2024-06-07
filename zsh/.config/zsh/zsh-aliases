@@ -26,6 +26,24 @@ alias p='lua_cd od'
 alias pv='l ov'
 alias pn='lua_nvim od'
 alias pt='lua_tmux od'
+alias bc='better-commits'
+alias bb='better-branch'
+alias pw='npx nx e2e-deployment cx-cloud-e2e-pw -- --ui'
+alias save_storage='npx playwright codegen http://localhost:4200 --save-storage=auth.json'
+alias load_storage='npx playwright codegen --load-storage=auth.json http://localhost:4200/yrxqBHmPkNhZ60/success-track/default/track/today-view'
+alias cases_glob='npx playwright codegen --load-storage=auth.json --save-har="./cases.har" --save-har-glob="**/api/edge/us/case/cxcp-cases-proxy/api/v1/cases/all?customerId=yrxqBHmPkNhZ60" http://localhost:4200/yrxqBHmPkNhZ60/success-track/default/track/today-view'
+alias lhci='npx nx run cx-portal:serve:lhci'
+alias perf='npx nx run cx-portal:serve:perf'
+alias serial='echo -n "FCW2234D14Z" | pbcopy'
+man_pw () {
+  type pw
+  type save_storage
+  type load_storage
+  type cases_glob
+  type lhci
+  type perf
+  type serial
+}
 
 # DAC is part of the name of the speaker
 # You could do this as 1 command, but you can't say get 1 character, because then it breaks on double digits

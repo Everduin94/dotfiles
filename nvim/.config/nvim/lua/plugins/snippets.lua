@@ -51,12 +51,60 @@ return {
         return os.date("(%x - %I:%M%p) ")
       end
 
+      -- HACK: I can't get this to work, so try later in auto commands.
+      local opts = { noremap = true }
+      vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+
+      -- HACK: Use rep(1) instead? This broke?
+      local same = function(index)
+        return f(function(args)
+          return args[1]
+        end, { index })
+      end
+
       ls.add_snippets("lua", {
         s("todo", { t("-- TODO: "), f(timeStamp), t(" "), i(0) }),
         s("if", fmt("if {statement} then\n\t{fin}\nend", { statement = i(1), fin = i(0) })),
         s("log", fmt("print({statement})", { statement = i(1) })),
         s("inspect", fmt("print(vim.inspect({statement}))", { statement = i(1) })),
       }, { key = "lua" })
+      ls.add_snippets("typescript", {
+        s("todo", { t("// TODO: "), f(timeStamp), t(" "), i(0) }),
+        s("if", fmt("if ({statement}) {{ \n\t{fin}\n}}", { statement = i(1), fin = i(0) })),
+        s("log", fmt("console.log({statement})", { statement = i(1) })),
+        s("random-item", fmt("{array}[Math.floor(Math.random() * {array}.length)]", { array = i(1) })),
+        s(
+          "deep-equals",
+          fmt("const result = JSON.stringify({objOne}) === JSON.stringify({objTwo})", { objOne = i(1), objTwo = i(2) })
+        ),
+        s(
+          "catch",
+          fmt("try {{ \n\t{statement}\n}} catch(error) {{ \n\tconsole.error(error); \n}}", { statement = i(1) })
+        ),
+      }, { key = "typescript" })
+
+      ls.add_snippets("go", {
+        s("todo", { t("// TODO: "), f(timeStamp), t(" "), i(0) }),
+        s("if", fmt("if {statement} {{ \n\t{fin}\n}}", { statement = i(1), fin = i(0) })),
+        s("log", fmt("fmt.Println({statement})", { statement = i(1) })),
+        s(
+          "random-item",
+          fmt("rand.Seed(time.Now().UnixNano())\n result := {array}[rand.Intn(len({array}))]", { array = i(1) })
+        ),
+        s("deep-equals", fmt("result := reflect.DeepEqual({objOne}, {objTwo})", { objOne = i(1), objTwo = i(2) })),
+        s(
+          "catch",
+          fmt(
+            'if {condition} {{ \n\t return {value}, errors.New("{error}")\n}}',
+            { condition = i(1), value = i(2), error = i(3) }
+          )
+        ),
+      }, { key = "go" })
     end,
+    -- TODO: If cmp didn't auto select. Tab could be a good way to "select" without code-action.
+    -- CTRL-Enter feels okay when typing. But, when writing code with brackets it feels pretty invasive
+    -- Today: enter to just enter. ctrl+f to select, tab to walk, ctrl+e to exit, tab to move to next snippet (should add ctrl+d back).
+    -- if for catch
+    -- random-item deep-equals
   },
 }

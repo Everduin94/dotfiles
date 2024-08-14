@@ -4,6 +4,7 @@
 local opt = vim.opt
 opt.pumblend = 0 -- Popup blend
 opt.showtabline = 0
+vim.cmd([[set iskeyword+=-]])
 
 -- NOTE: Maybe need these?
 -- local float = { focusable = true, style = "minimal", border = "rounded", }

@@ -19,6 +19,7 @@ export WS_DOTFILES=$HOME/dotfiles
 export WS_SNIPPETS_FILE=$HOME/.config/nvim/lua/luasnip-config.lua
 export WS_SVELTE_PLAYGROUND=$DEV_FOLDER/starter-template
 export WS_BLOG_FLOTES=$DEV_FOLDER/flotes-blog
+export WS_TOMATILLO=$DEV_FOLDER/tomatillo
 
 eval "$(fnm env)"
 

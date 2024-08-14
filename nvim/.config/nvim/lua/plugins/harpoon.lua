@@ -60,8 +60,13 @@ return {
       },
       settings = {
         save_on_toggle = true,
+        sync_on_ui_close = true,
       },
 
+      default = {
+        select_with_nil = true,
+        encode = false,
+      },
       term = {
         select_with_nil = true,
         encode = false,
@@ -119,6 +124,8 @@ return {
           local is_angular = next(vim.fs.find({ "angular.json", "nx.json" }, { upward = true }))
           local is_svelte = next(vim.fs.find({ "svelte.config.js", "svelte.config.ts" }, { upward = true }))
 
+          print(is_svelte, is_angular)
+
           -- Styles
           map(
             "n",
@@ -175,13 +182,13 @@ return {
             -- Inline TS
             vim.keymap.set(
               "n",
-              "<leader>oj",
+              "<leader>ok",
               inline_ts_switch("svelte", "(script_element (end_tag) @capture)"),
               { desc = "Go to Script" }
             )
             vim.keymap.set(
               "n",
-              "<leader>ok",
+              "<leader>oj",
               inline_ts_switch("svelte", "(style_element (start_tag) @capture)"),
               { desc = "Go to Style" }
             )

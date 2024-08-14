@@ -199,6 +199,7 @@ return {
             -- },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { LazyVim.lualine.pretty_path() },
+            -- { "filename" },
           },
           lualine_x = {
           -- stylua: ignore
@@ -276,24 +277,68 @@ return {
       }
 
       -- do not add trouble symbols if aerial is enabled
-      if vim.g.trouble_lualine then
-        local trouble = require("trouble")
-        local symbols = trouble.statusline
-          and trouble.statusline({
-            mode = "symbols",
-            groups = {},
-            title = false,
-            filter = { range = true },
-            format = "{kind_icon}{symbol.name:Normal}",
-            hl_group = "lualine_c_normal",
-          })
-        table.insert(opts.sections.lualine_c, {
-          symbols and symbols.get,
-          cond = symbols and symbols.has,
-        })
-      end
+      -- if vim.g.trouble_lualine then
+      --   local trouble = require("trouble")
+      --   local symbols = trouble.statusline
+      --     and trouble.statusline({
+      --       mode = "symbols",
+      --       groups = {},
+      --       title = false,
+      --       filter = { range = true },
+      --       format = "{kind_icon}{symbol.name:Normal}",
+      --       hl_group = "lualine_c_normal",
+      --     })
+      --   table.insert(opts.sections.lualine_c, {
+      --     symbols and symbols.get,
+      --     cond = symbols and symbols.has,
+      --   })
+      -- end
 
       return opts
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      plugins = {
+        spelling = true,
+        marks = false,
+        registers = false,
+        presets = {
+          operators = false, -- adds help for operators like d, y, ...
+          motions = false, -- adds help for motions
+          text_objects = false, -- help for text objects triggered after entering an operator
+          windows = false, -- default bindings on <c-w>
+          nav = false, -- misc bindings to work with windows
+          z = false, -- bindings for folds, spelling and others prefixed with z
+          g = false, -- bindings for prefixed with g
+        },
+      },
+      defaults = {
+        mode = { "n", "v" },
+        ["g"] = { name = "+goto" },
+        ["gs"] = { name = "+surround" },
+        ["z"] = { name = "+fold" },
+        ["]"] = { name = "+next" },
+        ["["] = { name = "+prev" },
+        ["<leader><tab>"] = { name = "+tabs" },
+        ["<leader>b"] = { name = "+buffer" },
+        ["<leader>c"] = { name = "+code" },
+        ["<leader>f"] = { name = "+file/find" },
+        ["<leader>g"] = { name = "+git" },
+        ["<leader>gh"] = { name = "+hunks" },
+        ["<leader>q"] = { name = "+quit/session" },
+        ["<leader>s"] = { name = "+search" },
+        ["<leader>u"] = { name = "+ui" },
+        ["<leader>w"] = { name = "+windows" },
+        ["<leader>x"] = { name = "+diagnostics/quickfix" },
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register(opts.defaults)
     end,
   },
 }

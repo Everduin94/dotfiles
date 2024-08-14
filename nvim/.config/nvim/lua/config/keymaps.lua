@@ -1,8 +1,8 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-local map = LazyVim.safe_keymap_set
 
+local map = LazyVim.safe_keymap_set
 -- Stop gaps
 map("n", "H", "^", { desc = "Beginning of Line" })
 map("v", "H", "^", { desc = "Beginning of Line" })
@@ -10,6 +10,11 @@ map("o", "H", "^", { desc = "Beginning of Line" })
 map("n", "L", "$", { desc = "End of Line" })
 map("v", "L", "$", { desc = "End of Line" })
 map("o", "L", "$", { desc = "End of Line" })
+
+map("n", "<leader>gu", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
+map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
+map("t", [[<C-\>]], [[<C-\><C-n>]], { desc = "Escape Terminal" })
+map("t", [[<esc>]], [[<C-\><C-n>]], { desc = "Escape Terminal" })
 
 -- Karabiner speed hack
 map("i", "<C-l>", "<esc>l")

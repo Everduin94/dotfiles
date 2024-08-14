@@ -20,3 +20,9 @@ compinit
 # bun completions
 [ -s "/home/erik/.bun/_bun" ] && source "/home/erik/.bun/_bun"
 export PATH=$PATH:/home/erik/.spicetify
+
+# make CapsLock behave like Ctrl:
+setxkbmap -option ctrl:nocaps
+
+# make short-pressed Ctrl behave like Escape:
+xcape -e 'Control_L=Escape'

@@ -1,4 +1,23 @@
 return {
+  {
+    "nvim-cmp",
+    dependencies = {
+      {
+        "garymjr/nvim-snippets",
+        opts = {
+          friendly_snippets = false,
+        },
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
+    },
+    opts = function(_, opts)
+      opts.snippet = {
+        expand = function(item)
+          return LazyVim.cmp.expand(item.body)
+        end,
+      }
+    end,
+  },
 
   {
     "hrsh7th/nvim-cmp",
@@ -17,7 +36,49 @@ return {
     -- opts = {
     --   auto_brackets = { "python" }
     -- }
-    -- ```
+    -- ```{
+    --
+    keys = {
+      {
+        "<tab>",
+        function()
+          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+        end,
+        expr = true,
+        silent = true,
+        mode = "i",
+      },
+      {
+        "<tab>",
+        function()
+          require("luasnip").jump(1)
+        end,
+        mode = "s",
+      },
+      {
+        "<c-d>",
+        function()
+          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+        end,
+        expr = true,
+        silent = true,
+        mode = "i",
+      },
+      {
+        "<c-d>",
+        function()
+          require("luasnip").jump(1)
+        end,
+        mode = "s",
+      },
+      {
+        "<s-tab>",
+        function()
+          require("luasnip").jump(-1)
+        end,
+        mode = { "i", "s" },
+      },
+    },
 
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -39,7 +100,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-f>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = LazyVim.cmp.confirm(),
+          -- ["<CR>"] = LazyVim.cmp.confirm(),
           ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<C-CR>"] = function(fallback)
             cmp.abort()
@@ -47,7 +108,7 @@ return {
           end,
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
+          { name = "nvim_lsp", max_item_count = 50 },
           { name = "path" },
         }, {
           { name = "buffer" },
@@ -57,6 +118,9 @@ return {
             local icons = require("lazyvim.config").icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
+              if item.menu then
+                item.menu = item.menu:sub(-20)
+              end
             end
             return item
           end,

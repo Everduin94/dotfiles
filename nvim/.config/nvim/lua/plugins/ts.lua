@@ -23,19 +23,32 @@ return {
         return {
           TabLineSel = { bg = colors.pink },
           CmpBorder = { fg = colors.surface2 },
-          Number = { fg = colors.sapphire },
+          Number = { fg = colors.red },
           Constant = { fg = colors.sapphire },
-          Boolean = { fg = colors.sapphire },
+          Boolean = { fg = colors.red },
           ["@parameter"] = { fg = colors.teal },
+          ["@keyword"] = { fg = colors.pink },
+          ["@keyword.import"] = { fg = colors.pink },
+          ["@keyword.function"] = { fg = colors.pink },
+          ["@punctuation.delimiter"] = { fg = colors.pink },
+          ["@property"] = { fg = colors.text },
+          ["@variable.parameter"] = { fg = colors.text },
+          ["@variable"] = { fg = colors.yellow },
+          ["@variable.member"] = { fg = colors.text },
           ["@constant"] = { fg = colors.sapphire },
+          ["@string"] = { fg = colors.teal },
           ["@constant.builtin"] = { fg = colors.sapphire },
           ["@function.builtin"] = { fg = colors.sapphire },
+          ["@function"] = { fg = colors.sapphire },
+          ["@function.method.call"] = { fg = colors.sapphire },
           ["@variable.builtin"] = { fg = colors.pink },
           ["@method.call"] = { fg = colors.pink },
           ["@number.css"] = { fg = colors.sapphire },
           ["@text.strong"] = { fg = colors.pink },
           ["@type.builtin"] = { fg = colors.teal },
-          ["Type"] = { fg = colors.teal },
+          ["Type"] = { fg = colors.text },
+          ["@type"] = { fg = colors.text },
+          ["@module"] = { fg = colors.text },
         }
       end,
       integrations = {
@@ -105,7 +118,9 @@ return {
       },
     },
   },
-
+  {
+    "nvim-treesitter/playground",
+  },
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts

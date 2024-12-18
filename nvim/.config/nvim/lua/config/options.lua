@@ -6,6 +6,10 @@ opt.pumblend = 0 -- Popup blend
 opt.showtabline = 0
 vim.cmd([[set iskeyword+=-]])
 vim.g.root_spec = { "cwd" } -- HOLYYYYYYYYYY WHY IS THIS NOT THE DEFAULT
+-- Try these.
+vim.o.smartindent = true
+vim.o.autoindent = true
+vim.o.smarttab = true
 
 -- NOTE: Maybe need these?
 -- local float = { focusable = true, style = "minimal", border = "rounded", }

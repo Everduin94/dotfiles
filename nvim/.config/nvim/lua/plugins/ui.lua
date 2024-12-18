@@ -185,7 +185,8 @@ return {
                 return get_mode_icon()
               end,
               color = function()
-                return LazyVim.ui.fg("Character")
+                return { fg = Snacks.util.color("Character") }
+                -- return LazyVim.ui.fg("Character")
               end,
             },
             -- {
@@ -218,7 +219,8 @@ return {
           {
             function() return "  " .. require("dap").status() end,
             cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-            color = function() return LazyVim.ui.fg("Debug") end,
+            color = function() return { fg = Snacks.util.color("Debug") } end
+            -- color = function() return LazyVim.ui.fg("Debug") end,
           },
             -- stylua: ignore
             -- {
@@ -297,48 +299,48 @@ return {
       return opts
     end,
   },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      plugins = {
-        spelling = true,
-        marks = false,
-        registers = false,
-        presets = {
-          operators = false, -- adds help for operators like d, y, ...
-          motions = false, -- adds help for motions
-          text_objects = false, -- help for text objects triggered after entering an operator
-          windows = false, -- default bindings on <c-w>
-          nav = false, -- misc bindings to work with windows
-          z = false, -- bindings for folds, spelling and others prefixed with z
-          g = false, -- bindings for prefixed with g
-        },
-      },
-      defaults = {
-        mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["gs"] = { name = "+surround" },
-        ["z"] = { name = "+fold" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader><tab>"] = { name = "+tabs" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>f"] = { name = "+file/find" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>q"] = { name = "+quit/session" },
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>u"] = { name = "+ui" },
-        ["<leader>w"] = { name = "+windows" },
-        ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
-    end,
-  },
+  -- {
+  --   "folke/which-key.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     plugins = {
+  --       spelling = true,
+  --       marks = false,
+  --       registers = false,
+  --       presets = {
+  --         operators = false, -- adds help for operators like d, y, ...
+  --         motions = false, -- adds help for motions
+  --         text_objects = false, -- help for text objects triggered after entering an operator
+  --         windows = false, -- default bindings on <c-w>
+  --         nav = false, -- misc bindings to work with windows
+  --         z = false, -- bindings for folds, spelling and others prefixed with z
+  --         g = false, -- bindings for prefixed with g
+  --       },
+  --     },
+  --     defaults = {
+  --       mode = { "n", "v" },
+  --       ["g"] = { name = "+goto" },
+  --       ["gs"] = { name = "+surround" },
+  --       ["z"] = { name = "+fold" },
+  --       ["]"] = { name = "+next" },
+  --       ["["] = { name = "+prev" },
+  --       ["<leader><tab>"] = { name = "+tabs" },
+  --       ["<leader>b"] = { name = "+buffer" },
+  --       ["<leader>c"] = { name = "+code" },
+  --       ["<leader>f"] = { name = "+file/find" },
+  --       ["<leader>g"] = { name = "+git" },
+  --       ["<leader>gh"] = { name = "+hunks" },
+  --       ["<leader>q"] = { name = "+quit/session" },
+  --       ["<leader>s"] = { name = "+search" },
+  --       ["<leader>u"] = { name = "+ui" },
+  --       ["<leader>w"] = { name = "+windows" },
+  --       ["<leader>x"] = { name = "+diagnostics/quickfix" },
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     local wk = require("which-key")
+  --     wk.setup(opts)
+  --     wk.add(opts.defaults)
+  --   end,
+  -- },
 }

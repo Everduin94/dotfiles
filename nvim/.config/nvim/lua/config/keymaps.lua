@@ -2,6 +2,23 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local sv = require("config/snippet-values")
+
+function _G.nexpand(body)
+  vim.api.nvim_feedkeys("o", "n", true)
+  vim.defer_fn(function()
+    vim.snippet.expand(body)
+  end, 10)
+end
+
+vim.keymap.set({ "i", "s" }, "<C-d>", function()
+  if vim.snippet.active({ direction = 1 }) then
+    return "<Cmd>lua vim.snippet.jump(1)<CR>"
+  else
+    return "<Tab>"
+  end
+end, { expr = true })
+
 local map = LazyVim.safe_keymap_set
 -- Stop gaps
 map("n", "H", "^", { desc = "Beginning of Line" })
@@ -11,6 +28,39 @@ map("n", "L", "$", { desc = "End of Line" })
 map("v", "L", "$", { desc = "End of Line" })
 map("o", "L", "$", { desc = "End of Line" })
 
+local function map_snippet_which_key(tbl, func)
+  local new_tbl = {}
+  for _, v in pairs(tbl) do
+    table.insert(new_tbl, func(v))
+  end
+  return new_tbl
+end
+
+-- Define the transformation function
+local function snippet_to_which_key(snippet)
+  return {
+    snippet.key,
+    function()
+      nexpand(snippet.body)
+    end,
+    desc = snippet.desc,
+    icon = snippet.icon,
+  }
+end
+
+local function which_key_snippets()
+  return map_snippet_which_key(sv, snippet_to_which_key)
+end
+
+local wk = require("which-key")
+wk.add(which_key_snippets())
+wk.add({
+  { "<leader>ms", group = "Svelte", icon = { icon = "", color = "orange" } },
+})
+
+map("n", "<leader>su", function()
+  vim.snippet.expand("var ${1:name} ${2:type} $0")
+end, { desc = "testing snippets" })
 map("n", "<leader>gu", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
 map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview Hunk" })
 map("t", [[<C-\>]], [[<C-\><C-n>]], { desc = "Escape Terminal" })

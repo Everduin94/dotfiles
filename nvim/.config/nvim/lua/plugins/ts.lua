@@ -119,6 +119,32 @@ return {
       },
     },
   },
+  -- lua/plugins/rose-pine.lua
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        --- @usage 'auto'|'main'|'moon'|'dawn'
+        variant = "moon",
+        --- @usage 'main'|'moon'|'dawn'
+        dark_variant = "main",
+        bold_vert_split = false,
+        dim_nc_background = false,
+        disable_background = true,
+        disable_float_background = true,
+        disable_italics = false,
+        styles = {
+          bold = true,
+          italic = true,
+          transparency = true,
+        },
+      })
+      vim.cmd("colorscheme rose-pine-moon")
+    end,
+  },
   {
     "nvim-treesitter/playground",
   },

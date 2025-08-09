@@ -40,26 +40,44 @@ return {
         end, { index })
       end
 
+      local sv = require("config/snippet-values")
+      local function remove_leader(input)
+        return input:gsub("^<leader>", "")
+      end
+      local tbl = {}
+      for _, v in pairs(sv) do
+        table.insert(tbl, ls.parser.parse_snippet({ trig = remove_leader(v.key) }, v.body))
+      end
+      ls.add_snippets("typescript", tbl, { key = "typescript" })
+      ls.add_snippets("svelte", tbl, { key = "svelte" })
+
+      -- ls.add_snippets("typescript", {
+      --   -- ls.parser.parse_snippet({ trig = "lspsyn" }, "Wow! This ${1:Stuff} really ${2:works. ${3:Well, a bit.}}"),
+      --   s("todo", { t("-- TODO: "), f(timeStamp), t(" "), i(0) }),
+      -- }, { key = "typescript" })
+
       ls.add_snippets("lua", {
         s("todo", { t("-- TODO: "), f(timeStamp), t(" "), i(0) }),
         s("if", fmt("if {statement} then\n\t{fin}\nend", { statement = i(1), fin = i(0) })),
         s("log", fmt("print({statement})", { statement = i(1) })),
         s("inspect", fmt("print(vim.inspect({statement}))", { statement = i(1) })),
       }, { key = "lua" })
-      ls.add_snippets("typescript", {
-        s("todo", { t("// TODO: "), f(timeStamp), t(" "), i(0) }),
-        s("if", fmt("if ({statement}) {{ \n\t{fin}\n}}", { statement = i(1), fin = i(0) })),
-        s("log", fmt("console.log({statement})", { statement = i(1) })),
-        s("random-item", fmt("{array}[Math.floor(Math.random() * {array}.length)]", { array = i(1) })),
-        s(
-          "deep-equals",
-          fmt("const result = JSON.stringify({objOne}) === JSON.stringify({objTwo})", { objOne = i(1), objTwo = i(2) })
-        ),
-        s(
-          "catch",
-          fmt("try {{ \n\t{statement}\n}} catch(error) {{ \n\tconsole.error(error); \n}}", { statement = i(1) })
-        ),
-      }, { key = "typescript" })
+      -- ls.add_snippets("typescript", {
+      --   s("todo", { t("// TODO: "), f(timeStamp), t(" "), i(0) }),
+      --   s("if", fmt("if ({statement}) {{ \n\t{fin}\n}}", { statement = i(1), fin = i(0) })),
+      --   s("log", fmt("console.log({statement})", { statement = i(1) })),
+      --   s("random-item", fmt("{array}[Math.floor(Math.random() * {array}.length)]", { array = i(1) })),
+      --   s(
+      --     "deep-equals",
+      --     fmt("const result = JSON.stringify({objOne}) === JSON.stringify({objTwo})", { objOne = i(1), objTwo = i(2) })
+      --   ),
+      --   ls.parser.parse_snippet({ trig = remove_leader("<leader>mf1") }, "$1 test"),
+      --   ls.parser.parse_snippet({ trig = "mf2" }, "$1 test"),
+      --   s(
+      --     "catch",
+      --     fmt("try {{ \n\t{statement}\n}} catch(error) {{ \n\tconsole.error(error); \n}}", { statement = i(1) })
+      --   ),
+      -- }, { key = "typescript" })
 
       ls.add_snippets("go", {
         s("todo", { t("// TODO: "), f(timeStamp), t(" "), i(0) }),

@@ -3,15 +3,32 @@
 -- Add any additional keymaps here
 
 local sv = require("config/snippet-values")
+local gn = require("config/generators/generator")
+
+-- Do you work?
+require("config/generators/features/svelte-feature-folder")
+
+local ls = require("luasnip")
 
 function _G.nexpand(body)
-  vim.api.nvim_feedkeys("o", "n", true)
+  vim.api.nvim_feedkeys("o", "n", true) -- open new line below and enter insert mode
   vim.defer_fn(function()
-    vim.snippet.expand(body)
+    ls.snip_expand(ls.parser.parse_snippet("anon", body))
   end, 10)
 end
 
+-- function _G.nexpand(body)
+--   vim.api.nvim_feedkeys("o", "n", true)
+--   vim.defer_fn(function()
+--     vim.snippet.expand(body)
+--   end, 10)
+-- end
+
+local ls = require("luasnip")
 vim.keymap.set({ "i", "s" }, "<C-d>", function()
+  if ls.jumpable(1) then
+    return "<Cmd>lua require('luasnip').jump(1)<CR>"
+  end
   if vim.snippet.active({ direction = 1 }) then
     return "<Cmd>lua vim.snippet.jump(1)<CR>"
   else
@@ -48,12 +65,26 @@ local function snippet_to_which_key(snippet)
   }
 end
 
+local function generator_to_which_key(generator)
+  return {
+    generator.key,
+    generator.fn,
+    desc = generator.desc,
+    icon = generator.icon,
+  }
+end
+
+local function which_key_generators()
+  return map_snippet_which_key(gn, generator_to_which_key)
+end
+
 local function which_key_snippets()
   return map_snippet_which_key(sv, snippet_to_which_key)
 end
 
 local wk = require("which-key")
 wk.add(which_key_snippets())
+wk.add(which_key_generators())
 wk.add({
   { "<leader>ms", group = "Svelte", icon = { icon = "", color = "orange" } },
 })

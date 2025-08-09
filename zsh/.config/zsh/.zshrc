@@ -27,6 +27,9 @@ setxkbmap -option ctrl:nocaps
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
 
+# Sane key repeat
+xset r rate 210 40
+
 # Swap mode with alt on Mode Loop keyboard
 setxkbmap -option altwin:swap_lalt_lwin
 

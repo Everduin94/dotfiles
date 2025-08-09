@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   "saghen/blink.cmp",
   version = not vim.g.lazyvim_blink_main and "*",
@@ -41,6 +42,7 @@ return {
   opts = {
     snippets = {
       expand = function(snippet, _)
+        print("Expanding!")
         return LazyVim.cmp.expand(snippet)
       end,
     },

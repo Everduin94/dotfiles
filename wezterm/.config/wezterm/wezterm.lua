@@ -1,7 +1,10 @@
 local wezterm = require("wezterm")
 
-local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
-custom.background = "#181825"
+local theme = wezterm.plugin.require("https://github.com/neapsix/wezterm").moon
+-- NOTE: Cat
+-- local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
+-- custom.background = "#181825"
+
 -- custom.tab_bar.background = "#040404"
 -- custom.tab_bar.inactive_tab.bg_color = "#0f0f0f"
 -- custom.tab_bar.new_tab.bg_color = "#080808"
@@ -48,11 +51,13 @@ end)
 -- END ZEN MODE
 
 return {
+	colors = theme.colors(),
 	-- color_scheme = 'termnial.sexy',
-	color_schemes = {
-		["OLEDppuccin"] = custom,
-	},
-	color_scheme = "OLEDppuccin",
+	-- NOTE: Cat
+	-- color_schemes = {
+	-- 	["OLEDppuccin"] = custom,
+	-- },
+	-- color_scheme = "OLEDppuccin",
 
 	-- More Spacing
 	font = wezterm.font("GeistMono Nerd Font", { weight = "Bold" }),

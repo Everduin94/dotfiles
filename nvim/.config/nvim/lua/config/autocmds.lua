@@ -10,6 +10,8 @@ vim.api.nvim_create_autocmd({ "BufWrite" }, {
   command = "LspRestart svelte",
 })
 
+vim.api.nvim_set_hl(0, "LspReferenceText", {})
+
 local map = LazyVim.safe_keymap_set
 function set_term_keymaps()
   local opts = { noremap = true }
@@ -34,6 +36,8 @@ end
 --         (#any-of? @tag "div" "span" "p")
 --     ) @element
 -- ]])
+
+-- TS Stuff
 
 local ts_utils = require("nvim-treesitter.ts_utils")
 

@@ -3,3 +3,4 @@ all/nvim/.config/nvim/autoload/**
 all/nvim/.config/nvim/autoload/plugged/**
 all/nvim/.config/nvim/node_modules
 all/nvim/.config/nvim/node_modules/**
+all/zsh/.config/zsh/.zsh_history

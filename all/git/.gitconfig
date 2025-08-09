@@ -1,0 +1,39 @@
+# ==============================
+# Core Git Configuration
+# ==============================
+[core]
+    editor = nvim
+
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    brb = checkout -b
+
+[push]
+    default = current
+
+[credential "https://github.com"]
+    helper =
+    helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper =
+    helper = !gh auth git-credential
+
+# ==============================
+# Default: personal config
+# ==============================
+[include]
+    path = ~/.gitconfig.personal
+
+# ==============================
+# Work-specific overrides
+# ==============================
+[includeIf "gitdir:~/dev/cx-cloud-ui/"]
+    path = ~/.gitconfig.work
+
+[includeIf "gitdir:~/dev/work/"]
+    path = ~/.gitconfig.work
+

@@ -8,7 +8,7 @@ Tech Stack
 - Arch + AwesomeWM `Home`
 - MacOS `Work / Mobile`
 
-> [!IMPORTANT]
+> [!NOTE]
 > This repository is managed by stow. The file structure is based on running stow from the OS level folders `all`, `mac` and `arch`.
 
 

@@ -7,7 +7,7 @@
 - Arch Linux + AwesomeWM
 
 > [!IMPORTANT]
-> This repository is managed by stow. The file structure is based on running stow from the OS level folder names "all", "mac" and "arch".
+> This repository is managed by stow. The file structure is based on running stow from the OS level folders `all`, `mac` and `arch`.
 
 
 ## 📦 Installation

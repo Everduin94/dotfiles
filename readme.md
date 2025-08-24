@@ -1,10 +1,12 @@
-# 👋 Welcome to my Dotfiles
+# 🌑 Dotfiles
 
-- Neovim
-- Wezterm
-- Zsh + Zap
-- MacOS
-- Arch Linux + AwesomeWM
+Tech Stack
+- [Neovim](https://github.com/Everduin94/dotfiles/tree/main/all/nvim/.config/nvim)
+- [Wezterm](https://github.com/Everduin94/dotfiles/tree/main/all/wezterm/.config/wezterm)
+- [Zsh + Zap](https://github.com/Everduin94/dotfiles/tree/main/all/zsh/.config/zsh)
+- [Starship](https://github.com/Everduin94/dotfiles/tree/main/all/starship/.config/starship)
+- Arch + AwesomeWM `Home`
+- MacOS `Work / Mobile`
 
 > [!IMPORTANT]
 > This repository is managed by stow. The file structure is based on running stow from the OS level folders `all`, `mac` and `arch`.

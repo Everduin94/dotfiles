@@ -8,12 +8,12 @@
 - MacOS `Work / Mobile`
 
 > [!NOTE]
-> This repository is managed by stow. The file structure is based on running stow from the OS level folders `all`, `mac` and `arch`.
+> This repository is managed by gnu stow. The file structure is based on running stow from the OS level folders `all`, `mac` and `arch`.
 
 
 ## 📦 Installation
 
-These dotfiles are managed by gnu stow. You can install individual modules of these dotfiles, for example `nvim`, based on your needs / OS. This will create a symlink to the module in your `~/.config` or `$HOME` directory, depending on the module.
+You can install individual folders of these dotfiles, for example `nvim`, based on your needs / operating system. - The following example will create a symlink to the `nvim` folder in your `~/.config` directory.
 
 ```sh
 # In your $HOME directory
@@ -30,18 +30,18 @@ stow -t ~ nvim
 ```
 
 > [!NOTE]
-> This example will clone all of my dotfiles, but will only install the `nvim` module into your `~/.config` directory. Modules will not impact your editor/terminal unless stowed.
+> This example will clone the entire dotfiles repository, but will only symlink the `nvim` folder into your `~/.config` directory. Folders will not impact your editor/terminal unless stowed.
 
 > [!WARNING]
 > These instructions are high level, and some dependencies may be out of date or missing. It may be better to take inspiration from these dotfiles instead of using them directly.
 
 ## ⚙️ Configuration
 
-Some configuration will be required depending on the modules you installed. For example:
+Some configuration will be required depending on the folders you installed. For example:
 
-- Updating the `git` module to use your name / email
-- Updating the `projects` list to point to your projects.
-  - The `p` command from the `zsh` module will open an FZF prompt of those projects.
+- Updating the `.gitconfig` from the `git` folder to use your name / email
+- Updating the `projects` file from the `projects` folder to point to your desired paths.
+  - The `p` command from the `zsh` folder will open an FZF prompt of those projects.
 - The list of dependencies for these dotfiles may be out of date. If something doesn't work, you may just be missing a dependency that needs to be installed via `npm` or your package manager (`brew`, `pacman`, etc...)
 
 ## 🖥️ Start from Zero (Mac)

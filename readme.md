@@ -1,6 +1,5 @@
 # 🌑 Dotfiles
 
-Tech Stack
 - [Neovim](https://github.com/Everduin94/dotfiles/tree/main/all/nvim/.config/nvim)
 - [Wezterm](https://github.com/Everduin94/dotfiles/tree/main/all/wezterm/.config/wezterm)
 - [Zsh + Zap](https://github.com/Everduin94/dotfiles/tree/main/all/zsh/.config/zsh)

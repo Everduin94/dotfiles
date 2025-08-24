@@ -1,45 +1,42 @@
-# Stack
-- Wezterm
+# 👋 Welcome to my Dotfiles
+
 - Neovim
-- Arch / MacOS (work)
-- Zsh (Zap Plugin Manager)
-- Raycast (MacOS)
+- Wezterm
+- Zsh + Zap
+- MacOS
+- Arch Linux + AwesomeWM
 
-## Some Interesting Things
+## Installation
 
-*The following may not be useful for your workflow but may inspire your own ideas*
+These dotfiles are managed by gnu stow. You can install individual modules of these dotfiles, for example `nvim`, based on your needs / OS. This will create a symlink to the module in your `~/.config` or `$HOME` directory, depending on the module.
 
-### Stow
-The project is manged by stow. -- The file structure may seem weird that's because:
+```sh
+# In your $HOME directory
+git clone https://github.com/Everduin94/dotfiles.git
 
-The first folder is just a namespace for the user to know what's there.
+# Install stow with your package manager
+brew install stow
 
-So `tmux/.config/tmux` will create symlinks of a folder structure in `~/.config/tmux`
-- i.e. the first folder is ignored.
+# Navigate to the folder containing the module you want to install
+cd ~/dotfiles/all
+stow -t ~ nvim
 
-So `tmux/.tmux-conf` will create a symlink `~/.tmux-conf`
+# 🔄 Rinse and repeat for all desired modules.
+```
 
-Run `stow */` to link all folders/files into `~` ($HOME)
+> [!NOTE]
+> This example will clone all of my dotfiles, but will only install the `nvim` module into your `~/.config` directory. Modules will not impact your editor/terminal unless stowed.
 
-### Raycast (MacOS) (Work)
+## Configuration
 
-It's an alternative to `Spotlight` or `Alfred`
+Some configuration will be required depending on the modules you installed. For example:
 
-My hotkey is (CMD+SPACE). Open any application, resize windows, paste snippets.
-- I primarily use this to open alacrity/chrome and navigate to specific hard to remember company URLs
-  - e.g. my team's jira board
+- Updating the `git` module to use your name / email
+- Updating the `projects` list to point to your projects.
+  - The `p` command from the `zsh` module will open an FZF prompt of those projects.
+- The list of dependencies for these dotfiles may be out of date. If something doesn't work, you may just be missing a dependency that needs to be installed via `npm` or your package manager (`brew`, `pacman`, etc...)
 
-### Projects
-- `p` is a utility for jumping into projects fast
-- `pn` is a utility for jumping into neovim fast
-
-`p` will open an FZF prompt of all of my projects.
-- Select a project to navigate to that selection
-
-Composable, type `pn` to open a prompt that will open that folder in neovim
-- Hypothetically you could do the same with VS Code
-
-# Start from Zero (Mac)
+## Start from Zero (Mac)
 
 **Install Brew**
 `cd ~`
@@ -52,12 +49,10 @@ Composable, type `pn` to open a prompt that will open that folder in neovim
 `brew install stow`
 
 **Run Stow**
-`cd dotfiles`
-`stow */`
 
-*Dotfiles should now be avilable in ~/.config*
+- See installation section
 
-**Install All Apps**
+Install All Apps\*\*
 `brew tap homebrew/cask-fonts`
 `xargs brew install < .brew-starter.list`
 `xargs brew install --cask < .brew-cask-starter.list`
@@ -66,19 +61,12 @@ Composable, type `pn` to open a prompt that will open that folder in neovim
 `gh auth login`
 `gh auth setup-git`
 
-**Setup Raycast**
+\*Manual Improvements\*\*
+Increase key repeat: System > Keyboard: Max both settings
+Rebind Caps: Click Modifier Keys in Bottom Right: Set Caps Lock to ESC
+Turn off spotlight: System Settings > Spotlight >Shortcuts
+Hide toolbar: System Preferences > Docks & Menu > Automatically hide
 
-*Not sure how to automate this*
-
-There should be a file ending in `.raycast` in your home (~), open Raycast Preferences and import that file.
-
-**Manual Improvements**
-- Increase key repeat: System > Keyboard: Max both settings
-- Rebind Caps: Click Modifier Keys in Bottom Right: Set Caps Lock to ESC
-- Turn off spotlight: System Settings > Spotlight >Shortcuts
-- Hide toolbar: System Preferences > Docks & Menu > Automatically hide
-
-# Arch Setup (WIP)
+## Arch Setup (WIP)
 
 This works on Arch minus Raycast and Mac specific things. I don't currently have the pacman & yay lists setup.
-

@@ -1,8 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
-local sv = require("config/snippet-values")
 local gn = require("config/generators/generator")
 
 -- Do you work?
@@ -16,13 +11,6 @@ function _G.nexpand(body)
     ls.snip_expand(ls.parser.parse_snippet("anon", body))
   end, 10)
 end
-
--- function _G.nexpand(body)
---   vim.api.nvim_feedkeys("o", "n", true)
---   vim.defer_fn(function()
---     vim.snippet.expand(body)
---   end, 10)
--- end
 
 local ls = require("luasnip")
 vim.keymap.set({ "i", "s" }, "<C-d>", function()
@@ -78,12 +66,15 @@ local function which_key_generators()
   return map_snippet_which_key(gn, generator_to_which_key)
 end
 
-local function which_key_snippets()
-  return map_snippet_which_key(sv, snippet_to_which_key)
+local function which_key_snippets(tbl)
+  return map_snippet_which_key(tbl, snippet_to_which_key)
 end
 
 local wk = require("which-key")
-wk.add(which_key_snippets())
+local svelte_snippets = require("modules.snippets.svelte.snippets-svelte")
+local typescript_snippets = require("modules.snippets.typescript.snippets-typescript")
+wk.add(which_key_snippets(svelte_snippets))
+wk.add(which_key_snippets(typescript_snippets))
 wk.add(which_key_generators())
 wk.add({
   { "<leader>ms", group = "Svelte", icon = { icon = "", color = "orange" } },

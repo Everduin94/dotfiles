@@ -1,4 +1,3 @@
-print("initialize GenerateSvelteFeatureFolder")
 local sv_templates = require("config/generators/templates/svelte-templates")
 local string_utils = require("config/generators/utils/strings")
 vim.api.nvim_create_user_command("GenerateSvelteFeatureFolder", function()

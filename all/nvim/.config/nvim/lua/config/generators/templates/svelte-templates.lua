@@ -1,7 +1,5 @@
 local M = {}
 
-local test = "this is my code i am"
-
 function M.svelte_class(base_name, class_name)
   local template = [[
 export type {class_name} = Tables<'{base_name}'>;

@@ -41,4 +41,14 @@ M.autolist = {
   end,
 }
 
+M.toggleterm = {
+  "akinsho/toggleterm.nvim",
+  version = "*",
+  config = function()
+    require("modules.util.util-commands")
+  end,
+}
+
+M.gitdiff = { "sindrets/diffview.nvim" }
+
 return M

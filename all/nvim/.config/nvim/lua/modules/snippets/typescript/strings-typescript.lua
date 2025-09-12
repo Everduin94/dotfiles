@@ -1,4 +1,8 @@
 local M = {}
+local fmt = require("luasnip.extras.fmt").fmt
+local rep = require("luasnip.extras").rep
+local i = require("luasnip").insert_node
+local s = require("luasnip").snippet
 
 M.if_statement = [[if ($1) {
   $0
@@ -22,9 +26,18 @@ M.for_of = [[for (const item of $1) {
 }]]
 
 M.try_catch = [[try {
-  $0
+  $1
 } catch(err) {
-  console.error(err);
+  $0
 }]]
+
+-- Luasnip style so that we can type in position 2 for intellisense and then repeat to position 2.
+M.log = s(
+  "ma1",
+  fmt("console.log('{}', {});", {
+    rep(1),
+    i(1),
+  })
+)
 
 return M

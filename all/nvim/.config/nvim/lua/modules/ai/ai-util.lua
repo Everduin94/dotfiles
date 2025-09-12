@@ -3,7 +3,22 @@ local job_id = nil
 local python_file = vim.fn.stdpath("config") .. "/lua/scripts/faster-whisper.py"
 local noice = require("noice")
 
+-- .venv/bin/python
+-- Because work machine is externally managed environment
 function M.run_python_task()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local python_terminal = Terminal:new({
+    cmd = "~/dotfiles/.venv/bin/python " .. python_file,
+    direction = "float",
+    close_on_exit = false,
+    on_open = function(term)
+      vim.cmd("startinsert!")
+    end,
+  })
+  python_terminal:toggle()
+end
+
+function M.run_python_task_2()
   noice.notify("Start recording...", "info")
   job_id = vim.fn.jobstart({ "python3", python_file }, {
     stdout_buffered = true,

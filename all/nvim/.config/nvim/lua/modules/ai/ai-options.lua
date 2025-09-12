@@ -38,7 +38,7 @@ return {
         {
           role = "user",
           content = [[
-            I have provided a rules file, general.md. 
+            I have provided a rules file, general.md.
             Read it.
             Follow the rules to the best of your ability when thinking and generating responses.
           ]],
@@ -49,7 +49,11 @@ return {
 
   strategies = {
     chat = {
-      adapter = "ollama",
+      adapter = {
+        name = "copilot",
+        model = "claude-sonnet-4",
+      },
+
       variables = {
         ["rules"] = {
           callback = "config.utils.rules-variable",
@@ -61,10 +65,18 @@ return {
       },
     },
     inline = {
-      adapter = "ollama",
+      adapter = {
+        name = "copilot",
+        model = "claude-sonnet-4",
+      },
+      -- adapter = "ollama",
     },
     cmd = {
-      adapter = "ollama",
+      adapter = {
+        name = "copilot",
+        model = "claude-sonnet-4",
+      },
+      -- adapter = "ollama",
     },
   },
 

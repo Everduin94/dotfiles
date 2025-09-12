@@ -4,19 +4,38 @@ M.if_block = [[{#if $1}
   $0
 {/if}]]
 
-M.else_block = [[{:else}
+M.else_if = [[{:else if $1} 
   $0]]
 
-M.else_if = [[{:else if $1} 
+M.else_block = [[{:else}
   $0]]
 
 M.for_block = [[{#each $1 as item, i (item.id)}
   $0
+  {:else}
+    No results found
 {/each}]]
 
 M.for_n = [[{#each { length: $1 }, i }
   $0
 {/each}]]
+
+M.signal_state = [[const $1 = \$state($2);$0]]
+M.derived = [[const $1 = \$derived($2);$0]]
+M.derived_by = [[const $1 = \$derived.by(() => {
+  $0
+});]]
+M.props = [[
+interface Props {
+  $1: $2;
+}
+
+let { $1 }: Props = $props();
+]]
+M.effect = [[$effect(() => {
+  $0
+})]]
+M.output = [[/* Add a function to props */]]
 
 M.if_lua = [[if ($1) then
   $0

@@ -9,5 +9,7 @@ vim.api.nvim_set_hl(0, "MarkviewBlockQuoteWarn", { fg = "#f6c177" }) -- yellow
 vim.api.nvim_set_hl(0, "MarkviewBlockQuoteOk", { fg = "#4a9a6f" }) -- green
 vim.api.nvim_set_hl(0, "MarkviewCheckboxChecked", { fg = "#4a9a6f" }) -- green
 vim.api.nvim_set_hl(0, "MarkviewCheckboxUnchecked", { fg = "#9ccfd8" }) -- green
+vim.api.nvim_set_hl(0, "MarkviewInlineCode", { fg = "#3e8fb0", bg = "#1e1e2e" }) -- blue fg, soft bg
+vim.api.nvim_set_hl(0, "@markup.raw.markdown_inline", { fg = "#3e8fb0" }) -- blue fg, soft bg
 
 return M

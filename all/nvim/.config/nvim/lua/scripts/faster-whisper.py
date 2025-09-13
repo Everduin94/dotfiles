@@ -33,8 +33,10 @@ log_file = os.path.join(os.path.expanduser("~"), ".chat_logs")
 if os.path.exists(output_file):
     os.remove(output_file)
 
+# ffmpeg -f avfoundation -list_devices true -i ""
+# set -i based on results
 proc = subprocess.Popen([
-    "ffmpeg", "-f", "avfoundation", "-i", ":1",
+    "ffmpeg", "-f", "avfoundation", "-i", ":2",
     "-codec:a", "libmp3lame", "-qscale:a", "2",
     output_file
 ])

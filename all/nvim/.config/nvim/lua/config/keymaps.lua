@@ -1,18 +1,17 @@
-local gn = require("config/generators/generator")
-
--- Do you work?
 require("config/generators/features/svelte-feature-folder")
 
 local ls = require("luasnip")
-
 function _G.nexpand(body)
   vim.api.nvim_feedkeys("o", "n", true) -- open new line below and enter insert mode
   vim.defer_fn(function()
-    ls.snip_expand(ls.parser.parse_snippet("anon", body))
+    if type(body) == "string" then
+      ls.snip_expand(ls.parser.parse_snippet("anon", body))
+    else
+      ls.snip_expand(body)
+    end
   end, 10)
 end
 
-local ls = require("luasnip")
 vim.keymap.set({ "i", "s" }, "<C-d>", function()
   if ls.jumpable(1) then
     return "<Cmd>lua require('luasnip').jump(1)<CR>"
@@ -32,53 +31,6 @@ map("o", "H", "^", { desc = "Beginning of Line" })
 map("n", "L", "$", { desc = "End of Line" })
 map("v", "L", "$", { desc = "End of Line" })
 map("o", "L", "$", { desc = "End of Line" })
-
-local function map_snippet_which_key(tbl, func)
-  local new_tbl = {}
-  for _, v in pairs(tbl) do
-    table.insert(new_tbl, func(v))
-  end
-  return new_tbl
-end
-
--- Define the transformation function
-local function snippet_to_which_key(snippet)
-  return {
-    snippet.key,
-    function()
-      nexpand(snippet.body)
-    end,
-    desc = snippet.desc,
-    icon = snippet.icon,
-  }
-end
-
-local function generator_to_which_key(generator)
-  return {
-    generator.key,
-    generator.fn,
-    desc = generator.desc,
-    icon = generator.icon,
-  }
-end
-
-local function which_key_generators()
-  return map_snippet_which_key(gn, generator_to_which_key)
-end
-
-local function which_key_snippets(tbl)
-  return map_snippet_which_key(tbl, snippet_to_which_key)
-end
-
-local wk = require("which-key")
-local svelte_snippets = require("modules.snippets.svelte.snippets-svelte")
-local typescript_snippets = require("modules.snippets.typescript.snippets-typescript")
-wk.add(which_key_snippets(svelte_snippets))
-wk.add(which_key_snippets(typescript_snippets))
-wk.add(which_key_generators())
-wk.add({
-  { "<leader>ms", group = "Svelte", icon = { icon = "", color = "orange" } },
-})
 
 map("n", "<leader>su", function()
   vim.snippet.expand("var ${1:name} ${2:type} $0")

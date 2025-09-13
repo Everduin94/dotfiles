@@ -25,6 +25,8 @@ return {
   ls_core.lsp_config,
   util_core.autopair,
   util_core.autolist,
+  util_core.toggleterm,
+  util_core.gitdiff,
   snippets_core.luasnip,
   { "akinsho/bufferline.nvim", enabled = false },
   { "folke/edgy.nvim", enabled = false },

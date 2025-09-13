@@ -63,7 +63,7 @@ M.markview = {
   opts = {
     preview = {
       filetypes = { "markdown", "codecompanion" },
-      hybrid_modes = { "n" },
+      -- hybrid_modes = { "n" },
       ignore_buftypes = {},
     },
     markdown = {

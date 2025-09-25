@@ -34,6 +34,13 @@ M.try_catch = [[try {
 -- Luasnip style so that we can type in position 2 for intellisense and then repeat to position 2.
 M.log = s(
   "ma1",
+  fmt("console.log('{}');", {
+    i(1),
+  })
+)
+
+M.log_var = s(
+  "ma1",
   fmt("console.log('{}', {});", {
     rep(1),
     i(1),

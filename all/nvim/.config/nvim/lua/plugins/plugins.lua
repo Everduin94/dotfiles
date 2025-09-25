@@ -27,6 +27,7 @@ return {
   util_core.autolist,
   util_core.toggleterm,
   util_core.gitdiff,
+  util_core.oil,
   snippets_core.luasnip,
   { "akinsho/bufferline.nvim", enabled = false },
   { "folke/edgy.nvim", enabled = false },

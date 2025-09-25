@@ -62,7 +62,10 @@ M.markview = {
   lazy = false,
   opts = {
     preview = {
-      filetypes = { "markdown", "codecompanion" },
+      filetypes = { "codecompanion" },
+      -- Not being able to use vim motions in links is driving me crazy.
+      -- But text shifting left and right every time I move in hybrid mode is driving me more crazy.
+      -- filetypes = { "markdown", "codecompanion" },
       -- hybrid_modes = { "n" },
       ignore_buftypes = {},
     },

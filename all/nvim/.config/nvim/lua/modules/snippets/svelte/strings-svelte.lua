@@ -30,9 +30,9 @@ interface Props {
   $1: $2;
 }
 
-let { $1 }: Props = $props();
+let { $1 }: Props = \$props();
 ]]
-M.effect = [[$effect(() => {
+M.effect = [[\$effect(() => {
   $0
 })]]
 M.output = [[/* Add a function to props */]]

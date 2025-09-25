@@ -46,6 +46,13 @@ local M = {
     icon = { icon = "󰈸", color = "blue" },
     key = "<leader>ma1",
   },
+
+  ts_log_var = {
+    body = strings.log_var,
+    desc = "Log Var",
+    icon = { icon = "󰈸", color = "blue" },
+    key = "<leader>mav",
+  },
 }
 
 return M

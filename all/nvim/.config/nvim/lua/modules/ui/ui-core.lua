@@ -3,7 +3,7 @@ local M = {}
 local ui_options = require("modules.ui.ui-options")
 local ui_util = require("modules.ui.ui-util")
 
-M.theme = {
+M.theme_rose_pine = {
   "rose-pine/neovim",
   name = "rose-pine",
   lazy = false,
@@ -11,6 +11,18 @@ M.theme = {
   config = function()
     require("rose-pine").setup(ui_options.rose_pine_options)
     vim.cmd("colorscheme rose-pine-moon")
+    require("modules.ui.ui-commands")
+  end,
+}
+
+M.theme_catppuccin = {
+  "catppuccin",
+  name = "catppuccin",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("catppuccin").setup(ui_options.catppuccin_options)
+    vim.cmd("colorscheme catppuccin-mocha")
     require("modules.ui.ui-commands")
   end,
 }

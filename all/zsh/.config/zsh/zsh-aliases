@@ -5,6 +5,7 @@ alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate ar
 
 # NVIM
 alias n="nvim"
+alias nv="NVIM_TRANSPARENT=1 nvim"
 
 # TMUX
 alias tmux="TERM=xterm-256color tmux -2"

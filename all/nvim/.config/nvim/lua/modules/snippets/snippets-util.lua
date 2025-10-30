@@ -9,6 +9,7 @@ end
 function M.to_snippets(snippets)
   local tbl = {}
   for _, v in ipairs(snippets) do
+    print(v)
     table.insert(tbl, ls.parser.parse_snippet({ trig = M.remove_leader(v.key) }, v.body))
   end
   return tbl

@@ -11,9 +11,78 @@ M.rose_pine_options = {
   disable_float_background = true,
   disable_italics = false,
   styles = {
-    bold = true,
+    bold = false,
     italic = true,
     transparency = true,
+  },
+}
+
+M.catppuccin_options = {
+  flavour = "mocha", -- latte, frappe, macchiato, mocha
+  background = {
+    light = "latte",
+    dark = "mocha",
+  },
+  transparent_background = os.getenv("NVIM_TRANSPARENT") == "1",
+  show_end_of_buffer = false,
+  term_colors = true,
+  dim_inactive = {
+    enabled = false,
+    shade = "dark",
+    percentage = 0.15,
+  },
+  no_italic = false,
+  no_bold = false,
+  no_underline = false,
+  styles = {
+    comments = { "italic" },
+    conditionals = { "italic" },
+    loops = {},
+    functions = {},
+    keywords = {},
+    strings = {},
+    variables = {},
+    numbers = {},
+    booleans = {},
+    properties = {},
+    types = {},
+    operators = {},
+  },
+  custom_highlights = function(colors)
+    return {
+      TabLineSel = { bg = colors.pink },
+      CmpBorder = { fg = colors.surface2 },
+      Number = { fg = colors.sapphire },
+      Constant = { fg = colors.sapphire },
+      Boolean = { fg = colors.yellow },
+      String = { fg = colors.teal },
+      ["Type"] = { fg = colors.yellow },
+      ["@parameter"] = { fg = colors.sky },
+      ["@property"] = { fg = colors.text },
+      ["@constant"] = { fg = colors.sapphire },
+      ["@constant.builtin"] = { fg = colors.sapphire },
+      ["@function.builtin"] = { fg = colors.sapphire },
+      ["@variable.builtin"] = { fg = colors.pink },
+      ["@method.call"] = { fg = colors.pink },
+      ["@number.css"] = { fg = colors.sapphire },
+      ["@text.strong"] = { fg = colors.pink },
+      ["@type.builtin"] = { fg = colors.teal },
+      ["@keyword.function"] = { fg = colors.pink },
+      ["@keyword.return"] = { fg = colors.pink },
+      ["@keyword.end"] = { fg = colors.pink },
+    }
+  end,
+
+  integrations = {
+    cmp = true,
+    gitsigns = true,
+    nvimtree = true,
+    treesitter = true,
+    notify = false,
+    mini = false,
+    telescope = true,
+    lsp_trouble = true,
+    which_key = true,
   },
 }
 
@@ -49,7 +118,19 @@ M.lualine_options = function()
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { "branch" },
+      lualine_b = {
+        {
+
+          "branch",
+          fmt = function(str)
+            if not str or str == "" then
+              return str
+            end
+            local last_segment = str:match("([^/]+)$")
+            return last_segment or str
+          end,
+        },
+      },
       lualine_c = {
         LazyVim.lualine.root_dir(),
         {
@@ -61,7 +142,19 @@ M.lualine_options = function()
           end,
         },
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-        { LazyVim.lualine.pretty_path() },
+        {
+          function()
+            return require("grapple").name_or_index()
+          end,
+          cond = function()
+            return package.loaded["grapple"] and require("grapple").exists()
+          end,
+          color = function()
+            return { fg = Snacks.util.color("Character") }
+          end,
+        },
+        -- { LazyVim.lualine.pretty_path() },
+        { "filename", path = 0 },
       },
       lualine_x = {
         {

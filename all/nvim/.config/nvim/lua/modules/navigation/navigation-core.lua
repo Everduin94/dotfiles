@@ -8,6 +8,17 @@ M.harpoon = {
   opts = options.harpoon_options,
   keys = options.harpoon_keys,
 }
+M.grapple = {
+  "cbochs/grapple.nvim",
+  dependencies = {
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+  },
+  keys = options.grapple_keys,
+  opts = {
+    name_pos = "start",
+    style = "basename",
+  },
+}
 M.surround = {
   "kylechui/nvim-surround",
   version = "*",

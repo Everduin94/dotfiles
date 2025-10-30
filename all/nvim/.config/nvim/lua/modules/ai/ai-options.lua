@@ -1,4 +1,21 @@
 return {
+  copilot = {
+    suggestion = {
+      enabled = true,
+      auto_trigger = true, -- This
+      hide_during_completion = false,
+      debounce = 200,
+      trigger_on_accept = true,
+      keymap = {
+        accept = "<C-f>", -- this
+        accept_word = false,
+        accept_line = false,
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-[>",
+      },
+    },
+  },
   mcphub = {
     callback = "mcphub.extensions.codecompanion",
     opts = {

@@ -1,34 +1,60 @@
 local M = {}
 
+--- Enter will select if there is a selection (preselect false)
+--- Enter will move to the next snippet if in a snippet and no selection.
+--- Enter will just enter otherwise.
 ---@module 'blink.cmp'
 ---@type blink.cmp.Config
 M.blink_options = {
   snippets = {
-    expand = function(snippet, _)
+    expand = function(snippet)
       return LazyVim.cmp.expand(snippet)
+    end,
+    jump = function(direction)
+      local ls = require("luasnip")
+      if ls.jumpable(direction) then
+        ls.jump(direction)
+      elseif vim.snippet.active({ direction = direction }) then
+        vim.snippet.jump(direction)
+      end
+    end,
+    active = function(filter)
+      local ls = require("luasnip")
+      return ls.jumpable(1) or vim.snippet.active({ direction = 1 })
     end,
   },
   appearance = {
     use_nvim_cmp_as_default = false,
     nerd_font_variant = "mono",
+    highlight_ns,
   },
   completion = {
+    list = {
+      selection = {
+        preselect = false,
+      },
+    },
+
     accept = {
       auto_brackets = {
         enabled = true,
       },
     },
     menu = {
+      border = "rounded",
       draw = {
         treesitter = { "lsp" },
       },
     },
     documentation = {
+      window = {
+        border = "rounded",
+      },
       auto_show = true,
       auto_show_delay_ms = 200,
     },
     ghost_text = {
-      enabled = vim.g.ai_cmp,
+      enabled = false,
     },
   },
 
@@ -39,7 +65,7 @@ M.blink_options = {
     -- adding any nvim-cmp sources here will enable them
     -- with blink.compat
     compat = {},
-    default = { "lsp", "path", "snippets", "buffer" },
+    default = { "snippets", "lsp", "path", "buffer" },
     per_filetype = {
       codecompanion = { "codecompanion" },
     },
@@ -51,7 +77,18 @@ M.blink_options = {
 
   keymap = {
     preset = "enter",
-    ["<C-y>"] = { "select_and_accept" },
+    ["<C-y>"] = { "select_and_accept" }, -- Picks first item even if no selection
+    ["<Tab>"] = { "select_next", "fallback" },
+    ["<S-Tab>"] = { "select_prev", "fallback" },
+    ["<CR>"] = { "accept", "fallback" },
+
+    -- Loved this idea until I realized some snippets values are callbacks and you have to press enter to open the {}.
+    -- ["<CR>"] = { "accept", "snippet_forward", "fallback" },
+
+    -- optional: Shift+Enter to jump *back* in snippet (or fallback)
+    -- ["<S-CR>"] = { "snippet_backward", "fallback" },
+
+    -- ["<enter>"] = {}, -- Disable if auto select is set to true
   },
 }
 

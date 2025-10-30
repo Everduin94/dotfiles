@@ -9,6 +9,10 @@ M.harpoon_options = {
   settings = {
     save_on_toggle = true,
     sync_on_ui_close = true,
+    key = function()
+      print("Harpoon key: ", vim.fn.getcwd())
+      return vim.fn.getcwd()
+    end,
   },
 
   default = {
@@ -22,22 +26,30 @@ M.harpoon_options = {
   },
 }
 
-M.harpoon_keys = function()
+M.grapple_keys = function()
   local keys = {
     {
       "<leader>0",
       function()
-        require("harpoon"):list():add()
+        require("grapple").tag()
       end,
-      desc = "Harpoon File",
+      desc = "Grapple File",
     },
     {
       "<leader>h",
       function()
-        local harpoon = require("harpoon")
-        harpoon.ui:toggle_quick_menu(harpoon:list())
+        local grapple = require("grapple")
+        grapple.toggle_tags()
       end,
-      desc = "Harpoon Quick Menu",
+      desc = "Grapple Quick Menu",
+    },
+    {
+      "<leader>H",
+      function()
+        local grapple = require("grapple")
+        grapple.reset()
+      end,
+      desc = "Grapple Reset",
     },
   }
 
@@ -45,11 +57,17 @@ M.harpoon_keys = function()
     table.insert(keys, {
       "<leader>" .. i,
       function()
-        require("harpoon"):list():select(i)
+        require("grapple").select({ index = i })
       end,
-      desc = "Harpoon to File " .. i,
+      desc = "Grapple to File " .. i,
     })
   end
+  return keys
+end
+
+-- Still use for terminal
+M.harpoon_keys = function()
+  local keys = {}
   return keys
 end
 

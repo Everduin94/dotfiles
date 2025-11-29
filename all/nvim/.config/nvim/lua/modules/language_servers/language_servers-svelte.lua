@@ -1,11 +1,11 @@
 local M = {}
 
 M.svelte_setup = function(_, opts)
-  LazyVim.lsp.on_attach(function(client, buffer)
+  LazyVim.lsp.on_attach(function(client)
     vim.api.nvim_create_autocmd("BufWritePost", {
       pattern = { "*.js", "*.ts" },
       callback = function(ctx)
-        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+        client:notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
       end,
     })
   end)
@@ -16,6 +16,12 @@ M.svelte_setup = function(_, opts)
           format = {
             config = {
               svelteBracketNewLine = false,
+            },
+          },
+          plugin = {
+            typescript = {
+              enabled = true,
+              diagnostics = { enable = true },
             },
           },
         },

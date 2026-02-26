@@ -1,6 +1,5 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.ai.copilot",
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.dap.core",
@@ -10,15 +9,8 @@
     "lazyvim.plugins.extras.editor.snacks_explorer",
     "lazyvim.plugins.extras.editor.snacks_picker",
     "lazyvim.plugins.extras.formatting.prettier",
-    "lazyvim.plugins.extras.lang.angular",
-    "lazyvim.plugins.extras.lang.astro",
-    "lazyvim.plugins.extras.lang.go",
-    "lazyvim.plugins.extras.lang.json",
-    "lazyvim.plugins.extras.lang.svelte",
     "lazyvim.plugins.extras.lang.tailwind",
     "lazyvim.plugins.extras.lang.toml",
-    "lazyvim.plugins.extras.lang.typescript",
-    "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.linting.eslint",
     "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.util.mini-hipatterns",
@@ -26,7 +18,7 @@
   ],
   "install_version": 7,
   "news": {
-    "NEWS.md": "10960"
+    "NEWS.md": "11866"
   },
   "version": 8
 }

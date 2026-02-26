@@ -1,5 +1,49 @@
 return {
+  ninetynine = function()
+    local _99 = require("99")
+    local cwd = vim.uv.cwd()
+    local basename = vim.fs.basename(cwd)
+    _99.setup({
+      -- provider = _99.ClaudeCodeProvider,  -- default: OpenCodeProvider
+      provider = _99.OpenCodeProvider,
+      model = "github-copilot/gpt-5.2-codex",
+      logger = {
+        level = _99.DEBUG,
+        path = "/tmp/" .. basename .. ".99.debug",
+        print_on_error = true,
+      },
+
+      --- Completions: #rules and @files in the prompt buffer
+      completion = {
+        -- custom_rules = {
+        --   "scratch/custom_rules/",
+        -- },
+
+        --- Configure @file completion (all fields optional, sensible defaults)
+        files = {
+          -- enabled = true,
+          -- max_file_size = 102400,     -- bytes, skip files larger than this
+          -- max_files = 5000,            -- cap on total discovered files
+          -- exclude = { ".env", ".env.*", "node_modules", ".git", ... },
+        },
+        -- source = "cmp",
+      },
+
+      md_files = {
+        "AGENT.md",
+      },
+    })
+
+    vim.keymap.set("v", "<leader>9v", function()
+      _99.visual()
+    end)
+
+    vim.keymap.set("v", "<leader>9s", function()
+      _99.stop_all_requests()
+    end)
+  end,
   copilot = {
+
     suggestion = {
       enabled = true,
       auto_trigger = true, -- This
@@ -7,12 +51,14 @@ return {
       debounce = 200,
       trigger_on_accept = true,
       keymap = {
-        accept = "<C-f>", -- this
+        -- Set all to false. Let manual keymap handle:
+        -- https://github.com/zbirenbaum/copilot.lua/issues/577
+        accept = false, -- this
         accept_word = false,
         accept_line = false,
         next = "<M-]>",
         prev = "<M-[>",
-        dismiss = "<C-[>",
+        dismiss = "<C-e>",
       },
     },
   },
@@ -68,7 +114,7 @@ return {
     chat = {
       adapter = {
         name = "copilot",
-        model = "claude-sonnet-4",
+        model = "claude-sonnet-4.5",
       },
 
       variables = {
@@ -84,14 +130,14 @@ return {
     inline = {
       adapter = {
         name = "copilot",
-        model = "claude-sonnet-4",
+        model = "claude-sonnet-4.5",
       },
       -- adapter = "ollama",
     },
     cmd = {
       adapter = {
         name = "copilot",
-        model = "claude-sonnet-4",
+        model = "claude-sonnet-4.5",
       },
       -- adapter = "ollama",
     },

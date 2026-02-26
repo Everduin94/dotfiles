@@ -190,6 +190,22 @@ return {
 				end),
 			}),
 		},
+		{
+			key = "w",
+			mods = "CMD|SHIFT",
+			action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		},
+		{
+			key = "_",
+			mods = "CMD|SHIFT",
+			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = '"',
+			mods = "CMD|SHIFT",
+			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		},
+		{ key = "s", mods = "CMD|SHIFT", action = wezterm.action.PaneSelect },
 	},
 	window_frame = {
 		border_left_width = "1px",

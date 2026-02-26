@@ -70,6 +70,10 @@ local function show_snippet_menu()
   end)
 end
 
+vim.keymap.set({ "i" }, "<C-f>", function()
+  require("copilot.suggestion").accept()
+end, { noremap = true, silent = true })
+
 vim.keymap.set({ "n" }, "<leader>ms", function()
   show_snippet_menu()
 end, { noremap = true, silent = true })

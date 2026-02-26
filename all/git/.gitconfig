@@ -37,3 +37,6 @@
 [includeIf "gitdir:~/dev/work/"]
     path = ~/.gitconfig.work
 
+[user]
+	name = everduin94
+	email = everduin94@gmail.com

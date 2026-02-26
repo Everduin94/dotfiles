@@ -46,6 +46,15 @@ man_pw () {
   type serial
 }
 
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 # DAC is part of the name of the speaker
 # You could do this as 1 command, but you can't say get 1 character, because then it breaks on double digits
 # i.e. redo this in lua

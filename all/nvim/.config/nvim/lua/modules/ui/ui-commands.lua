@@ -14,8 +14,52 @@ vim.api.nvim_set_hl(0, "@markup.raw.markdown_inline", { fg = "#3e8fb0" }) -- blu
 vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#6c7086" }) -- blue fg, soft bg
 vim.api.nvim_set_hl(0, "Delimiter", { fg = "#bac2de" }) -- blue fg, soft bg
 vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = "#bac2de" }) -- blue fg, soft bg
-vim.api.nvim_set_hl(0, "MatchParen", { fg = "#7dc4e4", bg = "NONE" }) -- blue fg, soft bg
+vim.api.nvim_set_hl(0, "MatchParen", { fg = "#f2cdcd", bg = "NONE" }) -- blue fg, soft bg #7dc4e4
 vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#313244" }) -- blue fg, soft bg
+vim.api.nvim_set_hl(0, "Type", { fg = "#CDD6f4" }) -- white
+
+-- Minimal Theme Implementation
+vim.api.nvim_set_hl(0, "@type.builtin", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.typescript", { fg = "#f5c2e7" }) -- high priority but softer than Function
+vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.svelte", { fg = "#f5c2e7" }) -- high priority but softer than Function
+vim.api.nvim_set_hl(0, "@function.builtin", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "@variable.member", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "@lsp.mod.declaration.typescript", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "#CDD6f4", italic = true }) -- white
+vim.api.nvim_set_hl(0, "@property", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "Type", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "Function", { fg = "#b4befe" }) -- white
+-- vim.api.nvim_set_hl(0, "Function", { fg = "#CDD6f4" }) -- white
+vim.api.nvim_set_hl(0, "Operator", { fg = "#bac2de" }) -- sub white
+vim.api.nvim_set_hl(0, "Special", { fg = "#bac2de" }) -- sub white
+vim.api.nvim_set_hl(0, "@parameter", { fg = "NONE" }) -- remove color
+vim.api.nvim_set_hl(0, "String", { fg = "#94e2d5" })
+vim.api.nvim_set_hl(0, "Number", { fg = "#94e2d5" })
+vim.api.nvim_set_hl(0, "Boolean", { fg = "#94e2d5" })
+vim.api.nvim_set_hl(0, "Keyword", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "Exception", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "@keyword.function", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "@keyword.export", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "@keyword.operator", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "Conditional", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "@keyword.return", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "Include", { fg = "#f5e0dc", italic = true }) -- soft color with italic
+vim.api.nvim_set_hl(0, "@lsp.mod.declaration.typescript", { fg = "#89b4fa" }) -- high priority color (yellow)
+vim.api.nvim_set_hl(0, "@lsp.typemod.variable.declaration.svelte", { fg = "#89b4fa" }) -- high priority color (yellow)
+vim.api.nvim_set_hl(0, "@lsp.typemod.function.declaration.svelte", { fg = "#89b4fa" }) -- high priority color (yellow)
+vim.api.nvim_set_hl(0, "@lsp.mod.declaration.typescript", { fg = "#89b4fa" }) -- high priority color (yellow)
+vim.api.nvim_set_hl(0, "@constructor.typescript", { fg = "#89b4fa" }) -- high priority color (yellow)
+vim.api.nvim_set_hl(0, "@lsp.typemod.property.declaration.typescript", { fg = "#CDD6f4" }) -- white
+-- @lsp.typemod.function.declaration.svelte
+
+--
+-- vim.api.nvim_set_hl(0, "Comment", { fg = "#89b4fa", italic = true }) -- Blue comments 👀
+-- vim.api.nvim_set_hl(0, "Function", { fg = "#89dceb" }) -- Is getting overwritten by mod declaration
+-- vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.typescript", { fg = "#89dceb" }) -- high priority but softer than Function
+-- vim.api.nvim_set_hl(0, "@constructor.typescript", { fg = "#89dceb", italic = true }) --
+-- vim.api.nvim_set_hl(0, "@lsp.typemod.parameter.declaration.typescript", { fg = "#f9e2af" }) -- high priority but softer than Function
+-- vim.api.nvim_set_hl(0, "@lsp.mod.declaration.typescript", { fg = "#89dceb" }) -- high priority color (cyan)
 
 -- vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#1e1e2e" })
 -- vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#1e1e2e" })

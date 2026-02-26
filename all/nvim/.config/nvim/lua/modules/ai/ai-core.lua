@@ -1,6 +1,21 @@
 local M = {}
 
 local options = require("modules.ai.ai-options")
+local commands = require("modules.ai.ai-commands")
+
+M.sidekick = {
+  "folke/sidekick.nvim",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  opts = {
+    nes = { enabled = false }, -- I strongly dislike NES
+    cli = {
+      prompts = require("modules.ai.ai-prompts"),
+    },
+  },
+  keys = commands.sidekick_keys,
+}
 
 M.mcphub = {
   "ravitemer/mcphub.nvim",
@@ -22,9 +37,17 @@ M.copilot = {
   },
   cmd = "Copilot",
   event = "InsertEnter",
+  filetypes = {
+    [""] = false,
+  },
   config = function()
     require("copilot").setup(options.copilot)
   end,
+}
+
+M.ninetynine = {
+  "ThePrimeagen/99",
+  config = options.ninetynine,
 }
 
 M.codecompanion = {
@@ -38,14 +61,16 @@ M.codecompanion = {
   config = function()
     require("codecompanion").setup({
       extensions = {
-        mcphub = {
-          callback = "mcphub.extensions.codecompanion",
-          opts = {
-            make_vars = true,
-            make_slash_commands = true,
-            show_result_in_chat = true,
-          },
-        },
+        -- Breaks even after updating everything.
+        --
+        -- mcphub = {
+        --   callback = "mcphub.extensions.codecompanion",
+        --   opts = {
+        --     make_vars = true,
+        --     make_slash_commands = true,
+        --     show_result_in_chat = true,
+        --   },
+        -- },
       },
       prompt_library = options.prompt_library,
       strategies = options.strategies,

@@ -13,6 +13,5 @@ Some things my configuration does that you might find interesting:
 - The `ui` module creates a minimal lua-line, and adds the title of the file in the buffer to the top corner via `incline`. buffer-line is disabled in `plugins.lua`.
 - `faster-whisper.py` allows you to record a mp3 via `ffmpeg` and then transcribe it with `faster-whisper` on a consumer cpu. - Allowing you to talk > text > paste.
 
-
 > [!NOTE]
 > All `modules` are loaded by `plugins.lua` inside of `/plugins`.

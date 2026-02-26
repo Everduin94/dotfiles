@@ -8,3 +8,5 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export FPATH="$HOME/completions/zsh:$FPATH"
+export FPATH="$HOME/eza/completions/zsh:$FPATH"

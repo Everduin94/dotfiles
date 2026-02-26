@@ -8,10 +8,12 @@ local util_core = require("modules.util.util-core")
 local snippets_core = require("modules.snippets.snippets-core")
 
 return {
+  ai_core.sidekick,
   ai_core.mcphub,
   ai_core.codecompanion,
   ai_core.img_clip,
   ai_core.copilot,
+  ai_core.ninetynine,
   ui_core.theme_catppuccin,
   ui_core.incline,
   ui_core.lualine,
@@ -22,6 +24,7 @@ return {
   navigation_core.grapple,
   navigation_core.quick_switcher,
   navigation_core.surround,
+  navigation_core.yazi,
   completion_core.blink,
   test_core.neotest,
   ls_core.lsp_config,
@@ -35,6 +38,6 @@ return {
   { "folke/edgy.nvim", enabled = false },
   { "RRethy/vim-illuminate", enabled = false },
   { "HiPhish/rainbow-delimiters.nvim", enabled = false },
-  { "echasnovski/mini.pairs", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
   -- ui_core.theme_rose_pine,
 }

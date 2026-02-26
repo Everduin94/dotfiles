@@ -21,10 +21,13 @@ M.luasnip = {
         },
       },
     })
-    local svelte_snippets = require("modules.snippets.svelte.snippets-svelte")
+
+    -- Deprecated
     local angular_snippets = require("modules.snippets.angular.snippets-angular")
     local typescript_snippets = require("modules.snippets.typescript.snippets-typescript")
     local util = require("modules.snippets.snippets-util")
+    -- End
+
     local is_angular = next(vim.fs.find({ "angular.json", "nx.json" }, { upward = true }))
     local is_svelte = next(vim.fs.find({ "svelte.config.js", "svelte.config.ts" }, { upward = true }))
 
@@ -33,28 +36,18 @@ M.luasnip = {
       ls.add_snippets("typescript", util.to_snippets(angular_plus_ts), { key = "typescript" })
       ls.add_snippets("html", util.to_snippets(angular_snippets), { key = "html" })
     elseif is_svelte then
-      ls.add_snippets("svelte", util.to_snippets(svelte_snippets), { key = "svelte" })
-      ls.add_snippets("typescript", util.to_snippets(typescript_snippets), { key = "typescript" })
+      local svelte_typescript_snippets = require("modules.snippets.svelte-typescript")
+      local svelte_snippets = require("modules.snippets.svelte")
+      local typescript_snippets_v2 = require("modules.snippets.typescript")
+
+      local svelte_typescript_all = vim.tbl_extend("force", typescript_snippets_v2, svelte_typescript_snippets)
+      ls.add_snippets("svelte", svelte_snippets, { key = "svelte" })
+      ls.add_snippets("typescript", svelte_typescript_all, { key = "typescript" })
     else
       ls.add_snippets("typescript", require("modules.snippets.typescript"), { key = "typescript" })
       -- ls.add_snippets("typescript", require("modules.snippets.svelte.snippets-typescript-v2"), { key = "typescript" })
     end
   end,
 }
-
--- s(
---   { trig = "10", desc = "A detailed description yo", name = "Console log" },
---   fmt("console.log('{}', {});", {
---     rep(1),
---     i(1),
---   })
--- ),
--- s("ifxx", {
---   t("if ("),
---   i(1, "condition"),
---   t({ ") {", "  " }),
---   selected_text(),
---   t({ "", "}" }),
--- }),
 
 return M

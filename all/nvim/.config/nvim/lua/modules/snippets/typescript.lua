@@ -35,6 +35,7 @@ M.log_variable = s(
   })
 )
 
+-- Remove friendly snippets
 M.if_statement = s({ trig = "if", name = "If Statement (Mine)" }, {
   t("if ("),
   i(1, "condition"),

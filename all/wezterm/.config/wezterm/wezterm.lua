@@ -64,11 +64,13 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	elseif title:lower():find("blog") then
 		fg_color = "#f5c2e7"
 	elseif title:lower():find("docs") then
-		fg_color = "#96cdfb"
+		fg_color = "#cba6f7"
 	elseif title:lower():find("platform") then
 		fg_color = "#96cdfb"
-	elseif title:lower():find("timer") then
+	elseif title:lower():find("timer") or title:lower():find("tomatillo") then
 		fg_color = "#a6e3a1"
+	elseif title:lower():find("system") then
+		fg_color = "#96cdfb"
 	elseif title:lower():find("dotfiles") then
 		fg_color = "#f9e2af"
 	end
@@ -195,6 +197,11 @@ local config = {
 			key = "w",
 			mods = "CMD|SHIFT",
 			action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		},
+		{
+			key = "x",
+			mods = "CMD|SHIFT",
+			action = wezterm.action.CloseCurrentTab({ confirm = true }),
 		},
 		{
 			key = "_",

@@ -141,19 +141,48 @@ map("n", "<A-h>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width
 -- Tabs
 map("n", "<leader><tab>r", ":LualineRenameTab<space>", { desc = "Rename Tab" })
 
--- Harpoon
-local harpoon = require("harpoon")
+-- Terminal
+local run_dev = require("toggleterm.terminal").Terminal:new({
+  cmd = "npm run dev",
+  direction = "horizontal",
+  close_on_exit = false,
+})
+
+local anything_term = require("toggleterm.terminal").Terminal:new({
+  direction = "horizontal",
+  close_on_exit = false,
+})
+
 map("n", "<leader>t1", function()
-  harpoon:list("term"):select(1)
+  run_dev:toggle()
 end)
 map("n", "<leader>t2", function()
-  harpoon:list("term"):select(2)
+  require("sidekick.cli").toggle({ name = "opencode", focus = true })
 end)
+
+-- Give all the options, see what we like
 map("n", "<leader>t3", function()
-  harpoon:list("term"):select(3)
+  anything_term:toggle(nil, "horizontal")
 end)
 map("n", "<leader>t4", function()
-  harpoon:list("term"):select(4)
+  anything_term:toggle(nil, "float")
+end)
+map("n", "<leader>tg", function()
+  anything_term:toggle(nil, "tab")
+end)
+
+map("n", "<leader>th", function()
+  run_dev:close()
+  anything_term:close()
+  require("sidekick.cli").hide()
+end)
+map("n", "<leader>tx", function()
+  run_dev:shutdown()
+end)
+
+map("n", "<leader>t0", function()
+  run_dev:toggle()
+  require("sidekick.cli").toggle({ name = "opencode", focus = true })
 end)
 
 -- Misc

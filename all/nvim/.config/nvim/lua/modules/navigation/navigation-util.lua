@@ -66,6 +66,7 @@ M.setup_dynamic_switcher_keymaps = function()
   end
   local is_angular = next(vim.fs.find({ "angular.json", "nx.json" }, { upward = true }))
   local is_svelte = next(vim.fs.find({ "svelte.config.js", "svelte.config.ts" }, { upward = true }))
+  print("is_angular", is_angular)
 
   -- Styles
   map(

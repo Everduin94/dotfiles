@@ -32,6 +32,8 @@ return {
   util_core.autolist,
   util_core.toggleterm,
   util_core.gitdiff,
+  util_core.codediff,
+  util_core.octo,
   util_core.oil,
   snippets_core.luasnip,
   { "akinsho/bufferline.nvim", enabled = false },

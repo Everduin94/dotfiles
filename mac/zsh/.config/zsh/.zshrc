@@ -12,7 +12,6 @@ plug "wintermi/zsh-starship"
 plug "$HOME/.config/zsh/zsh-aliases"
 plug "$HOME/.config/zsh/zsh-exports"
 plug "$HOME/.config/zsh/zsh-functions"
-plug "$HOME/.config/zsh/aliases.zsh"
 
 # Keybindings
 # Force emacs mode even when EDITOR/VISUAL is nvim.
@@ -30,21 +29,23 @@ compinit
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # pnpm
-export PNPM_HOME="/Users/everduin/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+for pnpm_home_candidate in "$HOME/Library/pnpm" "$HOME/.local/share/pnpm"; do
+  if [ -d "$pnpm_home_candidate" ]; then
+    export PNPM_HOME="$pnpm_home_candidate"
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    break
+  fi
+done
+unset pnpm_home_candidate
 # pnpm end
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 command -v nvm >/dev/null 2>&1 && nvm use --silent default >/dev/null 2>&1
-
-# opencode
-# export PATH=/Users/erik/.opencode/bin:$PATH
-export PATH=/Users/everduin/.opencode/bin:$PATH
 
 # zoxide
 eval "$(zoxide init zsh)"

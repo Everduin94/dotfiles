@@ -105,6 +105,8 @@ end)
 -- END ZEN MODE
 
 local colors = theme.colors()
+local home = os.getenv("HOME")
+local background_image = home and (home .. "/backgrounds/landscape2.jpg") or nil
 
 local config = {
 	colors = colors,
@@ -145,7 +147,6 @@ local config = {
 	macos_window_background_blur = 45,
 	window_background_opacity = 0.92,
 	window_decorations = "RESIZE | MACOS_FORCE_ENABLE_SHADOW",
-	window_background_image = "/Users/everduin/Downloads/uncharted_horizon_by_byrotek_deusrhv.png",
 	-- This looks pretty interesting 👀
 	-- window_background_gradient = {
 	-- 	orientation = "Vertical",
@@ -220,6 +221,14 @@ local config = {
 		border_bottom_color = "#45475a",
 	},
 }
+
+if background_image then
+	local file = io.open(background_image, "r")
+	if file then
+		file:close()
+		config.window_background_image = background_image
+	end
+end
 
 config.enable_kitty_keyboard = true
 

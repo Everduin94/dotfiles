@@ -1,0 +1,9 @@
+theme = Catppuccin Macchiato
+background = #1e1e2e
+font-family = Iosevka
+background-opacity = 0.90
+background-opacity-cells = true
+background-blur = true
+macos-titlebar-style = transparent
+
+keybind = alt+backspace=text:\x1b\x7f

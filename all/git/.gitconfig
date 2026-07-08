@@ -22,21 +22,6 @@
     helper =
     helper = !gh auth git-credential
 
-# ==============================
-# Default: personal config
-# ==============================
-[include]
-    path = ~/.gitconfig.personal
-
-# ==============================
-# Work-specific overrides
-# ==============================
-[includeIf "gitdir:~/dev/cx-cloud-ui/"]
-    path = ~/.gitconfig.work
-
-[includeIf "gitdir:~/dev/work/"]
-    path = ~/.gitconfig.work
-
 [user]
-	name = everduin94
-	email = everduin94@gmail.com
+	name = PLACE_HOLDER
+	email = PLACE_HOLDER

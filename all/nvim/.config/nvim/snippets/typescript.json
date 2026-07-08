@@ -1,0 +1,69 @@
+{
+  "If statement": {
+    "prefix": ["if", "m1"],
+    "body": [
+      "if (${1:condition}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "If statement"
+  },
+  "Else statement": {
+    "prefix": ["else", "m2"],
+    "body": [
+      "else {",
+      "  $0",
+      "}"
+    ],
+    "description": "Else statement"
+  },
+  "Else if statement": {
+    "prefix": ["elseif", "m3"],
+    "body": [
+      "else if (${1:condition}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Else if statement"
+  },
+  "For of loop": {
+    "prefix": ["forof", "m4"],
+    "body": [
+      "for (const ${1:item} of ${2:items}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "For of loop"
+  },
+  "For loop by index": {
+    "prefix": ["fori", "m5"],
+    "body": [
+      "for (let i = 0; i < ${1:items}.length; i++) {",
+      "  const item = ${1:items}[i];",
+      "  $0",
+      "}"
+    ],
+    "description": "For loop by index"
+  },
+  "Try catch": {
+    "prefix": ["try", "m6"],
+    "body": [
+      "try {",
+      "  ${1}",
+      "} catch (${2:err}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Try catch"
+  },
+  "Console log": {
+    "prefix": ["log", "ml"],
+    "body": "console.log(${1:value});$0",
+    "description": "Console log"
+  },
+  "Console log variable": {
+    "prefix": ["logv", "mlv"],
+    "body": "console.log('${1:name}', $1);$0",
+    "description": "Console log variable"
+  }
+}

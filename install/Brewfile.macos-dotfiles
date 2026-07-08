@@ -1,0 +1,33 @@
+# Install with:
+#   brew bundle --file=install/Brewfile.macos-dotfiles
+
+# Core
+brew "git"
+brew "stow"
+
+# Shell / terminal
+brew "starship"
+brew "tmux"
+brew "fzf"
+brew "zoxide"
+brew "yazi"
+
+# Editor / CLI
+brew "neovim"
+brew "fd"
+brew "ripgrep"
+brew "jq"
+brew "gh"
+brew "tree-sitter"
+brew "hunk"
+
+# macOS apps
+cask "ghostty"
+cask "karabiner-elements"
+cask "raycast"
+
+# Separate installers
+#   install/install-node.sh
+#   install/install-pi-agent.sh
+#   install/install-iosevka-font.sh
+#   install/install-browsers.sh

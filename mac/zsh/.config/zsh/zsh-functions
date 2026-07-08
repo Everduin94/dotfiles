@@ -1,0 +1,79 @@
+# Function to source files if they exist
+function zsh_add_file() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+
+function jira() {
+    local ticket_id="$1"
+    local field_arg=""
+
+    if [ -z "$ticket_id" ]; then
+        echo "Usage: jira <TICKET-ID> [--field <field_name>]" >&2
+        return 1
+    fi
+
+    # Shift past the first argument (ticket ID)
+    shift
+
+    # If --field was provided as the next arguments, pass them on to the python script
+    if [ "$1" = "--field" ]; then
+        field_arg="--field $2"
+    fi
+
+    curl -s \
+      -u "everduin@cisco.com:$(pass jira)" \
+      -H "Accept: application/json" \
+      "https://cisco-cxe.atlassian.net/rest/api/3/issue/${ticket_id}" | ~/.pi/scripts/jira-to-md.py ${field_arg}
+}
+
+function figma() {
+    local url="$1"
+    local node_id="$2"
+    if [ -z "$url" ]; then
+        echo "Usage: figma <FIGMA-URL-OR-FILE-KEY> [NODE-ID]" >&2
+        return 1
+    fi
+
+    local img_url
+    if [ -n "$node_id" ]; then
+        img_url=$(FIGMA_ACCESS_TOKEN="$(pass figma)" ~/.pi/scripts/figma-image.py "$url" "$node_id")
+    else
+        img_url=$(FIGMA_ACCESS_TOKEN="$(pass figma)" ~/.pi/scripts/figma-image.py "$url")
+    fi
+
+    if [ $? -eq 0 ] && [ -n "$img_url" ]; then
+        echo "$img_url"
+        # Copy to macOS clipboard
+        echo -n "$img_url" | pbcopy
+        echo "(Copied to clipboard!)" >&2
+    else
+        return 1
+    fi
+}
+
+function zsh_add_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
+        # For plugins
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    fi
+}
+
+function zsh_add_completion() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
+        # For completions
+		completion_file_path=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
+		fpath+="$(dirname "${completion_file_path}")"
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+		fpath+=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
+        [ -f $ZDOTDIR/.zccompdump ] && $ZDOTDIR/.zccompdump
+    fi
+	completion_file="$(basename "${completion_file_path}")"
+	if [ "$2" = true ] && compinit "${completion_file:1}"
+}

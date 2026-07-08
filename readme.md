@@ -2,7 +2,8 @@
 
 - [Neovim](https://github.com/Everduin94/dotfiles/tree/main/all/nvim/.config/nvim)
 - [Wezterm](https://github.com/Everduin94/dotfiles/tree/main/all/wezterm/.config/wezterm)
-- [Zsh + Zap](https://github.com/Everduin94/dotfiles/tree/main/all/zsh/.config/zsh)
+- Ghostty (`all/ghostty/.config/ghostty/config.ghostty`)
+- Zsh + Zap ([mac](https://github.com/Everduin94/dotfiles/tree/main/mac/zsh/.config/zsh), [arch](https://github.com/Everduin94/dotfiles/tree/main/arch/zsh/.config/zsh))
 - [Starship](https://github.com/Everduin94/dotfiles/tree/main/all/starship/.config/starship)
 - Arch + AwesomeWM `Home`
 - MacOS `Work / Mobile`
@@ -64,7 +65,6 @@ stow -t ~ nvim
 ## 🔄 Rinse and repeat for all desired modules.
 
 # Install All Apps
-brew tap homebrew/cask-fonts
 xargs brew install < .brew-starter.list
 xargs brew install --cask < .brew-cask-starter.list
 

@@ -106,7 +106,7 @@ end)
 
 local colors = theme.colors()
 
-return {
+local config = {
 	colors = colors,
 	-- NOTE: Cat
 	-- color_schemes = {
@@ -220,3 +220,7 @@ return {
 		border_bottom_color = "#45475a",
 	},
 }
+
+config.enable_kitty_keyboard = true
+
+return config

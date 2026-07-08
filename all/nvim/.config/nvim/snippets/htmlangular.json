@@ -1,0 +1,88 @@
+{
+  "Angular if block": {
+    "prefix": ["ngif", "mfq"],
+    "body": [
+      "@if (${1:condition}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "If angular block"
+  },
+  "Angular else if block": {
+    "prefix": ["ngelseif", "mfw"],
+    "body": [
+      "@else if (${1:condition}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Else if angular block"
+  },
+  "Angular else block": {
+    "prefix": ["ngelse", "mfe"],
+    "body": [
+      "@else {",
+      "  $0",
+      "}"
+    ],
+    "description": "Else angular block"
+  },
+  "Angular for block": {
+    "prefix": ["ngfor", "mfr"],
+    "body": [
+      "@for (let ${1:item} of ${2:items}; track ${1:item}.id) {",
+      "  $0",
+      "} @empty {",
+      "  No results found...",
+      "}"
+    ],
+    "description": "Each angular block"
+  },
+  "Angular for n block": {
+    "prefix": ["ngforn", "mfR"],
+    "body": [
+      "@for (let i of Array(${1:count}).keys()) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Each N angular block"
+  },
+  "Angular state": {
+    "prefix": ["ngstate", "ms1"],
+    "body": "const ${1:state} = signal(${2:value});$0",
+    "description": "Angular state"
+  },
+  "Angular computed": {
+    "prefix": ["ngcomputed", "ms2"],
+    "body": [
+      "const ${1:value} = computed(() => {",
+      "  $0",
+      "  return true;",
+      "});"
+    ],
+    "description": "Angular computed"
+  },
+  "Angular computed one line": {
+    "prefix": ["ngcomputed1", "ms@"],
+    "body": "const ${1:value} = computed(() => ${2:true});$0",
+    "description": "Angular computed one line"
+  },
+  "Angular effect": {
+    "prefix": ["ngeffect", "ms3"],
+    "body": [
+      "effect(() => {",
+      "  $0",
+      "});"
+    ],
+    "description": "Angular effect"
+  },
+  "Angular props": {
+    "prefix": ["ngprops", "ms4"],
+    "body": "${1:name} = input.required<${2:Type}>(${3});$0",
+    "description": "Angular props"
+  },
+  "Angular output": {
+    "prefix": ["ngoutput", "ms5"],
+    "body": "${1:name} = output<void>();$0 /* this.${1:name}.emit() */",
+    "description": "Angular output"
+  }
+}

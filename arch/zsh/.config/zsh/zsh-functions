@@ -20,10 +20,13 @@ function jira() {
         field_arg="--field $2"
     fi
 
+    local jira_base_url="${JIRA_BASE_URL:-$(pass "${JIRA_BASE_URL_PASS_ENTRY:-cisco/jira/base-url}")}"
+    local jira_user_email="${JIRA_USER_EMAIL:-$(pass "${JIRA_USER_EMAIL_PASS_ENTRY:-cisco/jira/user-email}")}"
+
     curl -s \
-      -u "everduin@cisco.com:$(pass jira)" \
+      -u "${jira_user_email}:$(pass jira)" \
       -H "Accept: application/json" \
-      "https://cisco-cxe.atlassian.net/rest/api/3/issue/${ticket_id}" | ~/.pi/scripts/jira-to-md.py ${field_arg}
+      "${jira_base_url%/}/rest/api/3/issue/${ticket_id}" | ~/.pi/scripts/jira-to-md.py ${field_arg}
 }
 
 function figma() {

@@ -11,6 +11,24 @@ map("n", "gV", '"g`[" . strpart(getregtype(), 0, 1) . "g`]"', {
 })
 map("x", "g/", [[<Esc>/\%V]], { silent = false, desc = "Search inside selection" })
 
+for _, mode in ipairs({ "n", "x", "o" }) do
+  map(mode, "H", "^", { desc = "Beginning of line" })
+  map(mode, "L", "$", { desc = "End of line" })
+end
+
+map("n", "<leader>-", "<C-w>s", { desc = "Split window below" })
+map("n", "<leader>|", "<C-w>v", { desc = "Split window right" })
+
+map("n", "<leader>pg", function()
+  local name = vim.fn.expand("%:t")
+  if name == "" then
+    vim.notify("Current buffer has no file", vim.log.levels.WARN)
+    return
+  end
+  vim.fn.setreg("+", name)
+  vim.notify("Copied: " .. name)
+end, { desc = "Copy buffer filename" })
+
 if not inline then
   map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
   map("n", "<leader><space>", function()
@@ -42,9 +60,10 @@ map("n", "<C-n>", tmux.next_window, { desc = "Next tmux window" })
 map("n", "<C-p>", tmux.previous_window, { desc = "Previous tmux window" })
 
 map("n", "<C-s>", "<cmd>write<cr>", { desc = "Write buffer" })
-map("n", "<C-q>", "<cmd>xall<cr>", { desc = "Save all and quit" })
 map("n", "<leader>ww", "<cmd>write<cr>", { desc = "Write buffer" })
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit window" })
+map("n", "<leader>qa", "<cmd>xall<cr>", { desc = "Save all and quit" })
+map("n", "<leader>od", "<cmd>e#<cr>", { desc = "Alternate file" })
 
 if not inline then
   map("n", "<leader>0", "<cmd>Grapple tag<cr>", { desc = "Grapple tag file" })

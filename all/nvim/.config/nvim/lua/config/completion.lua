@@ -47,6 +47,10 @@ function M.enter()
     return key("<C-y>")
   end
 
+  if _G.MiniPairs then
+    return MiniPairs.cr()
+  end
+
   return key("<CR>")
 end
 

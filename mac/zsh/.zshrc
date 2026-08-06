@@ -12,7 +12,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export FPATH="$HOME/completions/zsh:$FPATH"
 export FPATH="$HOME/eza/completions/zsh:$FPATH"
 
-export NODE_EXTRA_CA_CERTS="$HOME/.pi/certs/cisco-secure-access-root.pem"
+if [ -f "$HOME/.pi/certs/cisco-secure-access-root.pem" ]; then
+  export NODE_EXTRA_CA_CERTS="$HOME/.pi/certs/cisco-secure-access-root.pem"
+else
+  unset NODE_EXTRA_CA_CERTS
+fi
 
 # Pi voice input extension
 # Auto-select Shure first, then fall back to the MacBook Pro microphone.

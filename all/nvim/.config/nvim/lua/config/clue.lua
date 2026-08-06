@@ -4,6 +4,8 @@ local function leader_clues()
   local clues = {
     { mode = { "n", "x" }, keys = "<Leader>a", desc = "+pi" },
     { mode = "n", keys = "<Leader>m", desc = "+snippets" },
+    { mode = "n", keys = "<Leader>o", desc = "+open" },
+    { mode = "n", keys = "<Leader>p", desc = "+path" },
     { mode = "n", keys = "<Leader>q", desc = "+quit" },
     { mode = "n", keys = "<Leader>t", desc = "+tmux" },
     { mode = "n", keys = "<Leader>w", desc = "+write" },

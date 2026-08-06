@@ -48,8 +48,29 @@ export NVM_DIR="$HOME/.nvm"
 command -v nvm >/dev/null 2>&1 && nvm use --silent default >/dev/null 2>&1
 
 # zoxide
-eval "$(zoxide init zsh)"
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 pi() {
   EDITOR='env PI_NVIM_INLINE=1 nvim' VISUAL='env PI_NVIM_INLINE=1 nvim' command pi "$@"
 }
+
+. "$HOME/.turso/env"
+
+# Dark factory: create the task input and validation specification templates.
+# Fill in prompt.md, then run create-task on it. The specification phase fills
+# in validation-spec.md.
+function create-task-template() {
+  mkdir -p ./tmp
+  cp "$HOME/.pi/turso-poller-tui/templates/task-template.md" ./tmp/prompt.md
+  cp "$HOME/.pi/turso-poller-tui/templates/validation-specification-template.md" ./tmp/validation-spec.md
+  echo "Created ./tmp/prompt.md and ./tmp/validation-spec.md"
+  nvim ./tmp/prompt.md
+}
+alias ctt=create-task-template
+
+# Dark factory: create a task row from ./tmp/prompt.md (or an override path
+# passed as $1).
+function create-task() {
+  bun "$HOME/.pi/turso-poller-tui/scripts/create-task.ts" "$@"
+}
+alias ct=create-task

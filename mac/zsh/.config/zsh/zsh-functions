@@ -54,6 +54,40 @@ function figma() {
     fi
 }
 
+function create-task() {
+    local template="$1"
+    if [ -z "$template" ]; then
+        echo "Usage: create-task <filled-template.md>" >&2
+        return 1
+    fi
+
+    bun ~/.pi/turso-poller-tui/scripts/create-task.ts "$template"
+}
+
+function cxb() {
+    local main_repo="$HOME/dev/cx-platform-ui-worktrees/cx-platform-ui"
+
+    # git worktree list is sorted alphabetically by path, NOT by creation
+    # order, so we can't assume the new worktree is the last line. Diff the
+    # porcelain worktree list before/after to find whichever path is new.
+    local before after new_worktree
+    before=$(git --git-dir "$main_repo/.git" worktree list --porcelain | grep '^worktree ')
+
+    (
+        cd "$main_repo" || exit 1
+        better-branch --checkout worktree --git-dir "$main_repo/.git" "$@"
+    )
+    local status=$?
+    [ $status -ne 0 ] && return $status
+
+    after=$(git --git-dir "$main_repo/.git" worktree list --porcelain | grep '^worktree ')
+    new_worktree=$(comm -13 <(echo "$before" | sort) <(echo "$after" | sort) | sed 's/^worktree //' | head -n 1)
+
+    if [ -n "$new_worktree" ]; then
+        cd "$new_worktree" || return 1
+    fi
+}
+
 function zsh_add_plugin() {
     PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
     if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 

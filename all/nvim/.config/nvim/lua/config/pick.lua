@@ -17,7 +17,7 @@ local function picker_cwd()
 end
 
 function M.files()
-  Snacks.picker.smart({
+  Snacks.picker.files({
     cwd = picker_cwd(),
   })
 end

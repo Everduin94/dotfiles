@@ -233,6 +233,11 @@ function M.set_target(target)
 end
 
 function M.shell()
+  if not in_tmux() then
+    vim.cmd("botright split | terminal")
+    return
+  end
+
   local result = run({
     "split-window",
     "-dP",
@@ -289,6 +294,7 @@ function M.open()
 
   vim.g.pi_tmux_target = target
   vim.g.pi_tmux_managed_target = target
+  run({ "select-pane", "-t", target })
 end
 
 function M.close()
@@ -342,6 +348,7 @@ function M.attach()
     end
 
     M.set_target(item.id)
+    run({ "select-pane", "-t", item.id })
     vim.notify("Attached pi target " .. item.id)
   end)
 end
@@ -382,7 +389,7 @@ end
 function M.send_file()
   local file = current_file()
   if file then
-    M.send(file)
+    M.send(file, { submit = false })
   end
 end
 

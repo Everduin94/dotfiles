@@ -23,5 +23,5 @@
     helper = !gh auth git-credential
 
 [user]
-	name = PLACE_HOLDER
-	email = PLACE_HOLDER
+	name = Erik Verduin
+	email = everduin94@gmail.com

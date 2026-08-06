@@ -37,7 +37,11 @@ export GOPATH=$HOME/.local/share/go
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export NODE_OPTIONS=--max_old_space_size=16384
-export NODE_EXTRA_CA_CERTS="$HOME/.pi/certs/cisco-secure-access-root.pem"
+if [ -f "$HOME/.pi/certs/cisco-secure-access-root.pem" ]; then
+  export NODE_EXTRA_CA_CERTS="$HOME/.pi/certs/cisco-secure-access-root.pem"
+else
+  unset NODE_EXTRA_CA_CERTS
+fi
 
 # Pi voice input extension
 # Auto-select Shure first, then fall back to the MacBook Pro microphone.

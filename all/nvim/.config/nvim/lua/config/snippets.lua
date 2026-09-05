@@ -9,11 +9,15 @@ local function lang_patterns()
   local markdown = { "markdown/**/*.json", "**/markdown.json" }
 
   return {
+    css = { "css/**/*.json", "**/css.json" },
+    html = { "html/**/*.json", "**/html.json" },
+    htmlangular = { "htmlangular/**/*.json", "**/htmlangular.json" },
+    markdown = markdown,
+    svelte = { "svelte/**/*.json", "**/svelte.json" },
     typescript = typescript,
     typescriptreact = typescript,
     tsx = typescript,
-    htmlangular = { "htmlangular/**/*.json", "**/htmlangular.json" },
-    markdown = markdown,
+    zig = { "zig/**/*.json", "**/zig.json" },
   }
 end
 

@@ -7,7 +7,7 @@ local function leader_clues()
     { mode = "n", keys = "<Leader>o", desc = "+open" },
     { mode = "n", keys = "<Leader>p", desc = "+path" },
     { mode = "n", keys = "<Leader>q", desc = "+quit" },
-    { mode = "n", keys = "<Leader>t", desc = "+tmux" },
+    { mode = { "n", "x" }, keys = "<Leader>t", desc = "+terminal" },
     { mode = "n", keys = "<Leader>w", desc = "+write" },
   }
 

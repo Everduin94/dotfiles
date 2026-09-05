@@ -28,7 +28,6 @@ amdGaming=(
 
 editor=(
 'neovim'
-'tmux'
 )
 
 # nodejs npm

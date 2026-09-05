@@ -27,10 +27,10 @@ function M.jump_two_chars()
     return
   end
 
-  local pattern = vim.pesc(first .. second)
+  local pattern = "\\c\\V" .. vim.fn.escape(first .. second, "\\")
 
   MiniJump2d.start({
-    spotter = MiniJump2d.gen_spotter.pattern(pattern),
+    spotter = MiniJump2d.gen_spotter.vimpattern(pattern),
     allowed_lines = {
       blank = false,
       fold = false,

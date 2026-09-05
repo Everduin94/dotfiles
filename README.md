@@ -22,10 +22,10 @@ git clone https://github.com/Everduin94/dotfiles.git
 brew install stow
 
 cd ~/dotfiles/all
-stow -t ~ git nvim starship wezterm ghostty hunk tmux
+stow -t ~ git nvim starship wezterm ghostty hunk
 
 cd ~/dotfiles/mac
-stow -t ~ karabiner raycast zsh
+stow -t ~ karabiner raycast zsh yabai skhd sketchybar
 ```
 
 On Linux / Arch, stow from `~/dotfiles/arch` for OS-specific packages.
@@ -59,10 +59,10 @@ brew bundle --file=install/Brewfile.macos-dotfiles
 
 # Stow desired packages
 cd ~/dotfiles/all
-stow -t ~ git nvim starship wezterm ghostty hunk tmux
+stow -t ~ git nvim starship wezterm ghostty hunk
 
 cd ~/dotfiles/mac
-stow -t ~ karabiner raycast zsh
+stow -t ~ karabiner raycast zsh yabai skhd sketchybar
 
 # Authenticate GitHub
 gh auth login
@@ -84,6 +84,16 @@ gh auth setup-git
 - Increase key repeat: System > Keyboard: Max both settings
 - Turn off spotlight shortcuts: System Settings > Spotlight > Shortcuts
 - Hide toolbar: System Settings > Desktop & Dock > Automatically hide and show the Dock
+
+**yabai/skhd setup**
+- Grant Accessibility access to both `yabai` and `skhd`, then restart both services.
+- Create the desired number of macOS Spaces manually.
+- In Desktop & Dock: enable separate Spaces per display, disable automatic Space rearrangement, show desktop items, and set wallpaper clicks to reveal the desktop only in Stage Manager.
+
+**SketchyBar setup**
+- Start it with `brew services start sketchybar`.
+- SketchyBar requires **Displays have separate Spaces**.
+- Keep the native menu bar visible until the SketchyBar status items are sufficient.
 
 ## 🖥️ Arch Setup
 

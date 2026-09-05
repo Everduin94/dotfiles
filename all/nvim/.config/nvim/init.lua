@@ -31,7 +31,6 @@ local plugins = {
   { src = "https://github.com/nvim-mini/mini.cursorword" },
   { src = "https://github.com/nvim-mini/mini.hipatterns" },
   { src = "https://github.com/nvim-mini/mini.indentscope" },
-  { src = "https://github.com/roy2220/easyjump.tmux" },
 }
 
 if not inline then
@@ -66,7 +65,6 @@ hipatterns.setup({
 
 require("config.pairs").setup()
 require("config.jump").setup()
-require("config.easyjump").setup()
 require("config.surround").setup()
 require("config.snippets").setup()
 require("config.completion").setup()
@@ -82,6 +80,15 @@ if not inline then
   require("oil").setup({
     default_file_explorer = true,
     skip_confirm_for_simple_edits = true,
+    float = {
+      border = "rounded",
+      max_height = 0.9,
+      max_width = 50,
+      override = function(config)
+        config.col = 0
+        return config
+      end,
+    },
     view_options = {
       show_hidden = true,
       natural_order = true,

@@ -84,5 +84,42 @@
     "prefix": ["ngoutput", "ms5"],
     "body": "${1:name} = output<void>();$0 /* this.${1:name}.emit() */",
     "description": "Angular output"
+  },
+  "Angular button": {
+    "prefix": ["button"],
+    "body": [
+      "<button (click)=\"$1\" class=\"button $2\">",
+      "  $0",
+      "</button>"
+    ],
+    "description": "Angular button with click handler and classes"
+  },
+  "Left grow, right max": {
+    "prefix": ["left-grow-right-max"],
+    "body": [
+      "<div class=\"flex items-center gap-2\">",
+      "  <div class=\"grow\">",
+      "    $1",
+      "  </div>",
+      "  <div class=\"\">",
+      "    $0",
+      "  </div>",
+      "</div>"
+    ],
+    "description": "Flex row with a growing left side"
+  },
+  "Left max, right grow": {
+    "prefix": ["left-max-right-grow"],
+    "body": [
+      "<div class=\"flex items-center gap-2\">",
+      "  <div class=\"\">",
+      "    $1",
+      "  </div>",
+      "  <div class=\"grow\">",
+      "    $0",
+      "  </div>",
+      "</div>"
+    ],
+    "description": "Flex row with a growing right side"
   }
 }

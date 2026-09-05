@@ -1,0 +1,66 @@
+# -----------------------------------------------------------------------------
+# Window focus: west / south / north / east
+# This intentionally replaces the native Command+H “Hide application” shortcut.
+# -----------------------------------------------------------------------------
+cmd - h : yabai -m window --focus west
+cmd - j : yabai -m window --focus south
+cmd - k : yabai -m window --focus north
+cmd - l : yabai -m window --focus east
+
+# Move/reinsert a managed window in the BSP tree.
+shift + cmd - h : yabai -m window --warp west
+shift + cmd - j : yabai -m window --warp south
+shift + cmd - k : yabai -m window --warp north
+shift + cmd - l : yabai -m window --warp east
+
+# Close the focused macOS window, not the application. Unlike an app's native
+# Command+W behavior, this always targets the whole window rather than a tab,
+# then focuses another usable window on the same Space.
+cmd - w : "$HOME/.config/skhd/scripts/close-window.sh"
+
+# -----------------------------------------------------------------------------
+# Spaces/workspaces
+# -----------------------------------------------------------------------------
+cmd - 1 : yabai -m space --focus 1
+cmd - 2 : yabai -m space --focus 2
+cmd - 3 : yabai -m space --focus 3
+cmd - 4 : yabai -m space --focus 4
+cmd - 5 : yabai -m space --focus 5
+cmd - 6 : yabai -m space --focus 6
+cmd - 7 : yabai -m space --focus 7
+cmd - 8 : yabai -m space --focus 8
+cmd - 9 : yabai -m space --focus 9
+
+# Move a window to a Space and follow it. This works with SIP enabled.
+shift + cmd - 1 : yabai -m window --space 1 --focus
+shift + cmd - 2 : yabai -m window --space 2 --focus
+shift + cmd - 3 : yabai -m window --space 3 --focus
+shift + cmd - 4 : yabai -m window --space 4 --focus
+shift + cmd - 5 : yabai -m window --space 5 --focus
+shift + cmd - 6 : yabai -m window --space 6 --focus
+shift + cmd - 7 : yabai -m window --space 7 --focus
+shift + cmd - 8 : yabai -m window --space 8 --focus
+shift + cmd - 9 : yabai -m window --space 9 --focus
+
+# Toggle back to the previously focused Space.
+cmd - 0 : yabai -m space --focus recent
+
+# -----------------------------------------------------------------------------
+# Secondary window-management actions
+# These use Control+Command to avoid replacing common application shortcuts.
+# -----------------------------------------------------------------------------
+ctrl + cmd - f     : yabai -m window --toggle zoom-fullscreen
+ctrl + cmd - space : yabai -m window --toggle float --grid 4:4:1:1:2:2
+ctrl + cmd - b     : yabai -m space --balance
+ctrl + cmd - e     : yabai -m window --toggle split
+
+# Physical displays. Useful only when multiple monitors are connected.
+ctrl + cmd - h : yabai -m display --focus west
+ctrl + cmd - l : yabai -m display --focus east
+
+# Move the current window to another physical display and follow it.
+shift + ctrl + cmd - h : yabai -m window --display west; yabai -m display --focus west
+shift + ctrl + cmd - l : yabai -m window --display east; yabai -m display --focus east
+
+# Terminal launcher; avoids the commonly used Command+Return shortcut.
+ctrl + cmd - return : open -na /Applications/Ghostty.app

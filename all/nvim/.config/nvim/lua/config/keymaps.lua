@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 local hunk = require("config.hunk")
-local tmux = require("config.tmux")
+local terminal = require("config.terminal")
 local inline = vim.g.pi_nvim_inline == true
 
 map("n", "<Esc>", "<cmd>nohlsearch<cr>")
@@ -37,27 +37,15 @@ if not inline then
   map("n", "<leader>/", function()
     require("config.pick").grep()
   end, { desc = "Grep project" })
-  map("n", "<leader>e", "<cmd>Oil --float<cr>", { desc = "Open explorer" })
+  map("n", "<leader>e", function()
+    require("oil").toggle_float()
+  end, { desc = "Toggle explorer" })
 end
 
-map("n", "<C-h>", function()
-  tmux.navigate("h", "-L")
-end, { desc = "Window or tmux left" })
-
-map("n", "<C-j>", function()
-  tmux.navigate("j", "-D")
-end, { desc = "Window or tmux down" })
-
-map("n", "<C-k>", function()
-  tmux.navigate("k", "-U")
-end, { desc = "Window or tmux up" })
-
-map("n", "<C-l>", function()
-  tmux.navigate("l", "-R")
-end, { desc = "Window or tmux right" })
-
-map("n", "<C-n>", tmux.next_window, { desc = "Next tmux window" })
-map("n", "<C-p>", tmux.previous_window, { desc = "Previous tmux window" })
+map("n", "<C-h>", "<C-w>h", { desc = "Window left" })
+map("n", "<C-j>", "<C-w>j", { desc = "Window down" })
+map("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+map("n", "<C-l>", "<C-w>l", { desc = "Window right" })
 
 map("n", "<C-s>", "<cmd>write<cr>", { desc = "Write buffer" })
 map("n", "<leader>ww", "<cmd>write<cr>", { desc = "Write buffer" })
@@ -89,69 +77,70 @@ if not inline then
   end, { desc = "Git diff overlay" })
 end
 
-map("n", "<leader>gh", hunk.open, { desc = "Open or focus Hunk review" })
-map("n", "<leader>gH", hunk.close, { desc = "Close Hunk pane" })
+if not inline then
+  map("n", "<leader>gh", hunk.open, { desc = "Open or focus Hunk review" })
+  map("n", "<leader>gH", hunk.close, { desc = "Close Hunk terminal" })
 
-map("n", "<leader>tt", tmux.shell, { desc = "Open tmux shell pane" })
+  for i = 1, 4 do
+    local index = i
+    map("n", "<leader>t" .. index, function()
+      terminal.toggle(index)
+    end, { desc = "Terminal " .. index })
+  end
 
-map("n", "<leader>aa", tmux.open, { desc = "Open pi pane" })
-map("n", "<leader>as", tmux.attach, { desc = "Attach pi pane" })
-map("n", "<leader>ad", tmux.close, { desc = "Close pi pane" })
-map("n", "<leader>at", tmux.send_this, { desc = "Send file position to pi" })
-map("n", "<leader>af", tmux.send_file, { desc = "Send file path to pi" })
-map("x", "<leader>av", tmux.send_selection, { desc = "Send selection to pi" })
-map("n", "<leader>ap", tmux.prompt, { desc = "Prompt pi" })
+  map("n", "<leader>tg", terminal.toggle_zmx, { desc = "Toggle zmx terminal" })
+  map("n", "<leader>td", terminal.detach_zmx, { desc = "Detach zmx session" })
+  map("n", "<leader>tf", terminal.send_file, { desc = "Send file path to zmx" })
+  map("x", "<leader>ts", terminal.send_selection, { desc = "Send selection to zmx" })
 
-vim.api.nvim_create_user_command("HunkMenu", hunk.menu, {
-  desc = "Open the Hunk review menu",
-})
+  map("n", "<leader>at", terminal.send_this, { desc = "Send file position to zmx" })
+  map("n", "<leader>af", terminal.send_file, { desc = "Send file path to zmx" })
+  map("x", "<leader>av", terminal.send_selection, { desc = "Send selection to zmx" })
+  map("n", "<leader>ap", terminal.prompt, { desc = "Prompt zmx terminal" })
+end
 
-vim.api.nvim_create_user_command("HunkClose", hunk.close, {
-  desc = "Close the managed Hunk pane",
-})
-
-vim.api.nvim_create_user_command("TmuxShell", tmux.shell, {
-  desc = "Open a tmux split with a shell",
-})
-
-vim.api.nvim_create_user_command("PiOpen", tmux.open, {
-  desc = "Open a tmux split running pi",
-})
-
-vim.api.nvim_create_user_command("PiAttach", tmux.attach, {
-  desc = "Attach to an existing tmux pane running pi",
-})
-
-vim.api.nvim_create_user_command("PiClose", tmux.close, {
-  desc = "Close the managed pi tmux pane",
-})
-
-vim.api.nvim_create_user_command("PiTarget", function(opts)
-  tmux.set_target(opts.args)
+vim.api.nvim_create_user_command("Wd", function(opts)
+  require("mini.bufremove").delete(0, opts.bang)
 end, {
-  nargs = 1,
-  desc = "Set the tmux pane id used for pi commands",
+  bang = true,
+  desc = "Delete buffer without changing the window layout",
 })
 
-vim.api.nvim_create_user_command("PiPrompt", tmux.prompt, {
-  desc = "Prompt pi in tmux",
-})
+vim.cmd([[cnoreabbrev <expr> wd getcmdtype() ==# ':' && getcmdline() ==# 'wd' ? 'Wd' : 'wd']])
 
-vim.api.nvim_create_user_command("PiThis", tmux.send_this, {
-  desc = "Send current file position to pi",
-})
+if not inline then
+  vim.api.nvim_create_user_command("HunkMenu", hunk.menu, {
+    desc = "Open the Hunk review menu",
+  })
 
-vim.api.nvim_create_user_command("PiFile", tmux.send_file, {
-  desc = "Send current file path to pi",
-})
+  vim.api.nvim_create_user_command("HunkClose", hunk.close, {
+    desc = "Close the managed Hunk terminal",
+  })
 
-vim.api.nvim_create_user_command("PiFocus", tmux.focus_target, {
-  desc = "Focus the pi tmux pane",
-})
+  vim.api.nvim_create_user_command("ZmxOpen", terminal.focus_zmx, {
+    desc = "Open or focus the managed zmx terminal",
+  })
 
-vim.api.nvim_create_user_command("PiSend", function(opts)
-  tmux.send_range(opts.line1, opts.line2)
-end, {
-  range = true,
-  desc = "Send the current line or range to pi",
-})
+  vim.api.nvim_create_user_command("ZmxDetach", terminal.detach_zmx, {
+    desc = "Detach the current zmx session and return to the chooser",
+  })
+
+  vim.api.nvim_create_user_command("ZmxPrompt", terminal.prompt, {
+    desc = "Prompt the managed zmx terminal",
+  })
+
+  vim.api.nvim_create_user_command("ZmxThis", terminal.send_this, {
+    desc = "Send current file position to zmx",
+  })
+
+  vim.api.nvim_create_user_command("ZmxFile", terminal.send_file, {
+    desc = "Send current file path to zmx",
+  })
+
+  vim.api.nvim_create_user_command("ZmxSend", function(opts)
+    terminal.send_range(opts.line1, opts.line2)
+  end, {
+    range = true,
+    desc = "Send the current line or range to zmx",
+  })
+end

@@ -40,6 +40,9 @@ symbol=" "
 [git_status]
 disabled=true
 
+[env_var.ZMX_SESSION]
+format = ' [zmx](fg:yellow)'
+
 # What's with the spacing?
 [os]
 disabled=true

@@ -27,5 +27,10 @@ export PI_VOICE_DEVICE="cpu"
 export PI_VOICE_COMPUTE_TYPE="int8"
 export PI_VOICE_LANGUAGE="en"
 
-alias download-avf="$HOME/.pi/scripts/download-avf-openapi.sh"
-alias search-avf="$HOME/.pi/scripts/search-avf-openapi.sh"
+alias download-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/download-avf-openapi.sh"
+alias search-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/search-avf-openapi.sh"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=("$HOME/.docker/completions" $fpath)
+autoload -Uz compinit
+(( ${+_comps[docker]} )) || compinit
+# End of Docker CLI completions

@@ -18,7 +18,6 @@ ruby
 ruby-build
 sqlite
 stow
-tmux
 tree-sitter
 xclip
 gh

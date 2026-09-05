@@ -5,6 +5,7 @@ set -euo pipefail
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 2
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock mru-spaces -bool false
 
 python3 - <<'PY'
 import os
@@ -42,5 +43,5 @@ killall SystemUIServer >/dev/null 2>&1 || true
 
 echo
 echo "Done."
-echo "Set fast key repeat, disabled Spotlight shortcuts, and turned on Dock auto-hide."
+echo "Set fast key repeat, disabled Spotlight shortcuts, turned on Dock auto-hide, and disabled automatic Space rearrangement."
 echo "Caps Lock is handled by Karabiner."

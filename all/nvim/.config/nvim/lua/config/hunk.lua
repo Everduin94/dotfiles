@@ -1,11 +1,9 @@
 local M = {}
 
+local hunk_terminal
+
 local function trim(value)
   return (value or ""):gsub("%s+$", "")
-end
-
-local function in_tmux()
-  return vim.env.TMUX ~= nil and vim.env.TMUX ~= ""
 end
 
 local function system(args, opts)
@@ -27,19 +25,6 @@ local function system(args, opts)
   end
 
   return trim(result.stdout)
-end
-
-local function tmux(args)
-  if not in_tmux() then
-    vim.notify("Not running inside tmux", vim.log.levels.WARN)
-    return nil
-  end
-
-  return system(vim.list_extend({ "tmux" }, args))
-end
-
-local function pane_exists(target)
-  return target and target ~= "" and system({ "tmux", "list-panes", "-t", target }, { notify = false }) ~= nil
 end
 
 local function current_file()
@@ -92,63 +77,40 @@ local function base_ref(root)
   end
 end
 
-local function shelljoin(args)
-  return table.concat(vim.tbl_map(vim.fn.shellescape, args), " ")
+local function terminal_valid()
+  return hunk_terminal and hunk_terminal:buf_valid()
 end
 
-local function managed_target()
-  return vim.g.hunk_tmux_managed_target
-end
+local function open_in_terminal(cmd, cwd)
+  M.close()
 
-local function open_in_pane(cmd, cwd)
-  local target = managed_target()
-  if pane_exists(target) then
-    M.close()
-  end
-
-  local pane = tmux({
-    "split-window",
-    "-dP",
-    "-F",
-    "#{pane_id}",
-    "-c",
-    cwd,
-    "-h",
-    "-l",
-    "55%",
-    "exec " .. shelljoin(cmd),
+  hunk_terminal = Snacks.terminal.open(cmd, {
+    cwd = cwd,
+    win = {
+      position = "right",
+      width = 0.55,
+    },
   })
-
-  if not pane or pane == "" then
-    vim.notify("Failed to open hunk pane", vim.log.levels.ERROR)
-    return
-  end
-
-  vim.g.hunk_tmux_managed_target = pane
+  hunk_terminal:focus()
 end
 
 function M.close()
-  local target = managed_target()
-  if not target then
-    vim.notify("No managed hunk pane", vim.log.levels.WARN)
-    return
+  if terminal_valid() then
+    hunk_terminal:close()
   end
-
-  if pane_exists(target) then
-    tmux({ "kill-pane", "-t", target })
-  end
-
-  vim.g.hunk_tmux_managed_target = nil
+  hunk_terminal = nil
 end
 
 function M.focus()
-  local target = managed_target()
-  if not pane_exists(target) then
-    vim.g.hunk_tmux_managed_target = nil
+  if not terminal_valid() then
+    hunk_terminal = nil
     return false
   end
 
-  tmux({ "select-pane", "-t", target })
+  if not hunk_terminal:win_valid() then
+    hunk_terminal:show()
+  end
+  hunk_terminal:focus()
   return true
 end
 
@@ -201,7 +163,7 @@ function M.menu()
     end,
   }, function(item)
     if item then
-      open_in_pane(item.cmd, root)
+      open_in_terminal(item.cmd, root)
     end
   end)
 end

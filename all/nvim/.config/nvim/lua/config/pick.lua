@@ -19,12 +19,17 @@ end
 function M.files()
   Snacks.picker.files({
     cwd = picker_cwd(),
+    matcher = {
+      ignorecase = true,
+      smartcase = false,
+    },
   })
 end
 
 function M.grep()
   Snacks.picker.grep({
     cwd = picker_cwd(),
+    args = { "--ignore-case" },
   })
 end
 

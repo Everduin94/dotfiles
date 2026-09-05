@@ -7,6 +7,9 @@ alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate ar
 alias n="nvim"
 alias nv="NVIM_TRANSPARENT=1 nvim"
 
+# ZMX
+alias za='zmx-select'
+
 # TMUX
 # alias tmux="TERM=xterm-256color tmux -2"
 
@@ -51,9 +54,9 @@ pi_main() {
 }
 alias pimain='pi_main'
 alias pi-main='pi_main'
-alias download-avf="$HOME/.pi/scripts/download-avf-openapi.sh"
-alias search-avf="$HOME/.pi/scripts/search-avf-openapi.sh"
-alias describe-avf="$HOME/.pi/scripts/describe-avf-openapi.sh"
+alias download-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/download-avf-openapi.sh"
+alias search-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/search-avf-openapi.sh"
+alias describe-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/describe-avf-openapi.sh"
 
 # Lua Scripts
 export L="lua ~/.config/lua-scripts/lua-runner.lua"
@@ -114,8 +117,8 @@ sv () {
  
 alias figma="noglob figma"
  
-alias cx-platform-login="~/.pi/scripts/onprem-auth-login.sh"
-alias cx-platform-link="~/.pi/scripts/onprem-auth-link.sh"
+alias cx-platform-login="~/.pi/agent/paladin/projects/avf/scripts/core/onprem-auth-login.sh"
+alias cx-platform-link="~/.pi/agent/paladin/projects/avf/scripts/core/onprem-auth-link.sh"
  
 
 

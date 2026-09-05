@@ -7,7 +7,6 @@ brew "stow"
 
 # Shell / terminal
 brew "starship"
-brew "tmux"
 brew "fzf"
 brew "zoxide"
 brew "yazi"
@@ -20,6 +19,15 @@ brew "jq"
 brew "gh"
 brew "tree-sitter"
 brew "hunk"
+
+# Window management
+tap "asmvik/formulae"
+brew "asmvik/formulae/yabai"
+brew "asmvik/formulae/skhd"
+
+# Status bar
+tap "FelixKratz/formulae"
+brew "FelixKratz/formulae/sketchybar"
 
 # macOS apps
 cask "ghostty"

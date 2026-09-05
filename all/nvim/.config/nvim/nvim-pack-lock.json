@@ -4,10 +4,6 @@
       "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
       "src": "https://github.com/catppuccin/nvim"
     },
-    "easyjump.tmux": {
-      "rev": "06fc9e111ac3ff916e6834262ebc4171284424ce",
-      "src": "https://github.com/roy2220/easyjump.tmux"
-    },
     "grapple.nvim": {
       "rev": "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7",
       "src": "https://github.com/cbochs/grapple.nvim"

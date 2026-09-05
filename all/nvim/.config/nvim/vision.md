@@ -9,14 +9,14 @@
 - Configure plugins minimally.
 - Manage third-party dependencies outside Neovim when possible.
 - Stay usable in large files.
-- Integrate cleanly with tmux and pi.
+- Integrate cleanly with Snacks terminals, zmx, and pi.
 
 ## principles
 
 1. Native over plugin.
    - Use built-in LSP, diagnostics, packages, filetype, quickfix, and terminal features before adding plugins.
 2. External over auto-managed.
-   - Install language servers, tree-sitter parsers, formatters, linters, tmux, and CLI tools outside Neovim.
+   - Install language servers, tree-sitter parsers, formatters, linters, zmx, and CLI tools outside Neovim.
 3. Small over clever.
    - Prefer a few flat Lua files over a framework or deep abstraction.
 4. Fast over flashy.
@@ -27,9 +27,9 @@
    - Default to large-file guards.
    - Avoid tree-sitter highlighting by default.
    - Disable expensive features when file size crosses a threshold.
-6. Tmux is part of the editor workflow.
-   - Move between Neovim splits and tmux panes with the same keys.
-   - Send prompts or selections to pi through tmux.
+6. zmx is part of the editor workflow.
+   - Open persistent zmx sessions in a managed Snacks terminal.
+   - Send prompts or selections through Neovim's terminal channel.
 
 ## non-goals
 
@@ -43,7 +43,7 @@
 - Replace LazyVim with a native-first config.
 - Use `vim.pack` instead of a plugin manager.
 - Add only `oil.nvim` as the first plugin experiment.
-- Keep tmux navigation and pi messaging built in.
+- Keep zmx session access and pi messaging built in.
 - Add large-file protections early.
 
 ## expected layout
@@ -52,7 +52,7 @@
 - `lua/config/options.lua`
 - `lua/config/autocmds.lua`
 - `lua/config/keymaps.lua`
-- `lua/config/tmux.lua`
+- `lua/config/terminal.lua`
 - `vision.md`
 
 ## plugin bar
@@ -76,7 +76,7 @@ If it fails that bar, do not install it.
 - `:help lsp`
 - `:help api`
 - `:help vim.system()`
-- `man tmux`
+- `zmx --help`
 
 ## notes
 

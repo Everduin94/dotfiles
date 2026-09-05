@@ -13,6 +13,8 @@ mac/karabiner/.config/karabiner/automatic_backups/
 tmp/
 alacritty/
 nvim/
+!all/nvim/
+!all/nvim/.config/nvim/
 nvim.bak/
 zsh/
 all/nvim/.config/nvim/autoload

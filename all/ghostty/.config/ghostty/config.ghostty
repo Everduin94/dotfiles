@@ -1,9 +1,14 @@
 theme = Catppuccin Macchiato
 background = #1e1e2e
-font-family = Iosevka
+font-family = SF Mono
 background-opacity = 0.90
 background-opacity-cells = true
 background-blur = true
+
+# Subtly reduce contrast in unfocused Ghostty windows and splits.
+custom-shader = shaders/unfocused-dim.glsl
+custom-shader-animation = false
+
 macos-titlebar-style = transparent
 
 keybind = alt+backspace=text:\x1b\x7f

@@ -42,10 +42,47 @@ done
 unset pnpm_home_candidate
 # pnpm end
 
+# NVM (lazy-loaded): don't source nvm.sh or run `nvm use` on every shell.
+# Real nvm/node/npm/npx/corepack load on first use. A project pin
+# (.nvmrc/.node-version) wins over the `default` alias.
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-command -v nvm >/dev/null 2>&1 && nvm use --silent default >/dev/null 2>&1
+
+__nvm_loaded=0
+__nvm_lazy_load() {
+  [ "$__nvm_loaded" = 1 ] && return 0
+  __nvm_loaded=1
+  unset -f nvm node npm npx corepack 2>/dev/null
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+__nvm_activate() {
+  __nvm_lazy_load
+  command -v nvm >/dev/null 2>&1 || return 0
+  nvm use --silent >/dev/null 2>&1 || nvm use --silent default >/dev/null 2>&1
+}
+
+nvm() { __nvm_activate; nvm "$@"; }
+node() { __nvm_activate; node "$@"; }
+npm() { __nvm_activate; npm "$@"; }
+npx() { __nvm_activate; npx "$@"; }
+corepack() { __nvm_activate; corepack "$@"; }
+
+# Auto-switch to a project's pinned Node version when cd-ing into a
+# directory with .nvmrc/.node-version, without loading nvm elsewhere.
+__nvm_dir_has_pin() {
+  local dir="$PWD"
+  while :; do
+    [ -f "$dir/.nvmrc" ] && return 0
+    [ -f "$dir/.node-version" ] && return 0
+    [ "$dir" = "/" ] && return 1
+    dir="${dir:h}"
+  done
+}
+__nvm_chpwd() { __nvm_dir_has_pin && __nvm_activate; }
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd __nvm_chpwd
+__nvm_chpwd  # handle the case where the shell starts inside a pinned repo
 
 # zoxide
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"

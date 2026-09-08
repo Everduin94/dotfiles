@@ -38,7 +38,8 @@ Small set via `vim.pack`:
 - `<leader>/` case-insensitive project grep
 - `<leader>e` toggle the left-side Oil float
 - `<C-h/j/k/l>` move between Neovim splits
-- `<leader>t1..4` toggle persistent terminal buffers
+- `<leader>t1..4` open persistent terminal buffers in the current window (split first if wanted)
+- terminal `<Esc>` leave terminal mode
 - `<leader>tg` toggle the managed zmx chooser/session terminal
 - `<leader>td` detach zmx and return to its session chooser
 - `<leader>tf` paste the current file path into the attached zmx session

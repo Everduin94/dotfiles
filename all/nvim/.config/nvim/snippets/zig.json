@@ -1,1 +1,301 @@
-{}
+{
+  "Struct with init": {
+    "prefix": ["struct-init"],
+    "body": [
+      "const ${1:Name} = struct {",
+      "    $0",
+      "",
+      "    pub fn init() @This() {",
+      "        return .{};",
+      "    }",
+      "};"
+    ],
+    "description": "Struct with an init method; cursor lands on the first field"
+  },
+  "Info log": {
+    "prefix": ["log"],
+    "body": "std.log.info(\"${1:message}: {any}\", .{${2:value}});$0",
+    "description": "Log an informational message"
+  },
+  "Debug log": {
+    "prefix": ["debug"],
+    "body": "std.log.debug(\"${1:message}: {any}\", .{${2:value}});$0",
+    "description": "Log a debug message"
+  },
+  "Log format help": {
+    "prefix": ["log-help"],
+    "body": [
+      "// Zig format: {s} UTF-8 string, {c} ASCII char, {u} code point, {d} decimal, {x}/{X} hex, {b} binary, {o} octal, {e} scientific float",
+      "// {b64} base64, {D} duration, {B}/{Bi} byte size, {t} enum/error tag, {?} optional, {!} error union, {*} address",
+      "// {any} default formatting, {f} call the value's format method",
+      "// Shape: {[argument][specifier]:[fill][alignment][width].[precision]}; escape braces with {{ and }}.$0"
+    ],
+    "description": "Zig 0.16 format specifier reference"
+  },
+  "Read file": {
+    "prefix": ["file-read"],
+    "body": [
+      "const ${1:contents} = try std.Io.Dir.cwd().readFileAlloc(",
+      "    ${2:init.io},",
+      "    \"${3:path}\",",
+      "    ${4:init.gpa},",
+      "    std.Io.Limit.limited(${5:1 << 20}),",
+      ");",
+      "defer $4.free($1);",
+      "$0"
+    ],
+    "description": "Read an entire file with the Zig 0.16 std.Io interface"
+  },
+  "Write file": {
+    "prefix": ["file-write"],
+    "body": [
+      "try std.Io.Dir.cwd().writeFile(${1:init.io}, .{",
+      "    .sub_path = \"${2:path}\",",
+      "    .data = ${3:data},",
+      "});",
+      "$0"
+    ],
+    "description": "Write an entire file with the Zig 0.16 std.Io interface"
+  },
+  "JSON to object": {
+    "prefix": ["json-to-object"],
+    "body": [
+      "var ${1:parsed} = try std.json.parseFromSlice(${2:Type}, ${3:init.gpa}, ${4:json}, .{});",
+      "defer $1.deinit();",
+      "const ${5:value}: $2 = $1.value;",
+      "$0"
+    ],
+    "description": "Parse JSON into a typed value"
+  },
+  "Object to JSON": {
+    "prefix": ["object-to-json"],
+    "body": [
+      "const ${1:json} = try std.json.Stringify.valueAlloc(${2:init.gpa}, ${3:value}, .{});",
+      "defer $2.free($1);",
+      "$0"
+    ],
+    "description": "Serialize a value to allocated JSON"
+  },
+  "Heap allocation": {
+    "prefix": ["alloc"],
+    "body": [
+      "const ${1:items} = try ${2:init.gpa}.alloc(${3:u8}, ${4:count});",
+      "defer $2.free($1);",
+      "$0"
+    ],
+    "description": "Allocate a slice on the heap and free it"
+  },
+  "Unit test": {
+    "prefix": ["test"],
+    "body": [
+      "test \"${1:description}\" {",
+      "    ${2:try std.testing.expect(true);}",
+      "    $0",
+      "}"
+    ],
+    "description": "Basic Zig unit test"
+  },
+  "Fuzz test": {
+    "prefix": ["fuzz"],
+    "body": [
+      "test \"${1:property}\" {",
+      "    try std.testing.fuzz({}, ${2:fuzzOne}, .{",
+      "        .corpus = &.{ \"\", \"example\" },",
+      "    });",
+      "}",
+      "",
+      "fn $2(_: void, smith: *std.testing.Smith) !void {",
+      "    var buffer: [${3:256}]u8 = undefined;",
+      "    const input = buffer[0..smith.slice(&buffer)];",
+      "    _ = input;",
+      "    $0",
+      "}"
+    ],
+    "description": "Basic Zig 0.16 fuzz test with seed corpus"
+  },
+  "Reverse string": {
+    "prefix": ["reverse-string"],
+    "body": [
+      "const ${1:reversed} = try ${2:init.gpa}.dupe(u8, ${3:value});",
+      "defer $2.free($1);",
+      "std.mem.reverse(u8, $1);",
+      "$0"
+    ],
+    "description": "Copy and reverse a UTF-8 byte string"
+  },
+  "Random array": {
+    "prefix": ["random-array"],
+    "body": [
+      "var ${1:values}: [${2:N}]${3:u32} = undefined;",
+      "for (&$1) |*value| {",
+      "    ${4:init.io}.random(std.mem.asBytes(value));",
+      "}",
+      "$0"
+    ],
+    "description": "Fill a fixed-size array with random integers"
+  },
+  "Array push": {
+    "prefix": ["array-push"],
+    "body": "try ${1:list}.append(${2:init.gpa}, ${3:value});$0",
+    "description": "Append to a Zig 0.16 ArrayList"
+  },
+  "Array pop": {
+    "prefix": ["array-pop"],
+    "body": "const ${1:value} = ${2:list}.pop();$0",
+    "description": "Pop the last ArrayList item"
+  },
+  "Array filter": {
+    "prefix": ["array-filter"],
+    "body": [
+      "var ${1:filtered}: std.ArrayList(${2:T}) = .empty;",
+      "defer $1.deinit(${3:init.gpa});",
+      "for (${4:items}) |item| {",
+      "    if (${5:condition}) try $1.append($3, item);",
+      "}",
+      "$0"
+    ],
+    "description": "Filter items into a Zig 0.16 ArrayList"
+  },
+  "Array reduce to map": {
+    "prefix": ["array-reduce-map"],
+    "body": [
+      "var ${1:by_key} = std.AutoHashMap(${2:Key}, ${3:Value}).init(${4:init.gpa});",
+      "defer $1.deinit();",
+      "for (${5:items}) |item| {",
+      "    try $1.put(${6:item.key}, item);",
+      "}",
+      "$0"
+    ],
+    "description": "Index array values in a hash map by key"
+  },
+  "Array map": {
+    "prefix": ["array-map"],
+    "body": [
+      "var ${1:mapped}: std.ArrayList(${2:Output}) = .empty;",
+      "defer $1.deinit(${3:init.gpa});",
+      "for (${4:items}) |item| {",
+      "    try $1.append($3, ${5:transform});",
+      "}",
+      "$0"
+    ],
+    "description": "Map items into a Zig 0.16 ArrayList"
+  },
+  "Array dedupe": {
+    "prefix": ["array-dedupe"],
+    "body": [
+      "var ${1:seen} = std.AutoHashMap(${2:T}, void).init(${3:init.gpa});",
+      "defer $1.deinit();",
+      "var ${4:unique}: std.ArrayList($2) = .empty;",
+      "defer $4.deinit($3);",
+      "for (${5:items}) |item| {",
+      "    const entry = try $1.getOrPut(item);",
+      "    if (entry.found_existing) continue;",
+      "    entry.value_ptr.* = {};",
+      "    try $4.append($3, item);",
+      "}",
+      "$0"
+    ],
+    "description": "Dedupe values while preserving first occurrence order"
+  },
+  "Array sort": {
+    "prefix": ["array-sort"],
+    "body": "std.mem.sort(${1:T}, ${2:items}, {}, std.sort.${3:asc}($1));$0",
+    "description": "Sort an array or slice in place"
+  },
+  "Array swap": {
+    "prefix": ["array-swap"],
+    "body": "std.mem.swap(${1:T}, &${2:items}[${3:i}], &$2[${4:j}]);$0",
+    "description": "Swap two array positions safely"
+  },
+  "Polar to Cartesian": {
+    "prefix": ["polar-to-cartesian"],
+    "body": [
+      "pub fn convertPolarToCartesian(angle: f64, distance: f64) [2]f64 {",
+      "    const angle_in_radians = std.math.degreesToRadians(angle);",
+      "",
+      "    const x = std.math.cos(angle_in_radians) * distance;",
+      "    const y = std.math.sin(angle_in_radians) * distance;",
+      "",
+      "    return .{ x, y };",
+      "}$0"
+    ],
+    "description": "Convert a polar angle in degrees and distance to Cartesian coordinates"
+  },
+  "Degrees to radians": {
+    "prefix": ["degrees-to-radians"],
+    "body": [
+      "pub fn convertDegreesToRadians(angle: f64) f64 {",
+      "    return std.math.degreesToRadians(angle);",
+      "}$0"
+    ],
+    "description": "Convert degrees to radians"
+  },
+  "Clamp": {
+    "prefix": ["clamp"],
+    "body": [
+      "pub fn clamp(value: f64, first_bound: f64, second_bound: f64) f64 {",
+      "    const min = @min(first_bound, second_bound);",
+      "    const max = @max(first_bound, second_bound);",
+      "    return std.math.clamp(value, min, max);",
+      "}$0"
+    ],
+    "description": "Clamp a number between two order-independent bounds"
+  },
+  "Normalize": {
+    "prefix": ["normalize"],
+    "body": [
+      "pub fn normalize(",
+      "    value: f64,",
+      "    current_scale_min: f64,",
+      "    current_scale_max: f64,",
+      "    new_scale_min: f64,",
+      "    new_scale_max: f64,",
+      ") f64 {",
+      "    const standard_normalization =",
+      "        (value - current_scale_min) / (current_scale_max - current_scale_min);",
+      "",
+      "    return (new_scale_max - new_scale_min) * standard_normalization + new_scale_min;",
+      "}$0"
+    ],
+    "description": "Normalize a number from one scale to another"
+  },
+  "Clamped normalize": {
+    "prefix": ["clamped-normalize"],
+    "body": [
+      "pub fn clampedNormalize(",
+      "    value: f64,",
+      "    current_scale_min: f64,",
+      "    current_scale_max: f64,",
+      "    new_scale_min: f64,",
+      "    new_scale_max: f64,",
+      ") f64 {",
+      "    return clamp(",
+      "        normalize(value, current_scale_min, current_scale_max, new_scale_min, new_scale_max),",
+      "        new_scale_min,",
+      "        new_scale_max,",
+      "    );",
+      "}$0"
+    ],
+    "description": "Normalize a number to another scale and clamp the result"
+  },
+  "Exponential normalize": {
+    "prefix": ["exponential-normalize"],
+    "body": [
+      "pub fn exponentialNormalize(",
+      "    value: f64,",
+      "    current_scale_min: f64,",
+      "    current_scale_max: f64,",
+      "    new_scale_min: f64,",
+      "    new_scale_max: f64,",
+      "    exponent: f64,",
+      ") f64 {",
+      "    const normalized_input =",
+      "        (value - current_scale_min) / (current_scale_max - current_scale_min);",
+      "    const exponential_output = std.math.pow(f64, normalized_input, exponent);",
+      "",
+      "    return new_scale_min + (new_scale_max - new_scale_min) * exponential_output;",
+      "}$0"
+    ],
+    "description": "Normalize a number to another scale with an exponential curve"
+  }
+}

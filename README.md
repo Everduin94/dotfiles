@@ -4,6 +4,7 @@
 - [Wezterm](https://github.com/Everduin94/dotfiles/tree/main/all/wezterm/.config/wezterm)
 - Ghostty (`all/ghostty/.config/ghostty/config.ghostty`)
 - Hunk (`all/hunk/.config/hunk/config.toml`)
+- Hex corrections (`mac/hex/.local/share/hex/dictation-processing.json`)
 - Zsh + Zap ([mac](https://github.com/Everduin94/dotfiles/tree/main/mac/zsh/.config/zsh), [arch](https://github.com/Everduin94/dotfiles/tree/main/arch/zsh/.config/zsh))
 - [Starship](https://github.com/Everduin94/dotfiles/tree/main/all/starship/.config/starship)
 - Arch + AwesomeWM `Home`
@@ -25,7 +26,7 @@ cd ~/dotfiles/all
 stow -t ~ git nvim starship wezterm ghostty hunk
 
 cd ~/dotfiles/mac
-stow -t ~ karabiner raycast zsh yabai skhd sketchybar
+stow -t ~ hex karabiner raycast zsh yabai skhd sketchybar
 ```
 
 On Linux / Arch, stow from `~/dotfiles/arch` for OS-specific packages.
@@ -41,6 +42,7 @@ Some configuration will still be required depending on what you stowed.
 - Update `all/git/.gitconfig` with your name / email.
 - Update the `projects` file if you use the project picker.
 - If you use Raycast, replace `mac/raycast/.config/raycast/config.rayconfig` with your own export before importing it.
+- Hex stores corrections inside `~/Library/Application Support/voice-control/settings.json`. Quit Hex, then use `install/hex-save.sh` to update the tracked snapshot or `install/hex-import.sh` to restore it without replacing unrelated settings.
 
 ## 🖥️ Start from Zero (Mac)
 
@@ -62,7 +64,7 @@ cd ~/dotfiles/all
 stow -t ~ git nvim starship wezterm ghostty hunk
 
 cd ~/dotfiles/mac
-stow -t ~ karabiner raycast zsh yabai skhd sketchybar
+stow -t ~ hex karabiner raycast zsh yabai skhd sketchybar
 
 # Authenticate GitHub
 gh auth login
@@ -78,6 +80,7 @@ gh auth setup-git
 ./install/install-iosevka-font.sh
 ./install/macos-adjustments.sh
 ./install/raycast-import.sh
+./install/hex-import.sh # after completing Hex setup and quitting Hex
 ```
 
 **Manual Improvements**

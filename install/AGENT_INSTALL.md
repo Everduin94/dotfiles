@@ -1,8 +1,8 @@
 - First, stow whatever packages the user wants from these dotfiles or any other dotfiles before running install scripts.
 - Prompt the user for their Git name and email, then update `.gitconfig` with those values.
 - On macOS, install the curated dotfiles dependencies with `brew bundle --file=install/Brewfile.macos-dotfiles`.
-  - This Brewfile already includes Ghostty.
-  - If installing it manually, run `brew install --cask ghostty`.
+  - This Brewfile already includes Ghostty, Hex, and zmx.
+  - If installing Ghostty manually, run `brew install --cask ghostty`.
 - Run `gh auth login`.
 - Run `install/install-node.sh` to install `nvm` and the current Node LTS.
 - Run `install/install-pi-agent.sh` to install pi agent.
@@ -11,3 +11,4 @@
 - If the user wants fonts, run `install/install-iosevka-font.sh` from the dotfiles repo.
 - On macOS, run `install/macos-adjustments.sh` to set fast key repeat, disable Spotlight shortcuts, and turn on Dock auto-hide. Caps Lock is handled by Karabiner.
 - If the user stowed a Raycast export to `~/.config/raycast/config.rayconfig`, run `install/raycast-import.sh`. If they are not `everduin94`, they should replace that file with their own Raycast export first.
+- For Hex, launch it and complete setup first. To restore tracked corrections, quit Hex and run `install/hex-import.sh`. Run `install/hex-save.sh` after changing corrections in the UI.

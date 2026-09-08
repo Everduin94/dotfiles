@@ -1,6 +1,7 @@
 local M = {}
 
 local zmx_terminal
+local terminals = {}
 
 local function current_file()
   local file = vim.api.nvim_buf_get_name(0)
@@ -75,8 +76,41 @@ local function send(text, opts)
   vim.api.nvim_chan_send(channel, payload)
 end
 
-function M.toggle(index)
-  Snacks.terminal.toggle(nil, { count = index })
+function M.open(index)
+  local buffer = terminals[index]
+  if buffer and vim.api.nvim_buf_is_valid(buffer) then
+    vim.api.nvim_win_set_buf(0, buffer)
+    vim.cmd.startinsert()
+    return
+  end
+
+  local cwd = vim.fn.getcwd(0)
+  local shell = vim.env.SHELL or vim.o.shell
+  buffer = vim.api.nvim_create_buf(false, true)
+  terminals[index] = buffer
+  vim.bo[buffer].bufhidden = "hide"
+  vim.api.nvim_win_set_buf(0, buffer)
+
+  local job = vim.fn.jobstart({ shell }, { cwd = cwd, term = true })
+  if job <= 0 then
+    terminals[index] = nil
+    vim.api.nvim_buf_delete(buffer, { force = true })
+    vim.notify("Could not start terminal " .. index, vim.log.levels.ERROR)
+    return
+  end
+
+  vim.api.nvim_create_autocmd("TermClose", {
+    buffer = buffer,
+    once = true,
+    callback = function()
+      terminals[index] = nil
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(buffer) then
+          vim.api.nvim_buf_delete(buffer, { force = true })
+        end
+      end)
+    end,
+  })
 end
 
 function M.toggle_zmx()

@@ -8,8 +8,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-  desc = "Start in insert mode in terminal",
-  callback = function()
+  desc = "Configure terminal buffers",
+  callback = function(args)
+    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], {
+      buffer = args.buf,
+      desc = "Leave terminal mode",
+    })
     vim.cmd.startinsert()
   end,
 })

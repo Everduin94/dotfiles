@@ -84,8 +84,8 @@ if not inline then
   for i = 1, 4 do
     local index = i
     map("n", "<leader>t" .. index, function()
-      terminal.toggle(index)
-    end, { desc = "Terminal " .. index })
+      terminal.open(index)
+    end, { desc = "Open terminal " .. index .. " in current window" })
   end
 
   map("n", "<leader>tg", terminal.toggle_zmx, { desc = "Toggle zmx terminal" })

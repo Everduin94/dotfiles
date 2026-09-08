@@ -35,5 +35,219 @@
       "</div>"
     ],
     "description": "Flex row with a growing right side"
+  },
+  "Class with init": {
+    "prefix": ["struct-init"],
+    "body": [
+      "class ${1:Name} {",
+      "  $0",
+      "",
+      "  static init(): $1 {",
+      "    return new $1();",
+      "  }",
+      "}"
+    ],
+    "description": "Class with an init factory; cursor lands on the first property"
+  },
+  "Console debug": {
+    "prefix": ["debug"],
+    "body": "console.debug(${1:value});$0",
+    "description": "Console debug"
+  },
+  "Read file": {
+    "prefix": ["file-read"],
+    "body": "const ${1:contents} = await readFile(\"${2:path}\", \"utf8\");$0",
+    "description": "Read a UTF-8 file with node:fs/promises"
+  },
+  "Write file": {
+    "prefix": ["file-write"],
+    "body": "await writeFile(\"${1:path}\", ${2:data}, \"utf8\");$0",
+    "description": "Write a UTF-8 file with node:fs/promises"
+  },
+  "JSON to object": {
+    "prefix": ["json-to-object"],
+    "body": "const ${1:value} = JSON.parse(${2:json}) as ${3:Type};$0",
+    "description": "Parse JSON into a typed object"
+  },
+  "Object to JSON": {
+    "prefix": ["object-to-json"],
+    "body": "const ${1:json} = JSON.stringify(${2:value});$0",
+    "description": "Serialize a value to JSON"
+  },
+  "Heap-managed array": {
+    "prefix": ["alloc"],
+    "body": "const ${1:items} = new Array<${2:Type}>(${3:size});$0",
+    "description": "Allocate a garbage-collected array"
+  },
+  "Unit test": {
+    "prefix": ["test"],
+    "body": [
+      "it(\"${1:description}\", () => {",
+      "  ${2:expect(true).toBe(true);}",
+      "  $0",
+      "});"
+    ],
+    "description": "Basic Jest or Vitest unit test"
+  },
+  "Fuzz test": {
+    "prefix": ["fuzz"],
+    "body": [
+      "it(\"${1:property}\", () => {",
+      "  fc.assert(",
+      "    fc.property(fc.${2:string}(), (input) => {",
+      "      $0",
+      "    })",
+      "  );",
+      "});"
+    ],
+    "description": "Property-based test using fast-check"
+  },
+  "Reverse string": {
+    "prefix": ["reverse-string"],
+    "body": "const ${1:reversed} = [...${2:value}].reverse().join(\"\");$0",
+    "description": "Reverse a string by Unicode code points"
+  },
+  "Random array": {
+    "prefix": ["random-array"],
+    "body": "const ${1:values} = Array.from({ length: ${2:N} }, () => Math.random());$0",
+    "description": "Create an array of random numbers"
+  },
+  "Array push": {
+    "prefix": ["array-push"],
+    "body": "${1:items}.push(${2:value});$0",
+    "description": "Push a value onto an array"
+  },
+  "Array pop": {
+    "prefix": ["array-pop"],
+    "body": "const ${1:value} = ${2:items}.pop();$0",
+    "description": "Pop the last array value"
+  },
+  "Array filter": {
+    "prefix": ["array-filter"],
+    "body": "const ${1:filtered} = ${2:items}.filter((item) => ${3:condition});$0",
+    "description": "Filter an array"
+  },
+  "Array reduce to map": {
+    "prefix": ["array-reduce-map"],
+    "body": [
+      "const ${1:byKey} = new Map(",
+      "  ${2:items}.map((item) => [${3:item.key}, item] as const)",
+      ");$0"
+    ],
+    "description": "Index array values in a Map by key"
+  },
+  "Array map": {
+    "prefix": ["array-map"],
+    "body": "const ${1:mapped} = ${2:items}.map((item) => ${3:transform});$0",
+    "description": "Map an array"
+  },
+  "Array dedupe": {
+    "prefix": ["array-dedupe"],
+    "body": "const ${1:unique} = [...new Set(${2:items})];$0",
+    "description": "Dedupe an array with a Set"
+  },
+  "Array sort": {
+    "prefix": ["array-sort"],
+    "body": "${1:items}.sort((a, b) => ${2:a - b});$0",
+    "description": "Sort an array in place"
+  },
+  "Array swap": {
+    "prefix": ["array-swap"],
+    "body": "[${1:items}[${2:i}], $1[${3:j}]] = [$1[$3], $1[$2]];$0",
+    "description": "Swap two array positions"
+  },
+  "Polar to Cartesian": {
+    "prefix": ["polar-to-cartesian"],
+    "body": [
+      "const convertPolarToCartesian = (angle: number, distance: number): [number, number] => {",
+      "  const angleInRadians = convertDegreesToRadians(angle);",
+      "",
+      "  const x = Math.cos(angleInRadians) * distance;",
+      "  const y = Math.sin(angleInRadians) * distance;",
+      "",
+      "  return [x, y];",
+      "};$0"
+    ],
+    "description": "Convert a polar angle in degrees and distance to Cartesian coordinates"
+  },
+  "Degrees to radians": {
+    "prefix": ["degrees-to-radians"],
+    "body": "const convertDegreesToRadians = (angle: number): number => (angle * Math.PI) / 180;$0",
+    "description": "Convert degrees to radians"
+  },
+  "Clamp": {
+    "prefix": ["clamp"],
+    "body": [
+      "export const clamp = (value: number, min: number = 0, max: number = 1): number => {",
+      "  if (min > max) {",
+      "    [min, max] = [max, min];",
+      "  }",
+      "",
+      "  return Math.max(min, Math.min(max, value));",
+      "};$0"
+    ],
+    "description": "Clamp a number between two order-independent bounds"
+  },
+  "Normalize": {
+    "prefix": ["normalize"],
+    "body": [
+      "export const normalize = (",
+      "  value: number,",
+      "  currentScaleMin: number,",
+      "  currentScaleMax: number,",
+      "  newScaleMin: number = 0,",
+      "  newScaleMax: number = 1",
+      "): number => {",
+      "  const standardNormalization =",
+      "    (value - currentScaleMin) / (currentScaleMax - currentScaleMin);",
+      "",
+      "  return (newScaleMax - newScaleMin) * standardNormalization + newScaleMin;",
+      "};$0"
+    ],
+    "description": "Normalize a number from one scale to another"
+  },
+  "Clamped normalize": {
+    "prefix": ["clamped-normalize"],
+    "body": [
+      "export const clampedNormalize = (",
+      "  value: number,",
+      "  currentScaleMin: number,",
+      "  currentScaleMax: number,",
+      "  newScaleMin: number = 0,",
+      "  newScaleMax: number = 1",
+      "): number => {",
+      "  return clamp(",
+      "    normalize(value, currentScaleMin, currentScaleMax, newScaleMin, newScaleMax),",
+      "    newScaleMin,",
+      "    newScaleMax",
+      "  );",
+      "};$0"
+    ],
+    "description": "Normalize a number to another scale and clamp the result"
+  },
+  "Exponential normalize": {
+    "prefix": ["exponential-normalize"],
+    "body": [
+      "export const exponentialNormalize = (",
+      "  value: number,",
+      "  currentScaleMin: number,",
+      "  currentScaleMax: number,",
+      "  newScaleMin: number = 0,",
+      "  newScaleMax: number = 1,",
+      "  exponent: number = 2",
+      "): number => {",
+      "  const normalizedInput =",
+      "    (value - currentScaleMin) / (currentScaleMax - currentScaleMin);",
+      "  const exponentialOutput = Math.pow(normalizedInput, exponent);",
+      "",
+      "  return newScaleMin + (newScaleMax - newScaleMin) * exponentialOutput;",
+      "};$0"
+    ],
+    "description": "Normalize a number to another scale with an exponential curve"
+  },
+  "Console log": {
+    "prefix": ["log", "ml"],
+    "body": "console.log(${1:value});$0",
+    "description": "Console log"
   }
 }

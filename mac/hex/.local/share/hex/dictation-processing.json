@@ -1,0 +1,42 @@
+{
+  "default_mode": {
+    "name": "Global",
+    "applications": [],
+    "browser_hosts": [],
+    "replacements": [
+      {
+        "matched_phrase": "pie",
+        "output": "pi"
+      },
+      {
+        "matched_phrase": "ghosty",
+        "output": "ghostty"
+      },
+      {
+        "matched_phrase": "Z MX",
+        "output": "zmx"
+      },
+      {
+        "matched_phrase": "ZMX",
+        "output": "zmx"
+      },
+      {
+        "matched_phrase": "slash",
+        "output": "/"
+      },
+      {
+        "matched_phrase": "Hibai",
+        "output": "yabai"
+      }
+    ],
+    "transformations": [],
+    "post_processing": {
+      "enabled": false,
+      "prompt": "Rewrite the transcript into clear, natural text while preserving the speaker's intended meaning.",
+      "model": null,
+      "variant": null,
+      "deadline_seconds": 30
+    }
+  },
+  "modes": []
+}

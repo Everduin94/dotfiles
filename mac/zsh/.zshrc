@@ -1,10 +1,7 @@
 export ZDOTDIR=$HOME/.config/zsh
 source "$HOME/.config/zsh/.zshrc"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-command -v nvm >/dev/null 2>&1 && nvm use --silent default >/dev/null 2>&1
+# NVM is lazy-loaded in $ZDOTDIR/.zshrc; do not source it again here.
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

@@ -6,6 +6,8 @@ brew "git"
 brew "stow"
 
 # Shell / terminal
+tap "neurosnap/tap"
+brew "neurosnap/tap/zmx"
 brew "starship"
 brew "fzf"
 brew "zoxide"
@@ -30,6 +32,8 @@ tap "FelixKratz/formulae"
 brew "FelixKratz/formulae/sketchybar"
 
 # macOS apps
+tap "anomalyco/tap"
+cask "anomalyco/tap/hex"
 cask "ghostty"
 cask "karabiner-elements"
 cask "raycast"

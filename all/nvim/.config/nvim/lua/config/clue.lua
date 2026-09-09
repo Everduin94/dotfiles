@@ -8,7 +8,7 @@ local function leader_clues()
     { mode = "n", keys = "<Leader>p", desc = "+path" },
     { mode = "n", keys = "<Leader>q", desc = "+quit" },
     { mode = { "n", "x" }, keys = "<Leader>t", desc = "+terminal" },
-    { mode = "n", keys = "<Leader>w", desc = "+write" },
+    { mode = "n", keys = "<Leader>w", desc = "+window" },
   }
 
   if not vim.g.pi_nvim_inline then

@@ -8,20 +8,7 @@ local function key(term)
   return vim.api.nvim_replace_termcodes(term, true, false, true)
 end
 
-local function snippet_jump(direction)
-  if not vim.snippet.active({ direction = direction }) then
-    return nil
-  end
-
-  return key(string.format("<Cmd>lua vim.snippet.jump(%d)<CR>", direction))
-end
-
 function M.tab()
-  local jump = snippet_jump(1)
-  if jump then
-    return jump
-  end
-
   if vim.fn.pumvisible() == 1 then
     return key("<C-n>")
   end
@@ -30,16 +17,37 @@ function M.tab()
 end
 
 function M.s_tab()
-  local jump = snippet_jump(-1)
-  if jump then
-    return jump
-  end
-
   if vim.fn.pumvisible() == 1 then
     return key("<C-p>")
   end
 
   return key("<S-Tab>")
+end
+
+function M.snippet_forward()
+  if vim.snippet.active({ direction = 1 }) then
+    vim.snippet.jump(1)
+    return ""
+  end
+
+  if _G.MiniCompletion and MiniCompletion.scroll("down") then
+    return ""
+  end
+
+  return key("<C-f>")
+end
+
+function M.snippet_backward()
+  if vim.snippet.active({ direction = -1 }) then
+    vim.snippet.jump(-1)
+    return ""
+  end
+
+  if _G.MiniCompletion and MiniCompletion.scroll("up") then
+    return ""
+  end
+
+  return key("<C-b>")
 end
 
 function M.enter()
@@ -55,9 +63,21 @@ function M.enter()
 end
 
 function M.setup_keymaps()
-  vim.keymap.set({ "i", "s" }, "<Tab>", M.tab, { expr = true, desc = "Completion next / snippet next" })
-  vim.keymap.set({ "i", "s" }, "<S-Tab>", M.s_tab, { expr = true, desc = "Completion previous / snippet previous" })
+  vim.keymap.set({ "i", "s" }, "<Tab>", M.tab, { expr = true, desc = "Completion next" })
+  vim.keymap.set({ "i", "s" }, "<S-Tab>", M.s_tab, { expr = true, desc = "Completion previous" })
   vim.keymap.set({ "i", "s" }, "<CR>", M.enter, { expr = true, desc = "Completion accept" })
+  vim.keymap.set(
+    { "i", "s" },
+    "<C-f>",
+    M.snippet_forward,
+    { expr = true, desc = "Snippet jump forward / scroll down" }
+  )
+  vim.keymap.set(
+    { "i", "s" },
+    "<C-b>",
+    M.snippet_backward,
+    { expr = true, desc = "Snippet jump backward / scroll up" }
+  )
 end
 
 function M.setup()

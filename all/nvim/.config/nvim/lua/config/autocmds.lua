@@ -14,6 +14,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
       buffer = args.buf,
       desc = "Leave terminal mode",
     })
+
+    for _, dir in ipairs({ "h", "j", "k", "l" }) do
+      vim.keymap.set("t", "<C-" .. dir .. ">", [[<C-\><C-n><C-w>]] .. dir, {
+        buffer = args.buf,
+        desc = "Window " .. dir,
+      })
+    end
+
     vim.cmd.startinsert()
   end,
 })

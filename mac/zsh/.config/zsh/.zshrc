@@ -47,6 +47,27 @@ unset pnpm_home_candidate
 # (.nvmrc/.node-version) wins over the `default` alias.
 export NVM_DIR="$HOME/.nvm"
 
+# Cheaply put the default nvm node version's bin dir on PATH without
+# sourcing nvm.sh, so subprocesses/shebangs (e.g. `#!/usr/bin/env node`)
+# resolve the right node even before any nvm/node/npm command is typed.
+__nvm_default_version() {
+  local target=""
+  [ -f "$NVM_DIR/alias/default" ] && target=$(<"$NVM_DIR/alias/default")
+  local seen=0
+  while [ -n "$target" ] && [ -f "$NVM_DIR/alias/$target" ] && [ "$seen" -lt 5 ]; do
+    target=$(<"$NVM_DIR/alias/$target")
+    seen=$((seen + 1))
+  done
+  target="${target#v}"
+  if [ -z "$target" ] || [ ! -d "$NVM_DIR/versions/node/v$target" ]; then
+    target=$(command ls -1 "$NVM_DIR/versions/node" 2>/dev/null | sed 's/^v//' | sort -V | tail -1)
+  fi
+  echo "$target"
+}
+__nvm_default_bin="$NVM_DIR/versions/node/v$(__nvm_default_version)/bin"
+[ -d "$__nvm_default_bin" ] && PATH="$__nvm_default_bin:$PATH"
+unset __nvm_default_bin
+
 __nvm_loaded=0
 __nvm_lazy_load() {
   [ "$__nvm_loaded" = 1 ] && return 0

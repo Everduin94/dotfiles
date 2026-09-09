@@ -49,6 +49,28 @@ map("n", "<C-l>", "<C-w>l", { desc = "Window right" })
 
 map("n", "<C-s>", "<cmd>write<cr>", { desc = "Write buffer" })
 map("n", "<leader>ww", "<cmd>write<cr>", { desc = "Write buffer" })
+map("n", "<leader>wd", "<cmd>close<cr>", { desc = "Close window (keeps buffer)" })
+local function repeatable_resize(feed_keys)
+  return function()
+    _G.__win_resize_last = function()
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(feed_keys, true, false, true), "n", false)
+    end
+    vim.o.operatorfunc = "v:lua.__win_resize_op"
+    return "g@l"
+  end
+end
+
+function _G.__win_resize_op()
+  if _G.__win_resize_last then
+    _G.__win_resize_last()
+  end
+end
+
+map("n", "<leader>w=", "<C-w>=", { desc = "Equalize window sizes" })
+map("n", "<leader>w-", repeatable_resize("<C-w>-"), { expr = true, desc = "Decrease window height (repeat with .)" })
+map("n", "<leader>w+", repeatable_resize("<C-w>+"), { expr = true, desc = "Increase window height (repeat with .)" })
+map("n", "<leader>w<", repeatable_resize("<C-w><"), { expr = true, desc = "Decrease window width (repeat with .)" })
+map("n", "<leader>w>", repeatable_resize("<C-w>>"), { expr = true, desc = "Increase window width (repeat with .)" })
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit window" })
 map("n", "<leader>qa", "<cmd>xall<cr>", { desc = "Save all and quit" })
 map("n", "<leader>od", "<cmd>e#<cr>", { desc = "Alternate file" })

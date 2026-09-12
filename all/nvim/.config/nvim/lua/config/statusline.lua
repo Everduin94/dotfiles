@@ -1,5 +1,22 @@
 local M = {}
 
+local function section_filename()
+  if vim.bo.buftype == "terminal" then
+    local index = require("config.terminal").index_of(vim.api.nvim_get_current_buf())
+    if index then
+      return "T" .. index
+    end
+    return "Terminal"
+  end
+
+  local name = vim.api.nvim_buf_get_name(0)
+  if name == "" then
+    return "[No Name]"
+  end
+
+  return vim.fn.fnamemodify(name, ":t") .. "%m%r"
+end
+
 function M.setup()
   require("mini.statusline").setup({
     content = {
@@ -9,7 +26,7 @@ function M.setup()
         local diff = MiniStatusline.section_diff({ trunc_width = 75 })
         local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
         local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
-        local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+        local filename = section_filename()
         local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
         local location = MiniStatusline.section_location({ trunc_width = 75 })
         local search = MiniStatusline.section_searchcount({ trunc_width = 75 })

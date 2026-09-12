@@ -2,6 +2,7 @@ local M = {}
 
 local zmx_terminal
 local terminals = {}
+local buf_to_index = {}
 
 local function current_file()
   local file = vim.api.nvim_buf_get_name(0)
@@ -76,6 +77,10 @@ local function send(text, opts)
   vim.api.nvim_chan_send(channel, payload)
 end
 
+function M.index_of(buffer)
+  return buf_to_index[buffer]
+end
+
 function M.open(index)
   local buffer = terminals[index]
   if buffer and vim.api.nvim_buf_is_valid(buffer) then
@@ -88,12 +93,14 @@ function M.open(index)
   local shell = vim.env.SHELL or vim.o.shell
   buffer = vim.api.nvim_create_buf(false, true)
   terminals[index] = buffer
+  buf_to_index[buffer] = index
   vim.bo[buffer].bufhidden = "hide"
   vim.api.nvim_win_set_buf(0, buffer)
 
   local job = vim.fn.jobstart({ shell }, { cwd = cwd, term = true })
   if job <= 0 then
     terminals[index] = nil
+    buf_to_index[buffer] = nil
     vim.api.nvim_buf_delete(buffer, { force = true })
     vim.notify("Could not start terminal " .. index, vim.log.levels.ERROR)
     return
@@ -104,6 +111,7 @@ function M.open(index)
     once = true,
     callback = function()
       terminals[index] = nil
+      buf_to_index[buffer] = nil
       vim.schedule(function()
         if vim.api.nvim_buf_is_valid(buffer) then
           vim.api.nvim_buf_delete(buffer, { force = true })

@@ -49,7 +49,7 @@ function M.setup()
     },
     allowed_windows = {
       current = true,
-      not_current = false,
+      not_current = true,
     },
   })
 

@@ -41,7 +41,7 @@ symbol=" "
 disabled=true
 
 [env_var.ZMX_SESSION]
-format = ' [zmx](fg:yellow)'
+format = '[](bold peach)[ zmx ](bold bg:peach fg:crust)[](bold peach)'
 
 # What's with the spacing?
 [os]

@@ -97,6 +97,16 @@ if not inline then
   map("n", "<leader>gd", function()
     MiniDiff.toggle_overlay()
   end, { desc = "Git diff overlay" })
+
+  map("n", "<leader>cR", "<cmd>LspRestart<cr>", { desc = "LSP restart (buffer)" })
+  map("n", "<leader>cA", "<cmd>LspRestart!<cr>", { desc = "LSP restart (all clients)" })
+
+  map("n", "<leader>ss", function()
+    require("config.sessions").write()
+  end, { desc = "Save session for this directory" })
+  map("n", "<leader>sl", function()
+    require("config.sessions").select()
+  end, { desc = "Load a session" })
 end
 
 if not inline then

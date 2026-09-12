@@ -38,6 +38,7 @@ if not inline then
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/cbochs/grapple.nvim", name = "grapple.nvim" },
     { src = "https://github.com/nvim-mini/mini.diff" },
+    { src = "https://github.com/nvim-mini/mini.sessions" },
     { src = "https://github.com/folke/snacks.nvim" },
   })
 end
@@ -76,6 +77,7 @@ if not inline then
   require("config.grapple")
   require("config.diff").setup()
   require("config.pick").setup()
+  require("config.sessions").setup()
 
   require("oil").setup({
     default_file_explorer = true,

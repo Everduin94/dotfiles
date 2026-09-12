@@ -21,6 +21,16 @@ zle -N up-line-or-beginning-search
 bindkey '^F' end-of-line
 bindkey '^P' up-line-or-beginning-search
 
+# Ctrl-G: fuzzy-pick/attach a zmx session (same as the `za` alias).
+# Overrides the default send-break binding (aborts things like an active
+# Ctrl-R search), which we don't otherwise use.
+zmx-select-widget() {
+  zmx-select
+  zle reset-prompt
+}
+zle -N zmx-select-widget
+bindkey '^G' zmx-select-widget
+
 # Load and initialise completion system
 autoload -Uz compinit
 compinit

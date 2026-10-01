@@ -22,6 +22,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
       })
     end
 
+    -- pi's <C-g> opens $EDITOR; let it open a float in this Neovim.
+    vim.keymap.set("t", "<C-g>", function()
+      require("config.pi_edit").forward()
+    end, {
+      buffer = args.buf,
+      desc = "Forward ^G (pi external editor -> float in this nvim)",
+    })
+
     vim.cmd.startinsert()
   end,
 })

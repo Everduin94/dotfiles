@@ -20,6 +20,7 @@ vim.diagnostic.config({
 
 local plugins = {
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  { src = "https://github.com/webhooked/kanso.nvim", name = "kanso" },
   { src = "https://github.com/nvim-mini/mini.completion" },
   { src = "https://github.com/nvim-mini/mini.snippets" },
   { src = "https://github.com/nvim-mini/mini.pairs" },

@@ -77,6 +77,27 @@ local function send(text, opts)
   vim.api.nvim_chan_send(channel, payload)
 end
 
+local last_stop = 0
+
+--- Stop pi in the zmx terminal. Terminal-mode <Esc> is owned by Neovim, so
+--- send the Esc byte (pi's interrupt) ourselves. Tap twice quickly to send a
+--- real ^C instead (shell SIGINT / pi clear).
+function M.stop()
+  local channel = zmx_channel()
+  if not channel then
+    return
+  end
+
+  local now = vim.uv.hrtime() / 1e6
+  if now - last_stop < 400 then
+    last_stop = 0
+    vim.api.nvim_chan_send(channel, "\3")
+  else
+    last_stop = now
+    vim.api.nvim_chan_send(channel, "\27")
+  end
+end
+
 function M.index_of(buffer)
   return buf_to_index[buffer]
 end
@@ -129,6 +150,16 @@ function M.toggle_zmx()
       win = {
         position = "right",
         width = 0.4,
+        keys = {
+          pi_stop = {
+            "<C-c>",
+            function()
+              M.stop()
+            end,
+            mode = { "t", "n" },
+            desc = "Stop pi (Esc); double-tap sends ^C",
+          },
+        },
       },
     })
     zmx_terminal:focus()

@@ -3,6 +3,7 @@
 - On macOS, install the curated dotfiles dependencies with `brew bundle --file=install/Brewfile.macos-dotfiles`.
   - This Brewfile already includes Ghostty, Hex, and zmx.
   - If installing Ghostty manually, run `brew install --cask ghostty`.
+  - On macOS 27, completely follow `install/YABAI_MACOS27.md` after stowing `mac/yabai` and `mac/skhd`. Use its pinned installer rather than inventing Space-switching fallbacks or disabling SIP.
 - Run `gh auth login`.
 - Run `install/install-node.sh` to install `nvm` and the current Node LTS.
 - Run `install/install-pi-agent.sh` to install pi agent.

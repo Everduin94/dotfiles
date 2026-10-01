@@ -104,8 +104,8 @@ function scholar() {
     fi
 
     zmx attach "$session_name" env \
-        EDITOR='env PI_NVIM_INLINE=1 nvim' \
-        VISUAL='env PI_NVIM_INLINE=1 nvim' \
+        EDITOR="$HOME/.config/nvim/bin/pi-nvim-edit" \
+        VISUAL="$HOME/.config/nvim/bin/pi-nvim-edit" \
         pi \
         --no-context-files \
         --no-skills \

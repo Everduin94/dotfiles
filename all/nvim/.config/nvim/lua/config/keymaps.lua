@@ -128,6 +128,7 @@ if not inline then
   map("n", "<leader>at", terminal.send_this, { desc = "Send file position to zmx" })
   map("n", "<leader>af", terminal.send_file, { desc = "Send file path to zmx" })
   map("x", "<leader>av", terminal.send_selection, { desc = "Send selection to zmx" })
+  map("n", "<leader>ax", terminal.stop, { desc = "Stop pi (zmx terminal)" })
   map("n", "<leader>ap", terminal.prompt, { desc = "Prompt zmx terminal" })
 end
 

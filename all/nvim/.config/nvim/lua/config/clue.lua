@@ -9,6 +9,7 @@ local function leader_clues()
     { mode = "n", keys = "<Leader>q", desc = "+quit" },
     { mode = "n", keys = "<Leader>s", desc = "+session" },
     { mode = { "n", "x" }, keys = "<Leader>t", desc = "+terminal" },
+    { mode = "n", keys = "<Leader>u", desc = "+ui" },
     { mode = "n", keys = "<Leader>w", desc = "+window" },
   }
 

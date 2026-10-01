@@ -12,3 +12,7 @@ custom-shader-animation = false
 macos-titlebar-style = transparent
 
 keybind = alt+backspace=text:\x1b\x7f
+
+# Window transparency override written by `ghostty-opacity` (nvim: <leader>uT).
+# Optional file (`?`); delete it to go back to the value above.
+config-file = ?opacity.ghostty

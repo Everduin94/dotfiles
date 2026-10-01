@@ -4,6 +4,7 @@
 - [Wezterm](https://github.com/Everduin94/dotfiles/tree/main/all/wezterm/.config/wezterm)
 - Ghostty (`all/ghostty/.config/ghostty/config.ghostty`)
 - Hunk (`all/hunk/.config/hunk/config.toml`)
+- Posting API client + Unix-socket proxy helper (`all/posting`)
 - Hex corrections (`mac/hex/.local/share/hex/dictation-processing.json`)
 - Zsh + Zap ([mac](https://github.com/Everduin94/dotfiles/tree/main/mac/zsh/.config/zsh), [arch](https://github.com/Everduin94/dotfiles/tree/main/arch/zsh/.config/zsh))
 - [Starship](https://github.com/Everduin94/dotfiles/tree/main/all/starship/.config/starship)
@@ -23,7 +24,7 @@ git clone https://github.com/Everduin94/dotfiles.git
 brew install stow
 
 cd ~/dotfiles/all
-stow -t ~ git nvim starship wezterm ghostty hunk
+stow -t ~ git nvim starship wezterm ghostty hunk posting
 
 cd ~/dotfiles/mac
 stow -t ~ hex karabiner raycast zsh yabai skhd sketchybar
@@ -61,7 +62,7 @@ brew bundle --file=install/Brewfile.macos-dotfiles
 
 # Stow desired packages
 cd ~/dotfiles/all
-stow -t ~ git nvim starship wezterm ghostty hunk
+stow -t ~ git nvim starship wezterm ghostty hunk posting
 
 cd ~/dotfiles/mac
 stow -t ~ hex karabiner raycast zsh yabai skhd sketchybar
@@ -88,10 +89,16 @@ gh auth setup-git
 - Turn off spotlight shortcuts: System Settings > Spotlight > Shortcuts
 - Hide toolbar: System Settings > Desktop & Dock > Automatically hide and show the Dock
 
+**Posting Unix-socket setup**
+- Start the optional proxy with `posting-socket-proxy /path/to/api.sock`.
+- In Posting, send requests to `http://127.0.0.1:5180`.
+- Override the port with `-p PORT` or `POSTING_SOCKET_PORT`; stop the proxy with Ctrl-C.
+
 **yabai/skhd setup**
 - Grant Accessibility access to both `yabai` and `skhd`, then restart both services.
 - Create the desired number of macOS Spaces manually.
 - In Desktop & Dock: enable separate Spaces per display, disable automatic Space rearrangement, show desktop items, and set wallpaper clicks to reveal the desktop only in Stage Manager.
+- On macOS 27, follow [`install/YABAI_MACOS27.md`](install/YABAI_MACOS27.md). It installs the pinned, reviewed SIP-enabled Space-switching fix from [yabai #2822](https://github.com/asmvik/yabai/issues/2822) and documents verification and rollback.
 
 **SketchyBar setup**
 - Start it with `brew services start sketchybar`.

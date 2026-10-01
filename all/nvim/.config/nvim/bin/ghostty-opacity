@@ -1,0 +1,30 @@
+#!/bin/sh
+# Toggle Ghostty window transparency.
+# Usage: ghostty-opacity [toggle|on|off]
+# Writes ~/.config/ghostty/opacity.ghostty (included by config.ghostty via
+# `config-file = ?opacity.ghostty`) and asks Ghostty to reload (SIGUSR2).
+set -eu
+
+file="${GHOSTTY_OPACITY_FILE:-$HOME/.config/ghostty/opacity.ghostty}"
+on_value="${GHOSTTY_OPACITY_ON:-0.90}"
+
+current=on
+if [ -f "$file" ] && grep -q '^background-opacity = 1\(\.0*\)\?$' "$file"; then
+  current=off
+fi
+
+case "${1:-toggle}" in
+  toggle) if [ "$current" = on ]; then target=off; else target=on; fi ;;
+  on | off) target="$1" ;;
+  *) echo "usage: ghostty-opacity [toggle|on|off]" >&2; exit 2 ;;
+esac
+
+if [ "$target" = on ]; then
+  value="$on_value"
+else
+  value="1.0"
+fi
+
+printf 'background-opacity = %s\n' "$value" > "$file"
+pkill -USR2 -x ghostty 2>/dev/null || true
+echo "Ghostty opacity: $target ($value)"

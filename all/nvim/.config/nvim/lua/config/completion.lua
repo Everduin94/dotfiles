@@ -66,8 +66,16 @@ function M.snippet_backward()
 end
 
 function M.enter()
+  -- Accept the popup selection, as before (a snippet item expands through
+  -- mini.completion's `snippet_insert`).
   if vim.fn.pumvisible() == 1 and pum_selected() then
     return key("<C-y>")
+  end
+
+  -- Inside a snippet: step to the next placeholder. Also covers select mode,
+  -- where <CR> used to replace the selected placeholder with a newline.
+  if vim.snippet.active({ direction = 1 }) then
+    return schedule_jump(1)
   end
 
   if _G.MiniPairs then

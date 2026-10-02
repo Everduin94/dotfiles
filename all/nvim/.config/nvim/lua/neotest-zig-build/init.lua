@@ -10,6 +10,10 @@
 --     and then applies `-Dneotest-filter` to every test compile step under the
 --     `test` step, so named modules / dependencies keep working.
 --   * Loose files (no build.zig): `zig/neotest_standalone.zig` builds just that file.
+--   * Single file / single test runs where the project `test` step executes no tests
+--     at all (file not reachable from it): the file is retried on its own, i.e. what
+--     `zig test <file>` does. Only used as a fallback, so projects that need their
+--     build.zig modules keep working through the wrapper.
 --   * Results are read from the build runner's output: failures are printed as
 --     `error: '<file>.test.<name>' failed:` (or `... leaked`); everything else that
 --     ran is a pass.
@@ -72,13 +76,29 @@ end
 ---------------------------------------------------------------------------
 -- running
 ---------------------------------------------------------------------------
+-- $4/$5: file + standalone template used when the project `test` step ran no
+-- tests at all (e.g. the file is not reachable from it) -- then fall back to
+-- per-file mode, which is what `zig test <file>` does.
 local run_script = [[
-log=$1; src=$2; root=$3; shift 3
+log=$1; src=$2; root=$3; fallback_file=$4; fallback_src=$5; shift 5
 mkdir -p "$root" || exit 1
 cp "$src" "$root/]] .. wrapper_name .. [[" || exit 1
 zig build test --color off --summary all --build-file "$root/]] .. wrapper_name .. [[" "$@" >"$log" 2>&1
 code=$?
 rm -f "$root/]] .. wrapper_name .. [["
+
+if [ -n "$fallback_file" ] && ! grep -Eq '\([0-9]+ total\)' "$log"; then
+  alt="$log.alt"
+  zig build test --color off --summary all --build-file "$fallback_src" -Dneotest-file="$fallback_file" "$@" >"$alt" 2>&1
+  alt_code=$?
+  if grep -Eq '\([0-9]+ total\)' "$alt"; then
+    mv "$alt" "$log"
+    code=$alt_code
+  else
+    rm -f "$alt"
+  fi
+fi
+
 cat "$log"
 exit $code
 ]]
@@ -134,15 +154,19 @@ function M.build_spec(args)
   end
 
   -- dir / project-wide runs are unfiltered; file / test runs are filtered
+  local fallback_file, fallback_src = "", ""
   if pos.type == "file" or pos.type == "test" then
     local filters = filters_for(args.tree)
     for _, filter in ipairs(filters) do
       table.insert(zig_args, "-Dneotest-filter=" .. filter)
     end
+    -- single file / single test: if the project `test` step runs nothing, retry
+    -- this file on its own (covers files not reachable from the `test` step)
+    fallback_file, fallback_src = pos.path, assets_dir .. "/neotest_standalone.zig"
   end
 
   local log = nio.fn.tempname()
-  local command = { "sh", "-c", run_script, "neotest-zig-build", log, src, root }
+  local command = { "sh", "-c", run_script, "neotest-zig-build", log, src, root, fallback_file, fallback_src }
   vim.list_extend(command, zig_args)
 
   return {
@@ -279,7 +303,7 @@ function M.results(spec, result, tree)
       elseif not ran_something then
         results[data.id] = {
           status = "skipped",
-          short = "no tests ran: is this file reachable from the `test` step in build.zig?",
+          short = "no tests ran: not reachable from the `test` step in build.zig, and the file did not build on its own",
         }
       else
         results[data.id] = { status = "passed" }

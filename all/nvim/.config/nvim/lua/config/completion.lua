@@ -24,13 +24,26 @@ function M.s_tab()
   return key("<S-Tab>")
 end
 
+-- `vim.snippet.jump()` cannot run inside an expr mapping (textlock), and returning
+-- "<Cmd>lua vim.snippet.jump(N)<CR>" does not survive the completion popup menu
+-- being open: Neovim then inserts the raw keycodes verbatim, which is how the
+-- literal text "vim.snippet.jump(1)" ended up in the buffer. Jump on the next
+-- event-loop tick instead, cancelling the menu synchronously when it is open.
+local function schedule_jump(direction)
+  vim.schedule(function()
+    vim.snippet.jump(direction)
+  end)
+
+  if vim.fn.pumvisible() == 1 then
+    return key("<C-e>")
+  end
+
+  return ""
+end
+
 function M.snippet_forward()
   if vim.snippet.active({ direction = 1 }) then
-    -- Deferred via <Cmd> so the jump runs outside the expr-mapping/textlock
-    -- context. Calling vim.snippet.jump() directly here errors with
-    -- "E565: Not allowed to change text or change window" when the
-    -- completion popup menu is visible.
-    return key("<Cmd>lua vim.snippet.jump(1)<CR>")
+    return schedule_jump(1)
   end
 
   if _G.MiniCompletion and MiniCompletion.scroll("down") then
@@ -42,8 +55,7 @@ end
 
 function M.snippet_backward()
   if vim.snippet.active({ direction = -1 }) then
-    -- See M.snippet_forward for why this is deferred via <Cmd>.
-    return key("<Cmd>lua vim.snippet.jump(-1)<CR>")
+    return schedule_jump(-1)
   end
 
   if _G.MiniCompletion and MiniCompletion.scroll("up") then

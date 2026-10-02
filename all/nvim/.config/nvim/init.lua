@@ -44,6 +44,7 @@ if not inline then
     { src = "https://github.com/nvim-neotest/neotest" },
     { src = "https://github.com/nvim-neotest/nvim-nio" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://codeberg.org/ziglang/zig.vim" },
   })
 end

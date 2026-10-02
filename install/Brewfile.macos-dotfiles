@@ -23,6 +23,8 @@ brew "ripgrep"
 brew "jq"
 brew "gh"
 brew "tree-sitter"
+# `tree-sitter` is now the lib only; install/nvim-treesitter-parsers.sh needs the CLI
+brew "tree-sitter-cli"
 brew "hunk"
 
 # Window management

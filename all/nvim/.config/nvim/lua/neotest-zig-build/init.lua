@@ -255,6 +255,24 @@ local function failure_line(block, path, root)
   end
 end
 
+-- Output styling. `neotest.output.open()` and the output panel render into
+-- terminal buffers, so ANSI escapes work and inherit the colorscheme's
+-- terminal palette (theme green / red / yellow) instead of hardcoding hex.
+-- Icons are Nerd Font glyphs (U+F00C, U+F00D, U+F051); swap them here.
+local status_style = {
+  passed = { icon = "\u{f00c}", ansi = "32" },
+  failed = { icon = "\u{f00d}", ansi = "31" },
+  skipped = { icon = "\u{f051}", ansi = "33" },
+}
+
+local function styled(status, text)
+  local style = status_style[status]
+  if not style then
+    return text
+  end
+  return "\27[" .. style.ansi .. "m" .. text .. "\27[0m"
+end
+
 --- Condense a raw `zig build` log for `neotest.output.open()`: zig's step tree,
 --- timings, `MaxRSS`, `(cached|reused)` markers and the `failed command:` line
 --- (a long absolute path plus `--listen=-`) are noise. Keep the test's own
@@ -302,15 +320,15 @@ function M._condense(text, parsed, tests)
     passed, failed = parsed.passed, parsed.failed
   end
 
-  local header = ("Passed: %d | Failed: %d"):format(passed, failed)
+  local header = styled("passed", "Passed: " .. passed) .. " | " .. styled("failed", "Failed: " .. failed)
   if skipped > 0 then
-    header = header .. (" | Skipped: %d"):format(skipped)
+    header = header .. " | " .. styled("skipped", "Skipped: " .. skipped)
   end
 
   local out = { header }
   for _, test in ipairs(tests) do
-    local mark = test.status == "failed" and "❌" or (test.status == "passed" and "✅" or "⏭")
-    local line = mark .. " " .. test.name
+    local status = status_style[test.status] and test.status or "skipped"
+    local line = styled(status, status_style[status].icon .. " " .. test.name)
     if test.short and test.short ~= "" then
       line = line .. " — " .. test.short
     end

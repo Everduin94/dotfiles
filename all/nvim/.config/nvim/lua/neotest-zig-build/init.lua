@@ -258,10 +258,12 @@ end
 --- Condense a raw `zig build` log for `neotest.output.open()`: zig's step tree,
 --- timings, `MaxRSS`, `(cached|reused)` markers and the `failed command:` line
 --- (a long absolute path plus `--listen=-`) are noise. Keep the test's own
---- output and any failure blocks, prefixed with a one-line status.
+--- output and any failure blocks, prefixed with a per-test summary.
 ---@param text string
 ---@param parsed table Result of `M._parse`
-function M._condense(text, parsed)
+---@param tests? { name: string, status: string, short?: string }[] In tree order
+function M._condense(text, parsed, tests)
+  tests = tests or {}
   local keep = {}
   for line in (text .. "\n"):gmatch("(.-)\r?\n") do
     -- Lua patterns have no alternation, so these are separate matches
@@ -286,13 +288,39 @@ function M._condense(text, parsed)
     table.remove(keep)
   end
 
-  local ran = parsed.passed + parsed.failed > 0
-  local status = not ran and "no tests ran" or (parsed.failed > 0 and "failed" or "passed")
-  local header = ("%s: %d passed, %d failed"):format(status, parsed.passed, parsed.failed)
-  if #keep == 0 then
-    return header .. "\n"
+  local passed, failed, skipped = 0, 0, 0
+  for _, test in ipairs(tests) do
+    if test.status == "passed" then
+      passed = passed + 1
+    elseif test.status == "failed" then
+      failed = failed + 1
+    else
+      skipped = skipped + 1
+    end
   end
-  return header .. "\n\n" .. table.concat(keep, "\n") .. "\n"
+  if #tests == 0 then -- no per-test tree (e.g. a run reported before discovery)
+    passed, failed = parsed.passed, parsed.failed
+  end
+
+  local header = ("Passed: %d | Failed: %d"):format(passed, failed)
+  if skipped > 0 then
+    header = header .. (" | Skipped: %d"):format(skipped)
+  end
+
+  local out = { header }
+  for _, test in ipairs(tests) do
+    local mark = test.status == "failed" and "❌" or (test.status == "passed" and "✅" or "⏭")
+    local line = mark .. " " .. test.name
+    if test.short and test.short ~= "" then
+      line = line .. " — " .. test.short
+    end
+    table.insert(out, line)
+  end
+  if #keep > 0 then
+    table.insert(out, "")
+    vim.list_extend(out, keep)
+  end
+  return table.concat(out, "\n") .. "\n"
 end
 
 ---@async
@@ -310,6 +338,7 @@ function M.results(spec, result, tree)
 
   local parsed = M._parse(text)
   local results = {}
+  local order = {}
   local root = spec.context.root
   local ran_something = parsed.passed + parsed.failed > 0
   local build_failed = result.code ~= 0 and next(parsed.failures) == nil
@@ -347,17 +376,18 @@ function M.results(spec, result, tree)
       elseif not ran_something then
         results[data.id] = {
           status = "skipped",
-          short = "no tests ran: not reachable from the `test` step in build.zig, and the file did not build on its own",
+          short = "no tests ran (not reachable from the `test` step)",
         }
       else
         results[data.id] = { status = "passed" }
       end
+      table.insert(order, { name = name, status = results[data.id].status, short = results[data.id].short })
     end
   end
 
   -- Keep a condensed view of the output around for `neotest.output.open()`.
   local output_path = nio.fn.tempname()
-  pcall(lib.files.write, output_path, M._condense(text, parsed))
+  pcall(lib.files.write, output_path, M._condense(text, parsed, order))
   for _, r in pairs(results) do
     r.output = output_path
   end

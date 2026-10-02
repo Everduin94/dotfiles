@@ -149,9 +149,11 @@ function M.build_spec(args)
   elseif pos.type == "dir" then
     return nil -- loose directories: descend and run file by file
   else
-    -- no build.zig anywhere above: build just this file
-    vim.fn.mkdir(standalone_dir, "p") -- must exist: it is the process cwd
-    src, root, cwd = assets_dir .. "/neotest_standalone.zig", standalone_dir, standalone_dir
+    -- no build.zig anywhere above: build just this file. cwd is the file's own
+    -- directory, matching `zig test <file>` (relative paths in the test resolve
+    -- against it); zig's caches stay in the assets dir.
+    vim.fn.mkdir(standalone_dir, "p") -- the run script copies the wrapper there
+    src, root, cwd = assets_dir .. "/neotest_standalone.zig", standalone_dir, vim.fs.dirname(pos.path)
     table.insert(zig_args, "-Dneotest-file=" .. pos.path)
   end
 
@@ -253,6 +255,46 @@ local function failure_line(block, path, root)
   end
 end
 
+--- Condense a raw `zig build` log for `neotest.output.open()`: zig's step tree,
+--- timings, `MaxRSS`, `(cached|reused)` markers and the `failed command:` line
+--- (a long absolute path plus `--listen=-`) are noise. Keep the test's own
+--- output and any failure blocks, prefixed with a one-line status.
+---@param text string
+---@param parsed table Result of `M._parse`
+function M._condense(text, parsed)
+  local keep = {}
+  for line in (text .. "\n"):gmatch("(.-)\r?\n") do
+    -- Lua patterns have no alternation, so these are separate matches
+    local scaffolding = line:match("^failed command:")
+      or line:match("^Build Summary:")
+      or line:match("^%s*[+|]")
+      or line:match("^test%s*$")
+      or line:match("^test%s+success%s*$")
+      or line:match("^test%s+failure%s*$")
+      or line:match("^test%s+transitive failure%s*$")
+    if not scaffolding then
+      local blank = line:match("^%s*$") ~= nil
+      if not (blank and (keep[#keep] == nil or keep[#keep] == "")) then
+        table.insert(keep, blank and "" or line)
+      end
+    end
+  end
+  while keep[1] == "" do
+    table.remove(keep, 1)
+  end
+  while keep[#keep] == "" do
+    table.remove(keep)
+  end
+
+  local ran = parsed.passed + parsed.failed > 0
+  local status = not ran and "no tests ran" or (parsed.failed > 0 and "failed" or "passed")
+  local header = ("%s: %d passed, %d failed"):format(status, parsed.passed, parsed.failed)
+  if #keep == 0 then
+    return header .. "\n"
+  end
+  return header .. "\n\n" .. table.concat(keep, "\n") .. "\n"
+end
+
 ---@async
 ---@param spec neotest.RunSpec
 ---@param result neotest.StrategyResult
@@ -313,9 +355,9 @@ function M.results(spec, result, tree)
     end
   end
 
-  -- Keep the raw output around for `neotest.output.open()`.
+  -- Keep a condensed view of the output around for `neotest.output.open()`.
   local output_path = nio.fn.tempname()
-  pcall(lib.files.write, output_path, text)
+  pcall(lib.files.write, output_path, M._condense(text, parsed))
   for _, r in pairs(results) do
     r.output = output_path
   end

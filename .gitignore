@@ -24,3 +24,7 @@ all/nvim/.config/nvim/node_modules
 all/nvim/.config/nvim/node_modules/**
 
 **/ghostty/opacity.ghostty
+
+# zig build cache from neotest loose-file runs (assets dir is the build root)
+all/nvim/.config/nvim/zig/.zig-cache/
+all/nvim/.config/nvim/zig/zig-out/

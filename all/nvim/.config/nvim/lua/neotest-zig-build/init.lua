@@ -16,7 +16,9 @@
 --     build.zig modules keep working through the wrapper.
 --   * Results are read from the build runner's output: failures are printed as
 --     `error: '<file>.test.<name>' failed:` (or `... leaked`); everything else that
---     ran is a pass.
+--     ran is a pass. The wrapper sets `has_side_effects` on test run steps so the
+--     test binaries always re-execute: a *cached* run step prints no test counts at
+--     all, and their absence is what tells us nothing ran. Compiles stay cached.
 --
 -- Limits: filters are substring matches on `<stem>.test.<name>`, so a sibling whose
 -- name contains the selected one also runs (and is reported correctly). Tests

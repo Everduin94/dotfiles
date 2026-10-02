@@ -326,6 +326,9 @@ function M._condense(text, parsed, tests)
   end
 
   local out = { header }
+  if #tests > 0 then
+    table.insert(out, "")
+  end
   for _, test in ipairs(tests) do
     local status = status_style[test.status] and test.status or "skipped"
     local line = styled(status, status_style[status].icon .. " " .. test.name)

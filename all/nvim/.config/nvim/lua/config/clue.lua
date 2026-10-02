@@ -17,6 +17,7 @@ local function leader_clues()
     vim.list_extend(clues, {
       { mode = "n", keys = "<Leader>c", desc = "+code" },
       { mode = "n", keys = "<Leader>g", desc = "+git" },
+      { mode = "n", keys = "<Leader>r", desc = "+run tests" },
     })
   end
 

@@ -22,6 +22,8 @@
 - `scss`
 - `svelte`
 - `yaml`
+- `zig`
+  - used by neotest for Zig test discovery
 - `lua`
   - built into Neovim
 

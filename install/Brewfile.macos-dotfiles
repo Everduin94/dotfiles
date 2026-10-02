@@ -17,6 +17,7 @@ brew "socat"
 
 # Editor / CLI
 brew "neovim"
+brew "zig"
 brew "fd"
 brew "ripgrep"
 brew "jq"

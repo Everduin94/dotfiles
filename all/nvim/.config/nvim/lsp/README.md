@@ -29,6 +29,10 @@
 - `tailwindcss` -> `tailwindcss-language-server`
 - `lua_ls` -> `lua-language-server`
 
+## zig
+
+- Running tests: `zig-tests.md`. No `zls` config yet.
+
 ## save behavior
 
 - ESLint fixes run first

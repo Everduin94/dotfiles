@@ -41,6 +41,9 @@ if not inline then
     { src = "https://github.com/nvim-mini/mini.diff" },
     { src = "https://github.com/nvim-mini/mini.sessions" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://github.com/nvim-neotest/neotest" },
+    { src = "https://github.com/nvim-neotest/nvim-nio" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
   })
 end
 
@@ -79,6 +82,7 @@ if not inline then
   require("config.diff").setup()
   require("config.pick").setup()
   require("config.sessions").setup()
+  require("config.test").setup()
 
   require("oil").setup({
     default_file_explorer = true,

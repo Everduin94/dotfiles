@@ -65,6 +65,7 @@ install_repo "css" "https://github.com/tree-sitter/tree-sitter-css.git"
 install_repo "scss" "https://github.com/serenadeai/tree-sitter-scss.git"
 install_repo "svelte" "https://github.com/Himujjal/tree-sitter-svelte.git"
 install_repo "yaml" "https://github.com/tree-sitter-grammars/tree-sitter-yaml.git"
+install_repo "zig" "https://github.com/tree-sitter-grammars/tree-sitter-zig.git"
 
 TYPESCRIPT_REPO="$WORK_DIR/typescript-repo"
 echo "Installing typescript"

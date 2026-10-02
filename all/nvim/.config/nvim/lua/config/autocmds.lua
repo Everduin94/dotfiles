@@ -30,7 +30,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
       desc = "Forward ^G (pi external editor -> float in this nvim)",
     })
 
-    vim.cmd.startinsert()
+    -- Background terminals (e.g. neotest runs) must not steal the current window's mode.
+    -- (scheduled: the check must run after e.g. nvim_buf_call has restored the window)
+    vim.schedule(function()
+      if vim.api.nvim_get_current_buf() == args.buf then
+        vim.cmd.startinsert()
+      end
+    end)
   end,
 })
 

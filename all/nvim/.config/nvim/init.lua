@@ -20,6 +20,7 @@ vim.diagnostic.config({
 
 local plugins = {
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  { src = "https://github.com/webhooked/kanso.nvim", name = "kanso" },
   { src = "https://github.com/nvim-mini/mini.completion" },
   { src = "https://github.com/nvim-mini/mini.snippets" },
   { src = "https://github.com/nvim-mini/mini.pairs" },
@@ -38,7 +39,11 @@ if not inline then
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/cbochs/grapple.nvim", name = "grapple.nvim" },
     { src = "https://github.com/nvim-mini/mini.diff" },
+    { src = "https://github.com/nvim-mini/mini.sessions" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://github.com/nvim-neotest/neotest" },
+    { src = "https://github.com/nvim-neotest/nvim-nio" },
+    { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://codeberg.org/ziglang/zig.vim" },
   })
 end
@@ -77,6 +82,8 @@ if not inline then
   require("config.grapple")
   require("config.diff").setup()
   require("config.pick").setup()
+  require("config.sessions").setup()
+  require("config.test").setup()
 
   require("oil").setup({
     default_file_explorer = true,

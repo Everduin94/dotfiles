@@ -7,7 +7,9 @@ local function leader_clues()
     { mode = "n", keys = "<Leader>o", desc = "+open" },
     { mode = "n", keys = "<Leader>p", desc = "+path" },
     { mode = "n", keys = "<Leader>q", desc = "+quit" },
+    { mode = "n", keys = "<Leader>s", desc = "+session" },
     { mode = { "n", "x" }, keys = "<Leader>t", desc = "+terminal" },
+    { mode = "n", keys = "<Leader>u", desc = "+ui" },
     { mode = "n", keys = "<Leader>w", desc = "+window" },
   }
 
@@ -15,6 +17,7 @@ local function leader_clues()
     vim.list_extend(clues, {
       { mode = "n", keys = "<Leader>c", desc = "+code" },
       { mode = "n", keys = "<Leader>g", desc = "+git" },
+      { mode = "n", keys = "<Leader>r", desc = "+run tests" },
     })
   end
 

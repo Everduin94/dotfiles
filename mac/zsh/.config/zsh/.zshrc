@@ -21,6 +21,16 @@ zle -N up-line-or-beginning-search
 bindkey '^F' end-of-line
 bindkey '^P' up-line-or-beginning-search
 
+# Ctrl-G: fuzzy-pick/attach a zmx session (same as the `za` alias).
+# Overrides the default send-break binding (aborts things like an active
+# Ctrl-R search), which we don't otherwise use.
+zmx-select-widget() {
+  zmx-select
+  zle reset-prompt
+}
+zle -N zmx-select-widget
+bindkey '^G' zmx-select-widget
+
 # Load and initialise completion system
 autoload -Uz compinit
 compinit
@@ -109,7 +119,9 @@ __nvm_chpwd  # handle the case where the shell starts inside a pinned repo
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 pi() {
-  EDITOR='env PI_NVIM_INLINE=1 nvim' VISUAL='env PI_NVIM_INLINE=1 nvim' command pi "$@"
+  # pi-nvim-edit: float inside the host nvim when pi runs in an nvim terminal,
+  # else standalone minimal nvim.
+  EDITOR="$HOME/.config/nvim/bin/pi-nvim-edit" VISUAL="$HOME/.config/nvim/bin/pi-nvim-edit" command pi "$@"
 }
 
 . "$HOME/.turso/env"

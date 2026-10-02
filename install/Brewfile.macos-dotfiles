@@ -12,9 +12,12 @@ brew "starship"
 brew "fzf"
 brew "zoxide"
 brew "yazi"
+brew "posting"
+brew "socat"
 
 # Editor / CLI
 brew "neovim"
+brew "zig"
 brew "fd"
 brew "ripgrep"
 brew "jq"

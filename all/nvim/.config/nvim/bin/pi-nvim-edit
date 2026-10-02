@@ -1,0 +1,32 @@
+#!/bin/sh
+# $EDITOR for pi. When pi runs in a Neovim terminal (and that terminal just
+# forwarded <C-g>), open FILE in a float inside that Neovim and block until it
+# closes. Otherwise fall back to a standalone, minimal nvim.
+file="$1"
+[ -n "$file" ] || exit 1
+
+stamp="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/pi-edit-host"
+fallback() { exec env PI_NVIM_INLINE=1 nvim "$file"; }
+
+[ -f "$stamp" ] || fallback
+IFS='	' read -r addr ts < "$stamp"
+[ -n "$addr" ] && [ -n "$ts" ] || fallback
+now=$(date +%s)
+[ $((now - ts)) -le 10 ] || fallback
+nvim --server "$addr" --remote-expr '1' >/dev/null 2>&1 || fallback
+rm -f "$stamp"
+
+done_file=$(mktemp -u "${TMPDIR:-/tmp}/pi-nvim-edit.XXXXXX")
+q() { printf '%s' "$1" | sed "s/'/''/g"; }
+
+nvim --server "$addr" --remote-expr \
+  "luaeval('require(\"config.pi_edit\").open(_A[1], _A[2])', ['$(q "$file")', '$(q "$done_file")'])" \
+  >/dev/null 2>&1 || fallback
+
+while [ ! -e "$done_file" ]; do
+  # host nvim went away: stop waiting
+  nvim --server "$addr" --remote-expr '1' >/dev/null 2>&1 || break
+  sleep 0.2
+done
+rm -f "$done_file"
+exit 0

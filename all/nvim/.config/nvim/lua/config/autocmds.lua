@@ -22,7 +22,21 @@ vim.api.nvim_create_autocmd("TermOpen", {
       })
     end
 
-    vim.cmd.startinsert()
+    -- pi's <C-g> opens $EDITOR; let it open a float in this Neovim.
+    vim.keymap.set("t", "<C-g>", function()
+      require("config.pi_edit").forward()
+    end, {
+      buffer = args.buf,
+      desc = "Forward ^G (pi external editor -> float in this nvim)",
+    })
+
+    -- Background terminals (e.g. neotest runs) must not steal the current window's mode.
+    -- (scheduled: the check must run after e.g. nvim_buf_call has restored the window)
+    vim.schedule(function()
+      if vim.api.nvim_get_current_buf() == args.buf then
+        vim.cmd.startinsert()
+      end
+    end)
   end,
 })
 

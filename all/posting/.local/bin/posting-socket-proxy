@@ -1,0 +1,76 @@
+#!/bin/sh
+
+set -eu
+
+usage() {
+    cat <<'EOF'
+Usage: posting-socket-proxy [-p PORT] SOCKET_PATH
+
+Forward HTTP traffic from 127.0.0.1:PORT to a Unix domain socket for Posting.
+The default port is 5180, or POSTING_SOCKET_PORT when set.
+
+Run this command in one terminal, then use the printed HTTP URL in Posting.
+Stop the proxy with Ctrl-C.
+EOF
+}
+
+port="${POSTING_SOCKET_PORT:-5180}"
+
+if [ "${1:-}" = "--help" ]; then
+    usage
+    exit 0
+fi
+
+while getopts "hp:" option; do
+    case "$option" in
+        h)
+            usage
+            exit 0
+            ;;
+        p)
+            port="$OPTARG"
+            ;;
+        *)
+            usage >&2
+            exit 2
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+if [ "$#" -ne 1 ]; then
+    usage >&2
+    exit 2
+fi
+
+socket_path="$1"
+
+case "$port" in
+    ''|*[!0-9]*)
+        echo "posting-socket-proxy: port must be a number" >&2
+        exit 2
+        ;;
+esac
+
+if [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
+    echo "posting-socket-proxy: port must be between 1 and 65535" >&2
+    exit 2
+fi
+
+if ! command -v socat >/dev/null 2>&1; then
+    echo "posting-socket-proxy: socat is not installed" >&2
+    echo "Install it with: brew install socat" >&2
+    exit 1
+fi
+
+if [ ! -S "$socket_path" ]; then
+    echo "posting-socket-proxy: not a Unix socket: $socket_path" >&2
+    exit 1
+fi
+
+echo "Forwarding http://127.0.0.1:$port -> $socket_path"
+echo "Press Ctrl-C to stop."
+
+exec socat \
+    "TCP-LISTEN:$port,bind=127.0.0.1,fork,reuseaddr" \
+    "UNIX-CONNECT:$socket_path"

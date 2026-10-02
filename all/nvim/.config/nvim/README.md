@@ -7,6 +7,7 @@ Native-first Neovim `0.12+` config.
 Small set via `vim.pack`:
 - `oil.nvim`
 - `catppuccin`
+- `kanso.nvim`
 - `grapple.nvim`
 - `mini.completion`
 - `mini.snippets`
@@ -21,6 +22,7 @@ Small set via `vim.pack`:
 - `mini.hipatterns`
 - `mini.indentscope`
 - `snacks.nvim` (picker and terminals)
+- `neotest` (+ `nvim-nio`, `plenary.nvim`) with an in-config Zig adapter (`lua/neotest-zig-build`)
 
 ## notes
 
@@ -45,6 +47,11 @@ Small set via `vim.pack`:
 - `<leader>tf` paste the current file path into the attached zmx session
 - visual `<leader>ts` paste selection into the attached zmx session
 - `<leader>tf` and `<leader>ts` do not submit; edit the pasted input before pressing Enter
+- `<leader>ut` / `:Theme [name]` toggle catppuccin <-> kanso (persisted in nvim state dir)
+- `<leader>uT` / `:TermOpacity [toggle|on|off]` toggle Ghostty window transparency (`bin/ghostty-opacity`)
+- zmx terminal `<C-c>` sends Esc to pi (stop); double-tap sends real `^C`; `<leader>ax` same from any buffer
+- terminal `<C-g>` in pi opens the prompt editor as a float in this nvim (`bin/pi-nvim-edit`, `lua/config/pi_edit.lua`); `:wq` / `<C-s>` sends
+- `<leader>rr` run the test under the cursor (Zig, via neotest); `rf` file, `rl` last, `rx` stop, `ro` output float, `rO` output panel, `rs` summary
 - `<C-s>` save current buffer
 - `<C-q>` save all and quit Neovim
 - `gcc`, `gc{motion}`, visual `gc` comment toggle
@@ -68,8 +75,13 @@ Small set via `vim.pack`:
 - `<leader>at` / `<leader>af` send current position / file path to zmx
 - visual `<leader>av` also sends selection to zmx during transition
 
+## zig tests
+
+- `<leader>rr` runs the test under the cursor. Setup, Zig version notes and troubleshooting: `lsp/zig-tests.md`.
+
 ## docs
 
 - `vision.md`
 - `lsp/README.md`
+- `lsp/zig-tests.md`
 - `treesitter/README.md`

@@ -34,6 +34,11 @@
 - `lua_ls` -> `lua-language-server`
 - `zls` -> `zls` (zig), formatting matches `zig fmt`
 
+## zig
+
+- Running tests: `zig-tests.md`.
+- LSP: `zls.lua` (ZLS), formatting matches `zig fmt`.
+
 ## save behavior
 
 - ESLint fixes run first

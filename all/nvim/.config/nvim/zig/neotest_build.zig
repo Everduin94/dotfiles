@@ -15,8 +15,14 @@ fn applyFilters(
     seen: *std.AutoHashMap(*std.Build.Step, void),
 ) void {
     if ((seen.getOrPut(step) catch return).found_existing) return;
-    if (step.id == .compile) {
-        const compile: *std.Build.Step.Compile = @fieldParentPtr("step", step);
+    if (comptime @hasField(std.Build.Step, "id")) {
+        // Zig <= 0.16: Step carried an `id` tag
+        if (step.id == .compile) {
+            const compile: *std.Build.Step.Compile = @fieldParentPtr("step", step);
+            if (compile.kind == .@"test") compile.filters = b.dupeStrings(filters);
+        }
+    } else if (std.Build.Step.cast(step, std.Build.Step.Compile)) |compile| {
+        // Zig 0.17+: `id` replaced by `tag`, use Step.cast (checks base_tag)
         if (compile.kind == .@"test") compile.filters = b.dupeStrings(filters);
     }
     for (step.dependencies.items) |dep| applyFilters(b, dep, filters, seen);

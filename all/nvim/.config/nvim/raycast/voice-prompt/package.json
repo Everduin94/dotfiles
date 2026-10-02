@@ -1,0 +1,53 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "voice-prompt",
+  "title": "Voice Prompt",
+  "description": "Record audio, transcribe it with faster-whisper, and copy the result to the clipboard.",
+  "icon": "icon.png",
+  "author": "erik",
+  "platforms": ["macOS"],
+  "categories": ["Developer Tools", "Productivity"],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "voice-prompt",
+      "title": "Voice Prompt",
+      "description": "Start recording, stop it, and copy the transcript.",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "pythonBin",
+          "type": "textfield",
+          "required": true,
+          "title": "Python Binary",
+          "description": "Absolute path to the Python executable that can run your whisper script.",
+          "default": "/Users/erik/dotfiles/.venv/bin/python"
+        },
+        {
+          "name": "scriptPath",
+          "type": "textfield",
+          "required": true,
+          "title": "Whisper Script Path",
+          "description": "Absolute path to faster-whisper.py.",
+          "default": "/Users/erik/dotfiles/all/nvim/.config/nvim/lua/scripts/faster-whisper.py"
+        }
+      ]
+    }
+  ],
+  "scripts": {
+    "dev": "ray develop",
+    "build": "ray build -e dist",
+    "lint": "ray lint"
+  },
+  "dependencies": {
+    "@raycast/api": "^1.101.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "^22.15.17",
+    "@types/react": "^18.3.18",
+    "eslint": "^9.26.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  }
+}

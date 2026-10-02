@@ -4,6 +4,10 @@
       "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
       "src": "https://github.com/catppuccin/nvim"
     },
+    "easyjump.tmux": {
+      "rev": "06fc9e111ac3ff916e6834262ebc4171284424ce",
+      "src": "https://github.com/roy2220/easyjump.tmux"
+    },
     "grapple.nvim": {
       "rev": "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7",
       "src": "https://github.com/cbochs/grapple.nvim"
@@ -60,6 +64,11 @@
       "rev": "a2f644f3759edd3d3f8b6a6d55378408bfe6d290",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
+    "nvim-treesitter": {
+      "rev": "a1bcffc8095c142ad1f7a9671a4ae180333f9209",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
     "oil.nvim": {
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
@@ -67,6 +76,10 @@
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "zig.vim": {
+      "rev": "4842ab8cb1b000a9acb0a06170d404d12a154918",
+      "src": "https://codeberg.org/ziglang/zig.vim"
     }
   }
 }

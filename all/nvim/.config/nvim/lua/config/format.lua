@@ -1,5 +1,3 @@
-local util = require("lsp._util")
-
 local M = {}
 
 local prettier_filetypes = {
@@ -27,6 +25,11 @@ local eslint_filetypes = {
   svelte = true,
   typescript = true,
   typescriptreact = true,
+}
+
+local lsp_format_filetypes = {
+  zig = true,
+  zon = true,
 }
 
 local prettier_root_markers = {
@@ -90,14 +93,29 @@ local function find_prettier_root(bufnr)
 end
 
 local function prettier_command(root_dir, file_name)
-  local prettierd = util.prefer_local_executable(root_dir, "prettierd")
-  if vim.fn.executable(prettierd) == 1 then
-    return { prettierd, file_name }
+  if root_dir then
+    local local_prettierd = vim.fs.joinpath(root_dir, "node_modules", ".bin", "prettierd")
+    if vim.fn.executable(local_prettierd) == 1 then
+      return { local_prettierd, file_name }
+    end
+
+    local local_prettier = vim.fs.joinpath(root_dir, "node_modules", ".bin", "prettier")
+    if vim.fn.executable(local_prettier) == 1 then
+      return { local_prettier, "--stdin-filepath", file_name }
+    end
+
+    local local_prettier_cli = vim.fs.joinpath(root_dir, "node_modules", "prettier", "bin", "prettier.cjs")
+    if vim.uv.fs_stat(local_prettier_cli) and vim.fn.executable("node") == 1 then
+      return { "node", local_prettier_cli, "--stdin-filepath", file_name }
+    end
   end
 
-  local prettier = util.prefer_local_executable(root_dir, "prettier")
-  if vim.fn.executable(prettier) == 1 then
-    return { prettier, "--stdin-filepath", file_name }
+  if vim.fn.executable("prettierd") == 1 then
+    return { "prettierd", file_name }
+  end
+
+  if vim.fn.executable("prettier") == 1 then
+    return { "prettier", "--stdin-filepath", file_name }
   end
 end
 
@@ -170,6 +188,10 @@ function M.format_on_save(args)
 
   if prettier_filetypes[filetype] then
     run_prettier(bufnr)
+  end
+
+  if lsp_format_filetypes[filetype] then
+    vim.lsp.buf.format({ bufnr = bufnr })
   end
 end
 

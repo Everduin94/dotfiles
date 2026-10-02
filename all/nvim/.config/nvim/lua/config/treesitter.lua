@@ -2,6 +2,15 @@ local M = {}
 
 local max_lines = 1200
 
+-- Filetypes to drive with treesitter-based indent (`=`, autoindent, o/O).
+-- Provided by the nvim-treesitter plugin (core `vim.treesitter` has no
+-- indentexpr, only highlighting/folding). Opt-in per filetype: most useful
+-- for languages with embedded/mixed syntax (svelte's html+js+css, astro).
+local indentexpr_filetypes = {
+  svelte = true,
+  astro = true,
+}
+
 local function is_markdown(filetype)
   return filetype == "markdown" or filetype:match("^markdown%.") ~= nil
 end
@@ -67,6 +76,9 @@ function M.refresh(bufnr)
     local ok = pcall(vim.treesitter.start, bufnr, lang)
     if ok then
       vim.b[bufnr].treesitter_enabled = true
+      if indentexpr_filetypes[vim.bo[bufnr].filetype] then
+        vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
     end
     return
   end
@@ -74,6 +86,7 @@ function M.refresh(bufnr)
   if vim.b[bufnr].treesitter_enabled then
     pcall(vim.treesitter.stop, bufnr)
     vim.bo[bufnr].syntax = "ON"
+    vim.bo[bufnr].indentexpr = ""
     vim.b[bufnr].treesitter_enabled = false
   end
 end

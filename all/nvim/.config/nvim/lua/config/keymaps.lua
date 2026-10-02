@@ -4,6 +4,7 @@ local terminal = require("config.terminal")
 local inline = vim.g.pi_nvim_inline == true
 
 map("n", "<Esc>", "<cmd>nohlsearch<cr>")
+map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 map("n", "gV", '"g`[" . strpart(getregtype(), 0, 1) . "g`]"', {
   expr = true,
   replace_keycodes = false,

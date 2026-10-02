@@ -52,6 +52,7 @@ pi_main() {
 alias pimain='pi_main'
 alias pi-main='pi_main'
 alias paladin='pi --no-context-files --no-skills --no-extensions -e "$HOME/dev/pi-persona-light"'
+alias zig-tutor='pi --no-skills --no-extensions'
 alias download-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/download-avf-openapi.sh"
 alias search-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/search-avf-openapi.sh"
 alias describe-avf="$HOME/.pi/agent/paladin/projects/avf/scripts/core/describe-avf-openapi.sh"

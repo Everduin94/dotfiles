@@ -39,6 +39,7 @@ if not inline then
     { src = "https://github.com/cbochs/grapple.nvim", name = "grapple.nvim" },
     { src = "https://github.com/nvim-mini/mini.diff" },
     { src = "https://github.com/folke/snacks.nvim" },
+    { src = "https://codeberg.org/ziglang/zig.vim" },
   })
 end
 

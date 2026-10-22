@@ -14,7 +14,7 @@ Run the Zig test under the cursor with `<leader>rr`.
 ## setup
 
 1. Neovim 0.12+.
-2. `zig` on `PATH` (`brew install zig`). Match `.minimum_zig_version` in the project's `build.zig.zon`.
+2. `zig` and `zls` on `PATH` (both 0.17.0: `brew install zig zls`). Match `.minimum_zig_version` in the project's `build.zig.zon`; keep ZLS on the same version as `zig` or completion/hover silently degrades.
 3. Tree-sitter parser: `brew install tree-sitter-cli`, then `install/nvim-treesitter-parsers.sh`.
 4. Open nvim once so `vim.pack` installs neotest, nvim-nio, plenary.nvim.
 

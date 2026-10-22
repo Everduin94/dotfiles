@@ -344,6 +344,26 @@ function M._condense(text, parsed, tests)
   return table.concat(out, "\n") .. "\n"
 end
 
+--- Find the failure block for a test. Zig's FQN is relative to the module root
+--- (`api.health.decltest.getHealth` for `src/api/health.zig`), so an exact
+--- `stem.name` lookup misses files in subdirectories; fall back to a suffix match.
+---@param failures table<string, table>
+---@param stem string
+---@param name string
+local function find_failure(failures, stem, name)
+  for _, kind in ipairs({ ".test.", ".decltest." }) do
+    local key = stem .. kind .. name
+    if failures[key] then
+      return failures[key]
+    end
+  end
+  for fqn, failure in pairs(failures) do
+    if vim.endswith(fqn, "." .. stem .. ".test." .. name) or vim.endswith(fqn, "." .. stem .. ".decltest." .. name) then
+      return failure
+    end
+  end
+end
+
 ---@async
 ---@param spec neotest.RunSpec
 ---@param result neotest.StrategyResult
@@ -369,7 +389,7 @@ function M.results(spec, result, tree)
     if data.type == "test" then
       local name = strip_quotes(data.name)
       local stem = vim.fn.fnamemodify(data.path, ":t:r")
-      local failure = parsed.failures[stem .. ".test." .. name] or parsed.failures[stem .. ".decltest." .. name]
+      local failure = find_failure(parsed.failures, stem, name)
 
       if failure then
         results[data.id] = {

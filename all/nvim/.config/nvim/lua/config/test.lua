@@ -12,7 +12,9 @@ local zig_symbol_query = [[
 
 -- The symbol parsing itself happens in a child Nvim that neotest starts with
 -- `-u NONE`, so it only sees neotest's *default* queries. Teach that child our
--- query too (it starts asynchronously, hence the retries).
+-- query too. The child starts lazily on first use (client `_start`), long after
+-- this setup runs, so a one-shot push here is racy; hook `subprocess.init`
+-- instead and push right after the child comes up.
 local push_zig_symbol_query = "(function(q) require('neotest.config').watch.symbol_queries.zig = q return true end)"
 
 function M.setup()
@@ -41,20 +43,20 @@ function M.setup()
   })
 
   local nio = require("nio")
-  local function sync_symbol_queries(attempt)
+  local subprocess = require("neotest.lib.subprocess")
+  local push = function()
     nio.run(function()
-      local subprocess = require("neotest.lib.subprocess")
-      if subprocess.enabled() and pcall(subprocess.call, push_zig_symbol_query, { zig_symbol_query }) then
-        return
-      end
-      if attempt < 25 then
-        vim.defer_fn(function()
-          sync_symbol_queries(attempt + 1)
-        end, 200)
+      if subprocess.enabled() then
+        pcall(subprocess.call, push_zig_symbol_query, { zig_symbol_query })
       end
     end)
   end
-  sync_symbol_queries(1)
+  local init = subprocess.init
+  subprocess.init = function(...)
+    init(...)
+    push()
+  end
+  push() -- in case the child already started
 
   -- `<Esc>` / `q` close neotest's window (output float, summary, output panel).
   vim.api.nvim_create_autocmd("FileType", {

@@ -28,8 +28,7 @@
    - Avoid tree-sitter highlighting by default.
    - Disable expensive features when file size crosses a threshold.
 6. zmx is part of the editor workflow.
-   - Open persistent zmx sessions in a managed Snacks terminal.
-   - Send prompts or selections through Neovim's terminal channel.
+   - Neovim runs inside zmx sessions.
 
 ## non-goals
 

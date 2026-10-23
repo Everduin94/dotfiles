@@ -14,7 +14,7 @@ if ! command -v npm >/dev/null 2>&1; then
   exit 1
 fi
 
-npm install -g @redocly/cli better-commits
+npm install -g @redocly/cli better-commits pi-acp
 
 echo
 echo "Done."

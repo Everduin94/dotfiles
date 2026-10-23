@@ -1,61 +1,73 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Slanted segments like the Neovim statusline. Left segments slope down, right
+# ones slope up, and edges that touch the screen stay straight.
+#
+# Icons get an extra space after them because Ghostty draws an icon across the
+# space that follows it.
+
 add_newline = true
-# A minimal left prompt
-format = """$directory$character"""
 palette = "catppuccin_mocha"
-# move the rest of the prompt to the right
-right_format = """$all"""
 
-# [character]
-# success_symbol = '[➜](bold fg:green)'
-
-[character]
-success_symbol = '[➜](bold fg:green bg:base)[](bold base)'
-error_symbol = '[✖](bold fg:red bg:base)[](bold base)'
-
-# [directory]
-# style = 'bold fg:text'
-# format = '[$path ]($style)[$read_only]($read_only_style)'
-# read_only_style = 'bold fg:red bg:mantle'
+format = """$directory$character"""
+# $all comes first so the branch is always on the outside
+right_format = """$all$env_var$cmd_duration${custom.branch}"""
 
 [directory]
-style = 'bold fg:text bg:base'
-format = '[](bold base)[$path ]($style)[$read_only]($read_only_style)'
-read_only_style = 'bold fg:red bg:mantle'
+style = "bold fg:text bg:section"
+format = "[ \U000f024b  $path ]($style)[$read_only]($read_only_style)[\ue0b8](fg:section)"
+read_only = "\U000f033e "
+read_only_style = "bold fg:red bg:section"
 
-[golang]
-format = '[ ](bold cyan)'
-
-# [git_branch]
-# format='[$symbol$branch(:$remote_branch)]($style) '
-# style='bold bright fg:white'
-# symbol="🌱 "
-
-[git_branch]
-format='[](bold base)[$symbol$branch(:$remote_branch)](bold bg:base fg:text)[](bold base)'
-style='bold bright fg:white bg:base'
-symbol=" "
-
-[git_status]
-disabled=true
+# Status block, hidden for now. Swap in the commented symbols to show it.
+[character]
+format = "$symbol "
+success_symbol = ""
+error_symbol = ""
+# success_symbol = "[\ue0be](fg:section)[ \U000f0e1e  ](bold fg:green bg:section)[\ue0b8](fg:section)"
+# error_symbol = "[\ue0be](fg:section)[ \U000f1398  ](bold fg:red bg:section)[\ue0b8](fg:section)"
 
 [env_var.ZMX_SESSION]
-format = '[](bold peach)[ zmx ](bold bg:peach fg:crust)[](bold peach)'
+format = "[\ue0ba](fg:section)[ \U000f165d  ](bold fg:teal bg:section)[\ue0bc](fg:section)"
 
-# What's with the spacing?
+[cmd_duration]
+min_time = 2000
+format = "[\ue0ba](fg:section)[ \U000f051b  $duration ](fg:subtext0 bg:section)[\ue0bc](fg:section)"
+
+# Branch after the last `/` (everduin94/fix/154-x -> 154-x). git_branch can only
+# truncate by length, so this is a custom module. Detached HEAD shows the hash.
+[custom.branch]
+require_repo = true
+when = true
+shell = ["sh"]
+command = 'b=$(git branch --show-current 2>/dev/null); [ -n "$b" ] || b=$(git rev-parse --short HEAD 2>/dev/null); printf "%s" "${b##*/}"'
+symbol = "\ue725  "
+format = "[\ue0ba](fg:section)[ $symbol$output ](bold fg:text bg:section)"
+
+[git_branch]
+disabled = true
+
+[golang]
+format = "[\ue627 ](bold cyan)"
+
+[git_status]
+disabled = true
+
+[git_commit]
+disabled = true
+
 [os]
-disabled=true
-
+disabled = true
 
 [package]
-disabled=true
+disabled = true
 
 [nodejs]
-disabled=true
-
+disabled = true
 
 [palettes.catppuccin_mocha]
+# segment bg, a little lighter than the terminal bg (base)
+section = "#2a2b3c"
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
 pink = "#f5c2e7"

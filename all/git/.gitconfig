@@ -15,13 +15,16 @@
     default = current
 
 [credential "https://github.com"]
-    helper =
-    helper = !gh auth git-credential
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
-    helper =
-    helper = !gh auth git-credential
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
 
 [user]
 	name = Erik Verduin
 	email = everduin94@gmail.com
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+	insteadOf = ssh://git@github.com/

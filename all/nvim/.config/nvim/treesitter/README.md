@@ -58,3 +58,7 @@ thing providing the `indentexpr()` function and the query predicates its
 - `:checkhealth vim.treesitter`
 - indent: open a `.svelte` file, run `gg=G`, confirm nested html/js/css
   reindents correctly.
+
+## query tweaks
+
+- `after/queries/javascript/highlights.scm` tags calls as `@function.call` so the minimal themes can leave them uncolored.

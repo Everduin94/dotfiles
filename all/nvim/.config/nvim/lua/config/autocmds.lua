@@ -66,6 +66,7 @@ vim.api.nvim_create_autocmd("BufReadPre", {
     vim.b[args.buf].large_file = true
     vim.b[args.buf].minidiff_disable = true
     vim.b[args.buf].miniindentscope_disable = true
+    vim.b[args.buf].minianimate_disable = true
     pcall(function()
       require("mini.diff").disable(args.buf)
     end)

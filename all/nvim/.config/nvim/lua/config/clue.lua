@@ -2,7 +2,7 @@ local M = {}
 
 local function leader_clues()
   local clues = {
-    { mode = { "n", "x" }, keys = "<Leader>a", desc = "+pi" },
+    { mode = { "n", "x" }, keys = "<Leader>a", desc = "+ai" },
     { mode = "n", keys = "<Leader>m", desc = "+snippets" },
     { mode = "n", keys = "<Leader>o", desc = "+open" },
     { mode = "n", keys = "<Leader>p", desc = "+path" },
@@ -49,6 +49,20 @@ function M.setup()
         border = "rounded",
       },
     },
+  })
+
+  -- mini.clue skips unlisted buffers like the chat, which leaves <leader>
+  -- on the 300ms timeout.
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("config_clue_special", { clear = true }),
+    pattern = { "codecompanion" },
+    callback = function(args)
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(args.buf) then
+          MiniClue.ensure_buf_triggers(args.buf)
+        end
+      end)
+    end,
   })
 end
 

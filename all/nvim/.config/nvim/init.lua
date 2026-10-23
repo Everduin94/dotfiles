@@ -20,7 +20,9 @@ vim.diagnostic.config({
 
 local plugins = {
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
-  { src = "https://github.com/webhooked/kanso.nvim", name = "kanso" },
+  { src = "https://github.com/rebelot/kanagawa.nvim", name = "kanagawa" },
+  { src = "https://github.com/folke/tokyonight.nvim" },
+  { src = "https://github.com/EdenEast/nightfox.nvim" },
   { src = "https://github.com/nvim-mini/mini.completion" },
   { src = "https://github.com/nvim-mini/mini.snippets" },
   { src = "https://github.com/nvim-mini/mini.pairs" },
@@ -46,6 +48,9 @@ if not inline then
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://codeberg.org/ziglang/zig.vim" },
+    { src = "https://github.com/nvim-mini/mini.animate" },
+    { src = "https://github.com/olimorris/codecompanion.nvim", version = vim.version.range("^20.0.0") },
+    { src = "https://github.com/OXY2DEV/markview.nvim", version = vim.version.range("^29.0.0") },
   })
 end
 
@@ -86,22 +91,19 @@ if not inline then
   require("config.sessions").setup()
   require("config.test").setup()
 
-  require("oil").setup({
-    default_file_explorer = true,
-    skip_confirm_for_simple_edits = true,
-    float = {
-      border = "rounded",
-      max_height = 0.9,
-      max_width = 50,
-      override = function(config)
-        config.col = 0
-        return config
-      end,
-    },
-    view_options = {
-      show_hidden = true,
-      natural_order = true,
-    },
+  require("config.oil").setup()
+  require("config.ai").setup()
+  require("config.markview").setup()
+  require("config.panels").setup()
+
+  local animate = require("mini.animate")
+  local quick = animate.gen_timing.linear({ duration = 120, unit = "total" })
+  animate.setup({
+    cursor = { timing = quick },
+    scroll = { timing = quick },
+    resize = { timing = quick },
+    open = { timing = quick },
+    close = { timing = quick },
   })
 end
 

@@ -31,7 +31,9 @@ map("n", "<leader>pg", function()
 end, { desc = "Copy buffer filename" })
 
 if not inline then
-  map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
+  map("n", "-", function()
+    require("config.oil").open_panel()
+  end, { desc = "Oil side panel (left)" })
   map("n", "<leader><space>", function()
     require("config.pick").files()
   end, { desc = "Find files" })
@@ -118,19 +120,8 @@ if not inline then
     local index = i
     map("n", "<leader>t" .. index, function()
       terminal.open(index)
-    end, { desc = "Open terminal " .. index .. " in current window" })
+    end, { desc = "Terminal " .. index .. " (right split)" })
   end
-
-  map("n", "<leader>tg", terminal.toggle_zmx, { desc = "Toggle zmx terminal" })
-  map("n", "<leader>td", terminal.detach_zmx, { desc = "Detach zmx session" })
-  map("n", "<leader>tf", terminal.send_file, { desc = "Send file path to zmx" })
-  map("x", "<leader>ts", terminal.send_selection, { desc = "Send selection to zmx" })
-
-  map("n", "<leader>at", terminal.send_this, { desc = "Send file position to zmx" })
-  map("n", "<leader>af", terminal.send_file, { desc = "Send file path to zmx" })
-  map("x", "<leader>av", terminal.send_selection, { desc = "Send selection to zmx" })
-  map("n", "<leader>ax", terminal.stop, { desc = "Stop pi (zmx terminal)" })
-  map("n", "<leader>ap", terminal.prompt, { desc = "Prompt zmx terminal" })
 end
 
 vim.api.nvim_create_user_command("Wd", function(opts)
@@ -142,6 +133,41 @@ end, {
 
 vim.cmd([[cnoreabbrev <expr> wd getcmdtype() ==# ':' && getcmdline() ==# 'wd' ? 'Wd' : 'wd']])
 
+-- Recenter (zz) after big jumps. Uncomment the ones you want.
+-- local function centered(lhs, rhs, desc, mode)
+--   map(mode or "n", lhs, rhs .. "zz", { desc = desc .. " (centered)" })
+-- end
+-- centered("<C-d>", "<C-d>", "Half page down")
+-- centered("<C-u>", "<C-u>", "Half page up")
+-- centered("<C-f>", "<C-f>", "Page down")
+-- centered("<C-b>", "<C-b>", "Page up")
+-- centered("n", "nzv", "Next match")
+-- centered("N", "Nzv", "Previous match")
+-- centered("*", "*zv", "Search word forward")
+-- centered("#", "#zv", "Search word backward")
+-- centered("G", "G", "Go to last line")
+-- centered("{", "{", "Previous paragraph")
+-- centered("}", "}", "Next paragraph")
+-- centered("%", "%", "Matching pair")
+-- centered("<C-o>", "<C-o>", "Jump back")
+-- centered("<C-i>", "<C-i>", "Jump forward") -- <C-i> is <Tab> (sub-mode) in most terminals
+-- centered("g;", "g;", "Older change")
+-- centered("g,", "g,", "Newer change")
+-- centered("]s", "]s", "Next misspelling")
+-- centered("[s", "[s", "Previous misspelling")
+-- -- functions can't take a zz suffix, so center after they run:
+-- local function then_center(fn)
+--   return function()
+--     fn()
+--     vim.schedule(function()
+--       vim.cmd.normal({ "zz", bang = true })
+--     end)
+--   end
+-- end
+-- map("n", "]d", then_center(function() vim.diagnostic.jump({ count = 1, float = true }) end), { desc = "Next diagnostic (centered)" })
+-- map("n", "[d", then_center(function() vim.diagnostic.jump({ count = -1, float = true }) end), { desc = "Previous diagnostic (centered)" })
+-- -- gd is set in autocmds.lua (LspAttach): then_center(vim.lsp.buf.definition)
+
 if not inline then
   vim.api.nvim_create_user_command("HunkMenu", hunk.menu, {
     desc = "Open the Hunk review menu",
@@ -149,32 +175,5 @@ if not inline then
 
   vim.api.nvim_create_user_command("HunkClose", hunk.close, {
     desc = "Close the managed Hunk terminal",
-  })
-
-  vim.api.nvim_create_user_command("ZmxOpen", terminal.focus_zmx, {
-    desc = "Open or focus the managed zmx terminal",
-  })
-
-  vim.api.nvim_create_user_command("ZmxDetach", terminal.detach_zmx, {
-    desc = "Detach the current zmx session and return to the chooser",
-  })
-
-  vim.api.nvim_create_user_command("ZmxPrompt", terminal.prompt, {
-    desc = "Prompt the managed zmx terminal",
-  })
-
-  vim.api.nvim_create_user_command("ZmxThis", terminal.send_this, {
-    desc = "Send current file position to zmx",
-  })
-
-  vim.api.nvim_create_user_command("ZmxFile", terminal.send_file, {
-    desc = "Send current file path to zmx",
-  })
-
-  vim.api.nvim_create_user_command("ZmxSend", function(opts)
-    terminal.send_range(opts.line1, opts.line2)
-  end, {
-    range = true,
-    desc = "Send the current line or range to zmx",
   })
 end

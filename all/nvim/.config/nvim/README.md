@@ -6,8 +6,7 @@ Native-first Neovim `0.12+` config.
 
 Small set via `vim.pack`:
 - `oil.nvim`
-- `catppuccin`
-- `kanso.nvim`
+- `tokyonight.nvim`, `kanagawa.nvim`, `catppuccin`, `nightfox.nvim`
 - `grapple.nvim`
 - `mini.completion`
 - `mini.snippets`
@@ -21,35 +20,36 @@ Small set via `vim.pack`:
 - `mini.cursorword`
 - `mini.hipatterns`
 - `mini.indentscope`
-- `snacks.nvim` (picker and terminals)
+- `snacks.nvim` (picker, Hunk terminal)
 - `neotest` (+ `nvim-nio`, `plenary.nvim`) with an in-config Zig adapter (`lua/neotest-zig-build`)
+- `mini.animate`
+- `codecompanion.nvim` (chat and inline edits through pi, via `pi-acp`)
+- `markview.nvim` (renders markdown and the chat)
 
 ## notes
 
 - LSP is native. See `lsp/README.md`.
 - Treesitter is native. See `treesitter/README.md`.
 - Large-file guards disable expensive features.
-- Snacks terminals + zmx session workflow is built in.
+- The default theme is `tokyonight-moon-minimal`: most code is plain, and color marks declarations, types, literals, and parameters. See `lua/config/colors.lua`.
 - `mini.clue` gives which-key style next-key hints for leader and common built-ins.
 
 ## useful keys
 
-- `-` open Oil
-- `<C-c>` close Oil and restore the previous buffer
+- `-` open Oil in a left panel; picking a file closes it
+- `<C-c>` / `q` in Oil close the panel
 - `<leader><space>` case-insensitive file picker
 - `<leader>/` case-insensitive project grep
 - `<leader>e` toggle the left-side Oil float
 - `<C-h/j/k/l>` move between Neovim splits
-- `<leader>t1..4` open persistent terminal buffers in the current window (split first if wanted)
+- `<leader>t1..4` open or focus a terminal in a shared right split
 - terminal `<Esc>` leave terminal mode
-- `<leader>tg` toggle the managed zmx chooser/session terminal
-- `<leader>td` detach zmx and return to its session chooser
-- `<leader>tf` paste the current file path into the attached zmx session
-- visual `<leader>ts` paste selection into the attached zmx session
-- `<leader>tf` and `<leader>ts` do not submit; edit the pasted input before pressing Enter
-- `<leader>ut` / `:Theme [name]` toggle catppuccin <-> kanso (persisted in nvim state dir)
+- `<leader>ut` toggle the default and last theme, `<leader>uc` pick with preview, `<leader>un` / `<leader>uN` next / previous
+- `<leader>uy` white types, `<leader>up` blue params, `<leader>uk` muted keywords (minimal themes)
+- `<leader>um` markdown side-by-side, `<leader>uM` markdown rendering, `<leader>uB` code block bar
+- `<leader>us` one statusline or one per window
+- `<leader>ub` darker bg for the chat, terminals, and Oil
 - `<leader>uT` / `:TermOpacity [toggle|on|off]` toggle Ghostty window transparency (`bin/ghostty-opacity`)
-- zmx terminal `<C-c>` sends Esc to pi (stop); double-tap sends real `^C`; `<leader>ax` same from any buffer
 - terminal `<C-g>` in pi opens the prompt editor as a float in this nvim (`bin/pi-nvim-edit`, `lua/config/pi_edit.lua`); `:wq` / `<C-s>` sends
 - `<leader>rr` run the test under the cursor (Zig, via neotest); `rf` file, `rl` last, `rx` stop, `ro` output float, `rO` output panel, `rs` summary
 - `<C-s>` save current buffer
@@ -71,9 +71,10 @@ Small set via `vim.pack`:
 - normal `<Tab>` / `<S-Tab>` run the current sub-mode action
 - `<C-Space>` force completion
 - insert/select `<Tab>` / `<S-Tab>` completion or snippet jump
-- `<leader>ap` prompt the managed zmx terminal
-- `<leader>at` / `<leader>af` send current position / file path to zmx
-- visual `<leader>av` also sends selection to zmx during transition
+- `<leader>ac` toggle the last chat, `<leader>an` new chat, `}` / `{` cycle chats, `<leader>aA` actions and open chats
+- `<leader>at` send position or selection, `<leader>af` send file, visual `<leader>av` send selection (not submitted)
+- `<leader>ai` inline edit with pi, reviewed as a diff
+- `ga` in a chat changes the model
 
 ## zig tests
 

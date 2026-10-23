@@ -8,13 +8,27 @@
       "rev": "06fc9e111ac3ff916e6834262ebc4171284424ce",
       "src": "https://github.com/roy2220/easyjump.tmux"
     },
+    "codecompanion.nvim": {
+      "rev": "86118411be00f0451a59c5ef7972c437e979e1b7",
+      "src": "https://github.com/olimorris/codecompanion.nvim",
+      "version": "20.0.0 - 21.0.0"
+    },
     "grapple.nvim": {
       "rev": "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7",
       "src": "https://github.com/cbochs/grapple.nvim"
     },
-    "kanso": {
-      "rev": "1afbbb449aa0254823dbe1932e3cbb51886ff9fe",
-      "src": "https://github.com/webhooked/kanso.nvim"
+    "kanagawa": {
+      "rev": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
+    },
+    "markview.nvim": {
+      "rev": "ecc5a8867daa1856f8bcc5fdbceca8f5a5ce5f5d",
+      "src": "https://github.com/OXY2DEV/markview.nvim",
+      "version": "29.0.0 - 30.0.0"
+    },
+    "mini.animate": {
+      "rev": "ed7d4a2a6fac1777e6da1446127eea87dd2419b5",
+      "src": "https://github.com/nvim-mini/mini.animate"
     },
     "mini.bufremove": {
       "rev": "4cfbb201b2760da79ca6e1a00e9f67cbc99cbb8f",
@@ -76,6 +90,10 @@
       "rev": "27bf921498043f7ecd821d6db68d05de244bbd02",
       "src": "https://github.com/nvim-neotest/neotest"
     },
+    "nightfox.nvim": {
+      "rev": "4dacd3f0185a2227bdf3b6c0975a8f0bf87cac9a",
+      "src": "https://github.com/EdenEast/nightfox.nvim"
+    },
     "nvim-nio": {
       "rev": "edcc181a875301dd21840189aa2f2f9ad69fc172",
       "src": "https://github.com/nvim-neotest/nvim-nio"
@@ -100,6 +118,10 @@
     "zig.vim": {
       "rev": "4842ab8cb1b000a9acb0a06170d404d12a154918",
       "src": "https://codeberg.org/ziglang/zig.vim"
+    },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
     }
   }
 }

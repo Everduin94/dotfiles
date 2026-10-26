@@ -83,6 +83,7 @@ Small set via `vim.pack`:
 ## docs
 
 - `vision.md`
+- `better-prompt-persona-integration.md`
 - `lsp/README.md`
 - `lsp/zig-tests.md`
 - `treesitter/README.md`
